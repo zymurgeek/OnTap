@@ -5,20 +5,20 @@ import com.itllp.beerfestival.json.EventListFromJsonUrl;
 import android.content.Context;
 import android.net.ConnectivityManager;
 
-public class EventListFactory {
+public class EventDatabaseFactory {
 	private Context context;
 	private static String eventsUrl = "http://misdb.com/barleylegalapp/getevent.aspx";
 	
-	public EventListFactory(Context context) {
+	public EventDatabaseFactory(Context context) {
 		this.context = context;
 	}
 	
-	public EventList getEventList() {
+	public EventDatabase getEventDatabase() {
     	ConnectivityManager connMgr = (ConnectivityManager) 
     	        context.getSystemService(Context.CONNECTIVITY_SERVICE);
     	NetworkConnectivity networkConnectivity
     	= new AndroidNetworkConnectivity(connMgr);
-    	EventList eventList = new EventListFromJsonUrl(networkConnectivity, eventsUrl);
+    	EventDatabase eventList = new EventListFromJsonUrl(networkConnectivity, eventsUrl);
     	return eventList;
 	}
 	

@@ -17,7 +17,8 @@ public class ContactsFromJsonUrlTests extends TestCase {
 	}
 
 	public void testContactsFromJsonUrl() {
-		ContactsFromJsonUrl cut = new ContactsFromJsonUrl(null, null);
+		NetworkConnectivity net = new AlwaysUpNetworkConnectivity(); 
+		ContactsFromJsonUrl cut = new ContactsFromJsonUrl(net, null);
 		assertNotNull(cut);
 	}
 

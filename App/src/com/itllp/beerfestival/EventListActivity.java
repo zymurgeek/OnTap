@@ -16,7 +16,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class EventListActivity extends Activity {
 	private ListView eventListView;
-	private EventList eventList = null;
+	private EventDatabase eventDb = null;
 	
 	public EventListActivity() {
 	}
@@ -31,13 +31,13 @@ public class EventListActivity extends Activity {
     }
     
     private void loadEvents() {
-    	EventListFactory eventListFactory = new EventListFactory(this);
-    	eventList = eventListFactory.getEventList();
+    	EventDatabaseFactory eventDbFactory = new EventDatabaseFactory(this);
+    	eventDb = eventDbFactory.getEventDatabase();
 
-    	if (!eventList.isEmpty()) {
-    		ListAdapter adapter = new SimpleAdapter(this, eventList.getEvents(),
+    	if (!eventDb.isEmpty()) {
+    		ListAdapter adapter = new SimpleAdapter(this, eventDb.getEventList(),
     				R.layout.event,
-    				new String[] { EventList.EVENT_NAME, EventList.ID, EventList.EVENT_DATE }, 
+    				new String[] { EventDatabase.EVENT_NAME, EventDatabase.ID, EventDatabase.EVENT_DATE }, 
     				new int[] {	R.id.name, R.id.id, R.id.date });
 
     		this.eventListView.setAdapter(adapter);

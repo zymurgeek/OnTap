@@ -26,8 +26,15 @@ public class JSONParser {
     public JSONParser() {
     }
  
+    /**
+     * Gets the JSON tree from a given URL.
+     * @param url Location to query.  If null, returns an empty object.
+     */
     public JSONObject getJsonObjectFromUrl(String url) {
- 
+
+    	if (null == url) {
+    		return new JSONObject();
+    	}
         try {
             DefaultHttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url);

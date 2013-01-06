@@ -7,7 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.itllp.beerfestival.EventList;
+import com.itllp.beerfestival.EventDatabase;
 import com.itllp.beerfestival.NetworkConnectivity;
 
 import android.content.Context;
@@ -17,7 +17,7 @@ import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 
-public class EventListFromJsonUrl extends EventList {
+public class EventListFromJsonUrl extends EventDatabase {
     // Hashmap for ListView
 	public ArrayList<HashMap<String, String>> eventList = new ArrayList<HashMap<String, String>>();
 	public JSONParser jParser = new JSONParser();
@@ -70,12 +70,12 @@ public class EventListFromJsonUrl extends EventList {
 	 * @see com.itllp.beerfestival.EventList#getEvents()
 	 */
 	@Override
-	public ArrayList<HashMap<String, String>> getEvents() {
+	public ArrayList<HashMap<String, String>> getEventList() {
 		return eventList; 
 	}
 
 	public boolean isEmpty() {
-		return getEvents().isEmpty();
+		return getEventList().isEmpty();
 	}
 
 }
