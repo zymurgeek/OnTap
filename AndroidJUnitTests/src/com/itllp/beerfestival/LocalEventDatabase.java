@@ -5,14 +5,17 @@ import java.util.HashMap;
 
 public class LocalEventDatabase extends EventDatabase {
 
+	private ArrayList<HashMap<String, String>> eventList
+	= new ArrayList<HashMap<String, String>>();
+	
 	@Override
 	public ArrayList<HashMap<String, String>> getEventList() {
-		return new ArrayList<HashMap<String, String>>();
+		return eventList;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		return true;
+		return eventList.isEmpty();
 	}
 
 }

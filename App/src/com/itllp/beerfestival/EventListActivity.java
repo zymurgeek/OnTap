@@ -31,22 +31,15 @@ public class EventListActivity extends Activity {
     }
     
     private void loadEvents() {
-    	EventDatabaseFactory eventDbFactory = new EventDatabaseFactory(this);
+    	EventDatabaseFactory eventDbFactory = new EventDatabaseFactoryImpl(this);
     	eventDb = eventDbFactory.getEventDatabase();
 
-    	if (!eventDb.isEmpty()) {
-    		ListAdapter adapter = new SimpleAdapter(this, eventDb.getEventList(),
-    				R.layout.event,
-    				new String[] { EventDatabase.EVENT_NAME, EventDatabase.ID, EventDatabase.EVENT_DATE }, 
-    				new int[] {	R.id.name, R.id.id, R.id.date });
+    	ListAdapter adapter = new SimpleAdapter(this, eventDb.getEventList(),
+    			R.layout.event,
+    			new String[] { EventDatabase.EVENT_NAME, EventDatabase.ID, EventDatabase.EVENT_DATE }, 
+    			new int[] {	R.id.name, R.id.id, R.id.date });
 
-    		this.eventListView.setAdapter(adapter);
-    	} else {
-    		String [] myStringArray = { "events not available" };
-    		ArrayAdapter adapter = new ArrayAdapter<String>(this, 
-    				android.R.layout.simple_list_item_1, myStringArray);
-    		this.eventListView.setAdapter(adapter);
-    	}
+    	this.eventListView.setAdapter(adapter);
     	
     	this.eventListView.setOnItemClickListener(new OnItemClickListener() {
 

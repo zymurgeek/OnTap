@@ -17,7 +17,7 @@ import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 
-public class EventListFromJsonUrl extends EventDatabase {
+public class EventDatabaseFromJsonUrl extends EventDatabase {
     // Hashmap for ListView
 	public ArrayList<HashMap<String, String>> eventList = new ArrayList<HashMap<String, String>>();
 	public JSONParser jParser = new JSONParser();
@@ -29,7 +29,7 @@ public class EventListFromJsonUrl extends EventDatabase {
 	public Boolean active = null;
 	public HashMap<String, String> map = null;
 	
-	public EventListFromJsonUrl(NetworkConnectivity networkConnectivity, String url) {
+	public EventDatabaseFromJsonUrl(NetworkConnectivity networkConnectivity, String url) {
 	    if (networkConnectivity.isConnected()) {
 
 	    	jsonArray = this.jParser.getJsonArrayFromUrl(url);

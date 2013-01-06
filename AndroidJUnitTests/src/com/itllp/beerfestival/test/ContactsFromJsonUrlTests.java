@@ -1,4 +1,8 @@
-package com.itllp.beerfestival;
+package com.itllp.beerfestival.test;
+
+import com.itllp.beerfestival.AlwaysUpNetworkConnectivity;
+import com.itllp.beerfestival.ContactsFromJsonUrl;
+import com.itllp.beerfestival.NetworkConnectivity;
 
 import junit.framework.TestCase;
 
