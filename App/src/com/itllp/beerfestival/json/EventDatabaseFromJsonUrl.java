@@ -10,13 +10,6 @@ import org.json.JSONObject;
 import com.itllp.beerfestival.EventDatabase;
 import com.itllp.beerfestival.NetworkConnectivity;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Build;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
-
 public class EventDatabaseFromJsonUrl extends EventDatabase {
     // Hashmap for ListView
 	public ArrayList<HashMap<String, String>> eventList = new ArrayList<HashMap<String, String>>();
@@ -38,16 +31,16 @@ public class EventDatabaseFromJsonUrl extends EventDatabase {
 	    		for(int i = 0; i < jsonArray.length(); i++){
 	    			JSONObject jsonEvent = jsonArray.getJSONObject(i);
 
-	    			this.id = jsonEvent.getString(this.ID);
-	    			this.eventName = jsonEvent.getString(this.EVENT_NAME);
-	    			this.eventDate = jsonEvent.getString(this.EVENT_DATE);
-	    			this.active = jsonEvent.getBoolean(this.ACTIVE);
+	    			this.id = jsonEvent.getString(EventDatabase.ID);
+	    			this.eventName = jsonEvent.getString(EventDatabase.EVENT_NAME);
+	    			this.eventDate = jsonEvent.getString(EventDatabase.EVENT_DATE);
+	    			this.active = jsonEvent.getBoolean(EventDatabase.ACTIVE);
 
 	    			this.map = new HashMap<String, String>();
 
-	    			this.map.put(this.ID, this.id);
-	    			this.map.put(this.EVENT_NAME, this.eventName);
-	    			this.map.put(this.EVENT_DATE, getDateStringFromJson(this.eventDate));
+	    			this.map.put(EventDatabase.ID, this.id);
+	    			this.map.put(EventDatabase.EVENT_NAME, this.eventName);
+	    			this.map.put(EventDatabase.EVENT_DATE, getDateStringFromJson(this.eventDate));
 	    			//this.map.put(this.ACTIVE, this.active);
 
 	    			this.eventList.add(this.map);

@@ -21,20 +21,12 @@ package com.itllp.beerfestival.test;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import android.app.Instrumentation;
 import android.content.Intent;
-import android.test.ActivityInstrumentationTestCase2;
 import android.test.ActivityUnitTestCase;
-import android.test.SingleLaunchActivityTestCase;
 import android.widget.ListView;
-import android.widget.TextView;
-
 import com.itllp.beerfestival.EventDatabase;
 import com.itllp.beerfestival.EventDatabaseFactoryImpl;
 import com.itllp.beerfestival.EventListActivity;
-import com.itllp.beerfestival.LocalEventDatabase;
-import com.itllp.beerfestival.R;
-import com.itllp.beerfestival.R.id;
 
 public class EventListActivityTests extends
 	/*ActivityInstrumentationTestCase2<EventListActivity>*/
