@@ -1,4 +1,6 @@
-package com.itllp.beerfestival;
+package com.itllp.beerfestival.test;
+
+import com.itllp.beerfestival.NetworkConnectivity;
 
 public class AlwaysUpNetworkConnectivity implements NetworkConnectivity {
 
