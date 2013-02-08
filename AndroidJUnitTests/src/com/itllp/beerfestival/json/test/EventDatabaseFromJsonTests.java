@@ -6,8 +6,8 @@ import java.util.HashMap;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import com.itllp.beerfestival.dateconverter.test.MockStringConverter;
-import com.itllp.beerfestival.json.EventDatabaseFromJsonArray;
+import com.itllp.barleylegalhomebrewers.ontap.dateconverter.test.MockStringConverter;
+import com.itllp.barleylegalhomebrewers.ontap.json.EventDatabaseFromJsonArray;
 
 import junit.framework.TestCase;
 

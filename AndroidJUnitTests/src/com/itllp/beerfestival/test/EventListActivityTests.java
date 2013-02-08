@@ -24,9 +24,10 @@ import java.util.HashMap;
 import android.content.Intent;
 import android.test.ActivityUnitTestCase;
 import android.widget.ListView;
-import com.itllp.beerfestival.EventDatabase;
-import com.itllp.beerfestival.EventDatabaseFactoryImpl;
-import com.itllp.beerfestival.EventListActivity;
+
+import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
+import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseFactoryImpl;
+import com.itllp.barleylegalhomebrewers.ontap.EventListActivity;
 
 public class EventListActivityTests extends
 	/*ActivityInstrumentationTestCase2<EventListActivity>*/
@@ -72,7 +73,7 @@ public class EventListActivityTests extends
     	
     	// Postconditions
         eventListView = (ListView)activity.findViewById
-        		(com.itllp.beerfestival.R.id.list);
+        		(com.itllp.barleylegalhomebrewers.ontap.R.id.list);
         assertEquals("List should be empty", 0, 
         		eventListView.getCount());    	
     }
@@ -90,7 +91,7 @@ public class EventListActivityTests extends
     	
     	// Postconditions
         eventListView = (ListView)activity.findViewById
-        		(com.itllp.beerfestival.R.id.list);
+        		(com.itllp.barleylegalhomebrewers.ontap.R.id.list);
         assertEquals("List should have one item", 1, 
         		eventListView.getCount());    	
     }
