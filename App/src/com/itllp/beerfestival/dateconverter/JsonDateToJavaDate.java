@@ -2,14 +2,18 @@ package com.itllp.beerfestival.dateconverter;
 
 import java.util.Date;
 
-public class JsonDateToJavaDate {
+public class JsonDateToJavaDate implements StringToJavaDate {
 
 	/**
 	 * Converts a JSON date to a java Date.
-	 * @param jsonDate A date formatted for JSON in Microsoft Ajax format,
-	 * e.g. "\/@Date(1352001600000-0400)\/".
+	 * @param jsonDate A date formatted for JSON in Microsoft Ajax format, 
+	 * which is milliseconds since 1970 followed by a timezone offset in hhmm 
+	 * format, e.g. "\/Date(1352001600000-0400)\/", 
 	 * @return Date corresponding to input jsonDate.
+     *
+	 * @see com.itllp.beerfestival.dateconverter.StringToJavaDate#getJavaDate(java.lang.String)
 	 */
+	@Override
 	public Date getJavaDate(String jsonDate) {
 		String milliPlusTzString = removeJsonDateWrapper(jsonDate);
 		
@@ -39,7 +43,7 @@ public class JsonDateToJavaDate {
 	 * @param minutes 
 	 * @return The number of milliseconds in the given number of minutes.
 	 */
-	long getMillisFromMinutes(long minutes) {
+	public long getMillisFromMinutes(long minutes) {
 		return minutes * 60 * 1000;
 	}
 
@@ -49,7 +53,7 @@ public class JsonDateToJavaDate {
 	 * @param hours
 	 * @return The number of milliseconds in the given number of hours.
 	 */
-	long getMillisFromHours(long hours) {
+	public long getMillisFromHours(long hours) {
 		return hours * 60 * 60 * 1000;
 	}
 
@@ -61,7 +65,7 @@ public class JsonDateToJavaDate {
 	 * @return The minute portion of the input.  For example, for 530, the result
 	 * would be 30.
 	 */
-	long getTzMinutes(long timezoneOffset) {
+	public long getTzMinutes(long timezoneOffset) {
 		long minuteTimezoneOffset = timezoneOffset % 100;
 		return minuteTimezoneOffset;
 	}
@@ -74,7 +78,7 @@ public class JsonDateToJavaDate {
 	 * @return The hours portion of the input.  For example, for 530, the result
 	 * would be 5.
 	 */
-	long getTzHours(long timezoneOffset) {
+	public long getTzHours(long timezoneOffset) {
 		long hourTimezoneOffset = timezoneOffset / 100;
 		return hourTimezoneOffset;
 	}
@@ -87,12 +91,14 @@ public class JsonDateToJavaDate {
 	 * @return The millisecond and TZ portion in between the parenthesis or an
 	 * empty string if the input is not formatted as a JSON date. 
 	 */
-	String removeJsonDateWrapper(String jsonDate) {
+	public String removeJsonDateWrapper(String jsonDate) {
 		if (null == jsonDate) {
 			return "";
 		}
 		String dateString = jsonDate.replace("\\/Date(", "");
+		dateString = dateString.replace("/Date(", "");
 		dateString = dateString.replace(")\\/", "");
+		dateString = dateString.replace(")/", "");
 		return dateString;
 	}
 	
@@ -103,7 +109,7 @@ public class JsonDateToJavaDate {
 	 * of a JSON date, i.e. the part inside the parenthesis.
 	 * @return The character index or -1 if there is no timezone.
 	 */
-	int getTimezoneStartOffset(String dateString) {
+	public int getTimezoneStartOffset(String dateString) {
 		if (null == dateString) {
 			return -1;
 		}
@@ -122,7 +128,7 @@ public class JsonDateToJavaDate {
 	 * @return The long contained in the string or 0 if the input does not
 	 * contain a long integer.
 	 */
-	long parseLong(String longString) {
+	public long parseLong(String longString) {
 		long longNumber = 0;
 		
 		if (null == longString) {
