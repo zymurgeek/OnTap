@@ -47,7 +47,6 @@ public class EventListActivity extends Activity {
     				int position, long id) {
     			String eventIdString = ((TextView) view.findViewById(R.id.id)).getText().toString();
     				
-    			// Starting new intent
     			Intent in = new Intent(getApplicationContext(), BeerListActivity.class);
     			in.putExtra(BeerListActivity.EVENT_ID, eventIdString);
     			startActivity(in);

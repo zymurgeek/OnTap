@@ -7,8 +7,7 @@ public class JavaDateToHumanReadableDate implements JavaDateToString {
 
 	@Override
 	public String getString(Date javaDate) {
-		String stringDate = DateFormat.getDateTimeInstance().format(javaDate);
-		// "EEE, MMM d, ''yy"
+		String stringDate = DateFormat.getDateInstance(DateFormat.FULL).format(javaDate);
 		return stringDate;
 	}
 

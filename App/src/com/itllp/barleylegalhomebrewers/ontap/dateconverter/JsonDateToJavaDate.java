@@ -22,15 +22,20 @@ public class JsonDateToJavaDate implements StringToJavaDate {
 			timezoneStartOffset = milliPlusTzString.length();
 		}
 		String millisString = milliPlusTzString.substring(0, timezoneStartOffset);
-		String timezoneOffsetString = milliPlusTzString.substring(timezoneStartOffset);
 		
 		long millis = parseLong(millisString);
+		
+		/*
+		// This block adds the time zone offset to get UTC.  However, it looks like
+		// the misdb.com server is supplying the local time in millis already.
+		String timezoneOffsetString = milliPlusTzString.substring(timezoneStartOffset);
 		long timezoneOffset = parseLong(timezoneOffsetString);
 		
 		long hourTimezoneOffset = getTzHours(timezoneOffset);
 		long minuteTimezoneOffset = getTzMinutes(timezoneOffset);
 		millis += getMillisFromHours(hourTimezoneOffset);
 		millis += getMillisFromMinutes(minuteTimezoneOffset);
+		*/
 		
 		Date result = new Date(millis);
 

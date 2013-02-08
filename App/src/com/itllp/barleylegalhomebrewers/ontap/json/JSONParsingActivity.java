@@ -9,13 +9,9 @@ import org.json.JSONObject;
 
 import com.itllp.barleylegalhomebrewers.ontap.R;
 import com.itllp.barleylegalhomebrewers.ontap.SingleMenuItemActivity;
-import com.itllp.barleylegalhomebrewers.ontap.R.id;
-import com.itllp.barleylegalhomebrewers.ontap.R.layout;
- 
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;

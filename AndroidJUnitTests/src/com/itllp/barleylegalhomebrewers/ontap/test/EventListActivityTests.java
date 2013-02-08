@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with Tip On Discount.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.itllp.beerfestival.test;
+package com.itllp.barleylegalhomebrewers.ontap.test;
 
 import java.util.ArrayList;
 import java.util.HashMap;

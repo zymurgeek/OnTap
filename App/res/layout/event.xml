@@ -9,12 +9,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 		<!-- Event ID -->
+
         <TextView
             android:id="@+id/id"
-            android:layout_width="80dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="#acacac"
-            android:paddingBottom="2dip"/>
+            android:paddingBottom="2dip"
+            android:textColor="#acacac" />
+
     	<!-- Event Name -->
         <TextView
             android:id="@+id/name"
@@ -32,13 +34,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:text="@string/date_label"
-            android:textColor="#5d5d5d"
-            android:textStyle="bold" />
         <TextView
             android:id="@+id/date"
             android:layout_width="wrap_content"

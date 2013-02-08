@@ -1,4 +1,4 @@
-package com.itllp.beerfestival.json.test;
+package com.itllp.barleylegalhomebrewers.ontap.json.test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,11 +11,11 @@ import com.itllp.barleylegalhomebrewers.ontap.json.EventDatabaseFromJsonArray;
 
 import junit.framework.TestCase;
 
-public class EventDatabaseFromJsonTests extends TestCase {
+public class EventDatabaseFromJsonArrayTests extends TestCase {
 
 	private MockStringConverter mockDateConverter = null;
 	
-	public EventDatabaseFromJsonTests(String name) {
+	public EventDatabaseFromJsonArrayTests(String name) {
 		super(name);
 	}
 
