@@ -1,0 +1,8 @@
+#!/bin/bash
+
+for DENSITY in ldpi mdpi hdpi xhdpi
+do
+    OUTPUT=../res/drawable-${DENSITY}/ic_launcher_ontap.png
+    rm ${OUTPUT}
+    pngcrush -q ${DENSITY}/ic_launcher_ontap.png ${OUTPUT}
+done
