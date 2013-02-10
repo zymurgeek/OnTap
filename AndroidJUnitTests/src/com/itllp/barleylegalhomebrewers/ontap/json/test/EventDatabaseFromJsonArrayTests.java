@@ -64,13 +64,13 @@ public class EventDatabaseFromJsonArrayTests extends TestCase {
 	public void testDatabaseFromJsonArrayWithOneEvent() {
 		// Preconditions
 		String jsonString = "[ { ";
-		jsonString += "\"ID\": 0, ";
+		jsonString += "\"ID\": 0 ";
 		jsonString += "} ]";
 		JSONArray jsonArray = null;
 		try {
 			jsonArray = new JSONArray(jsonString);
 		} catch (JSONException x) {
-			fail("Failed to parse JSON string");
+			fail("Failed to parse JSON string: " + x);
 		}
 
 		// Method under test
@@ -87,13 +87,13 @@ public class EventDatabaseFromJsonArrayTests extends TestCase {
 		String expectedId = "1";
 		
 		String jsonString = "[ { ";
-		jsonString += "\"ID\": " + expectedId + ", ";
+		jsonString += "\"ID\": " + expectedId + " ";
 		jsonString += "} ]";
 		JSONArray jsonArray = null;
 		try {
 			jsonArray = new JSONArray(jsonString);
 		} catch (JSONException x) {
-			fail("Failed to parse JSON string");
+			fail("Failed to parse JSON string" + x);
 		}
 
 		// Method under test
@@ -113,13 +113,13 @@ public class EventDatabaseFromJsonArrayTests extends TestCase {
 		String expectedEventName = "A";
 		
 		String jsonString = "[ { ";
-		jsonString += "\"EventName\": \"" + expectedEventName + "\", ";
+		jsonString += "\"EventName\": \"" + expectedEventName + "\" ";
 		jsonString += "} ]";
 		JSONArray jsonArray = null;
 		try {
 			jsonArray = new JSONArray(jsonString);
 		} catch (JSONException x) {
-			fail("Failed to parse JSON string");
+			fail("Failed to parse JSON string" + x);
 		}
 		// Method under test
 		EventDatabaseFromJsonArray databaseWithOneRow 
@@ -139,13 +139,13 @@ public class EventDatabaseFromJsonArrayTests extends TestCase {
 		String expectedOutputEventDate = "output_date";
 		
 		String jsonString = "[ { ";
-		jsonString += "\"EventDate\": \"" + expectedInputEventDate + "\", ";
+		jsonString += "\"EventDate\": \"" + expectedInputEventDate + "\" ";
 		jsonString += "} ]";
 		JSONArray jsonArray = null;
 		try {
 			jsonArray = new JSONArray(jsonString);
 		} catch (JSONException x) {
-			fail("Failed to parse JSON string");
+			fail("Failed to parse JSON string:  " + x);
 		}
 		mockDateConverter.addConversion(expectedInputEventDate, expectedOutputEventDate);
 		

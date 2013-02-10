@@ -34,7 +34,7 @@ public class EventListActivity extends Activity {
     	eventDb = eventDbFactory.getEventDatabase();
 
     	ListAdapter adapter = new SimpleAdapter(this, eventDb.getEventList(),
-    			R.layout.event,
+    			R.layout.event_list_item,
     			new String[] { EventDatabase.EVENT_NAME, EventDatabase.ID, EventDatabase.EVENT_DATE }, 
     			new int[] {	R.id.name, R.id.id, R.id.date });
 

@@ -5,34 +5,56 @@ import com.itllp.barleylegalhomebrewers.ontap.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class BeerListActivity  extends Activity {
-	
-	// JSON node keys
+	private ListView beerListView;
+	private BeerDatabase beerDb = null;
 	public static final String EVENT_ID = "EVENT_ID";
-	public static final String TAG_NAME = "name";
-	public static final String TAG_EMAIL = "email";
-	public static final String TAG_PHONE_MOBILE = "mobile";
 	
+	public BeerListActivity() {
+	}
+
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.beer_list_item);
-        
-        // getting intent data
+        setContentView(R.layout.beer_list);
+        beerListView = (ListView)findViewById(R.id.list);
         Intent in = getIntent();
-        
-        // Get JSON values from previous intent
         String eventId = in.getStringExtra(EVENT_ID);
         
-        // Displaying all values on the screen
-        TextView lblName = (TextView) findViewById(R.id.name_label);
-        TextView lblCost = (TextView) findViewById(R.id.email_label);
-        TextView lblDesc = (TextView) findViewById(R.id.mobile_label);
-        
-        lblName.setText("event id = " + eventId);
-        lblCost.setText("cost");
-        lblDesc.setText("description");
+        this.loadBeers();
+    }
+
+    private void loadBeers() {
+    	/*
+    	EventDatabaseFactory eventDbFactory = new EventDatabaseFactoryImpl(this);
+    	beerDb = null; // eventDbFactory.getEventDatabase();
+
+    	ListAdapter adapter = new SimpleAdapter(this, beerDb.getEventList(),
+    			R.layout.beer_list_item,
+    			new String[] { EventDatabase.EVENT_NAME, EventDatabase.ID, EventDatabase.EVENT_DATE }, 
+    			new int[] {	R.id.name, R.id.id, R.id.date });
+
+    	this.beerListView.setAdapter(adapter);
+    	
+    	this.beerListView.setOnItemClickListener(new OnItemClickListener() {
+
+    		@Override
+    		public void onItemClick(AdapterView<?> parent, View view,
+    				int position, long id) {
+    			String beerIdString = ((TextView) view.findViewById(R.id.id)).getText().toString();
+    			Intent in = new Intent(getApplicationContext(), BeerListActivity.class);
+    			in.putExtra(BeerListActivity.EVENT_ID, beerIdString);
+    			startActivity(in);
+    		}
+    	});
+*/
     }
 }

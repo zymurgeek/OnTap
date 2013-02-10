@@ -17,8 +17,8 @@ public class EventDatabaseFromJsonUrl extends EventDatabase {
 	private EventDatabaseFromJsonArray eventDatabase = null;
 	
     public EventDatabaseFromJsonUrl(NetworkConnectivity networkConnectivity, String url) {
+    	// TODO: move network activity to another thread 
 	    if (networkConnectivity.isConnected()) {
-
 	    	JSONParser jParser = new JSONParser();
 	    	JSONArray jsonArray = jParser.getJsonArrayFromUrl(url);
 	    	StringToJavaDate jsonDateConverter = new JsonDateToJavaDate();
