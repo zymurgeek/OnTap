@@ -13,7 +13,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class EventListActivity extends Activity {
+public class EventListActivity extends Activity /*implements LoaderCallbacks<Cursor>*/ {
 	private ListView eventListView;
 	private EventDatabase eventDb = null;
 	
@@ -27,6 +27,7 @@ public class EventListActivity extends Activity {
         setContentView(R.layout.event_list);
         eventListView = (ListView)findViewById(R.id.list);
         this.loadEvents();
+        //getLoaderManager().initLoader(0, null, this);
     }
     
     private void loadEvents() {
@@ -54,4 +55,23 @@ public class EventListActivity extends Activity {
     	});
 
     }
+/*
+	@Override
+	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void onLoadFinished(Loader<Cursor> arg0, Cursor arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onLoaderReset(Loader<Cursor> arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+*/	
 }
