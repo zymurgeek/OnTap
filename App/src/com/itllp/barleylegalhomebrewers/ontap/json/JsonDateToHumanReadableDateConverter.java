@@ -2,17 +2,17 @@ package com.itllp.barleylegalhomebrewers.ontap.json;
 
 import java.util.Date;
 
-import com.itllp.barleylegalhomebrewers.ontap.dateconverter.JavaDateToString;
+import com.itllp.barleylegalhomebrewers.ontap.dateconverter.JavaDateToStringConverter;
 import com.itllp.barleylegalhomebrewers.ontap.dateconverter.StringConverter;
 import com.itllp.barleylegalhomebrewers.ontap.dateconverter.StringToJavaDateConverter;
 
-public class JsonDateToHumanReadableDate implements StringConverter {
+public class JsonDateToHumanReadableDateConverter implements StringConverter {
 
 	private StringToJavaDateConverter jsonDateConverter = null;
-	private JavaDateToString javaDateConverter = null;
+	private JavaDateToStringConverter javaDateConverter = null;
 	
-	public JsonDateToHumanReadableDate(StringToJavaDateConverter jsonDateConverter,
-			JavaDateToString javaDateConverter) {
+	public JsonDateToHumanReadableDateConverter(StringToJavaDateConverter jsonDateConverter,
+			JavaDateToStringConverter javaDateConverter) {
 		this.jsonDateConverter = jsonDateConverter;
 		this.javaDateConverter = javaDateConverter;
 	}

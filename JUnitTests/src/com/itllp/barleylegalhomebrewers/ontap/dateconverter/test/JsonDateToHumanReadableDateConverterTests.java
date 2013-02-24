@@ -4,17 +4,17 @@ import static org.mockito.Mockito.*;
 import java.util.Date;
 import junit.framework.TestCase;
 
-import com.itllp.barleylegalhomebrewers.ontap.dateconverter.JavaDateToString;
+import com.itllp.barleylegalhomebrewers.ontap.dateconverter.JavaDateToStringConverter;
 import com.itllp.barleylegalhomebrewers.ontap.dateconverter.StringToJavaDateConverter;
-import com.itllp.barleylegalhomebrewers.ontap.json.JsonDateToHumanReadableDate;
+import com.itllp.barleylegalhomebrewers.ontap.json.JsonDateToHumanReadableDateConverter;
 
-public class JsonDateToHumanReadableDateTests extends TestCase {
+public class JsonDateToHumanReadableDateConverterTests extends TestCase {
 
-	private JsonDateToHumanReadableDate cut = null;
+	private JsonDateToHumanReadableDateConverter cut = null;
 	StringToJavaDateConverter mockJsonDateConverter = null;
-	JavaDateToString mockJavaDateConverter = null; 
+	JavaDateToStringConverter mockJavaDateConverter = null; 
 	
-	public JsonDateToHumanReadableDateTests(String name) {
+	public JsonDateToHumanReadableDateConverterTests(String name) {
 		super(name);
 	}
 
@@ -22,10 +22,10 @@ public class JsonDateToHumanReadableDateTests extends TestCase {
 		super.setUp();
 		mockJsonDateConverter = mock(StringToJavaDateConverter.class);
 		when(mockJsonDateConverter.getJavaDate(anyString())).thenReturn(new Date());
-		mockJavaDateConverter = mock(JavaDateToString.class);
+		mockJavaDateConverter = mock(JavaDateToStringConverter.class);
 		when(mockJavaDateConverter.getString((Date)anyObject())).thenReturn("");
 		
-		cut = new JsonDateToHumanReadableDate(mockJsonDateConverter, 
+		cut = new JsonDateToHumanReadableDateConverter(mockJsonDateConverter, 
 				mockJavaDateConverter);
 	}
 

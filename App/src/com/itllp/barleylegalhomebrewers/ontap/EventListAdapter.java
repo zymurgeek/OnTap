@@ -2,6 +2,8 @@ package com.itllp.barleylegalhomebrewers.ontap;
 
 import java.util.List;
 
+import com.itllp.barleylegalhomebrewers.ontap.dateconverter.JavaDateToHumanReadableDateConverter;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +13,12 @@ import android.widget.TextView;
 
 public class EventListAdapter extends ArrayAdapter<Event> {
     private final LayoutInflater mInflater;
-
+    private JavaDateToHumanReadableDateConverter dateConverter;
+    
 	public EventListAdapter(Context context, int textViewResourceId) {
 		super(context, textViewResourceId);
         mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        dateConverter = new JavaDateToHumanReadableDateConverter();
 	}
 
     public void setData(List<Event> data) {
@@ -33,15 +37,19 @@ public class EventListAdapter extends ArrayAdapter<Event> {
             view = convertView;
         }
 
-        Event item = getItem(position);
-        String idString = String.valueOf(item.getId());
-        String nameString = item.getName();
+        Event event = getItem(position);
+        String idString = String.valueOf(event.getId());
+        String nameString = event.getName();
         
         TextView idView = (TextView)view.findViewById(R.id.id);
         idView.setText(idString);
 
         TextView nameView = (TextView)view.findViewById(R.id.name); 
         nameView.setText(nameString);
+        
+        TextView dateView = (TextView)view.findViewById(R.id.date);
+        String dateString = dateConverter.getString(event.getDate());
+        dateView.setText(dateString);
 
         return view;
     }
