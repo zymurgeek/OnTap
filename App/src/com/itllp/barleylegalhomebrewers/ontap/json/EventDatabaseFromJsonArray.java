@@ -1,6 +1,7 @@
 package com.itllp.barleylegalhomebrewers.ontap.json;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -30,7 +31,7 @@ public class EventDatabaseFromJsonArray  extends EventDatabase {
     	for (int i = 0; i < jsonArray.length(); i++){
         	int id = -1;
         	String eventName = "";
-        	String eventDate = "";
+        	Date eventDate = new Date();
 
     		try {
     			JSONObject jsonEvent = jsonArray.getJSONObject(i);
@@ -43,12 +44,12 @@ public class EventDatabaseFromJsonArray  extends EventDatabase {
     				eventName = jsonEvent.getString(OldEventDatabase.EVENT_NAME);
         		} catch (JSONException e) {}
     			try {
-    				eventDate = jsonEvent.getString(OldEventDatabase.EVENT_DATE);
+    				String jsonEventDate = jsonEvent.getString(OldEventDatabase.EVENT_DATE);
         		} catch (JSONException e) {}
-    			if (id != -1 && (!eventName.contentEquals("") || !eventDate.contentEquals(""))) {
+    			if (id != -1) {
     				Event event = new Event(id);
     				event.setName(eventName);
-
+    				event.setDate(eventDate);
     				eventList.add(event);
     			}
     		} catch (JSONException e) {}
