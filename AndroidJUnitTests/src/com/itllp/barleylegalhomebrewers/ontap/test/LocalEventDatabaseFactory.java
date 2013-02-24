@@ -5,7 +5,7 @@ import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseFactory;
 
 public class LocalEventDatabaseFactory implements EventDatabaseFactory {
 
-	private EventDatabase eventDb = new LocalEventDatabase();
+	private static EventDatabase eventDb = new LocalEventDatabase();
 	
 	@Override
 	public EventDatabase getEventDatabase() {

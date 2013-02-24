@@ -3,7 +3,7 @@
 	<name>OnTapAndroidJUnitTests</name>
 	<comment></comment>
 	<projects>
-		<project>BeerFestival</project>
+		<project>OnTap</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

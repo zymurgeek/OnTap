@@ -19,9 +19,8 @@ public class EventDatabaseFactoryImpl implements EventDatabaseFactory {
 		return concreteEventDatabaseFactory.getEventDatabase();
 	}
 
-	public static void setEventDatabaseFactory(
-			EventDatabaseFactory eventDbFactory) {
-		concreteEventDatabaseFactory = eventDbFactory;
+	public static void setEventDatabaseFactory(EventDatabaseFactory factory) {
+		concreteEventDatabaseFactory = factory;
 	}
 	
 }

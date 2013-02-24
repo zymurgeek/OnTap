@@ -8,14 +8,15 @@ import org.json.JSONException;
 
 import com.itllp.barleylegalhomebrewers.ontap.dateconverter.test.MockStringConverter;
 import com.itllp.barleylegalhomebrewers.ontap.json.EventDatabaseFromJsonArray;
+import com.itllp.barleylegalhomebrewers.ontap.json.OldEventDatabaseFromJsonArray;
 
 import junit.framework.TestCase;
 
-public class EventDatabaseFromJsonArrayTests extends TestCase {
+public class OldEventDatabaseFromJsonArrayTests extends TestCase {
 
 	private MockStringConverter mockDateConverter = null;
 	
-	public EventDatabaseFromJsonArrayTests(String name) {
+	public OldEventDatabaseFromJsonArrayTests(String name) {
 		super(name);
 	}
 
@@ -61,7 +62,7 @@ public class EventDatabaseFromJsonArrayTests extends TestCase {
 	}
 
 	
-	public void testDatabaseFromJsonArrayWithOneEvent() {
+	public void testOldDatabaseFromJsonArrayWithOneEvent() {
 		// Preconditions
 		String jsonString = "[ { ";
 		jsonString += "\"ID\": 0 ";
@@ -74,15 +75,15 @@ public class EventDatabaseFromJsonArrayTests extends TestCase {
 		}
 
 		// Method under test
-		EventDatabaseFromJsonArray databaseWithOneRow 
-		= new EventDatabaseFromJsonArray(jsonArray, mockDateConverter);
+		OldEventDatabaseFromJsonArray databaseWithOneRow 
+		= new OldEventDatabaseFromJsonArray(jsonArray, mockDateConverter);
 		
 		// Postconditions
 		ArrayList<HashMap<String, String>> eventList = databaseWithOneRow.getEventList();
 		assertEquals(1, eventList.size());
 	}
 	
-	public void testDatabaseFromJsonArrayWithOneId() {
+	public void testOldDatabaseFromJsonArrayWithOneId() {
 		// Preconditions
 		String expectedId = "1";
 		
@@ -97,8 +98,8 @@ public class EventDatabaseFromJsonArrayTests extends TestCase {
 		}
 
 		// Method under test
-		EventDatabaseFromJsonArray databaseWithOneRow 
-		= new EventDatabaseFromJsonArray(jsonArray, mockDateConverter);
+		OldEventDatabaseFromJsonArray databaseWithOneRow 
+		= new OldEventDatabaseFromJsonArray(jsonArray, mockDateConverter);
 		
 		// Postconditions
 		ArrayList<HashMap<String, String>> eventList = databaseWithOneRow.getEventList();
@@ -108,7 +109,7 @@ public class EventDatabaseFromJsonArrayTests extends TestCase {
 		assertEquals(expectedId, actualId);
 	}
 	
-	public void testDatabaseFromJsonArrayWithOneEventName() {
+	public void testOldDatabaseFromJsonArrayWithOneEventName() {
 		// Preconditions
 		String expectedEventName = "A";
 		
@@ -122,8 +123,8 @@ public class EventDatabaseFromJsonArrayTests extends TestCase {
 			fail("Failed to parse JSON string" + x);
 		}
 		// Method under test
-		EventDatabaseFromJsonArray databaseWithOneRow 
-		= new EventDatabaseFromJsonArray(jsonArray, mockDateConverter);
+		OldEventDatabaseFromJsonArray databaseWithOneRow 
+		= new OldEventDatabaseFromJsonArray(jsonArray, mockDateConverter);
 		
 		// Postconditions
 		ArrayList<HashMap<String, String>> eventList = databaseWithOneRow.getEventList();
@@ -133,7 +134,7 @@ public class EventDatabaseFromJsonArrayTests extends TestCase {
 		assertEquals(expectedEventName, actualEventName);
 	}
 
-	public void testDatabaseFromJsonArrayWithOneEventDate() {
+	public void testOldDatabaseFromJsonArrayWithOneEventDate() {
 		// Preconditions
 		String expectedInputEventDate = "input_date";
 		String expectedOutputEventDate = "output_date";
@@ -150,8 +151,8 @@ public class EventDatabaseFromJsonArrayTests extends TestCase {
 		mockDateConverter.addConversion(expectedInputEventDate, expectedOutputEventDate);
 		
 		// Method under test
-		EventDatabaseFromJsonArray databaseWithOneRow 
-		= new EventDatabaseFromJsonArray(jsonArray, mockDateConverter);
+		OldEventDatabaseFromJsonArray databaseWithOneRow 
+		= new OldEventDatabaseFromJsonArray(jsonArray, mockDateConverter);
 		
 		// Postconditions
 		ArrayList<HashMap<String, String>> eventList = databaseWithOneRow.getEventList();

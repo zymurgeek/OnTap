@@ -25,22 +25,21 @@ import android.content.Intent;
 import android.test.ActivityUnitTestCase;
 import android.widget.ListView;
 
-import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
-import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseFactoryImpl;
+import com.itllp.barleylegalhomebrewers.ontap.OldEventDatabase;
 import com.itllp.barleylegalhomebrewers.ontap.EventListActivity;
+import com.itllp.barleylegalhomebrewers.ontap.OldEventDatabaseFactoryImpl;
 
-public class EventListActivityTests extends
-	/*ActivityInstrumentationTestCase2<EventListActivity>*/
+public class OldEventListActivityTests extends
 	ActivityUnitTestCase<EventListActivity>{
 
 	private Intent mIntent;
     ListView eventListView;
-	private LocalEventDatabaseFactory mLocalEventDbFactory;
-	private EventDatabase mEventDb;
+	private OldLocalEventDatabaseFactory mLocalEventDbFactory;
+	private OldEventDatabase mEventDb;
 	private ArrayList<HashMap<String, String>> mEventList;
     
     
-	public EventListActivityTests() {
+	public OldEventListActivityTests() {
 		super(EventListActivity.class);
 	}
 
@@ -49,10 +48,10 @@ public class EventListActivityTests extends
     protected void setUp() throws Exception {
         super.setUp();
         mIntent = new Intent();
-		mLocalEventDbFactory = new LocalEventDatabaseFactory();
+		mLocalEventDbFactory = new OldLocalEventDatabaseFactory();
 		mEventDb = mLocalEventDbFactory.getEventDatabase();
 		mEventList = mEventDb.getEventList();
-    	EventDatabaseFactoryImpl.setEventDatabaseFactory(mLocalEventDbFactory);
+    	OldEventDatabaseFactoryImpl.setEventDatabaseFactory(mLocalEventDbFactory);
     }
     
 
@@ -83,7 +82,7 @@ public class EventListActivityTests extends
     public void testListWithOneItem() {
     	// Preconditions
     	HashMap<String, String> map = new HashMap<String, String>();
-		map.put(EventDatabase.ID, "1");
+		map.put(OldEventDatabase.ID, "1");
 		mEventList.add(map);
     	
     	// Method under test

@@ -1,17 +1,22 @@
 package com.itllp.barleylegalhomebrewers.ontap.test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 
+import com.itllp.barleylegalhomebrewers.ontap.Event;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
 
 public class LocalEventDatabase extends EventDatabase {
 
-	private ArrayList<HashMap<String, String>> eventList
-	= new ArrayList<HashMap<String, String>>();
+	private List<Event> eventList = new ArrayList<Event>();
 	
 	@Override
-	public ArrayList<HashMap<String, String>> getEventList() {
+	public void clearEventList() {
+		eventList.clear();
+	}
+
+	@Override
+	public List<Event> getEventList() {
 		return eventList;
 	}
 

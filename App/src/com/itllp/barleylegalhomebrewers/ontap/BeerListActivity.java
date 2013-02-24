@@ -31,7 +31,7 @@ public class BeerListActivity  extends Activity {
 
     	ListAdapter adapter = new SimpleAdapter(this, beerDb.getEventList(),
     			R.layout.beer_list_item,
-    			new String[] { EventDatabase.EVENT_NAME, EventDatabase.ID, EventDatabase.EVENT_DATE }, 
+    			new String[] { OldEventDatabase.EVENT_NAME, OldEventDatabase.ID, OldEventDatabase.EVENT_DATE }, 
     			new int[] {	R.id.name, R.id.id, R.id.date });
 
     	this.beerListView.setAdapter(adapter);

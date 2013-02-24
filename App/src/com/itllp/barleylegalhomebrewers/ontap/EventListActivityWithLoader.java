@@ -3,7 +3,10 @@ package com.itllp.barleylegalhomebrewers.ontap;
 import com.itllp.barleylegalhomebrewers.ontap.R;
 
 import android.app.Activity;
+import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Intent;
+import android.content.Loader;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,13 +16,13 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class EventListActivity extends Activity 
-/*implements LoaderCallbacks<Cursor>*/
+public class EventListActivityWithLoader extends Activity 
+implements LoaderCallbacks<Cursor>
 {
 	private ListView eventListView;
 	private OldEventDatabase eventDb = null;
 	
-	public EventListActivity() {
+	public EventListActivityWithLoader() {
 	}
 
 	/** Called when the activity is first created. */
@@ -28,8 +31,7 @@ public class EventListActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.event_list);
         eventListView = (ListView)findViewById(R.id.list);
-        this.loadEvents();
-        //must derive from FragmentActivity.getSupportLoaderManager();//.initLoader(0, null, this);
+        getLoaderManager().initLoader(0, null, this);
     }
     
     private void loadEvents() {
@@ -57,7 +59,7 @@ public class EventListActivity extends Activity
     	});
 
     }
-/*
+
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		// TODO Auto-generated method stub
@@ -75,5 +77,4 @@ public class EventListActivity extends Activity
 		// TODO Auto-generated method stub
 		
 	}
-	*/
 }

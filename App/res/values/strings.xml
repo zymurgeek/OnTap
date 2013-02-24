@@ -4,5 +4,6 @@
     <string name="app_name">On Tap</string>
     <string name="event_list_label_text">All Events</string>
     <string name="beer_list_label_text">All Beers</string>
+    <string name="no_events_text">No events</string>
     
 </resources>
