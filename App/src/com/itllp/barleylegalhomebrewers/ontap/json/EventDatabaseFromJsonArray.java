@@ -10,12 +10,16 @@ import org.json.JSONObject;
 
 import com.itllp.barleylegalhomebrewers.ontap.Event;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
-import com.itllp.barleylegalhomebrewers.ontap.OldEventDatabase;
 import com.itllp.barleylegalhomebrewers.ontap.dateconverter.StringToJavaDateConverter;
 
 public class EventDatabaseFromJsonArray  extends EventDatabase {
 
 	private List<Event> eventList = new ArrayList<Event>();
+	public static final String ID = "ID";
+	public static final String EVENT_NAME = "EventName";
+	public static final String EVENT_DATE = "EventDate";
+	public static final String ACTIVE = "Active";
+	public static final String DELETED = "Deleted";
 
 	
 	public EventDatabaseFromJsonArray(JSONArray jsonArray, StringToJavaDateConverter dateConverter) {
@@ -36,14 +40,14 @@ public class EventDatabaseFromJsonArray  extends EventDatabase {
     			JSONObject jsonEvent = jsonArray.getJSONObject(i);
 
     			try {
-    				String idString = jsonEvent.getString(OldEventDatabase.ID);
+    				String idString = jsonEvent.getString(ID);
     				id = Integer.parseInt(idString);
         		} catch (JSONException e) {}
     			try {
-    				eventName = jsonEvent.getString(OldEventDatabase.EVENT_NAME);
+    				eventName = jsonEvent.getString(EVENT_NAME);
         		} catch (JSONException e) {}
     			try {
-    				String jsonEventDate = jsonEvent.getString(OldEventDatabase.EVENT_DATE);
+    				String jsonEventDate = jsonEvent.getString(EVENT_DATE);
     				eventDate = dateConverter.getJavaDate(jsonEventDate);
         		} catch (JSONException e) {}
     			if (id != -1) {
