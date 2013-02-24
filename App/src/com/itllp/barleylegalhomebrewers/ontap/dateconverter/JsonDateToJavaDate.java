@@ -2,7 +2,7 @@ package com.itllp.barleylegalhomebrewers.ontap.dateconverter;
 
 import java.util.Date;
 
-public class JsonDateToJavaDate implements StringToJavaDate {
+public class JsonDateToJavaDate implements StringToJavaDateConverter {
 
 	/**
 	 * Converts a JSON date to a java Date.
@@ -11,7 +11,7 @@ public class JsonDateToJavaDate implements StringToJavaDate {
 	 * format, e.g. "\/Date(1352001600000-0400)\/", 
 	 * @return Date corresponding to input jsonDate.
      *
-	 * @see com.itllp.barleylegalhomebrewers.ontap.dateconverter.StringToJavaDate#getJavaDate(java.lang.String)
+	 * @see com.itllp.barleylegalhomebrewers.ontap.dateconverter.StringToJavaDateConverter#getJavaDate(java.lang.String)
 	 */
 	@Override
 	public Date getJavaDate(String jsonDate) {

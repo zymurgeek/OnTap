@@ -11,15 +11,14 @@ import org.json.JSONObject;
 import com.itllp.barleylegalhomebrewers.ontap.Event;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
 import com.itllp.barleylegalhomebrewers.ontap.OldEventDatabase;
-import com.itllp.barleylegalhomebrewers.ontap.dateconverter.StringConverter;
+import com.itllp.barleylegalhomebrewers.ontap.dateconverter.StringToJavaDateConverter;
 
 public class EventDatabaseFromJsonArray  extends EventDatabase {
 
-	// Hashmap for ListView
 	private List<Event> eventList = new ArrayList<Event>();
 
 	
-	public EventDatabaseFromJsonArray(JSONArray jsonArray, StringConverter dateConverter) {
+	public EventDatabaseFromJsonArray(JSONArray jsonArray, StringToJavaDateConverter dateConverter) {
 
 		if (dateConverter == null) {
 			throw new NullPointerException("dateConverter may not be null");
@@ -45,6 +44,7 @@ public class EventDatabaseFromJsonArray  extends EventDatabase {
         		} catch (JSONException e) {}
     			try {
     				String jsonEventDate = jsonEvent.getString(OldEventDatabase.EVENT_DATE);
+    				eventDate = dateConverter.getJavaDate(jsonEventDate);
         		} catch (JSONException e) {}
     			if (id != -1) {
     				Event event = new Event(id);

@@ -5,13 +5,13 @@ import java.util.Date;
 import junit.framework.TestCase;
 
 import com.itllp.barleylegalhomebrewers.ontap.dateconverter.JavaDateToString;
-import com.itllp.barleylegalhomebrewers.ontap.dateconverter.StringToJavaDate;
+import com.itllp.barleylegalhomebrewers.ontap.dateconverter.StringToJavaDateConverter;
 import com.itllp.barleylegalhomebrewers.ontap.json.JsonDateToHumanReadableDate;
 
 public class JsonDateToHumanReadableDateTests extends TestCase {
 
 	private JsonDateToHumanReadableDate cut = null;
-	StringToJavaDate mockJsonDateConverter = null;
+	StringToJavaDateConverter mockJsonDateConverter = null;
 	JavaDateToString mockJavaDateConverter = null; 
 	
 	public JsonDateToHumanReadableDateTests(String name) {
@@ -20,7 +20,7 @@ public class JsonDateToHumanReadableDateTests extends TestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		mockJsonDateConverter = mock(StringToJavaDate.class);
+		mockJsonDateConverter = mock(StringToJavaDateConverter.class);
 		when(mockJsonDateConverter.getJavaDate(anyString())).thenReturn(new Date());
 		mockJavaDateConverter = mock(JavaDateToString.class);
 		when(mockJavaDateConverter.getString((Date)anyObject())).thenReturn("");

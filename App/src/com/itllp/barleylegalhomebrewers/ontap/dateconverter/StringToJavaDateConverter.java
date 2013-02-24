@@ -2,7 +2,7 @@ package com.itllp.barleylegalhomebrewers.ontap.dateconverter;
 
 import java.util.Date;
 
-public interface StringToJavaDate {
+public interface StringToJavaDateConverter {
 
 	/**
 	 * Converts a String to a java Date.

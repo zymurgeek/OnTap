@@ -7,11 +7,8 @@ import org.json.JSONArray;
 import com.itllp.barleylegalhomebrewers.ontap.Event;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
 import com.itllp.barleylegalhomebrewers.ontap.NetworkConnectivity;
-import com.itllp.barleylegalhomebrewers.ontap.dateconverter.JavaDateToHumanReadableDate;
-import com.itllp.barleylegalhomebrewers.ontap.dateconverter.JavaDateToString;
 import com.itllp.barleylegalhomebrewers.ontap.dateconverter.JsonDateToJavaDate;
-import com.itllp.barleylegalhomebrewers.ontap.dateconverter.StringConverter;
-import com.itllp.barleylegalhomebrewers.ontap.dateconverter.StringToJavaDate;
+import com.itllp.barleylegalhomebrewers.ontap.dateconverter.StringToJavaDateConverter;
 
 public class EventDatabaseFromJsonUrl extends EventDatabase {
 	private EventDatabaseFromJsonArray eventDatabase = null;
@@ -20,11 +17,8 @@ public class EventDatabaseFromJsonUrl extends EventDatabase {
 	    if (networkConnectivity.isConnected()) {
 	    	JSONParser jParser = new JSONParser();
 	    	JSONArray jsonArray = jParser.getJsonArrayFromUrl(url);
-	    	StringToJavaDate jsonDateConverter = new JsonDateToJavaDate();
-	    	JavaDateToString javaDateConverter = new JavaDateToHumanReadableDate(); 
-	    	StringConverter dateConverter = new JsonDateToHumanReadableDate(jsonDateConverter,
-	    			javaDateConverter);
-	    	eventDatabase = new EventDatabaseFromJsonArray(jsonArray, dateConverter);
+	    	StringToJavaDateConverter jsonDateConverter = new JsonDateToJavaDate();
+	    	eventDatabase = new EventDatabaseFromJsonArray(jsonArray, jsonDateConverter);
 	    }
 	}
 	

@@ -31,8 +31,8 @@ public class OldEventDatabaseFromJsonArrayTests extends TestCase {
 
 	public void testDatabaseFromNullJsonArray() {
 		// Method under test
-		EventDatabaseFromJsonArray emptyDatabase 
-		= new EventDatabaseFromJsonArray(null, mockDateConverter);
+		OldEventDatabaseFromJsonArray emptyDatabase 
+		= new OldEventDatabaseFromJsonArray(null, mockDateConverter);
 		
 		// Postconditions
 		assertTrue(emptyDatabase.isEmpty());
@@ -54,8 +54,8 @@ public class OldEventDatabaseFromJsonArrayTests extends TestCase {
 		JSONArray jsonArray = new JSONArray();
 		
 		// Method under test
-		EventDatabaseFromJsonArray emptyDatabase 
-		= new EventDatabaseFromJsonArray(jsonArray, mockDateConverter);
+		OldEventDatabaseFromJsonArray emptyDatabase 
+		= new OldEventDatabaseFromJsonArray(jsonArray, mockDateConverter);
 		
 		// Postconditions
 		assertTrue(emptyDatabase.isEmpty());

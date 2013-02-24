@@ -11,7 +11,7 @@ import com.itllp.barleylegalhomebrewers.ontap.dateconverter.JavaDateToHumanReada
 import com.itllp.barleylegalhomebrewers.ontap.dateconverter.JavaDateToString;
 import com.itllp.barleylegalhomebrewers.ontap.dateconverter.JsonDateToJavaDate;
 import com.itllp.barleylegalhomebrewers.ontap.dateconverter.StringConverter;
-import com.itllp.barleylegalhomebrewers.ontap.dateconverter.StringToJavaDate;
+import com.itllp.barleylegalhomebrewers.ontap.dateconverter.StringToJavaDateConverter;
 
 public class OldEventDatabaseFromJsonUrl extends OldEventDatabase {
 	private OldEventDatabaseFromJsonArray eventDatabase = null;
@@ -20,7 +20,7 @@ public class OldEventDatabaseFromJsonUrl extends OldEventDatabase {
 	    if (networkConnectivity.isConnected()) {
 	    	JSONParser jParser = new JSONParser();
 	    	JSONArray jsonArray = jParser.getJsonArrayFromUrl(url);
-	    	StringToJavaDate jsonDateConverter = new JsonDateToJavaDate();
+	    	StringToJavaDateConverter jsonDateConverter = new JsonDateToJavaDate();
 	    	JavaDateToString javaDateConverter = new JavaDateToHumanReadableDate(); 
 	    	StringConverter dateConverter = new JsonDateToHumanReadableDate(jsonDateConverter,
 	    			javaDateConverter);

@@ -1,23 +1,20 @@
 package com.itllp.barleylegalhomebrewers.ontap.json.test;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import com.itllp.barleylegalhomebrewers.ontap.Event;
-import com.itllp.barleylegalhomebrewers.ontap.dateconverter.test.MockStringConverter;
+import com.itllp.barleylegalhomebrewers.ontap.dateconverter.test.MockStringToJavaDateConverter;
 import com.itllp.barleylegalhomebrewers.ontap.json.EventDatabaseFromJsonArray;
-import com.itllp.barleylegalhomebrewers.ontap.json.OldEventDatabaseFromJsonArray;
 
 import junit.framework.TestCase;
 
 public class EventDatabaseFromJsonArrayTests extends TestCase {
 
-	private MockStringConverter mockDateConverter = null;
+	private MockStringToJavaDateConverter mockJsonDateConverter = null;
 	
 	public EventDatabaseFromJsonArrayTests(String name) {
 		super(name);
@@ -25,7 +22,7 @@ public class EventDatabaseFromJsonArrayTests extends TestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		mockDateConverter = new MockStringConverter();
+		mockJsonDateConverter = new MockStringToJavaDateConverter();
 	}
 
 	protected void tearDown() throws Exception {
@@ -35,7 +32,7 @@ public class EventDatabaseFromJsonArrayTests extends TestCase {
 	public void testDatabaseFromNullJsonArray() {
 		// Method under test
 		EventDatabaseFromJsonArray emptyDatabase 
-		= new EventDatabaseFromJsonArray(null, mockDateConverter);
+		= new EventDatabaseFromJsonArray(null, mockJsonDateConverter);
 		
 		// Postconditions
 		assertTrue(emptyDatabase.isEmpty());
@@ -58,7 +55,7 @@ public class EventDatabaseFromJsonArrayTests extends TestCase {
 		
 		// Method under test
 		EventDatabaseFromJsonArray emptyDatabase 
-		= new EventDatabaseFromJsonArray(jsonArray, mockDateConverter);
+		= new EventDatabaseFromJsonArray(jsonArray, mockJsonDateConverter);
 		
 		// Postconditions
 		assertTrue(emptyDatabase.isEmpty());
@@ -79,7 +76,7 @@ public class EventDatabaseFromJsonArrayTests extends TestCase {
 
 		// Method under test
 		EventDatabaseFromJsonArray databaseWithOneRow 
-		= new EventDatabaseFromJsonArray(jsonArray, mockDateConverter);
+		= new EventDatabaseFromJsonArray(jsonArray, mockJsonDateConverter);
 		
 		// Postconditions
 		List<Event> eventList = databaseWithOneRow.getEventList();
@@ -104,7 +101,7 @@ public class EventDatabaseFromJsonArrayTests extends TestCase {
 
 		// Method under test
 		EventDatabaseFromJsonArray databaseWithOneRow 
-		= new EventDatabaseFromJsonArray(jsonArray, mockDateConverter);
+		= new EventDatabaseFromJsonArray(jsonArray, mockJsonDateConverter);
 		
 		// Postconditions
 		List<Event> eventList = databaseWithOneRow.getEventList();
@@ -117,9 +114,12 @@ public class EventDatabaseFromJsonArrayTests extends TestCase {
 	
 	public void testDatabaseFromJsonArrayWithOneEventName() {
 		// Preconditions
+		int id = 99;
+		String idString = String.valueOf(id);
 		String expectedEventName = "A";
 		
 		String jsonString = "[ { ";
+		jsonString += "\"ID\": " + idString + ", ";
 		jsonString += "\"EventName\": \"" + expectedEventName + "\" ";
 		jsonString += "} ]";
 		JSONArray jsonArray = null;
@@ -130,7 +130,7 @@ public class EventDatabaseFromJsonArrayTests extends TestCase {
 		}
 		// Method under test
 		EventDatabaseFromJsonArray databaseWithOneRow 
-		= new EventDatabaseFromJsonArray(jsonArray, mockDateConverter);
+		= new EventDatabaseFromJsonArray(jsonArray, mockJsonDateConverter);
 		
 		// Postconditions
 		List<Event> eventList = databaseWithOneRow.getEventList();
@@ -143,10 +143,13 @@ public class EventDatabaseFromJsonArrayTests extends TestCase {
 	
 	public void testDatabaseFromJsonArrayWithOneEventDate() {
 		// Preconditions
+		int id = 17;
+		String idString = String.valueOf(id);
 		String expectedInputEventDate = "input_date";
-		String expectedOutputEventDate = "output_date";
+		Date expectedOutputEventDate = new Date(42);
 		
 		String jsonString = "[ { ";
+		jsonString += "\"ID\": " + idString + ", ";
 		jsonString += "\"EventDate\": \"" + expectedInputEventDate + "\" ";
 		jsonString += "} ]";
 		JSONArray jsonArray = null;
@@ -155,11 +158,11 @@ public class EventDatabaseFromJsonArrayTests extends TestCase {
 		} catch (JSONException x) {
 			fail("Failed to parse JSON string:  " + x);
 		}
-		mockDateConverter.addConversion(expectedInputEventDate, expectedOutputEventDate);
+		mockJsonDateConverter.addConversion(expectedInputEventDate, expectedOutputEventDate);
 		
 		// Method under test
 		EventDatabaseFromJsonArray databaseWithOneRow 
-		= new EventDatabaseFromJsonArray(jsonArray, mockDateConverter);
+		= new EventDatabaseFromJsonArray(jsonArray, mockJsonDateConverter);
 		
 		// Postconditions
 		List<Event> eventList = databaseWithOneRow.getEventList();
