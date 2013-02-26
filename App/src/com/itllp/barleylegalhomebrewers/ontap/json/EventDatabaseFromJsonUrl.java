@@ -24,6 +24,12 @@ public class EventDatabaseFromJsonUrl extends EventDatabase {
 	
 
 	@Override
+	public void addEvent(Event event) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
 	public void clearEventList() {
 		eventDatabase.clearEventList();
 	}
@@ -39,5 +45,13 @@ public class EventDatabaseFromJsonUrl extends EventDatabase {
 	public boolean isEmpty() {
 		return getEventList().isEmpty();
 	}
+
+
+	@Override
+	public int size() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 
 }

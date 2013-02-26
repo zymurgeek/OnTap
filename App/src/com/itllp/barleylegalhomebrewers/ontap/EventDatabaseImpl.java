@@ -1,19 +1,17 @@
-package com.itllp.barleylegalhomebrewers.ontap.test;
+package com.itllp.barleylegalhomebrewers.ontap;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.itllp.barleylegalhomebrewers.ontap.Event;
-import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
-
-public class LocalEventDatabase extends EventDatabase {
-
+public class EventDatabaseImpl extends EventDatabase {
 	private List<Event> eventList = new ArrayList<Event>();
+
 	
 	@Override
 	public void addEvent(Event event) {
-		// TODO Auto-generated method stub
-		
+		if (null != event && !eventList.contains(event)) {
+			eventList.add(event);
+		}
 	}
 
 	@Override
@@ -33,8 +31,7 @@ public class LocalEventDatabase extends EventDatabase {
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return eventList.size();
 	}
 
 }
