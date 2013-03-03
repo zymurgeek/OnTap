@@ -12,7 +12,7 @@ import com.itllp.barleylegalhomebrewers.ontap.Event;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
 import com.itllp.barleylegalhomebrewers.ontap.dateconverter.StringToJavaDateConverter;
 
-public class EventDatabaseFromJsonArray  extends EventDatabase {
+public class EventDatabaseFromJsonArray implements EventDatabase {
 
 	private List<Event> eventList = new ArrayList<Event>();
 	public static final String ID = "ID";
@@ -62,7 +62,7 @@ public class EventDatabaseFromJsonArray  extends EventDatabase {
 
 	
 	@Override
-	public void addEvent(Event event) {
+	public void addOrUpdateEvent(Event event) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -88,6 +88,27 @@ public class EventDatabaseFromJsonArray  extends EventDatabase {
 	@Override
 	public int size() {
 		return 0;
+	}
+
+
+	@Override
+	public void deleteId(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public boolean containsId(int id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public Event getEvent(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

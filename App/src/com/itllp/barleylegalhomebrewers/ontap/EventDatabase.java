@@ -2,10 +2,13 @@ package com.itllp.barleylegalhomebrewers.ontap;
 
 import java.util.List;
 
-public abstract class EventDatabase {
-	public abstract void addEvent(Event event);
-	public abstract void clearEventList();
-	public abstract List<Event> getEventList();
-	public abstract boolean isEmpty();
-	public abstract int size();
+public interface EventDatabase {
+	public void addOrUpdateEvent(Event event);
+	public void deleteId(int id);
+	public Event getEvent(int id);
+	public void clearEventList();
+	public List<Event> getEventList();
+	public boolean isEmpty();
+	public int size();
+	public boolean containsId(int id);
 }

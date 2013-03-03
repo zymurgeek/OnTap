@@ -10,7 +10,7 @@ import com.itllp.barleylegalhomebrewers.ontap.NetworkConnectivity;
 import com.itllp.barleylegalhomebrewers.ontap.dateconverter.JsonDateToJavaDate;
 import com.itllp.barleylegalhomebrewers.ontap.dateconverter.StringToJavaDateConverter;
 
-public class EventDatabaseFromJsonUrl extends EventDatabase {
+public class EventDatabaseFromJsonUrl implements EventDatabase {
 	private EventDatabaseFromJsonArray eventDatabase = null;
 	
     public EventDatabaseFromJsonUrl(NetworkConnectivity networkConnectivity, String url) {
@@ -24,7 +24,7 @@ public class EventDatabaseFromJsonUrl extends EventDatabase {
 	
 
 	@Override
-	public void addEvent(Event event) {
+	public void addOrUpdateEvent(Event event) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -51,6 +51,27 @@ public class EventDatabaseFromJsonUrl extends EventDatabase {
 	public int size() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+
+	@Override
+	public void deleteId(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public boolean containsId(int id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public Event getEvent(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

@@ -27,14 +27,6 @@ public class EventDatabaseImplTests {
 	}
 
 	@Test
-	public void testInitializationCreatesZeroSizeDatabase() {
-		// Postconditions
-		assertTrue(eventDatabase.isEmpty());
-		assertEquals(0, eventDatabase.size());
-		assertEquals(expectedEventList, eventDatabase.getEventList());
-	}
-	
-	@Test
 	public void testInitializationCreatesEmptyList() {
 		// Postconditions
 		assertTrue(eventDatabase.isEmpty());
@@ -43,9 +35,9 @@ public class EventDatabaseImplTests {
 	}
 	
 	@Test
-	public void testAddNullEvent() {
+	public void testAddNullEventDoesNothing() {
 		// Method under test
-		eventDatabase.addEvent(null);
+		eventDatabase.addOrUpdateEvent(null);
 		
 		// Postconditions
 		assertTrue(eventDatabase.isEmpty());
@@ -59,7 +51,7 @@ public class EventDatabaseImplTests {
 		expectedEventList.add(expectedEvent1);
 		
 		// Method under test
-		eventDatabase.addEvent(expectedEvent1);
+		eventDatabase.addOrUpdateEvent(expectedEvent1);
 		
 		// Postconditions
 		assertFalse(eventDatabase.isEmpty());
@@ -74,8 +66,8 @@ public class EventDatabaseImplTests {
 		expectedEventList.add(expectedEvent2);
 		
 		// Method under test
-		eventDatabase.addEvent(expectedEvent1);
-		eventDatabase.addEvent(expectedEvent2);
+		eventDatabase.addOrUpdateEvent(expectedEvent1);
+		eventDatabase.addOrUpdateEvent(expectedEvent2);
 		
 		// Postconditions
 		assertFalse(eventDatabase.isEmpty());
@@ -83,25 +75,98 @@ public class EventDatabaseImplTests {
 		assertEquals(expectedEventList, eventDatabase.getEventList());
 	}
 	
-	@Test 
-	public void testAddDuplicateEvents() {
+	@Test
+	public void testContainsIdWhenDatabaseEmpty() {
+		assertFalse(eventDatabase.containsId(0));
+	}
+	
+	@Test
+	public void testContainsIdWhenIdNotInDatabase() {
 		// Preconditions
-		expectedEventList.add(expectedEvent2);
+		eventDatabase.addOrUpdateEvent(expectedEvent1);
+		int idNotInDatabase = expectedEvent1.getId()+1;
 		
 		// Method under test
-		eventDatabase.addEvent(expectedEvent2);
-		eventDatabase.addEvent(expectedEvent2);
+		assertFalse(eventDatabase.containsId(idNotInDatabase));
+	}
+	
+	@Test
+	public void testContainsIdWhenIdInDatabase() {
+		// Preconditions
+		eventDatabase.addOrUpdateEvent(expectedEvent1);
+		int idInDatabase = expectedEvent1.getId();
+		
+		// Method under test
+		assertTrue(eventDatabase.containsId(idInDatabase));
+	}
+	
+	@Test 
+	public void testUpdateEvent() {
+		// Preconditions
+		Event updatedExpectedEvent2 = new Event(expectedEvent2.getId());
+		String updatedExpectedName = "Updated Event 2";
+		updatedExpectedEvent2.setName(updatedExpectedName);
+		
+		// Method under test
+		eventDatabase.addOrUpdateEvent(expectedEvent2);
+		eventDatabase.addOrUpdateEvent(updatedExpectedEvent2);
 		
 		// Postconditions
 		assertFalse(eventDatabase.isEmpty());
 		assertEquals(1, eventDatabase.size());
-		assertEquals(expectedEventList, eventDatabase.getEventList());
+		List<Event> actualEventList = eventDatabase.getEventList();
+		Event actualUpdatedEvent = actualEventList.get(0);
+		assertEquals(updatedExpectedEvent2, actualUpdatedEvent);
+	}
+	
+	@Test
+	public void testDeleteIdNotInDatabase() {
+		// Preconditions
+		eventDatabase.addOrUpdateEvent(expectedEvent1);
+		int idNotInDatabase = expectedEvent1.getId()+1;
+		
+		// Method under test
+		eventDatabase.deleteId(idNotInDatabase);
+		
+		// Postconditions
+		assertFalse(eventDatabase.isEmpty()); 
+	}
+	
+	@Test
+	public void testDeleteIdInDatabase() {
+		// Preconditions
+		eventDatabase.addOrUpdateEvent(expectedEvent1);
+		int idInDatabase = expectedEvent1.getId();
+		
+		// Method under test
+		eventDatabase.deleteId(idInDatabase);
+		
+		// Postconditions
+		assertTrue(eventDatabase.isEmpty()); 
+	}
+	
+	@Test
+	public void testGetEventWhenNotInDatabaseReturnsNull() {
+		assertNull(eventDatabase.getEvent(0));
+	}
+	
+	@Test
+	public void testGetEventWhenInDatabase() {
+		// Preconditions
+		eventDatabase.addOrUpdateEvent(expectedEvent1);
+		int idInDatabase = expectedEvent1.getId();
+		
+		// Method under test
+		Event eventInDatabase = eventDatabase.getEvent(idInDatabase);
+		
+		// Postconditions
+		assertEquals(expectedEvent1, eventInDatabase);
 	}
 	
 	@Test
 	public void testClearEvents() {
 		// Preconditions
-		eventDatabase.addEvent(expectedEvent1);
+		eventDatabase.addOrUpdateEvent(expectedEvent1);
 		
 		// Method under test
 		eventDatabase.clearEventList();
