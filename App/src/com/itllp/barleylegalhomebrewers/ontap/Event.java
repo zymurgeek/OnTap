@@ -9,6 +9,8 @@ public class Event {
 	
 	public Event(int id) {
 		this.id = id;
+		name = "";
+		date = new Date(0);
 	}
 	
 	public Date getDate() {
@@ -24,10 +26,14 @@ public class Event {
 	}
 	
 	public void setDate(Date date) {
-		this.date = date;
+		if (null != date) {
+			this.date = date;
+		}
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		if (null != name) {
+			this.name = name;
+		}
 	}
 }
