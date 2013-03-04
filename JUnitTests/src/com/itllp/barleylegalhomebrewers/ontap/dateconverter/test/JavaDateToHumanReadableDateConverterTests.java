@@ -7,7 +7,6 @@ import junit.framework.TestCase;
 import com.itllp.barleylegalhomebrewers.ontap.dateconverter.JavaDateToHumanReadableDateConverter;
 import com.itllp.barleylegalhomebrewers.ontap.dateconverter.JavaDateToStringConverter;
 import com.itllp.barleylegalhomebrewers.ontap.dateconverter.StringToJavaDateConverter;
-import com.itllp.barleylegalhomebrewers.ontap.json.JsonDateToHumanReadableDateConverter;
 
 public class JavaDateToHumanReadableDateConverterTests extends TestCase {
 
