@@ -3,8 +3,7 @@ package com.itllp.barleylegalhomebrewers.ontap;
 public class EventDatabaseFactoryProvider {
 	protected static EventDatabaseFactory eventDatabaseFactory = null;
 
-	public static void setEventDatabaseFactory(EventDatabaseFactory factory)
-	throws FactoryAlreadySetException, NullFactoryException {
+	public static void setEventDatabaseFactory(EventDatabaseFactory factory) {
 		if (null == factory) {
 			throw new NullFactoryException();
 		}
@@ -14,8 +13,7 @@ public class EventDatabaseFactoryProvider {
 		eventDatabaseFactory = factory;
 	}
 
-	public static EventDatabaseFactory getEventDatabaseFactory() 
-		throws UninitializedFactoryException {
+	public static EventDatabaseFactory getEventDatabaseFactory() {
 		if (null == eventDatabaseFactory) {
 			throw new UninitializedFactoryException();
 		}

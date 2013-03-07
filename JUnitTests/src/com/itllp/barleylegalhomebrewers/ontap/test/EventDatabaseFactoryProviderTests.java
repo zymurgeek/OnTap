@@ -38,7 +38,7 @@ public class EventDatabaseFactoryProviderTests extends TestCase {
 		}
 	}
 
-	public void testGetFactoryWhenInitialized() throws FactoryAlreadySetException, NullFactoryException {
+	public void testGetFactoryWhenInitialized() {
 		// Preconditions
 		EventDatabaseFactoryProvider.setEventDatabaseFactory(factory);
 		EventDatabaseFactory actualFactory = null;
@@ -63,7 +63,7 @@ public class EventDatabaseFactoryProviderTests extends TestCase {
 		}
 	}
 
-	public void testSetFactoryWhenAlreadySetThrowsException() throws FactoryAlreadySetException, NullFactoryException {
+	public void testSetFactoryWhenAlreadySetThrowsException() {
 		// Preconditions
 		EventDatabaseFactoryProvider.setEventDatabaseFactory(factory);
 		

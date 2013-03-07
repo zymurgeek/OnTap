@@ -16,11 +16,9 @@ public class EventListActivityWithFragments extends Activity
         super.onCreate(savedInstanceState);
         Context context = this.getApplicationContext();
         try {
-			EventDatabaseFactoryProvider.setEventDatabaseFactory
+        	EventDatabaseFactoryProvider.setEventDatabaseFactory
 				(new JsonEventDatabaseFactory(context));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        } catch (FactoryAlreadySetException e) {}
         setContentView(R.layout.event_list_fragment);
     }
     
