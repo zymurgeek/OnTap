@@ -25,7 +25,7 @@ import android.test.AndroidTestCase;
 
 import com.itllp.barleylegalhomebrewers.ontap.Event;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
-import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseFactoryImpl;
+import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseFactoryProvider;
 import com.itllp.barleylegalhomebrewers.ontap.EventListAsyncTaskLoader;
 
 public class EventListAsyncTaskLoaderTests extends
@@ -47,7 +47,8 @@ public class EventListAsyncTaskLoaderTests extends
         localEdbFactory = new LocalEventDatabaseFactory();
         eventDb = localEdbFactory.getEventDatabase();
     	eventDb.clearEventList();
-    	EventDatabaseFactoryImpl.setEventDatabaseFactory(localEdbFactory);
+    	EventDatabaseFactoryProvider.clearEventDatabaseFactory();
+    	EventDatabaseFactoryProvider.setEventDatabaseFactory(localEdbFactory);
     	loader = new EventListAsyncTaskLoader(context);
     }
     

@@ -11,7 +11,11 @@ public class EventListAsyncTaskLoader extends AsyncTaskLoader<List<Event>> {
 	
 	public EventListAsyncTaskLoader(Context context) {
 		super(context);
-		factory = new EventDatabaseFactoryImpl(context);
+		try {
+			factory = EventDatabaseFactoryProvider.getEventDatabaseFactory();
+		} catch (UninitializedFactoryException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

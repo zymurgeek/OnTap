@@ -26,7 +26,7 @@ public class BeerListActivity  extends Activity {
 
     private void loadBeers() {
     	/*
-    	EventDatabaseFactory eventDbFactory = new EventDatabaseFactoryImpl(this);
+    	EventDatabaseFactory eventDbFactory = new EventDatabaseFactoryProvider(this);
     	beerDb = null; // eventDbFactory.getEventDatabase();
 
     	ListAdapter adapter = new SimpleAdapter(this, beerDb.getEventList(),
