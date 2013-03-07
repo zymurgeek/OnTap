@@ -1,9 +1,8 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
 public class EventDatabaseFactoryProvider {
-	private static EventDatabaseFactory eventDatabaseFactory = null;
-	// todo move clear to testing class
-	// todo move tests for this to non-android junit tests
+	protected static EventDatabaseFactory eventDatabaseFactory = null;
+
 	public static void setEventDatabaseFactory(EventDatabaseFactory factory)
 	throws FactoryAlreadySetException, NullFactoryException {
 		if (null == factory) {
@@ -23,8 +22,4 @@ public class EventDatabaseFactoryProvider {
 		return eventDatabaseFactory;
 	}
 
-	public static void clearEventDatabaseFactory() {
-		eventDatabaseFactory = null;
-	}
-	
 }

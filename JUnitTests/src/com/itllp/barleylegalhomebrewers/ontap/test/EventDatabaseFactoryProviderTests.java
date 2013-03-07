@@ -19,7 +19,7 @@ public class EventDatabaseFactoryProviderTests extends TestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		EventDatabaseFactoryProvider.clearEventDatabaseFactory();
+		TestEventDatabaseFactoryProvider.clearEventDatabaseFactory();
 	}
 
 	protected void tearDown() throws Exception {

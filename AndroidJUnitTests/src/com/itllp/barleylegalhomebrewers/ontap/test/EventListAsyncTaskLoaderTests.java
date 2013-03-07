@@ -47,7 +47,7 @@ public class EventListAsyncTaskLoaderTests extends
         localEdbFactory = new LocalEventDatabaseFactory();
         eventDb = localEdbFactory.getEventDatabase();
     	eventDb.clearEventList();
-    	EventDatabaseFactoryProvider.clearEventDatabaseFactory();
+    	TestEventDatabaseFactoryProvider.clearEventDatabaseFactory();
     	EventDatabaseFactoryProvider.setEventDatabaseFactory(localEdbFactory);
     	loader = new EventListAsyncTaskLoader(context);
     }

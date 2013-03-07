@@ -57,7 +57,7 @@ public class EventListActivityWithFragmentsTests extends
         mIntent = new Intent();
         mInstrumentation = getInstrumentation();
 		mLocalEventDbFactory = new LocalEventDatabaseFactory();
-    	EventDatabaseFactoryProvider.clearEventDatabaseFactory();
+    	TestEventDatabaseFactoryProvider.clearEventDatabaseFactory();
     	EventDatabaseFactoryProvider.setEventDatabaseFactory(mLocalEventDbFactory);
     	elFactory = new EventListLoaderFactory();
     	context = getInstrumentation().getContext();
