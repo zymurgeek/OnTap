@@ -2,9 +2,9 @@ package com.itllp.barleylegalhomebrewers.ontap.test;
 
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseFactoryProvider;
 
-public class TestEventDatabaseFactoryProvider extends EventDatabaseFactoryProvider {
+public class EventDatabaseFactoryProviderTestHelper extends EventDatabaseFactoryProvider {
 	
-	public TestEventDatabaseFactoryProvider() {
+	public EventDatabaseFactoryProviderTestHelper() {
 	}
 
 	public static void clearEventDatabaseFactory() {
