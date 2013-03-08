@@ -1,25 +1,25 @@
 package com.itllp.barleylegalhomebrewers.ontap.test;
 
-import static org.mockito.Mockito.*;
-import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseFactory;
-import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseFactoryProvider;
+import static org.mockito.Mockito.mock;
+import junit.framework.TestCase;
+
+import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoaderFactory;
+import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoaderFactoryProvider;
 import com.itllp.barleylegalhomebrewers.ontap.FactoryAlreadySetException;
 import com.itllp.barleylegalhomebrewers.ontap.NullFactoryException;
 import com.itllp.barleylegalhomebrewers.ontap.UninitializedFactoryException;
 
-import junit.framework.TestCase;
+public class EventDatabaseLoaderFactoryProviderTests extends TestCase {
 
-public class EventDatabaseFactoryProviderTests extends TestCase {
+	private final EventDatabaseLoaderFactory factory = mock(EventDatabaseLoaderFactory.class);
 
-	private final EventDatabaseFactory factory = mock(EventDatabaseFactory.class);
-
-	public EventDatabaseFactoryProviderTests(String name) {
+	public EventDatabaseLoaderFactoryProviderTests(String name) {
 		super(name);
 	}
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		EventDatabaseFactoryProviderTestHelper.clearEventDatabaseFactory();
+		EventDatabaseLoaderFactoryProviderTestHelper.clearEventDatabaseLoaderFactory();
 	}
 
 	protected void tearDown() throws Exception {
@@ -29,7 +29,7 @@ public class EventDatabaseFactoryProviderTests extends TestCase {
 	public void testGetFactoryWhenUninitialized() {
 		// Method under test and postconditions
 		try {
-			EventDatabaseFactoryProvider.getEventDatabaseFactory();
+			EventDatabaseLoaderFactoryProvider.getEventDatabaseLoaderFactory();
 			fail("Uninitialized provider should throw exception");
 		} catch (UninitializedFactoryException correctException) {
 			assertNotNull(correctException);
@@ -40,12 +40,12 @@ public class EventDatabaseFactoryProviderTests extends TestCase {
 
 	public void testGetFactoryWhenInitialized() {
 		// Preconditions
-		EventDatabaseFactoryProvider.setEventDatabaseFactory(factory);
-		EventDatabaseFactory actualFactory = null;
+		EventDatabaseLoaderFactoryProvider.setEventDatabaseLoaderFactory(factory);
+		EventDatabaseLoaderFactory actualFactory = null;
 		
 		// Method under test and postconditions
 		try {
-			actualFactory = EventDatabaseFactoryProvider.getEventDatabaseFactory();
+			actualFactory = EventDatabaseLoaderFactoryProvider.getEventDatabaseLoaderFactory();
 		} catch (Exception e) {
 			fail("Should not have thrown exception, but threw: " + e);
 		}
@@ -57,7 +57,7 @@ public class EventDatabaseFactoryProviderTests extends TestCase {
 	public void testSetFactoryWhenUninitialized() {
 		// Method under test and postconditions
 		try {
-			EventDatabaseFactoryProvider.setEventDatabaseFactory(factory);
+			EventDatabaseLoaderFactoryProvider.setEventDatabaseLoaderFactory(factory);
 		} catch (Exception e) {
 			fail("Should not have thrown an exception, but threw: " + e);
 		}
@@ -65,11 +65,11 @@ public class EventDatabaseFactoryProviderTests extends TestCase {
 
 	public void testSetFactoryWhenAlreadySet() {
 		// Preconditions
-		EventDatabaseFactoryProvider.setEventDatabaseFactory(factory);
+		EventDatabaseLoaderFactoryProvider.setEventDatabaseLoaderFactory(factory);
 		
 		// Method under test and postconditions
 		try {
-			EventDatabaseFactoryProvider.setEventDatabaseFactory(factory);
+			EventDatabaseLoaderFactoryProvider.setEventDatabaseLoaderFactory(factory);
 			fail("Should have thrown an exception");
 		} catch (FactoryAlreadySetException correctException) {
 			assertNotNull(correctException);
@@ -81,7 +81,7 @@ public class EventDatabaseFactoryProviderTests extends TestCase {
 	public void testSetNullFactory() {
 		// Preconditions
 		try {
-			EventDatabaseFactoryProvider.setEventDatabaseFactory(null);
+			EventDatabaseLoaderFactoryProvider.setEventDatabaseLoaderFactory(null);
 			fail("Should have thrown an exception");
 		} catch (NullFactoryException correctException) {
 			assertNotNull(correctException);

@@ -7,16 +7,21 @@ import android.content.Context;
 public class EventListAsyncTaskLoader extends AsyncTaskLoader<List<Event>> {
 
 	private List<Event> mEventList;
-	EventDatabaseFactory factory;
+	private EventDatabaseFactory eventDbFactory;
+	private EventDatabaseLoaderFactory eventDbLoaderFactory;
 	
 	public EventListAsyncTaskLoader(Context context) {
 		super(context);
-		factory = EventDatabaseFactoryProvider.getEventDatabaseFactory();
+		eventDbFactory = EventDatabaseFactoryProvider.getEventDatabaseFactory();
+		eventDbLoaderFactory = EventDatabaseLoaderFactoryProvider.getEventDatabaseLoaderFactory();
 	}
 
 	@Override
 	public List<Event> loadInBackground() {
-		EventDatabase database = factory.getEventDatabase();
+		EventDatabaseLoader loader = eventDbLoaderFactory.getEventDatabaseLoader();
+		loader.load();
+		
+		EventDatabase database = eventDbFactory.getEventDatabase();
 		List<Event> eventList = database.getEventList();
 		return eventList;
 	}

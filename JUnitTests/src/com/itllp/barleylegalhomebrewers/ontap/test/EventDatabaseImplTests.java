@@ -1,4 +1,4 @@
-package com.itllp.barleylegalhomebrewers.ontap;
+package com.itllp.barleylegalhomebrewers.ontap.test;
 
 import static org.junit.Assert.*;
 
@@ -8,6 +8,9 @@ import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.itllp.barleylegalhomebrewers.ontap.Event;
+import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseImpl;
 
 public class EventDatabaseImplTests {
 

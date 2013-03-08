@@ -26,15 +26,11 @@ import android.test.AndroidTestCase;
 import com.itllp.barleylegalhomebrewers.ontap.Event;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseFactoryProvider;
+import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoaderFactoryProvider;
 import com.itllp.barleylegalhomebrewers.ontap.EventListAsyncTaskLoader;
 
 public class EventListAsyncTaskLoaderTests extends
 	AndroidTestCase {
-
-	private Context context;
-	private LocalEventDatabaseFactory localEdbFactory;
-	private EventDatabase eventDb;
-	private EventListAsyncTaskLoader loader;
 
 	public EventListAsyncTaskLoaderTests() {
 	}
@@ -43,37 +39,33 @@ public class EventListAsyncTaskLoaderTests extends
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        context = new MockContext();
-        localEdbFactory = new LocalEventDatabaseFactory();
-        eventDb = localEdbFactory.getEventDatabase();
-    	eventDb.clearEventList();
-    	EventDatabaseFactoryProviderTestHelper.clearEventDatabaseFactory();
-    	EventDatabaseFactoryProvider.setEventDatabaseFactory(localEdbFactory);
-    	loader = new EventListAsyncTaskLoader(context);
     }
     
     
-    public void testLoadInBackgroundWithNoItems() {
-    	// Method under test
-    	List<Event> actualEventList = loader.loadInBackground();
-    	
-    	// Postconditions
-    	assertEquals(0, actualEventList.size());
-    }
-    
-    
-    public void testLoadInBackgroundWith17Items() {
+    public void testLoadInBackground() {
     	// Preconditions
-    	List<Event> expectedEventList = eventDb.getEventList();
-    	for (int id=1; id<=17; ++id) {
-    		Event event = new Event(id);
-    		expectedEventList.add(event);
-    	}
+    	MockEventDatabaseLoaderFactory mockLoaderFactory = new MockEventDatabaseLoaderFactory();
+    	EventDatabaseLoaderFactoryProviderTestHelper.clearEventDatabaseLoaderFactory();
+    	EventDatabaseLoaderFactoryProvider.setEventDatabaseLoaderFactory(mockLoaderFactory);
+    	MockEventDatabaseLoader mockEventDatabaseLoader = new MockEventDatabaseLoader();
+    	mockLoaderFactory.MOCK_setEventDatabaseLoader(mockEventDatabaseLoader);
+
+    	LocalEventDatabaseFactory localEventDatabaseFactory = new LocalEventDatabaseFactory();
+    	EventDatabase eventDatabase = localEventDatabaseFactory.getEventDatabase();
+    	List<Event> expectedEventList = eventDatabase.getEventList();
+    	EventDatabaseFactoryProviderTestHelper.clearEventDatabaseFactory();
+    	EventDatabaseFactoryProvider.setEventDatabaseFactory(localEventDatabaseFactory);
+    	
+    	Context context= new MockContext();
+    	EventListAsyncTaskLoader loader = new EventListAsyncTaskLoader(context);
     	
     	// Method under test
     	List<Event> actualEventList = loader.loadInBackground();
     	
     	// Postconditions
-    	assertTrue(expectedEventList.equals(actualEventList));
+    	assertEquals(1, mockEventDatabaseLoader.MOCK_getLoadCount());
+    	assertEquals(expectedEventList, actualEventList);
     }
+    
+    
 }
