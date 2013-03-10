@@ -5,7 +5,7 @@ import com.itllp.barleylegalhomebrewers.ontap.json.EventDatabaseFromJsonUrl;
 import android.content.Context;
 import android.net.ConnectivityManager;
 
-public class JsonEventDatabaseFactory implements EventDatabaseFactory {
+public class JsonEventDatabaseFactory {
 	private Context context;
 	private static String eventsUrl = "http://misdb.com/barleylegalapp/getevent.aspx";
 	
@@ -16,7 +16,6 @@ public class JsonEventDatabaseFactory implements EventDatabaseFactory {
 	/* (non-Javadoc)
 	 * @see com.itllp.barleylegalhomebrewers.ontap.EventDatabaseFactoryIF#getEventDatabase()
 	 */
-	@Override
 	public EventDatabase getEventDatabase() {
     	ConnectivityManager connMgr = (ConnectivityManager) 
     	        context.getSystemService(Context.CONNECTIVITY_SERVICE);
