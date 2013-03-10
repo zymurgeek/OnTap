@@ -36,6 +36,7 @@ import com.itllp.barleylegalhomebrewers.ontap.EventListFragment;
 import com.itllp.barleylegalhomebrewers.ontap.EventListLoaderFactory;
 import com.itllp.barleylegalhomebrewers.ontap.NewEventDatabase;
 import com.itllp.barleylegalhomebrewers.ontap.NewEventDatabaseImpl;
+import com.itllp.barleylegalhomebrewers.ontap.json.JsonUrlEventDatabaseLoader;
 
 public class EventListActivityWithFragmentsTests extends
 	ActivityUnitTestCase<EventListActivityWithFragments> {
