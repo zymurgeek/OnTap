@@ -2,7 +2,7 @@ package com.itllp.barleylegalhomebrewers.ontap.test;
 
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoader;
 
-public class MockEventDatabaseLoader implements EventDatabaseLoader {
+public class MockEventDatabaseLoader extends EventDatabaseLoader {
 
 	private int loadCount = 0;
 	

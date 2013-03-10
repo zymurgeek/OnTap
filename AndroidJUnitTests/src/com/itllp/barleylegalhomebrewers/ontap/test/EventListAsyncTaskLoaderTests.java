@@ -24,7 +24,7 @@ import android.content.Context;
 import android.test.AndroidTestCase;
 
 import com.itllp.barleylegalhomebrewers.ontap.Event;
-import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoaderFactoryProvider;
+import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoader;
 import com.itllp.barleylegalhomebrewers.ontap.EventListAsyncTaskLoader;
 import com.itllp.barleylegalhomebrewers.ontap.NewEventDatabase;
 
@@ -43,11 +43,9 @@ public class EventListAsyncTaskLoaderTests extends
     
     public void testLoadInBackground() {
     	// Preconditions
-    	MockEventDatabaseLoaderFactory mockLoaderFactory = new MockEventDatabaseLoaderFactory();
-    	EventDatabaseLoaderFactoryProviderTestHelper.clearEventDatabaseLoaderFactory();
-    	EventDatabaseLoaderFactoryProvider.setEventDatabaseLoaderFactory(mockLoaderFactory);
-    	MockEventDatabaseLoader mockEventDatabaseLoader = new MockEventDatabaseLoader();
-    	mockLoaderFactory.MOCK_setEventDatabaseLoader(mockEventDatabaseLoader);
+    	FakeEventDatabaseLoader.clearInstance();
+    	FakeEventDatabaseLoader.create();
+    	FakeEventDatabaseLoader fakeLoader = (FakeEventDatabaseLoader)EventDatabaseLoader.getInstance();
 
     	FakeNewEventDatabase.clearInstance();
     	FakeNewEventDatabase.create();
@@ -62,7 +60,7 @@ public class EventListAsyncTaskLoaderTests extends
     	List<Event> actualEventList = loader.loadInBackground();
     	
     	// Postconditions
-    	assertEquals(1, mockEventDatabaseLoader.MOCK_getLoadCount());
+    	assertEquals(1, fakeLoader.MOCK_getLoadCount());
     	assertEquals(expectedEventList, actualEventList);
     }
     
