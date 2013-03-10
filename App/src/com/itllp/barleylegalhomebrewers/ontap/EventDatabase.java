@@ -2,6 +2,7 @@ package com.itllp.barleylegalhomebrewers.ontap;
 
 import java.util.List;
 
+// TODO:  Remove this old EventDatabase
 public interface EventDatabase {
 	public void addOrUpdateEvent(Event event);
 	public void deleteId(int id);
