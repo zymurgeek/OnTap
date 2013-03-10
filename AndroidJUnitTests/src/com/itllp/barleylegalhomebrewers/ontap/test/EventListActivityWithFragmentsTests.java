@@ -29,7 +29,6 @@ import android.test.ActivityUnitTestCase;
 import android.widget.ListView;
 
 import com.itllp.barleylegalhomebrewers.ontap.Event;
-import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseFactoryProvider;
 import com.itllp.barleylegalhomebrewers.ontap.EventListActivityWithFragments;
 import com.itllp.barleylegalhomebrewers.ontap.EventListFragment;
 import com.itllp.barleylegalhomebrewers.ontap.EventListLoaderFactory;
@@ -40,7 +39,6 @@ public class EventListActivityWithFragmentsTests extends
 
 	private Intent mIntent;
     ListView eventListView;
-	private LocalEventDatabaseFactory mLocalEventDbFactory;
 	private Instrumentation mInstrumentation;
 	private EventListLoaderFactory elFactory;
 	private Context context;
@@ -57,7 +55,6 @@ public class EventListActivityWithFragmentsTests extends
         super.setUp();
         mIntent = new Intent();
         mInstrumentation = getInstrumentation();
-		mLocalEventDbFactory = new LocalEventDatabaseFactory();
     	
     	FakeNewEventDatabase.clearInstance();
     	NewEventDatabaseImpl.create();

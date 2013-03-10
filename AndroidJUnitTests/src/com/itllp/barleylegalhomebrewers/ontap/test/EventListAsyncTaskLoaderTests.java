@@ -24,8 +24,6 @@ import android.content.Context;
 import android.test.AndroidTestCase;
 
 import com.itllp.barleylegalhomebrewers.ontap.Event;
-import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
-import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseFactoryProvider;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoaderFactoryProvider;
 import com.itllp.barleylegalhomebrewers.ontap.EventListAsyncTaskLoader;
 import com.itllp.barleylegalhomebrewers.ontap.NewEventDatabase;

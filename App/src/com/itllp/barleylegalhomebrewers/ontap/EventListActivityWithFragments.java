@@ -3,7 +3,6 @@ package com.itllp.barleylegalhomebrewers.ontap;
 import com.itllp.barleylegalhomebrewers.ontap.R;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 
 public class EventListActivityWithFragments extends Activity 
