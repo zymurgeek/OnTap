@@ -22,6 +22,7 @@ public class NewEventDatabaseImplTests {
 	
 	@Before
 	public void setUp() throws Exception {
+		FakeNewEventDatabase.clearInstance();
 		NewEventDatabaseImpl.create();
 		eventDatabase = NewEventDatabase.getInstance();
 		

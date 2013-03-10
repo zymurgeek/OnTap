@@ -28,6 +28,7 @@ import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseFactoryProvider;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoaderFactoryProvider;
 import com.itllp.barleylegalhomebrewers.ontap.EventListAsyncTaskLoader;
+import com.itllp.barleylegalhomebrewers.ontap.NewEventDatabase;
 
 public class EventListAsyncTaskLoaderTests extends
 	AndroidTestCase {
@@ -50,11 +51,11 @@ public class EventListAsyncTaskLoaderTests extends
     	MockEventDatabaseLoader mockEventDatabaseLoader = new MockEventDatabaseLoader();
     	mockLoaderFactory.MOCK_setEventDatabaseLoader(mockEventDatabaseLoader);
 
-    	LocalEventDatabaseFactory localEventDatabaseFactory = new LocalEventDatabaseFactory();
-    	EventDatabase eventDatabase = localEventDatabaseFactory.getEventDatabase();
+    	FakeNewEventDatabase.clearInstance();
+    	FakeNewEventDatabase.create();
+    	NewEventDatabase eventDatabase = NewEventDatabase.getInstance();
+    	eventDatabase.addOrUpdateEvent(new Event(1));
     	List<Event> expectedEventList = eventDatabase.getEventList();
-    	EventDatabaseFactoryProviderTestHelper.clearEventDatabaseFactory();
-    	EventDatabaseFactoryProvider.setEventDatabaseFactory(localEventDatabaseFactory);
     	
     	Context context= new MockContext();
     	EventListAsyncTaskLoader loader = new EventListAsyncTaskLoader(context);

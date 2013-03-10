@@ -33,6 +33,7 @@ import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseFactoryProvider;
 import com.itllp.barleylegalhomebrewers.ontap.EventListActivityWithFragments;
 import com.itllp.barleylegalhomebrewers.ontap.EventListFragment;
 import com.itllp.barleylegalhomebrewers.ontap.EventListLoaderFactory;
+import com.itllp.barleylegalhomebrewers.ontap.NewEventDatabaseImpl;
 
 public class EventListActivityWithFragmentsTests extends
 	ActivityUnitTestCase<EventListActivityWithFragments> {
@@ -57,8 +58,10 @@ public class EventListActivityWithFragmentsTests extends
         mIntent = new Intent();
         mInstrumentation = getInstrumentation();
 		mLocalEventDbFactory = new LocalEventDatabaseFactory();
-    	EventDatabaseFactoryProviderTestHelper.clearEventDatabaseFactory();
-    	EventDatabaseFactoryProvider.setEventDatabaseFactory(mLocalEventDbFactory);
+    	
+    	FakeNewEventDatabase.clearInstance();
+    	NewEventDatabaseImpl.create();
+    	
     	elFactory = new EventListLoaderFactory();
     	context = getInstrumentation().getContext();
     	mockLoader = new MockEventListAsyncTaskLoader(context);
