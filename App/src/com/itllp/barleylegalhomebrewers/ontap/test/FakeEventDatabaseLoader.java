@@ -4,6 +4,8 @@ import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoader;
 
 public class FakeEventDatabaseLoader extends EventDatabaseLoader {
 
+	private int loadCount = 0;
+	
 	public static void clearInstance() {
 		setInstance(null);
 	}
@@ -12,9 +14,17 @@ public class FakeEventDatabaseLoader extends EventDatabaseLoader {
 		setInstance(new FakeEventDatabaseLoader());
 	}
 
+	@Override
+	public void load() {
+		++loadCount;
+	}
+	
+	public void MOCK_clearLoadCount() {
+		loadCount = 0;
+	}
+	
 	public int MOCK_getLoadCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return loadCount;
 	}
 
 }

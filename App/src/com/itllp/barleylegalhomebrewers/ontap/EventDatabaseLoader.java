@@ -6,6 +6,9 @@ public abstract class EventDatabaseLoader {
 	public void load() {}
 
 	public static EventDatabaseLoader getInstance() {
+		if (null == instance) {
+			throw new DatabaseLoaderNotInstantiatedException();
+		}
 		return instance;
 	}
 	

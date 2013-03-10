@@ -16,6 +16,9 @@ public class EventListActivityWithFragments extends Activity
         try {
         	NewEventDatabaseImpl.create();
         } catch (DatabaseAlreadyInstantiatedException e) {}
+        try {
+        	ProductionSiteEventDatabaseLoader.create();
+        } catch (DatabaseLoaderAlreadyInstantiatedException e) {}
         setContentView(R.layout.event_list_fragment);
     }
     

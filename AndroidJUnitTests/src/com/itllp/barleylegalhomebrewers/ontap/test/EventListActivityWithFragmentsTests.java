@@ -29,10 +29,13 @@ import android.test.ActivityUnitTestCase;
 import android.widget.ListView;
 
 import com.itllp.barleylegalhomebrewers.ontap.Event;
+import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoader;
 import com.itllp.barleylegalhomebrewers.ontap.EventListActivityWithFragments;
 import com.itllp.barleylegalhomebrewers.ontap.EventListFragment;
 import com.itllp.barleylegalhomebrewers.ontap.EventListLoaderFactory;
+import com.itllp.barleylegalhomebrewers.ontap.NewEventDatabase;
 import com.itllp.barleylegalhomebrewers.ontap.NewEventDatabaseImpl;
+import com.itllp.barleylegalhomebrewers.ontap.ProductionSiteEventDatabaseLoader;
 
 public class EventListActivityWithFragmentsTests extends
 	ActivityUnitTestCase<EventListActivityWithFragments> {
@@ -67,11 +70,17 @@ public class EventListActivityWithFragmentsTests extends
     
 
     public void testInitialization() {
+    	// Preconditions
+    	FakeNewEventDatabase.clearInstance();
+    	FakeEventDatabaseLoader.clearInstance();
+
     	// Method under test
     	EventListActivityWithFragments activity = startActivity(mIntent, null, null);
     	
     	// Postconditions
     	assertNotNull(activity);
+    	assertTrue(NewEventDatabase.getInstance() instanceof NewEventDatabaseImpl);
+    	assertTrue(EventDatabaseLoader.getInstance() instanceof ProductionSiteEventDatabaseLoader);
     }
     
 
