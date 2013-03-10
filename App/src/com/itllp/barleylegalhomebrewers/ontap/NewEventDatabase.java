@@ -3,11 +3,17 @@ package com.itllp.barleylegalhomebrewers.ontap;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewEventDatabase {
+public abstract class NewEventDatabase {
 
-	protected static NewEventDatabase instance = null;
+	private static NewEventDatabase instance = null;
 	protected List<Event> eventList = new ArrayList<Event>();
 
+	protected static void setInstance(NewEventDatabase newInstance) {
+		if (null != newInstance && null != instance) {
+			throw new DatabaseAlreadyInstantiatedException();
+		}
+		instance = newInstance;
+	}
 	
 	public static NewEventDatabase getInstance() {
 		return instance;
