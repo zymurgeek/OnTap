@@ -7,11 +7,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.itllp.barleylegalhomebrewers.ontap.DatabaseLoaderAlreadyInstantiatedException;
-import com.itllp.barleylegalhomebrewers.ontap.DatabaseLoaderNotInstantiatedException;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoader;
-import com.itllp.barleylegalhomebrewers.ontap.ProductionSiteEventDatabaseLoader;
 
-public class ProductionSiteEventDatabaseLoaderTest {
+public class JsonUrlEventDatabaseLoaderTests {
+
+	private final String url = "xyz";
 
 	@Before
 	public void setUp() throws Exception {
@@ -21,51 +21,48 @@ public class ProductionSiteEventDatabaseLoaderTest {
 	@After
 	public void tearDown() throws Exception {
 	}
+	// TODO: Refactor tests
 
 	@Test
 	public void testCreateWhenNotInitialized() {
 		// Method under test
-		ProductionSiteEventDatabaseLoader.create();
+		JsonUrlEventDatabaseLoader.create(url);
 		
 		// Postconditions
-		assertTrue(EventDatabaseLoader.getInstance() instanceof ProductionSiteEventDatabaseLoader);
+		EventDatabaseLoader loader = EventDatabaseLoader.getInstance();
+		assertNotNull(loader);
+		assertTrue(loader instanceof JsonUrlEventDatabaseLoader);
+		JsonUrlEventDatabaseLoader urlLoader = (JsonUrlEventDatabaseLoader)loader;
+		assertEquals(url, urlLoader.getUrl());
 	}
 
 	@Test
 	public void testCreateWhenAlreadyInitialized() {
 		// Preconditions
-		ProductionSiteEventDatabaseLoader.create();
+		JsonUrlEventDatabaseLoader.create(url);
 		
 		// Method under test and postconditions
 		try {
-			ProductionSiteEventDatabaseLoader.create();
+			JsonUrlEventDatabaseLoader.create(url);
 			fail("Should throw exception");
 		} catch (DatabaseLoaderAlreadyInstantiatedException e) {
 			assertNotNull(e);
 		}
 	}
-	
+/*	
 	@Test
-	public void testGetInstanceWhenInitialized() {
+	public void testLoad() {
 		// Preconditions
-		ProductionSiteEventDatabaseLoader.create();
-
-		// Method under test
+		JsonArrayEventDatabaseLoader 
+		JsonUrlEventDatabaseLoader.create(url);
 		EventDatabaseLoader loader = EventDatabaseLoader.getInstance();
 		
-		// Postconditions
-		assertTrue(loader instanceof ProductionSiteEventDatabaseLoader);
-	}
-	
-	@Test
-	public void testGetInstanceWhenNotInitialized() {
 		// Method under test
-		try {
-			EventDatabaseLoader.getInstance();
-			fail("Should throw exception");
-		} catch (DatabaseLoaderNotInstantiatedException e) {
-			assertNotNull(e);
-		}
+		loader.load();
+		
+		// Postconditions
+		verify(mockUrlLoader).load();
 	}
-
+	*/
+	// TODO:  Finish JsonUrlEventDatabase tests
 }

@@ -1,7 +1,6 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
 import com.itllp.barleylegalhomebrewers.ontap.R;
-
 import android.app.Activity;
 import android.os.Bundle;
 
@@ -17,7 +16,7 @@ public class EventListActivityWithFragments extends Activity
         	NewEventDatabaseImpl.create();
         } catch (DatabaseAlreadyInstantiatedException e) {}
         try {
-        	ProductionSiteEventDatabaseLoader.create();
+        	EventDatabaseLoaderFactory.createProductionSiteEventDatabaseLoader();
         } catch (DatabaseLoaderAlreadyInstantiatedException e) {}
         setContentView(R.layout.event_list_fragment);
     }

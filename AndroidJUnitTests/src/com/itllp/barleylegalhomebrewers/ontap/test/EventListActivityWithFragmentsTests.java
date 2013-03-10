@@ -30,12 +30,12 @@ import android.widget.ListView;
 
 import com.itllp.barleylegalhomebrewers.ontap.Event;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoader;
+import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoaderFactory;
 import com.itllp.barleylegalhomebrewers.ontap.EventListActivityWithFragments;
 import com.itllp.barleylegalhomebrewers.ontap.EventListFragment;
 import com.itllp.barleylegalhomebrewers.ontap.EventListLoaderFactory;
 import com.itllp.barleylegalhomebrewers.ontap.NewEventDatabase;
 import com.itllp.barleylegalhomebrewers.ontap.NewEventDatabaseImpl;
-import com.itllp.barleylegalhomebrewers.ontap.ProductionSiteEventDatabaseLoader;
 
 public class EventListActivityWithFragmentsTests extends
 	ActivityUnitTestCase<EventListActivityWithFragments> {
@@ -80,7 +80,11 @@ public class EventListActivityWithFragmentsTests extends
     	// Postconditions
     	assertNotNull(activity);
     	assertTrue(NewEventDatabase.getInstance() instanceof NewEventDatabaseImpl);
-    	assertTrue(EventDatabaseLoader.getInstance() instanceof ProductionSiteEventDatabaseLoader);
+    	assertTrue(EventDatabaseLoader.getInstance() instanceof JsonUrlEventDatabaseLoader);
+    	JsonUrlEventDatabaseLoader loader = (JsonUrlEventDatabaseLoader)EventDatabaseLoader.getInstance();
+    	String expectedUrl = EventDatabaseLoaderFactory.productionSiteUrl;
+    	String actualUrl = loader.getUrl();
+    	assertEquals(expectedUrl, actualUrl);
     }
     
 
