@@ -11,7 +11,9 @@ public class JsonArrayEventDatabaseLoaderImpl implements JsonArrayEventDatabaseL
 		if (null == dateConverter) {
 			throw new NullPointerException();
 		}
-		// TODO Auto-generated constructor stub
+		if (null == eventDatabase) {
+			throw new NullPointerException();
+		}
 	}
 
 	@Override

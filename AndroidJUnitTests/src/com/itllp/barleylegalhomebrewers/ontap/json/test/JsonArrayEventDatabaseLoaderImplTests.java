@@ -1,5 +1,7 @@
 package com.itllp.barleylegalhomebrewers.ontap.json.test;
 
+import org.json.JSONArray;
+
 import junit.framework.TestCase;
 
 import com.itllp.barleylegalhomebrewers.ontap.JsonArrayEventDatabaseLoader;
@@ -9,7 +11,8 @@ import com.itllp.barleylegalhomebrewers.ontap.test.FakeNewEventDatabase;
 
 public class JsonArrayEventDatabaseLoaderImplTests extends TestCase {
 
-	private FakeStringToJavaDateConverter mockJsonDateConverter = null;
+	private FakeStringToJavaDateConverter fakeJsonDateConverter;
+	private FakeNewEventDatabase fakeEventDatabase;
 	
 	public JsonArrayEventDatabaseLoaderImplTests(String name) {
 		super(name);
@@ -17,7 +20,8 @@ public class JsonArrayEventDatabaseLoaderImplTests extends TestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		mockJsonDateConverter = new FakeStringToJavaDateConverter();
+		fakeJsonDateConverter = new FakeStringToJavaDateConverter();
+		fakeEventDatabase = new FakeNewEventDatabase();
 	}
 
 	protected void tearDown() throws Exception {
@@ -25,29 +29,28 @@ public class JsonArrayEventDatabaseLoaderImplTests extends TestCase {
 	}
 	
 	public void testCreateWithNullDateConverter() {
+		// Method under test and postconditions
 		try {
-			// Method under test
-			new JsonArrayEventDatabaseLoaderImpl(null, null);
+			new JsonArrayEventDatabaseLoaderImpl(null, fakeEventDatabase);
 			fail("Should throw NullPointerException");
 		} catch (NullPointerException e) {
 			assertNotNull(e);
 		}
 	}
 
-	public void testCreate() {
-		// Method under test
-		JsonArrayEventDatabaseLoader loader = new JsonArrayEventDatabaseLoaderImpl
-				(mockJsonDateConverter, null);
-		
-		// Postconditions
-		assertNotNull(loader);
+	public void testCreateWithNullDatabase() {
+		// Method under test and postconditions
+		try {
+			new JsonArrayEventDatabaseLoaderImpl(fakeJsonDateConverter, null);
+			fail("Should throw NullPointerException");
+		} catch (NullPointerException e) {
+			assertNotNull(e);
+		}
 	}
 
 	public void testLoadOfNullJsonArray() {
-		// Preconditions
-		FakeNewEventDatabase fakeEventDatabase = new FakeNewEventDatabase(); 
 		JsonArrayEventDatabaseLoader loader = new JsonArrayEventDatabaseLoaderImpl
-				(mockJsonDateConverter, fakeEventDatabase);
+				(fakeJsonDateConverter, fakeEventDatabase);
 		
 		// Method under test
 		loader.load(null);
@@ -56,20 +59,21 @@ public class JsonArrayEventDatabaseLoaderImplTests extends TestCase {
 		assertTrue(fakeEventDatabase.isEmpty());
 	}
 
-/*
-	public void testDatabaseFromEmptyJsonArray() {
+	public void testLoadOfEmptyJsonArray() {
 		// Preconditions
 		JSONArray jsonArray = new JSONArray();
+		FakeNewEventDatabase fakeEventDatabase = new FakeNewEventDatabase(); 
+		JsonArrayEventDatabaseLoader loader = new JsonArrayEventDatabaseLoaderImpl
+				(fakeJsonDateConverter, fakeEventDatabase);
 		
 		// Method under test
-		EventDatabaseFromJsonArray emptyDatabase 
-		= new EventDatabaseFromJsonArray(jsonArray, mockJsonDateConverter);
+		loader.load(jsonArray);
 		
 		// Postconditions
-		assertTrue(emptyDatabase.isEmpty());
+		assertTrue(fakeEventDatabase.isEmpty());
 	}
 
-	
+	/*
 	public void testDatabaseFromJsonArrayWithOneEvent() {
 		// Preconditions
 		String jsonString = "[ { ";
@@ -84,7 +88,7 @@ public class JsonArrayEventDatabaseLoaderImplTests extends TestCase {
 
 		// Method under test
 		EventDatabaseFromJsonArray databaseWithOneRow 
-		= new EventDatabaseFromJsonArray(jsonArray, mockJsonDateConverter);
+		= new EventDatabaseFromJsonArray(jsonArray, fakeJsonDateConverter);
 		
 		// Postconditions
 		List<Event> eventList = databaseWithOneRow.getEventList();
@@ -109,7 +113,7 @@ public class JsonArrayEventDatabaseLoaderImplTests extends TestCase {
 
 		// Method under test
 		EventDatabaseFromJsonArray databaseWithOneRow 
-		= new EventDatabaseFromJsonArray(jsonArray, mockJsonDateConverter);
+		= new EventDatabaseFromJsonArray(jsonArray, fakeJsonDateConverter);
 		
 		// Postconditions
 		List<Event> eventList = databaseWithOneRow.getEventList();
@@ -138,7 +142,7 @@ public class JsonArrayEventDatabaseLoaderImplTests extends TestCase {
 		}
 		// Method under test
 		EventDatabaseFromJsonArray databaseWithOneRow 
-		= new EventDatabaseFromJsonArray(jsonArray, mockJsonDateConverter);
+		= new EventDatabaseFromJsonArray(jsonArray, fakeJsonDateConverter);
 		
 		// Postconditions
 		List<Event> eventList = databaseWithOneRow.getEventList();
@@ -166,11 +170,11 @@ public class JsonArrayEventDatabaseLoaderImplTests extends TestCase {
 		} catch (JSONException x) {
 			fail("Failed to parse JSON string:  " + x);
 		}
-		mockJsonDateConverter.addConversion(expectedInputEventDate, expectedOutputEventDate);
+		fakeJsonDateConverter.addConversion(expectedInputEventDate, expectedOutputEventDate);
 		
 		// Method under test
 		EventDatabaseFromJsonArray databaseWithOneRow 
-		= new EventDatabaseFromJsonArray(jsonArray, mockJsonDateConverter);
+		= new EventDatabaseFromJsonArray(jsonArray, fakeJsonDateConverter);
 		
 		// Postconditions
 		List<Event> eventList = databaseWithOneRow.getEventList();
