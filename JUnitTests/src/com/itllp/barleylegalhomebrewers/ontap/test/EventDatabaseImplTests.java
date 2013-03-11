@@ -11,9 +11,9 @@ import org.junit.Test;
 
 import com.itllp.barleylegalhomebrewers.ontap.Event;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
-import com.itllp.barleylegalhomebrewers.ontap.NewEventDatabaseImpl;
+import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseImpl;
 
-public class NewEventDatabaseImplTests {
+public class EventDatabaseImplTests {
 
 	private EventDatabase eventDatabase;
 	private final Event expectedEvent1 = new Event(1);
@@ -23,7 +23,7 @@ public class NewEventDatabaseImplTests {
 	@Before
 	public void setUp() throws Exception {
 		FakeEventDatabase.clearInstance();
-		NewEventDatabaseImpl.create();
+		EventDatabaseImpl.create();
 		eventDatabase = EventDatabase.getInstance();
 		
 		expectedEventList = new ArrayList<Event>();
@@ -37,7 +37,7 @@ public class NewEventDatabaseImplTests {
 	public void testCreate() {
 		// Postconditions
 		assertNotNull(eventDatabase);
-		assertTrue(eventDatabase instanceof NewEventDatabaseImpl);
+		assertTrue(eventDatabase instanceof EventDatabaseImpl);
 		assertTrue(eventDatabase.isEmpty());
 		assertEquals(0, eventDatabase.size());
 		assertEquals(0, eventDatabase.getEventList().size());

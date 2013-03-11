@@ -35,7 +35,7 @@ import com.itllp.barleylegalhomebrewers.ontap.EventListActivityWithFragments;
 import com.itllp.barleylegalhomebrewers.ontap.EventListFragment;
 import com.itllp.barleylegalhomebrewers.ontap.EventListLoaderFactory;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
-import com.itllp.barleylegalhomebrewers.ontap.NewEventDatabaseImpl;
+import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseImpl;
 import com.itllp.barleylegalhomebrewers.ontap.json.JsonUrlEventDatabaseLoader;
 
 public class EventListActivityWithFragmentsTests extends
@@ -61,7 +61,7 @@ public class EventListActivityWithFragmentsTests extends
         mInstrumentation = getInstrumentation();
     	
     	FakeEventDatabase.clearInstance();
-    	NewEventDatabaseImpl.create();
+    	EventDatabaseImpl.create();
     	
     	elFactory = new EventListLoaderFactory();
     	context = getInstrumentation().getContext();
@@ -80,7 +80,7 @@ public class EventListActivityWithFragmentsTests extends
     	
     	// Postconditions
     	assertNotNull(activity);
-    	assertTrue(EventDatabase.getInstance() instanceof NewEventDatabaseImpl);
+    	assertTrue(EventDatabase.getInstance() instanceof EventDatabaseImpl);
     	assertTrue(EventDatabaseLoader.getInstance() instanceof JsonUrlEventDatabaseLoader);
     	JsonUrlEventDatabaseLoader loader = (JsonUrlEventDatabaseLoader)EventDatabaseLoader.getInstance();
     	String expectedUrl = EventDatabaseLoaderFactory.productionSiteUrl;
