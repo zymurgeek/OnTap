@@ -13,10 +13,24 @@ import com.itllp.barleylegalhomebrewers.ontap.Event;
 public class EventTests {
 
 	private Event event;
+	private int id = 99;
+	private String name = "name";
+	private long dateMillis = 987654321L;
+	private Date date = new Date(dateMillis);
+	private Event event1;
+	private Event sameAsEvent1;
 
 	@Before
 	public void setUp() throws Exception {
 		event = new Event(0);
+		
+		event1 = new Event(id);
+		event1.setName(name);
+		event1.setDate(date);
+		
+		sameAsEvent1 = new Event(id);
+		sameAsEvent1.setName(name);
+		sameAsEvent1.setDate(date);
 	}
 
 	@After
@@ -78,4 +92,50 @@ public class EventTests {
 		assertEquals(expectedDate, event.getDate());
 	}
 	
+	@Test
+	public void testEqualsWithEqualObjects() {
+		// Method under test and postconditions
+		assertEquals(event1, sameAsEvent1);
+	}
+	
+	@Test
+	public void testEqualsWithUnequalIds() {
+		// Preconditions
+		Event event2 = new Event(id+1);
+		event2.setName(name);
+		event2.setDate(date);
+		
+		// Method under test and postconditions
+		assertFalse(event1.equals(event2));
+	}
+	
+	@Test
+	public void testEqualsWithUnequalNames() {
+		// Preconditions
+		Event event2 = new Event(id);
+		String differentName = "not " + name;
+		event2.setName(differentName);
+		event2.setDate(date);
+		
+		// Method under test and postconditions
+		assertFalse(event1.equals(event2));
+	}
+	
+	@Test
+	public void testEqualsWithUnequalDates() {
+		// Preconditions
+		Event event2 = new Event(id);
+		event2.setName(name);
+		Date differentDate = new Date(dateMillis * 2);
+		event2.setDate(differentDate);
+		
+		// Method under test and postconditions
+		assertFalse(event1.equals(event2));
+	}
+	
+	@Test
+	public void testHashCode() {
+		// Preconditions
+		assertEquals(id, event1.hashCode());
+	}
 }
