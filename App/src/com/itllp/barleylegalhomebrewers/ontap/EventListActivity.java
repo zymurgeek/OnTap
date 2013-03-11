@@ -23,7 +23,7 @@ public class EventListActivity extends Activity
         	ConnectivityManager connMgr = (ConnectivityManager) 
         	        context.getSystemService(Context.CONNECTIVITY_SERVICE);
         	NetworkConnectivity netConn = new AndroidNetworkConnectivity(connMgr);
-        	EventDatabaseLoaderFactory.createProductionSiteEventDatabaseLoader(netConn);
+        	EventDatabaseLoaderFactory.createBetaSiteEventDatabaseLoader(netConn);
         } catch (DatabaseLoaderAlreadyInstantiatedException e) {}
         setContentView(R.layout.event_list_fragment);
     }
