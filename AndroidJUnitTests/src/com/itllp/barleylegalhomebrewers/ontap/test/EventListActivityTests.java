@@ -41,7 +41,7 @@ import com.itllp.barleylegalhomebrewers.ontap.json.JsonUrlEventDatabaseLoader;
 public class EventListActivityTests extends
 	ActivityUnitTestCase<EventListActivity> {
 
-	private Intent mIntent;
+	private Intent intent;
     ListView eventListView;
 	private Instrumentation mInstrumentation;
 	private EventListLoaderFactory elFactory;
@@ -57,7 +57,7 @@ public class EventListActivityTests extends
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        mIntent = new Intent();
+        intent = new Intent();
         mInstrumentation = getInstrumentation();
     	
     	FakeEventDatabase.clearInstance();
@@ -76,7 +76,7 @@ public class EventListActivityTests extends
     	FakeEventDatabaseLoader.clearInstance();
 
     	// Method under test
-    	EventListActivity activity = startActivity(mIntent, null, null);
+    	EventListActivity activity = startActivity(intent, null, null);
     	
     	// Postconditions
     	assertNotNull(activity);
@@ -92,7 +92,7 @@ public class EventListActivityTests extends
     public void testEmptyList() {
     	
     	// Method under test
-    	EventListActivity activity = startActivity(mIntent, null, null);
+    	EventListActivity activity = startActivity(intent, null, null);
     	mInstrumentation.waitForIdleSync();
     	
     	// Postconditions
@@ -111,7 +111,7 @@ public class EventListActivityTests extends
     	List<Event> eventList = new ArrayList<Event>();
     	Event event = new Event(1);
     	eventList.add(event);
-    	EventListActivity activity = startActivity(mIntent, null, null);
+    	EventListActivity activity = startActivity(intent, null, null);
     	FragmentManager fragmentManager = activity.getFragmentManager();
     	EventListFragment eventListFragment = (EventListFragment)
     		fragmentManager.findFragmentById
@@ -133,7 +133,7 @@ public class EventListActivityTests extends
     	eventList.add(event);
     	event = new Event(20);
     	eventList.add(event);
-    	EventListActivity activity = startActivity(mIntent, null, null);
+    	EventListActivity activity = startActivity(intent, null, null);
     	FragmentManager fragmentManager = activity.getFragmentManager();
     	EventListFragment eventListFragment = (EventListFragment)
     		fragmentManager.findFragmentById
