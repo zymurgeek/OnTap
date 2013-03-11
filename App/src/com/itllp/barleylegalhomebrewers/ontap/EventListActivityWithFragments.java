@@ -14,6 +14,7 @@ public class EventListActivityWithFragments extends Activity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Specify implementation class names in Bundle and use classForName to load them 
         try {
         	NewEventDatabaseImpl.create();
         } catch (DatabaseAlreadyInstantiatedException e) {}

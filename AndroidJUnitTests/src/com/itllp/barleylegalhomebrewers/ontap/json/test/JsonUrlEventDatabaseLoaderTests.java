@@ -29,7 +29,7 @@ public class JsonUrlEventDatabaseLoaderTests extends TestCase {
 
 	public void testCreateWhenNotInitialized() {
 		// Method under test
-		JsonUrlEventDatabaseLoader.create(null, url, null);
+		JsonUrlEventDatabaseLoader.create(null, url, null, null);
 		
 		// Postconditions
 		EventDatabaseLoader loader = EventDatabaseLoader.getInstance();
@@ -41,11 +41,11 @@ public class JsonUrlEventDatabaseLoaderTests extends TestCase {
 
 	public void testCreateWhenAlreadyInitialized() {
 		// Preconditions
-		JsonUrlEventDatabaseLoader.create(null, null, null);
+		JsonUrlEventDatabaseLoader.create(null, null, null, null);
 		
 		// Method under test and postconditions
 		try {
-			JsonUrlEventDatabaseLoader.create(null, null, null);
+			JsonUrlEventDatabaseLoader.create(null, null, null, null);
 			fail("Should throw exception");
 		} catch (DatabaseLoaderAlreadyInstantiatedException e) {
 			assertNotNull(e);
@@ -54,9 +54,14 @@ public class JsonUrlEventDatabaseLoaderTests extends TestCase {
 
 	public void testLoadWhenNetworkIsUp() {
 		// Preconditions
-		JsonUrlEventDatabaseLoader.create(upNetworkConnectivity, url, fakeJsonArrayLoader);
-		EventDatabaseLoader loader = EventDatabaseLoader.getInstance();
 		JSONArray expectedJsonArray = new JSONArray();
+		expectedJsonArray.put(true);
+		FakeJsonArrayRetriever fakeRetriever = new FakeJsonArrayRetriever();
+		fakeRetriever.FAKE_setWhenUrl(url);
+		fakeRetriever.FAKE_setReturnArray(expectedJsonArray);
+		JsonUrlEventDatabaseLoader.create(upNetworkConnectivity, url, 
+				fakeRetriever, fakeJsonArrayLoader);
+		EventDatabaseLoader loader = EventDatabaseLoader.getInstance();
 		
 		// Method under test
 		loader.load();
@@ -65,12 +70,12 @@ public class JsonUrlEventDatabaseLoaderTests extends TestCase {
 		assertEquals(1, fakeJsonArrayLoader.getLoadCount());
 		JSONArray actualJsonArray = fakeJsonArrayLoader.getLastLoadArgument();
 		assertEquals(expectedJsonArray, actualJsonArray);
-		// TODO:  Verify array from URL--how to stub out network call?
 	}
 	
 	public void testLoadWhenNetworkIsDown() {
 		// Preconditions
-		JsonUrlEventDatabaseLoader.create(downNetworkConnectivity, url, fakeJsonArrayLoader);
+		JsonUrlEventDatabaseLoader.create(downNetworkConnectivity, url, 
+				null, fakeJsonArrayLoader);
 		EventDatabaseLoader loader = EventDatabaseLoader.getInstance();
 		
 		// Method under test

@@ -11,17 +11,21 @@ public class JsonUrlEventDatabaseLoader extends EventDatabaseLoader {
 
 	private NetworkConnectivity networkConnectivity;
 	private String url;
+	private JsonArrayRetriever jsonArrayRetriever;
 	private JsonArrayEventDatabaseLoader jsonArrayLoader;
 	
-	private JsonUrlEventDatabaseLoader(NetworkConnectivity networkConnectivity, String url, JsonArrayEventDatabaseLoader jsonArrayLoader) {
+	private JsonUrlEventDatabaseLoader(NetworkConnectivity networkConnectivity, 
+			String url, JsonArrayRetriever jsonArrayRetriever,
+			JsonArrayEventDatabaseLoader jsonArrayLoader) {
 		this.networkConnectivity = networkConnectivity;
 		this.url = url;
+		this.jsonArrayRetriever = jsonArrayRetriever;
 		this.jsonArrayLoader = jsonArrayLoader;
 	}
 	
 	public void load() {
 		if (networkConnectivity.isConnected()) {
-			JSONArray jsonArray = new JSONArray();
+			JSONArray jsonArray = jsonArrayRetriever.getJsonArray(url);
 			jsonArrayLoader.load(jsonArray);
 		}
 	}
@@ -30,7 +34,10 @@ public class JsonUrlEventDatabaseLoader extends EventDatabaseLoader {
 		return url;
 	}
 
-	public static void create(NetworkConnectivity networkConnectivity, String url, JsonArrayEventDatabaseLoader jsonArrayLoader) {
-		setInstance(new JsonUrlEventDatabaseLoader(networkConnectivity, url, jsonArrayLoader));
+	public static void create(NetworkConnectivity networkConnectivity, 
+			String url, JsonArrayRetriever jsonArrayRetriever, 
+			JsonArrayEventDatabaseLoader jsonArrayLoader) {
+		setInstance(new JsonUrlEventDatabaseLoader(networkConnectivity, url, 
+				jsonArrayRetriever, jsonArrayLoader));
 	}
 }
