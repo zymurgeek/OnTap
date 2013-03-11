@@ -7,9 +7,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.itllp.barleylegalhomebrewers.ontap.DatabaseAlreadyInstantiatedException;
-import com.itllp.barleylegalhomebrewers.ontap.NewEventDatabase;
+import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
 
-public class NewEventDatabaseTests {
+public class EventDatabaseTests {
 
 	@Before
 	public void setUp() throws Exception {
@@ -21,27 +21,27 @@ public class NewEventDatabaseTests {
 
 	@Test
 	public void testGetInstanceWhenNotInstantiated() {
-		assertNull(NewEventDatabase.getInstance());
+		assertNull(EventDatabase.getInstance());
 	}
 	
 	@Test
 	public void testGetInstanceWhenInstantiated() {
 		// Preconditions
-		FakeNewEventDatabase.create();
+		FakeEventDatabase.create();
 		
 		// Postconditions
-		assertNotNull(NewEventDatabase.getInstance());
+		assertNotNull(EventDatabase.getInstance());
 	}
 
 	@Test
 	public void testSetInstanceWhenAlreadySet() {
 		// Preconditions
-		FakeNewEventDatabase.clearInstance();
-		FakeNewEventDatabase.create();
+		FakeEventDatabase.clearInstance();
+		FakeEventDatabase.create();
 		
 		// Method under test
 		try {
-			FakeNewEventDatabase.create();
+			FakeEventDatabase.create();
 			fail("Should throw exception");
 		} catch (DatabaseAlreadyInstantiatedException e) {
 			assertNotNull(e);

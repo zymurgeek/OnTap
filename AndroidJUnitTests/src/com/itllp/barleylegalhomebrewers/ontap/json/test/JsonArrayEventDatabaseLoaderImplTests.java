@@ -13,12 +13,12 @@ import com.itllp.barleylegalhomebrewers.ontap.Event;
 import com.itllp.barleylegalhomebrewers.ontap.JsonArrayEventDatabaseLoader;
 import com.itllp.barleylegalhomebrewers.ontap.JsonArrayEventDatabaseLoaderImpl;
 import com.itllp.barleylegalhomebrewers.ontap.dateconverter.test.FakeStringToJavaDateConverter;
-import com.itllp.barleylegalhomebrewers.ontap.test.FakeNewEventDatabase;
+import com.itllp.barleylegalhomebrewers.ontap.test.FakeEventDatabase;
 
 public class JsonArrayEventDatabaseLoaderImplTests extends TestCase {
 
 	private FakeStringToJavaDateConverter fakeJsonDateConverter;
-	private FakeNewEventDatabase fakeEventDatabase;
+	private FakeEventDatabase fakeEventDatabase;
 	private JsonArrayEventDatabaseLoader cut;
 	
 	public JsonArrayEventDatabaseLoaderImplTests(String name) {
@@ -28,7 +28,7 @@ public class JsonArrayEventDatabaseLoaderImplTests extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		fakeJsonDateConverter = new FakeStringToJavaDateConverter();
-		fakeEventDatabase = new FakeNewEventDatabase();
+		fakeEventDatabase = new FakeEventDatabase();
 		cut = new JsonArrayEventDatabaseLoaderImpl
 			(fakeJsonDateConverter, fakeEventDatabase);
 	}

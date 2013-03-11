@@ -13,11 +13,11 @@ public class JsonArrayEventDatabaseLoaderImpl implements JsonArrayEventDatabaseL
 	public static final String ID = "ID";
 	public static final String EVENT_NAME = "EventName";
 	public static final String EVENT_DATE = "EventDate";
-	private NewEventDatabase eventDatabase;
+	private EventDatabase eventDatabase;
 	private StringToJavaDateConverter dateConverter;
 	
 	public JsonArrayEventDatabaseLoaderImpl(StringToJavaDateConverter dateConverter,
-			NewEventDatabase eventDatabase) {
+			EventDatabase eventDatabase) {
 		if (null == dateConverter) {
 			throw new NullPointerException();
 		}

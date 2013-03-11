@@ -34,7 +34,7 @@ import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoaderFactory;
 import com.itllp.barleylegalhomebrewers.ontap.EventListActivityWithFragments;
 import com.itllp.barleylegalhomebrewers.ontap.EventListFragment;
 import com.itllp.barleylegalhomebrewers.ontap.EventListLoaderFactory;
-import com.itllp.barleylegalhomebrewers.ontap.NewEventDatabase;
+import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
 import com.itllp.barleylegalhomebrewers.ontap.NewEventDatabaseImpl;
 import com.itllp.barleylegalhomebrewers.ontap.json.JsonUrlEventDatabaseLoader;
 
@@ -60,7 +60,7 @@ public class EventListActivityWithFragmentsTests extends
         mIntent = new Intent();
         mInstrumentation = getInstrumentation();
     	
-    	FakeNewEventDatabase.clearInstance();
+    	FakeEventDatabase.clearInstance();
     	NewEventDatabaseImpl.create();
     	
     	elFactory = new EventListLoaderFactory();
@@ -72,7 +72,7 @@ public class EventListActivityWithFragmentsTests extends
 
     public void testInitialization() {
     	// Preconditions
-    	FakeNewEventDatabase.clearInstance();
+    	FakeEventDatabase.clearInstance();
     	FakeEventDatabaseLoader.clearInstance();
 
     	// Method under test
@@ -80,7 +80,7 @@ public class EventListActivityWithFragmentsTests extends
     	
     	// Postconditions
     	assertNotNull(activity);
-    	assertTrue(NewEventDatabase.getInstance() instanceof NewEventDatabaseImpl);
+    	assertTrue(EventDatabase.getInstance() instanceof NewEventDatabaseImpl);
     	assertTrue(EventDatabaseLoader.getInstance() instanceof JsonUrlEventDatabaseLoader);
     	JsonUrlEventDatabaseLoader loader = (JsonUrlEventDatabaseLoader)EventDatabaseLoader.getInstance();
     	String expectedUrl = EventDatabaseLoaderFactory.productionSiteUrl;

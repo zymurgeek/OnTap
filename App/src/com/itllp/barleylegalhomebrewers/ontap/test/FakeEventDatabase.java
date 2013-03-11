@@ -1,9 +1,9 @@
 package com.itllp.barleylegalhomebrewers.ontap.test;
 
 import com.itllp.barleylegalhomebrewers.ontap.Event;
-import com.itllp.barleylegalhomebrewers.ontap.NewEventDatabase;
+import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
 
-public class FakeNewEventDatabase extends NewEventDatabase {
+public class FakeEventDatabase extends EventDatabase {
 
 	public void addOrUpdateEvent(Event event) {
 		eventList.add(event);
@@ -14,7 +14,7 @@ public class FakeNewEventDatabase extends NewEventDatabase {
 	}
 	
 	public static void create() {
-		setInstance(new FakeNewEventDatabase());
+		setInstance(new FakeEventDatabase());
 	}
 
 }

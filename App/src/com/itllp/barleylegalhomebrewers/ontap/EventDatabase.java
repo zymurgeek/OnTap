@@ -3,20 +3,20 @@ package com.itllp.barleylegalhomebrewers.ontap;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO:  Rename NewEventDatabase* classes to EventDatabase*
-public abstract class NewEventDatabase {
+// TODO:  Rename EventDatabase* classes to EventDatabase*
+public abstract class EventDatabase {
 
-	private static NewEventDatabase instance = null;
+	private static EventDatabase instance = null;
 	protected List<Event> eventList = new ArrayList<Event>();
 
-	protected static void setInstance(NewEventDatabase newInstance) {
+	protected static void setInstance(EventDatabase newInstance) {
 		if (null != newInstance && null != instance) {
 			throw new DatabaseAlreadyInstantiatedException();
 		}
 		instance = newInstance;
 	}
 	
-	public static NewEventDatabase getInstance() {
+	public static EventDatabase getInstance() {
 		return instance;
 	}
 

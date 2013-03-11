@@ -26,7 +26,7 @@ import android.test.AndroidTestCase;
 import com.itllp.barleylegalhomebrewers.ontap.Event;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoader;
 import com.itllp.barleylegalhomebrewers.ontap.EventListAsyncTaskLoader;
-import com.itllp.barleylegalhomebrewers.ontap.NewEventDatabase;
+import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
 
 public class EventListAsyncTaskLoaderTests extends
 	AndroidTestCase {
@@ -47,9 +47,9 @@ public class EventListAsyncTaskLoaderTests extends
     	FakeEventDatabaseLoader.create();
     	FakeEventDatabaseLoader fakeLoader = (FakeEventDatabaseLoader)EventDatabaseLoader.getInstance();
 
-    	FakeNewEventDatabase.clearInstance();
-    	FakeNewEventDatabase.create();
-    	NewEventDatabase eventDatabase = NewEventDatabase.getInstance();
+    	FakeEventDatabase.clearInstance();
+    	FakeEventDatabase.create();
+    	EventDatabase eventDatabase = EventDatabase.getInstance();
     	eventDatabase.addOrUpdateEvent(new Event(1));
     	List<Event> expectedEventList = eventDatabase.getEventList();
     	

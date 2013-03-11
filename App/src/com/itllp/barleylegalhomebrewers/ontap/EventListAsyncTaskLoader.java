@@ -16,7 +16,7 @@ public class EventListAsyncTaskLoader extends AsyncTaskLoader<List<Event>> {
 		EventDatabaseLoader loader = EventDatabaseLoader.getInstance();
 		loader.load();
 		
-		NewEventDatabase database = NewEventDatabase.getInstance();
+		EventDatabase database = EventDatabase.getInstance();
 		List<Event> eventList = database.getEventList();
 		return eventList;
 	}

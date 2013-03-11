@@ -1,7 +1,7 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
 
-public class NewEventDatabaseImpl extends NewEventDatabase {
+public class NewEventDatabaseImpl extends EventDatabase {
 	public static void create() {
 		setInstance(new NewEventDatabaseImpl());
 	}

@@ -13,7 +13,7 @@ public class EventDatabaseLoaderFactory {
 
 	public static void createProductionSiteEventDatabaseLoader(
 			NetworkConnectivity networkConnectivity) {
-		NewEventDatabase eventDatabase = NewEventDatabase.getInstance();
+		EventDatabase eventDatabase = EventDatabase.getInstance();
 		StringToJavaDateConverter dateConverter = new JsonDateToJavaDate(); 
 		JsonArrayEventDatabaseLoader arrayLoader = 
 				new JsonArrayEventDatabaseLoaderImpl(dateConverter, eventDatabase);

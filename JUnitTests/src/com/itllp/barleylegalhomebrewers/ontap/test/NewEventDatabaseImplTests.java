@@ -10,21 +10,21 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.itllp.barleylegalhomebrewers.ontap.Event;
-import com.itllp.barleylegalhomebrewers.ontap.NewEventDatabase;
+import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
 import com.itllp.barleylegalhomebrewers.ontap.NewEventDatabaseImpl;
 
 public class NewEventDatabaseImplTests {
 
-	private NewEventDatabase eventDatabase;
+	private EventDatabase eventDatabase;
 	private final Event expectedEvent1 = new Event(1);
 	private final Event expectedEvent2 = new Event(2);
 	private List<Event> expectedEventList;
 	
 	@Before
 	public void setUp() throws Exception {
-		FakeNewEventDatabase.clearInstance();
+		FakeEventDatabase.clearInstance();
 		NewEventDatabaseImpl.create();
-		eventDatabase = NewEventDatabase.getInstance();
+		eventDatabase = EventDatabase.getInstance();
 		
 		expectedEventList = new ArrayList<Event>();
 	}
