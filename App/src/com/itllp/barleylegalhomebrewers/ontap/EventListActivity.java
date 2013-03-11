@@ -6,15 +6,15 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 
-public class EventListActivityWithFragments extends Activity 
+public class EventListActivity extends Activity 
 {
-	public EventListActivityWithFragments() {
+	public EventListActivity() {
 	}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Specify implementation class names in Bundle and use classForName to load them 
+        // TODO: Specify implementation class names in Bundle and use classForName to load them 
         try {
         	EventDatabaseImpl.create();
         } catch (DatabaseAlreadyInstantiatedException e) {}

@@ -1,8 +1,8 @@
 // Copyright 2013 David A. Greenbaum
 /*
-This file is part of Beer Festival.
+This file is part of On Tap.
 
-Beer Festival is free software: you can redistribute it and/or
+On Tap is free software: you can redistribute it and/or
 modify it under the terms of the GNU General Public License as
 published by the Free Software Foundation, either version 3 of the
 License, or (at your option) any later version.
@@ -31,15 +31,15 @@ import android.widget.ListView;
 import com.itllp.barleylegalhomebrewers.ontap.Event;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoader;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoaderFactory;
-import com.itllp.barleylegalhomebrewers.ontap.EventListActivityWithFragments;
+import com.itllp.barleylegalhomebrewers.ontap.EventListActivity;
 import com.itllp.barleylegalhomebrewers.ontap.EventListFragment;
 import com.itllp.barleylegalhomebrewers.ontap.EventListLoaderFactory;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseImpl;
 import com.itllp.barleylegalhomebrewers.ontap.json.JsonUrlEventDatabaseLoader;
 
-public class EventListActivityWithFragmentsTests extends
-	ActivityUnitTestCase<EventListActivityWithFragments> {
+public class EventListActivityTests extends
+	ActivityUnitTestCase<EventListActivity> {
 
 	private Intent mIntent;
     ListView eventListView;
@@ -49,8 +49,8 @@ public class EventListActivityWithFragmentsTests extends
 	private MockEventListAsyncTaskLoader mockLoader;
     
     
-	public EventListActivityWithFragmentsTests() {
-		super(EventListActivityWithFragments.class);
+	public EventListActivityTests() {
+		super(EventListActivity.class);
 	}
 
 	
@@ -76,7 +76,7 @@ public class EventListActivityWithFragmentsTests extends
     	FakeEventDatabaseLoader.clearInstance();
 
     	// Method under test
-    	EventListActivityWithFragments activity = startActivity(mIntent, null, null);
+    	EventListActivity activity = startActivity(mIntent, null, null);
     	
     	// Postconditions
     	assertNotNull(activity);
@@ -92,7 +92,7 @@ public class EventListActivityWithFragmentsTests extends
     public void testEmptyList() {
     	
     	// Method under test
-    	EventListActivityWithFragments activity = startActivity(mIntent, null, null);
+    	EventListActivity activity = startActivity(mIntent, null, null);
     	mInstrumentation.waitForIdleSync();
     	
     	// Postconditions
@@ -111,7 +111,7 @@ public class EventListActivityWithFragmentsTests extends
     	List<Event> eventList = new ArrayList<Event>();
     	Event event = new Event(1);
     	eventList.add(event);
-    	EventListActivityWithFragments activity = startActivity(mIntent, null, null);
+    	EventListActivity activity = startActivity(mIntent, null, null);
     	FragmentManager fragmentManager = activity.getFragmentManager();
     	EventListFragment eventListFragment = (EventListFragment)
     		fragmentManager.findFragmentById
@@ -133,7 +133,7 @@ public class EventListActivityWithFragmentsTests extends
     	eventList.add(event);
     	event = new Event(20);
     	eventList.add(event);
-    	EventListActivityWithFragments activity = startActivity(mIntent, null, null);
+    	EventListActivity activity = startActivity(mIntent, null, null);
     	FragmentManager fragmentManager = activity.getFragmentManager();
     	EventListFragment eventListFragment = (EventListFragment)
     		fragmentManager.findFragmentById
