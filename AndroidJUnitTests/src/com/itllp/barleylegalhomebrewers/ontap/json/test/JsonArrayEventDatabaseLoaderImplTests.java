@@ -1,22 +1,17 @@
 package com.itllp.barleylegalhomebrewers.ontap.json.test;
 
-import java.util.Date;
-import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-
-import com.itllp.barleylegalhomebrewers.ontap.Event;
-import com.itllp.barleylegalhomebrewers.ontap.dateconverter.test.FakeStringToJavaDateConverter;
-import com.itllp.barleylegalhomebrewers.ontap.json.EventDatabaseFromJsonArray;
-
 import junit.framework.TestCase;
 
-public class EventDatabaseFromJsonArrayTests extends TestCase {
+import com.itllp.barleylegalhomebrewers.ontap.JsonArrayEventDatabaseLoader;
+import com.itllp.barleylegalhomebrewers.ontap.JsonArrayEventDatabaseLoaderImpl;
+import com.itllp.barleylegalhomebrewers.ontap.dateconverter.test.FakeStringToJavaDateConverter;
+import com.itllp.barleylegalhomebrewers.ontap.test.FakeNewEventDatabase;
+
+public class JsonArrayEventDatabaseLoaderImplTests extends TestCase {
 
 	private FakeStringToJavaDateConverter mockJsonDateConverter = null;
 	
-	public EventDatabaseFromJsonArrayTests(String name) {
+	public JsonArrayEventDatabaseLoaderImplTests(String name) {
 		super(name);
 	}
 
@@ -28,27 +23,40 @@ public class EventDatabaseFromJsonArrayTests extends TestCase {
 	protected void tearDown() throws Exception {
 		super.tearDown();
 	}
-
-	public void testDatabaseFromNullJsonArray() {
-		// Method under test
-		EventDatabaseFromJsonArray emptyDatabase 
-		= new EventDatabaseFromJsonArray(null, mockJsonDateConverter);
-		
-		// Postconditions
-		assertTrue(emptyDatabase.isEmpty());
-	}
-
-	public void testDatabaseWithNullDateConverter() {
+	
+	public void testCreateWithNullDateConverter() {
 		try {
 			// Method under test
-			new EventDatabaseFromJsonArray(null, null);
-
+			new JsonArrayEventDatabaseLoaderImpl(null, null);
 			fail("Should throw NullPointerException");
 		} catch (NullPointerException e) {
-			assertTrue(true);
+			assertNotNull(e);
 		}
 	}
 
+	public void testCreate() {
+		// Method under test
+		JsonArrayEventDatabaseLoader loader = new JsonArrayEventDatabaseLoaderImpl
+				(mockJsonDateConverter, null);
+		
+		// Postconditions
+		assertNotNull(loader);
+	}
+
+	public void testLoadOfNullJsonArray() {
+		// Preconditions
+		FakeNewEventDatabase fakeEventDatabase = new FakeNewEventDatabase(); 
+		JsonArrayEventDatabaseLoader loader = new JsonArrayEventDatabaseLoaderImpl
+				(mockJsonDateConverter, fakeEventDatabase);
+		
+		// Method under test
+		loader.load(null);
+		
+		// Postconditions
+		assertTrue(fakeEventDatabase.isEmpty());
+	}
+
+/*
 	public void testDatabaseFromEmptyJsonArray() {
 		// Preconditions
 		JSONArray jsonArray = new JSONArray();
@@ -158,7 +166,7 @@ public class EventDatabaseFromJsonArrayTests extends TestCase {
 		} catch (JSONException x) {
 			fail("Failed to parse JSON string:  " + x);
 		}
-		mockJsonDateConverter.FAKE_addConversion(expectedInputEventDate, expectedOutputEventDate);
+		mockJsonDateConverter.addConversion(expectedInputEventDate, expectedOutputEventDate);
 		
 		// Method under test
 		EventDatabaseFromJsonArray databaseWithOneRow 
@@ -171,4 +179,6 @@ public class EventDatabaseFromJsonArrayTests extends TestCase {
 		Date actualEventDate = event.getDate();
 		assertEquals(expectedOutputEventDate, actualEventDate);
 	}
+	*/
+	// TODO:  Working here
 }

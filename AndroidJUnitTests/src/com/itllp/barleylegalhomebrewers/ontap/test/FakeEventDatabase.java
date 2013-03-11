@@ -6,14 +6,13 @@ import java.util.List;
 import com.itllp.barleylegalhomebrewers.ontap.Event;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
 
-public class LocalEventDatabase implements EventDatabase {
+public class FakeEventDatabase implements EventDatabase {
 
 	private List<Event> eventList = new ArrayList<Event>();
 	
 	@Override
 	public void addOrUpdateEvent(Event event) {
-		// TODO Auto-generated method stub
-		
+		eventList.add(event);
 	}
 
 	@Override
@@ -33,14 +32,12 @@ public class LocalEventDatabase implements EventDatabase {
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return eventList.size();
 	}
 
 	@Override
 	public void deleteId(int id) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

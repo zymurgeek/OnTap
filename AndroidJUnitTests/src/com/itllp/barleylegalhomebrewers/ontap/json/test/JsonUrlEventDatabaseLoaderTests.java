@@ -85,5 +85,4 @@ public class JsonUrlEventDatabaseLoaderTests extends TestCase {
 		assertEquals(0, fakeJsonArrayLoader.getLoadCount());
 	}
 
-	// TODO:  Finish JsonUrlEventDatabase tests
 }
