@@ -3,7 +3,6 @@ package com.itllp.barleylegalhomebrewers.ontap;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO:  Rename EventDatabase* classes to EventDatabase*
 public abstract class EventDatabase {
 
 	private static EventDatabase instance = null;
