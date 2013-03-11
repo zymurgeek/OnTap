@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import com.itllp.barleylegalhomebrewers.ontap.dateconverter.StringConverter;
 
+// TODO:  Rename this to Fake*
 public class MockStringConverter implements StringConverter {
 
 	private HashMap<String, String> conversionMap = new HashMap<String, String>();
