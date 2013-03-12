@@ -5,6 +5,7 @@ import com.itllp.barleylegalhomebrewers.ontap.R;
 import android.app.Activity;
 import android.os.Bundle;
 
+// TODO:  Should BeerListActivity be a fragment instead?  
 public class BeerListActivity  extends Activity {
 	//private ListView beerListView;
 	//private BeerDatabase beerDb = null;
