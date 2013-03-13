@@ -57,7 +57,10 @@ public class EventListActivityTests extends
     @Override
     protected void setUp() throws Exception {
         super.setUp();
+        
         intent = new Intent();
+		intent.putExtra(EventListActivity.SKIP_INSTANTIATION, true);
+		
         mInstrumentation = getInstrumentation();
     	
     	FakeEventDatabase.clearInstance();
@@ -74,6 +77,7 @@ public class EventListActivityTests extends
     	// Preconditions
     	FakeEventDatabase.clearInstance();
     	FakeEventDatabaseLoader.clearInstance();
+		intent.putExtra(EventListActivity.SKIP_INSTANTIATION, false);
 
     	// Method under test
     	EventListActivity activity = startActivity(intent, null, null);
