@@ -10,7 +10,7 @@ import com.itllp.barleylegalhomebrewers.ontap.json.JsonUrlEventDatabaseLoader;
 public class EventDatabaseLoaderFactory {
 
 	public static final String betaSiteUrl = "http://misdb.com/barleylegalapp/getevent.aspx";
-	public static final String productionSiteUrl = "http://barleylegalevents.com/barleylegal/getevent.aspx";
+	public static final String productionSiteUrl = "http://www.barleylegalevents.com/barleylegal/getevent.aspx";
 
 	private static void createEventDatabaseLoader(
 			NetworkConnectivity networkConnectivity, String url) {

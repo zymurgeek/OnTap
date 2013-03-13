@@ -9,8 +9,8 @@ import android.os.Bundle;
 
 public class EventListActivity extends Activity 
 {
-	public static final String SKIP_INSTANTIATION 
-		= "com.itllp.barleylegalhomebrewers.ontap.skipInstantiation";
+	public static final String SKIP_INSTANTIATION_FOR_TESTING 
+		= "com.itllp.barleylegalhomebrewers.ontap.skipInstantiation_FOR_TESTING";
 
 	public EventListActivity() {
 	}
@@ -19,7 +19,7 @@ public class EventListActivity extends Activity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
-        boolean skipInstantiation = intent.getBooleanExtra(SKIP_INSTANTIATION, false);
+        boolean skipInstantiation = intent.getBooleanExtra(SKIP_INSTANTIATION_FOR_TESTING, false);
         if (!skipInstantiation) {
         	EventDatabaseImpl.create();
 
@@ -27,7 +27,7 @@ public class EventListActivity extends Activity
         	ConnectivityManager connMgr = (ConnectivityManager) 
         	        context.getSystemService(Context.CONNECTIVITY_SERVICE);
         	NetworkConnectivity netConn = new AndroidNetworkConnectivity(connMgr);
-        	EventDatabaseLoaderFactory.createBetaSiteEventDatabaseLoader(netConn);
+        	EventDatabaseLoaderFactory.createProductionSiteEventDatabaseLoader(netConn);
         }
         setContentView(R.layout.event_list_fragment);
     }

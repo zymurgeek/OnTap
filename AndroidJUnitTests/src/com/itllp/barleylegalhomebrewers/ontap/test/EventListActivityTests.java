@@ -59,7 +59,7 @@ public class EventListActivityTests extends
         super.setUp();
         
         intent = new Intent();
-		intent.putExtra(EventListActivity.SKIP_INSTANTIATION, true);
+		intent.putExtra(EventListActivity.SKIP_INSTANTIATION_FOR_TESTING, true);
 		
         mInstrumentation = getInstrumentation();
     	
@@ -77,7 +77,7 @@ public class EventListActivityTests extends
     	// Preconditions
     	FakeEventDatabase.clearInstance();
     	FakeEventDatabaseLoader.clearInstance();
-		intent.putExtra(EventListActivity.SKIP_INSTANTIATION, false);
+		intent.putExtra(EventListActivity.SKIP_INSTANTIATION_FOR_TESTING, false);
 
     	// Method under test
     	EventListActivity activity = startActivity(intent, null, null);
