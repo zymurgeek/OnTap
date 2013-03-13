@@ -47,7 +47,7 @@ implements OnQueryTextListener, LoaderCallbacks<List<Event>> {
     @Override
 	public void onListItemClick(ListView l, View view, int position, long id) {
 		String eventIdString = ((TextView) view.findViewById(R.id.id)).getText().toString();
-		
+		// TODO: How should the beer list fragment be loaded?
     	Context context = getActivity().getApplicationContext();
 		Intent in = new Intent(context, BeerListActivity.class);
 		in.putExtra(BeerListActivity.EVENT_ID, eventIdString);
