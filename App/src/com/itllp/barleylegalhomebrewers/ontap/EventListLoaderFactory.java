@@ -3,7 +3,7 @@ package com.itllp.barleylegalhomebrewers.ontap;
 import java.util.List;
 
 import android.app.Activity;
-import android.content.Loader;
+import android.support.v4.content.Loader;
 
 public class EventListLoaderFactory {
 	private static Loader<List<Event>> loader = null;

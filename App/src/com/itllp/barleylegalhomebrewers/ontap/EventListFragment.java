@@ -2,19 +2,17 @@ package com.itllp.barleylegalhomebrewers.ontap;
 
 import java.util.List;
 
-import android.app.ListFragment;
-import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.SearchView.OnQueryTextListener;
 import android.widget.TextView;
 
-public class EventListFragment extends ListFragment 
-implements OnQueryTextListener, LoaderCallbacks<List<Event>> {
+public class EventListFragment extends android.support.v4.app.ListFragment 
+implements LoaderCallbacks<List<Event>> {
 	
 	private EventListAdapter eventListAdapter = null;
 	
@@ -55,18 +53,6 @@ implements OnQueryTextListener, LoaderCallbacks<List<Event>> {
 
 	}
 	
-	@Override
-	public boolean onQueryTextChange(String newText) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean onQueryTextSubmit(String query) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	@Override
 	public void onLoadFinished(Loader<List<Event>> loader, List<Event> data) {
         // Set the new data in the adapter.

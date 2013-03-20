@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.itllp.barleylegalhomebrewers.ontap.Event;
 
-import android.content.AsyncTaskLoader;
+import android.support.v4.content.AsyncTaskLoader;
 import android.content.Context;
 
 public class MockEventListAsyncTaskLoader extends AsyncTaskLoader<List<Event>> {

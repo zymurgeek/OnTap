@@ -24,7 +24,9 @@ public class EventListAdapter extends ArrayAdapter<Event> {
     public void setData(List<Event> data) {
         clear();
         if (data != null) {
-            addAll(data);
+        	for (Event event : data) {
+        		add(event);
+        	}
         }
     }
 

@@ -1,13 +1,13 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
 import com.itllp.barleylegalhomebrewers.ontap.R;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
-public class EventListActivity extends Activity 
+public class EventListActivity extends FragmentActivity 
 {
 	public static final String SKIP_INSTANTIATION_FOR_TESTING 
 		= "com.itllp.barleylegalhomebrewers.ontap.skipInstantiation_FOR_TESTING";

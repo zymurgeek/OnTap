@@ -21,7 +21,7 @@ package com.itllp.barleylegalhomebrewers.ontap.test;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.FragmentManager;
+import android.support.v4.app.FragmentManager;
 import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
@@ -100,7 +100,7 @@ public class EventListActivityTests extends
     	mInstrumentation.waitForIdleSync();
     	
     	// Postconditions
-    	FragmentManager fragmentManager = activity.getFragmentManager();
+    	FragmentManager fragmentManager = activity.getSupportFragmentManager();
     	EventListFragment eventListFragment = (EventListFragment)
     		fragmentManager.findFragmentById
     		(com.itllp.barleylegalhomebrewers.ontap.R.id.event_list_fragment);
@@ -116,7 +116,7 @@ public class EventListActivityTests extends
     	Event event = new Event(1);
     	eventList.add(event);
     	EventListActivity activity = startActivity(intent, null, null);
-    	FragmentManager fragmentManager = activity.getFragmentManager();
+    	FragmentManager fragmentManager = activity.getSupportFragmentManager();
     	EventListFragment eventListFragment = (EventListFragment)
     		fragmentManager.findFragmentById
     		(com.itllp.barleylegalhomebrewers.ontap.R.id.event_list_fragment);
@@ -138,7 +138,7 @@ public class EventListActivityTests extends
     	event = new Event(20);
     	eventList.add(event);
     	EventListActivity activity = startActivity(intent, null, null);
-    	FragmentManager fragmentManager = activity.getFragmentManager();
+    	FragmentManager fragmentManager = activity.getSupportFragmentManager();
     	EventListFragment eventListFragment = (EventListFragment)
     		fragmentManager.findFragmentById
     		(com.itllp.barleylegalhomebrewers.ontap.R.id.event_list_fragment);
