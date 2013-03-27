@@ -58,9 +58,6 @@ public class EventListActivityTests extends
     protected void setUp() throws Exception {
         super.setUp();
         
-        intent = new Intent();
-		intent.putExtra(EventListActivity.SKIP_INSTANTIATION_FOR_TESTING, true);
-		
         mInstrumentation = getInstrumentation();
     	
     	FakeEventDatabase.clearInstance();
@@ -70,6 +67,11 @@ public class EventListActivityTests extends
     	context = getInstrumentation().getContext();
     	mockLoader = new MockEventListAsyncTaskLoader(context);
     	elFactory.setLoader(mockLoader);
+    	
+        intent = new Intent(context, EventListActivity.class);
+		intent.putExtra(EventListActivity.SKIP_INSTANTIATION_FOR_TESTING, true);
+		
+
     }
     
 
@@ -120,6 +122,7 @@ public class EventListActivityTests extends
     	EventListFragment eventListFragment = (EventListFragment)
     		fragmentManager.findFragmentById
     		(com.itllp.barleylegalhomebrewers.ontap.R.id.event_list_fragment);
+    	eventListFragment.onActivityCreated(null);
     	
     	// Method under test
     	eventListFragment.onLoadFinished(null, eventList);
@@ -142,7 +145,8 @@ public class EventListActivityTests extends
     	EventListFragment eventListFragment = (EventListFragment)
     		fragmentManager.findFragmentById
     		(com.itllp.barleylegalhomebrewers.ontap.R.id.event_list_fragment);
-    	
+    	eventListFragment.onActivityCreated(null);
+
     	// Method under test
     	eventListFragment.onLoadFinished(null, eventList);
     	
