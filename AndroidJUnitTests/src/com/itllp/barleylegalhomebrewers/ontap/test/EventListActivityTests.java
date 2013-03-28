@@ -123,7 +123,7 @@ public class EventListActivityTests extends
     		fragmentManager.findFragmentById
     		(com.itllp.barleylegalhomebrewers.ontap.R.id.event_list_fragment);
     	eventListFragment.onActivityCreated(null);
-    	
+// TODO:  Would     	mInstrumentation.waitForIdleSync(); replace call to onActivityCreated?    	
     	// Method under test
     	eventListFragment.onLoadFinished(null, eventList);
     	
