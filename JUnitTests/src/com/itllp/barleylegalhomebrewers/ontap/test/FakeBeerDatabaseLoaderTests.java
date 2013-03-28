@@ -6,8 +6,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.itllp.barleylegalhomebrewers.ontap.BeerDatabaseLoader;
 import com.itllp.barleylegalhomebrewers.ontap.DatabaseLoaderAlreadyInstantiatedException;
-import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoader;
 
 public class FakeBeerDatabaseLoaderTests {
 
@@ -18,7 +18,7 @@ public class FakeBeerDatabaseLoaderTests {
 	@After
 	public void tearDown() throws Exception {
 	}
-//TODO:  Not finished
+
 	@Test
 	public void testCreateWhenNotInitialized() {
 		// Preconditions
@@ -30,7 +30,7 @@ public class FakeBeerDatabaseLoaderTests {
 		// Postconditions
 		assertNotNull(BeerDatabaseLoader.getInstance());
 	}
-/*	
+
 	@Test
 	public void testCreateWhenInitialized() {
 		// Preconditions
@@ -45,5 +45,4 @@ public class FakeBeerDatabaseLoaderTests {
 			assertNotNull(e);
 		}
 	}
-*/
 }

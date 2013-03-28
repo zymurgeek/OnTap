@@ -1,7 +1,6 @@
 package com.itllp.barleylegalhomebrewers.ontap.test;
 
 import com.itllp.barleylegalhomebrewers.ontap.BeerDatabaseLoader;
-import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoader;
 
 public class FakeBeerDatabaseLoader extends BeerDatabaseLoader {
 
