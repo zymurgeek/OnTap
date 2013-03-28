@@ -3,47 +3,46 @@ package com.itllp.barleylegalhomebrewers.ontap.test;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.itllp.barleylegalhomebrewers.ontap.Event;
-
+import com.itllp.barleylegalhomebrewers.ontap.Beer;
 import android.support.v4.content.AsyncTaskLoader;
 import android.content.Context;
 
-public class MockBeerListAsyncTaskLoader extends AsyncTaskLoader<List<Event>> {
+public class MockBeerListAsyncTaskLoader extends AsyncTaskLoader<List<Beer>> {
 
-	private List<Event> mEventList = new ArrayList<Event>();
-	private List<Event> mMockEventList = null;
+	private List<Beer> mBeerList = new ArrayList<Beer>();
+	private List<Beer> mMockBeerList = null;
 	
 	public MockBeerListAsyncTaskLoader(Context context) {
 		super(context);
 	}
 
 	@Override
-	public List<Event> loadInBackground() {
-		return mMockEventList;
+	public List<Beer> loadInBackground() {
+		return mMockBeerList;
 	}
 	
-	public void setMockData(List<Event> data) {
-		mMockEventList = data;
+	public void setMockData(List<Beer> data) {
+		mMockBeerList = data;
 	}
 
-    @Override public void deliverResult(List<Event> eventList) {
-        mEventList = eventList;
+    @Override public void deliverResult(List<Beer> beerList) {
+        mBeerList = beerList;
 
         if (isStarted()) {
             // If the Loader is currently started, we can immediately
             // deliver its results.
-            super.deliverResult(eventList);
+            super.deliverResult(beerList);
         }
     }
 
     @Override protected void onStartLoading() {
-        if (mEventList != null) {
+        if (mBeerList != null) {
             // If we currently have a result available, deliver it
             // immediately.
-            deliverResult(mEventList);
+            deliverResult(mBeerList);
         }
 
-        if (takeContentChanged() || mEventList == null) {
+        if (takeContentChanged() || mBeerList == null) {
             // If the data has changed since the last time it was loaded
             // or is not currently available, start a load.
             forceLoad();
@@ -55,8 +54,8 @@ public class MockBeerListAsyncTaskLoader extends AsyncTaskLoader<List<Event>> {
         cancelLoad();
     }
 
-    @Override public void onCanceled(List<Event> eventList) {
-        super.onCanceled(eventList);
+    @Override public void onCanceled(List<Beer> beerList) {
+        super.onCanceled(beerList);
     }
 
     @Override protected void onReset() {
@@ -67,8 +66,8 @@ public class MockBeerListAsyncTaskLoader extends AsyncTaskLoader<List<Event>> {
 
         // At this point we can release the resources associated with 'apps'
         // if needed.
-        if (mEventList != null) {
-            mEventList = null;
+        if (mBeerList != null) {
+            mBeerList = null;
         }
     }
 

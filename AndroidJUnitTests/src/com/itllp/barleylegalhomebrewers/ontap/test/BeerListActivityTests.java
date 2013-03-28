@@ -57,8 +57,6 @@ public class BeerListActivityTests extends
 		super(BeerListActivity.class);
 	}
 
-	// TODO: unfinished
-/*
     @Override
     protected void setUp() throws Exception {
         super.setUp();
@@ -77,7 +75,8 @@ public class BeerListActivityTests extends
 		intent.putExtra(BeerListActivity.SKIP_INSTANTIATION_FOR_TESTING, true);
     }
     
-
+	// TODO: unfinished
+/*
     public void testInitialization() {
     	// Preconditions
     	FakeBeerDatabase.clearInstance();
@@ -97,7 +96,6 @@ public class BeerListActivityTests extends
     	assertEquals(expectedUrl, actualUrl);
     }
     
-
     public void testEmptyList() {
     	
     	// Method under test
