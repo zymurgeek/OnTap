@@ -4,19 +4,17 @@ import org.json.JSONArray;
 
 import junit.framework.TestCase;
 
+import com.itllp.barleylegalhomebrewers.ontap.BeerDatabaseLoader;
 import com.itllp.barleylegalhomebrewers.ontap.DatabaseLoaderAlreadyInstantiatedException;
-import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoader;
 import com.itllp.barleylegalhomebrewers.ontap.NetworkConnectivity;
-import com.itllp.barleylegalhomebrewers.ontap.json.JsonUrlEventDatabaseLoader;
+import com.itllp.barleylegalhomebrewers.ontap.json.JsonUrlBeerDatabaseLoader;
 import com.itllp.barleylegalhomebrewers.ontap.test.AlwaysDownNetworkConnectivity;
 import com.itllp.barleylegalhomebrewers.ontap.test.AlwaysUpNetworkConnectivity;
-import com.itllp.barleylegalhomebrewers.ontap.test.FakeEventDatabaseLoader;
+import com.itllp.barleylegalhomebrewers.ontap.test.FakeBeerDatabaseLoader;
 
 public class JsonUrlBeerDatabaseLoaderTests extends TestCase {
 
 	private final String url = "xyz";
-	//TODO: unfinished
-	/*
 	private FakeJsonArrayBeerDatabaseLoader fakeJsonArrayLoader = new FakeJsonArrayBeerDatabaseLoader();
 	NetworkConnectivity upNetworkConnectivity = new AlwaysUpNetworkConnectivity();
 	NetworkConnectivity downNetworkConnectivity = new AlwaysDownNetworkConnectivity();
@@ -31,23 +29,23 @@ public class JsonUrlBeerDatabaseLoaderTests extends TestCase {
 
 	public void testCreateWhenNotInitialized() {
 		// Method under test
-		JsonUrlEventDatabaseLoader.create(null, url, null, null);
+		JsonUrlBeerDatabaseLoader.create(null, url, null, null);
 		
 		// Postconditions
-		EventDatabaseLoader loader = EventDatabaseLoader.getInstance();
+		BeerDatabaseLoader loader = BeerDatabaseLoader.getInstance();
 		assertNotNull(loader);
-		assertTrue(loader instanceof JsonUrlEventDatabaseLoader);
-		JsonUrlEventDatabaseLoader urlLoader = (JsonUrlEventDatabaseLoader)loader;
+		assertTrue(loader instanceof JsonUrlBeerDatabaseLoader);
+		JsonUrlBeerDatabaseLoader urlLoader = (JsonUrlBeerDatabaseLoader)loader;
 		assertEquals(url, urlLoader.getUrl());
 	}
 
 	public void testCreateWhenAlreadyInitialized() {
 		// Preconditions
-		JsonUrlEventDatabaseLoader.create(null, null, null, null);
+		JsonUrlBeerDatabaseLoader.create(null, null, null, null);
 		
 		// Method under test and postconditions
 		try {
-			JsonUrlEventDatabaseLoader.create(null, null, null, null);
+			JsonUrlBeerDatabaseLoader.create(null, null, null, null);
 			fail("Should throw exception");
 		} catch (DatabaseLoaderAlreadyInstantiatedException e) {
 			assertNotNull(e);
@@ -61,9 +59,9 @@ public class JsonUrlBeerDatabaseLoaderTests extends TestCase {
 		FakeJsonArrayRetriever fakeRetriever = new FakeJsonArrayRetriever();
 		fakeRetriever.FAKE_setWhenUrl(url);
 		fakeRetriever.FAKE_setReturnArray(expectedJsonArray);
-		JsonUrlEventDatabaseLoader.create(upNetworkConnectivity, url, 
+		JsonUrlBeerDatabaseLoader.create(upNetworkConnectivity, url, 
 				fakeRetriever, fakeJsonArrayLoader);
-		EventDatabaseLoader loader = EventDatabaseLoader.getInstance();
+		BeerDatabaseLoader loader = BeerDatabaseLoader.getInstance();
 		
 		// Method under test
 		loader.load();
@@ -76,9 +74,9 @@ public class JsonUrlBeerDatabaseLoaderTests extends TestCase {
 	
 	public void testLoadWhenNetworkIsDown() {
 		// Preconditions
-		JsonUrlEventDatabaseLoader.create(downNetworkConnectivity, url, 
+		JsonUrlBeerDatabaseLoader.create(downNetworkConnectivity, url, 
 				null, fakeJsonArrayLoader);
-		EventDatabaseLoader loader = EventDatabaseLoader.getInstance();
+		BeerDatabaseLoader loader = BeerDatabaseLoader.getInstance();
 		
 		// Method under test
 		loader.load();
@@ -86,5 +84,4 @@ public class JsonUrlBeerDatabaseLoaderTests extends TestCase {
 		// Postconditions
 		assertEquals(0, fakeJsonArrayLoader.getLoadCount());
 	}
-*/
 }
