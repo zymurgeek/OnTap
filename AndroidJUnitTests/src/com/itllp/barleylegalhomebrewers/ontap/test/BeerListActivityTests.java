@@ -32,6 +32,7 @@ import com.itllp.barleylegalhomebrewers.ontap.Beer;
 import com.itllp.barleylegalhomebrewers.ontap.BeerDatabase;
 import com.itllp.barleylegalhomebrewers.ontap.BeerDatabaseImpl;
 import com.itllp.barleylegalhomebrewers.ontap.BeerDatabaseLoader;
+import com.itllp.barleylegalhomebrewers.ontap.BeerDatabaseLoaderFactory;
 import com.itllp.barleylegalhomebrewers.ontap.BeerListActivity;
 import com.itllp.barleylegalhomebrewers.ontap.BeerListLoaderFactory;
 import com.itllp.barleylegalhomebrewers.ontap.Event;
@@ -42,6 +43,7 @@ import com.itllp.barleylegalhomebrewers.ontap.EventListFragment;
 import com.itllp.barleylegalhomebrewers.ontap.EventListLoaderFactory;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseImpl;
+import com.itllp.barleylegalhomebrewers.ontap.json.JsonUrlBeerDatabaseLoader;
 import com.itllp.barleylegalhomebrewers.ontap.json.JsonUrlEventDatabaseLoader;
 
 public class BeerListActivityTests extends
@@ -77,7 +79,6 @@ public class BeerListActivityTests extends
 		intent.putExtra(BeerListActivity.SKIP_INSTANTIATION_FOR_TESTING, true);
     }
     
-	// TODO: unfinished
     public void testInitialization() {
     	// Preconditions
     	FakeBeerDatabase.clearInstance();
@@ -90,15 +91,14 @@ public class BeerListActivityTests extends
     	// Postconditions
     	assertNotNull(activity);
     	assertTrue(BeerDatabase.getInstance() instanceof BeerDatabaseImpl);
-    	/*
     	assertTrue(BeerDatabaseLoader.getInstance() instanceof JsonUrlBeerDatabaseLoader);
     	JsonUrlBeerDatabaseLoader loader = (JsonUrlBeerDatabaseLoader)BeerDatabaseLoader.getInstance();
     	String expectedUrl = BeerDatabaseLoaderFactory.productionSiteUrl;
     	String actualUrl = loader.getUrl();
     	assertEquals(expectedUrl, actualUrl);
-    	*/
     }
 
+	// TODO: unfinished
 /*
     public void testEmptyList() {
     	

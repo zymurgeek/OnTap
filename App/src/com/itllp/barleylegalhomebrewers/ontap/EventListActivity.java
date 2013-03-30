@@ -27,6 +27,9 @@ public class EventListActivity extends FragmentActivity
         	ConnectivityManager connMgr = (ConnectivityManager) 
         	        context.getSystemService(Context.CONNECTIVITY_SERVICE);
         	NetworkConnectivity netConn = new AndroidNetworkConnectivity(connMgr);
+        	/* TODO:  Throws DatabaseAlreadyInstantiated exception on second run.
+        	 * Check operation of pause/suspend
+        	 */
         	EventDatabaseLoaderFactory.createProductionSiteEventDatabaseLoader(netConn);
         }
         setContentView(R.layout.event_list_fragment);
