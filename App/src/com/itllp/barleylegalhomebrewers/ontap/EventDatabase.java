@@ -19,6 +19,10 @@ public abstract class EventDatabase {
 		return instance;
 	}
 
+	public static void clearInstance() {
+		instance = null;		
+	}
+
 	public void addOrUpdateEvent(Event event) {}
 	
 	public void clearEventList() {

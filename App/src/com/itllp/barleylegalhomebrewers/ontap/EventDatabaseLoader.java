@@ -6,10 +6,11 @@ public abstract class EventDatabaseLoader {
 	public void load() {}
 
 	public static EventDatabaseLoader getInstance() {
-		if (null == instance) {
-			throw new DatabaseLoaderNotInstantiatedException();
-		}
 		return instance;
+	}
+	
+	public static void clearInstance() {
+		instance = null;
 	}
 	
 	protected static void setInstance(EventDatabaseLoader newInstance) {

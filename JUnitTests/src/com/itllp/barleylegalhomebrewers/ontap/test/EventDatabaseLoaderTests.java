@@ -6,7 +6,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.itllp.barleylegalhomebrewers.ontap.DatabaseLoaderNotInstantiatedException;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoader;
 
 public class EventDatabaseLoaderTests {
@@ -23,12 +22,7 @@ public class EventDatabaseLoaderTests {
 	@Test
 	public void testGetInstanceWhenNotInitialized() {
 		// Method under test and postconditions
-		try {
-			EventDatabaseLoader.getInstance();
-			fail("Should throw exception");
-		} catch (DatabaseLoaderNotInstantiatedException e) {
-			assertNotNull(e);
-		}
+		assertNull(EventDatabaseLoader.getInstance());
 	}
 
 	@Test
@@ -44,5 +38,15 @@ public class EventDatabaseLoaderTests {
 		assertTrue(loader instanceof FakeEventDatabaseLoader);
 	}
 	
-
+	@Test
+	public void testClearInstance() {
+		// Preconditions
+		FakeEventDatabaseLoader.create();
+		
+		// Method under test
+		EventDatabaseLoader.clearInstance();
+		
+		// Postconditions
+		assertNull(EventDatabaseLoader.getInstance());
+	}
 }

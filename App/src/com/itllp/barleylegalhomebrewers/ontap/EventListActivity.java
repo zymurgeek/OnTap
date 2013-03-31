@@ -1,6 +1,8 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
 import com.itllp.barleylegalhomebrewers.ontap.R;
+import com.itllp.barleylegalhomebrewers.ontap.json.JsonUrlEventDatabaseLoader;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -18,21 +20,34 @@ public class EventListActivity extends FragmentActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = getIntent();
-        boolean skipInstantiation = intent.getBooleanExtra(SKIP_INSTANTIATION_FOR_TESTING, false);
-        if (!skipInstantiation) {
-        	EventDatabaseImpl.create();
-
-        	Context context = this.getApplicationContext();
-        	ConnectivityManager connMgr = (ConnectivityManager) 
-        	        context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        	NetworkConnectivity netConn = new AndroidNetworkConnectivity(connMgr);
-        	/* TODO:  Throws DatabaseAlreadyInstantiated exception on second run.
-        	 * Check operation of pause/suspend
-        	 */
-        	EventDatabaseLoaderFactory.createProductionSiteEventDatabaseLoader(netConn);
-        }
+        createEventDatabaseAndLoader();
         setContentView(R.layout.event_list_fragment);
     }
-    
+
+    private void createEventDatabaseAndLoader() {
+		Intent intent = getIntent();
+        boolean skipInstantiation = intent.getBooleanExtra(SKIP_INSTANTIATION_FOR_TESTING, false);
+        if (!skipInstantiation) {
+        	if (null == EventDatabase.getInstance()) {
+        		EventDatabaseImpl.create();
+        	} else {
+        		if (! (EventDatabase.getInstance() instanceof EventDatabaseImpl)) {
+        			throw (new DatabaseAlreadyInstantiatedException());
+        		}
+        	}
+
+        	if (null == EventDatabaseLoader.getInstance()) {
+	        	Context context = this.getApplicationContext();
+	        	ConnectivityManager connMgr = (ConnectivityManager) 
+	        	        context.getSystemService(Context.CONNECTIVITY_SERVICE);
+	        	NetworkConnectivity netConn = new AndroidNetworkConnectivity(connMgr);
+	        	EventDatabaseLoaderFactory.createProductionSiteEventDatabaseLoader(netConn);
+        	} else {
+        		if (!(EventDatabaseLoader.getInstance() instanceof JsonUrlEventDatabaseLoader)) {
+        			throw (new DatabaseLoaderAlreadyInstantiatedException());
+        		}
+        	}
+        }
+	}
+
 }

@@ -47,4 +47,17 @@ public class EventDatabaseTests {
 			assertNotNull(e);
 		}
 	}
+	
+	@Test
+	public void testClearInstance() {
+		// Preconditions
+		FakeEventDatabase.clearInstance();
+		FakeEventDatabase.create();
+		
+		// Method under test
+		EventDatabase.clearInstance();
+		
+		// Postconditions
+		assertNull(EventDatabase.getInstance());
+	}
 }
