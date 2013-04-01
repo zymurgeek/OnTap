@@ -1,7 +1,58 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
-import android.support.v4.app.ListFragment;
+import java.util.List;
 
-public class BeerListFragment extends ListFragment {
+import android.os.Bundle;
+import android.support.v4.app.ListFragment;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
+
+public class BeerListFragment extends ListFragment 
+implements LoaderCallbacks<List<Beer>> {
+	
+	private BeerListAdapter beerListAdapter = null;
+
+    @Override public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        setEmptyText(getString(R.string.no_events_text));
+
+        // Create an empty adapter we will use to display the loaded data.
+        beerListAdapter = new BeerListAdapter(getActivity(), R.layout.beer_list_item);
+        setListAdapter(beerListAdapter);
+
+        // Start out with a progress indicator.
+        setListShown(false);
+
+        // Prepare the loader.  Either re-connect with an existing one,
+        // or start a new one.
+        getLoaderManager().initLoader(0, null, this);
+    }
+
+	@Override
+	public void onLoadFinished(Loader<List<Beer>> loader, List<Beer> data) {
+        // Set the new data in the adapter.
+        beerListAdapter.setData(data);
+
+        // The list should now be shown.
+        if (isResumed()) {
+            setListShown(true);
+        } else {
+            setListShownNoAnimation(true);
+        }
+	}
+
+	@Override
+	public Loader<List<Beer>> onCreateLoader(int arg0, Bundle arg1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void onLoaderReset(Loader<List<Beer>> arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

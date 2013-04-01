@@ -115,8 +115,6 @@ public class BeerListActivityTests extends
         		beerListView.getCount());    	
     }
 
-	// TODO: unfinished
-    /*
     public void testListWithOneItem() {
     	List<Beer> beerList = new ArrayList<Beer>();
     	Beer beer = new Beer(1);
@@ -136,8 +134,9 @@ public class BeerListActivityTests extends
         assertEquals("List should have 1 item", 1, 
         		beerListView.getCount());    	
     }
-
-
+    
+	// TODO: unfinished
+/*
     public void testListWithTwoItems() {
     	List<Beer> beerList = new ArrayList<Beer>();
     	Beer beer = new Beer(10);
