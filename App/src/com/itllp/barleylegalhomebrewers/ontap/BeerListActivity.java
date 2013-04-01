@@ -31,8 +31,7 @@ public class BeerListActivity  extends FragmentActivity {
         	NetworkConnectivity netConn = new AndroidNetworkConnectivity(connMgr);
         	BeerDatabaseLoaderFactory.createProductionSiteBeerDatabaseLoader(netConn);
         }
-        // TODO:  Create beer list fragment
-        //setContentView(R.layout.beer_list_fragment);
+        setContentView(R.layout.beer_list_fragment);
 
         //setContentView(R.layout.beer_list);
         //beerListView = (ListView)findViewById(R.id.list);

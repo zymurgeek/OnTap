@@ -34,6 +34,7 @@ import com.itllp.barleylegalhomebrewers.ontap.BeerDatabaseImpl;
 import com.itllp.barleylegalhomebrewers.ontap.BeerDatabaseLoader;
 import com.itllp.barleylegalhomebrewers.ontap.BeerDatabaseLoaderFactory;
 import com.itllp.barleylegalhomebrewers.ontap.BeerListActivity;
+import com.itllp.barleylegalhomebrewers.ontap.BeerListFragment;
 import com.itllp.barleylegalhomebrewers.ontap.BeerListLoaderFactory;
 import com.itllp.barleylegalhomebrewers.ontap.Event;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoader;
@@ -98,8 +99,6 @@ public class BeerListActivityTests extends
     	assertEquals(expectedUrl, actualUrl);
     }
 
-	// TODO: unfinished
-/*
     public void testEmptyList() {
     	
     	// Method under test
@@ -116,8 +115,8 @@ public class BeerListActivityTests extends
         		beerListView.getCount());    	
     }
 
-
-
+	// TODO: unfinished
+    /*
     public void testListWithOneItem() {
     	List<Beer> beerList = new ArrayList<Beer>();
     	Beer beer = new Beer(1);
