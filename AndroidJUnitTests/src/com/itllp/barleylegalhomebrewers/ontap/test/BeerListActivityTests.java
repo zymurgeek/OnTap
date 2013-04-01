@@ -135,8 +135,6 @@ public class BeerListActivityTests extends
         		beerListView.getCount());    	
     }
     
-	// TODO: unfinished
-/*
     public void testListWithTwoItems() {
     	List<Beer> beerList = new ArrayList<Beer>();
     	Beer beer = new Beer(10);
@@ -163,5 +161,4 @@ public class BeerListActivityTests extends
         assertEquals("Second beer ID should be 20", 20, beer.getId());
     }
 
-*/
 }
