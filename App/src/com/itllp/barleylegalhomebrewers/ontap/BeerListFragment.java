@@ -2,10 +2,15 @@ package com.itllp.barleylegalhomebrewers.ontap;
 
 import java.util.List;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.TextView;
 
 public class BeerListFragment extends ListFragment 
 implements LoaderCallbacks<List<Beer>> {
@@ -30,6 +35,25 @@ implements LoaderCallbacks<List<Beer>> {
     }
 
 	@Override
+	public Loader<List<Beer>> onCreateLoader(int arg0, Bundle arg1) {
+		BeerListLoaderFactory f = new BeerListLoaderFactory();
+		Loader<List<Beer>> loader = f.getLoader(getActivity());
+		
+        return loader;
+	}
+
+    @Override
+	public void onListItemClick(ListView l, View view, int position, long id) {
+    	/*
+		String eventIdString = ((TextView) view.findViewById(R.id.id)).getText().toString();
+    	Context context = getActivity().getApplicationContext();
+		Intent in = new Intent(context, BeerListActivity.class);
+		in.putExtra(BeerListActivity.EVENT_ID, eventIdString);
+		startActivity(in);
+		*/
+	}
+	
+	@Override
 	public void onLoadFinished(Loader<List<Beer>> loader, List<Beer> data) {
         // Set the new data in the adapter.
         beerListAdapter.setData(data);
@@ -43,16 +67,9 @@ implements LoaderCallbacks<List<Beer>> {
 	}
 
 	@Override
-	public Loader<List<Beer>> onCreateLoader(int arg0, Bundle arg1) {
-		// TODO Auto-generated method stub
-		return null;
+	public void onLoaderReset(Loader<List<Beer>> loader) {
+        // Clear the data in the adapter.
+        beerListAdapter.setData(null);
 	}
-
-	@Override
-	public void onLoaderReset(Loader<List<Beer>> arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 }
