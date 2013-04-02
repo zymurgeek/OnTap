@@ -3,7 +3,7 @@ package com.itllp.barleylegalhomebrewers.ontap;
 public class BeerDatabaseLoader {
 	private static BeerDatabaseLoader instance = null;
 	
-	public void load() {}
+	public void load(int eventId) {}
 
 	public static BeerDatabaseLoader getInstance() {
 		if (null == instance) {

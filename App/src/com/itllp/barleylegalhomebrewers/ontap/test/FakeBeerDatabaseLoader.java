@@ -4,6 +4,7 @@ import com.itllp.barleylegalhomebrewers.ontap.BeerDatabaseLoader;
 
 public class FakeBeerDatabaseLoader extends BeerDatabaseLoader {
 
+	// TODO:  Count by event ID
 	private int loadCount = 0;
 	
 	public static void clearInstance() {
@@ -15,7 +16,7 @@ public class FakeBeerDatabaseLoader extends BeerDatabaseLoader {
 	}
 
 	@Override
-	public void load() {
+	public void load(int eventId) {
 		++loadCount;
 	}
 	

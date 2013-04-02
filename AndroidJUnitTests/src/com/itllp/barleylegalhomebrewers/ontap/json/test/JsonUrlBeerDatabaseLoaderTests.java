@@ -57,14 +57,15 @@ public class JsonUrlBeerDatabaseLoaderTests extends TestCase {
 		JSONArray expectedJsonArray = new JSONArray();
 		expectedJsonArray.put(true);
 		FakeJsonArrayRetriever fakeRetriever = new FakeJsonArrayRetriever();
-		fakeRetriever.FAKE_setWhenUrl(url);
+		String urlPlusEventId = url + "15";
+		fakeRetriever.FAKE_setWhenUrl(urlPlusEventId);
 		fakeRetriever.FAKE_setReturnArray(expectedJsonArray);
 		JsonUrlBeerDatabaseLoader.create(upNetworkConnectivity, url, 
 				fakeRetriever, fakeJsonArrayLoader);
 		BeerDatabaseLoader loader = BeerDatabaseLoader.getInstance();
 		
 		// Method under test
-		loader.load();
+		loader.load(15);
 		
 		// Postconditions
 		assertEquals(1, fakeJsonArrayLoader.getLoadCount());
@@ -79,7 +80,7 @@ public class JsonUrlBeerDatabaseLoaderTests extends TestCase {
 		BeerDatabaseLoader loader = BeerDatabaseLoader.getInstance();
 		
 		// Method under test
-		loader.load();
+		loader.load(14);
 		
 		// Postconditions
 		assertEquals(0, fakeJsonArrayLoader.getLoadCount());

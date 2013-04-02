@@ -23,9 +23,10 @@ public class JsonUrlBeerDatabaseLoader extends BeerDatabaseLoader {
 		this.jsonArrayLoader = jsonArrayLoader;
 	}
 	
-	public void load() {
+	public void load(int eventId) {
 		if (networkConnectivity.isConnected()) {
-			JSONArray jsonArray = jsonArrayRetriever.getJsonArray(url);
+			String urlPlusEventId = url + String.valueOf(eventId);
+			JSONArray jsonArray = jsonArrayRetriever.getJsonArray(urlPlusEventId);
 			jsonArrayLoader.load(jsonArray);
 		}
 	}

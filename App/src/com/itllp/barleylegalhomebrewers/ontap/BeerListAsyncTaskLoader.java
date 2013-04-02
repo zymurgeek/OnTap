@@ -17,7 +17,8 @@ public class BeerListAsyncTaskLoader extends AsyncTaskLoader<List<Beer>> {
 	@Override
 	public List<Beer> loadInBackground() {
 		BeerDatabaseLoader loader = BeerDatabaseLoader.getInstance();
-		loader.load();
+		// TODO Parameterize event ID
+		loader.load(9);
 		
 		BeerDatabase database = BeerDatabase.getInstance();
 		List<Beer> beerList = database.getBeerList();
