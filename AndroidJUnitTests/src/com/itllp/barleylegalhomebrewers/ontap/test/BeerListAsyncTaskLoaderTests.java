@@ -27,10 +27,6 @@ import com.itllp.barleylegalhomebrewers.ontap.Beer;
 import com.itllp.barleylegalhomebrewers.ontap.BeerDatabase;
 import com.itllp.barleylegalhomebrewers.ontap.BeerDatabaseLoader;
 import com.itllp.barleylegalhomebrewers.ontap.BeerListAsyncTaskLoader;
-import com.itllp.barleylegalhomebrewers.ontap.Event;
-import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoader;
-import com.itllp.barleylegalhomebrewers.ontap.EventListAsyncTaskLoader;
-import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
 
 public class BeerListAsyncTaskLoaderTests extends
 	AndroidTestCase {

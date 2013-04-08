@@ -21,6 +21,7 @@ public class BeerListActivity  extends FragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
+        
         boolean skipInstantiation = intent.getBooleanExtra(SKIP_INSTANTIATION_FOR_TESTING, false);
         if (!skipInstantiation) {
         	BeerDatabaseImpl.create();
@@ -32,10 +33,7 @@ public class BeerListActivity  extends FragmentActivity {
         	BeerDatabaseLoaderFactory.createProductionSiteBeerDatabaseLoader(netConn);
         }
         setContentView(R.layout.beer_list_fragment);
-
-        //setContentView(R.layout.beer_list);
-        //beerListView = (ListView)findViewById(R.id.list);
-        //Intent in = getIntent();
-        //String eventId = in.getStringExtra(EVENT_ID);
+        
+        //String eventId = intent.getStringExtra(EVENT_ID);
     }
 }
