@@ -138,5 +138,5 @@ public class EventListActivityTests extends
 			fail("Should throw exception");
 		} catch (DatabaseLoaderAlreadyInstantiatedException e) {}
     }
-    
+
 }

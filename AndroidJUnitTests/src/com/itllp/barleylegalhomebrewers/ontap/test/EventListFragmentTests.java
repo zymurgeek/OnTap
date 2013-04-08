@@ -140,4 +140,9 @@ public class EventListFragmentTests extends
         assertEquals("Second event ID should be 20", 20, event.getId());
     }
 
+    public void testOnListItemClick() {
+    	// TODO Verify event ID passed to BeerListActivity
+    	fail("Not finished");
+    }
+
 }
