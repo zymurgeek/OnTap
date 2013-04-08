@@ -2,15 +2,12 @@ package com.itllp.barleylegalhomebrewers.ontap;
 
 import java.util.List;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class BeerListFragment extends ListFragment 
 implements LoaderCallbacks<List<Beer>> {

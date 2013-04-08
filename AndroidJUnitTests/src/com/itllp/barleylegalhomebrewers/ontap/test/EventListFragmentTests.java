@@ -40,7 +40,7 @@ import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseImpl;
 import com.itllp.barleylegalhomebrewers.ontap.json.JsonUrlEventDatabaseLoader;
 
-public class EventListActivityTests extends
+public class EventListFragmentTests extends
 	ActivityUnitTestCase<EventListActivity> {
 
 	private Intent intent;
@@ -51,7 +51,7 @@ public class EventListActivityTests extends
 	private MockEventListAsyncTaskLoader mockLoader;
     
     
-	public EventListActivityTests() {
+	public EventListFragmentTests() {
 		super(EventListActivity.class);
 	}
 
@@ -74,69 +74,70 @@ public class EventListActivityTests extends
 		intent.putExtra(EventListActivity.SKIP_INSTANTIATION_FOR_TESTING, true);
     }
     
-
-    public void testInitialization() {
-    	// Preconditions
-    	FakeEventDatabase.clearInstance();
-    	FakeEventDatabaseLoader.clearInstance();
-		intent.putExtra(EventListActivity.SKIP_INSTANTIATION_FOR_TESTING, false);
-
+    
+    public void testEmptyList() {
+    	
     	// Method under test
     	EventListActivity activity = startActivity(intent, null, null);
     	instrumentation.waitForIdleSync();
     	
     	// Postconditions
-    	assertNotNull(activity);
-    	assertTrue(EventDatabase.getInstance() instanceof EventDatabaseImpl);
-    	assertTrue(EventDatabaseLoader.getInstance() instanceof JsonUrlEventDatabaseLoader);
-    	JsonUrlEventDatabaseLoader loader = (JsonUrlEventDatabaseLoader)EventDatabaseLoader.getInstance();
-    	String expectedUrl = EventDatabaseLoaderFactory.productionSiteUrl;
-    	String actualUrl = loader.getUrl();
-    	assertEquals(expectedUrl, actualUrl);
+    	FragmentManager fragmentManager = activity.getSupportFragmentManager();
+    	EventListFragment eventListFragment = (EventListFragment)
+    		fragmentManager.findFragmentById
+    		(com.itllp.barleylegalhomebrewers.ontap.R.id.event_list_fragment);
+        eventListView = (ListView)eventListFragment.getListView();
+        assertEquals("List should be empty", 0, 
+        		eventListView.getCount());    	
     }
-    
-    public void testInitializationWhenAlreadyInitializedWithRightClasses() {
-    	// Preconditions
-		intent.putExtra(EventListActivity.SKIP_INSTANTIATION_FOR_TESTING, false);
+
+
+
+    public void testListWithOneItem() {
+    	List<Event> eventList = new ArrayList<Event>();
+    	Event event = new Event(1);
+    	eventList.add(event);
+    	EventListActivity activity = startActivity(intent, null, null);
+    	FragmentManager fragmentManager = activity.getSupportFragmentManager();
+    	EventListFragment eventListFragment = (EventListFragment)
+    		fragmentManager.findFragmentById
+    		(com.itllp.barleylegalhomebrewers.ontap.R.id.event_list_fragment);
+    	eventListFragment.onActivityCreated(null);
 
     	// Method under test
-    	EventListActivity activity = startActivity(intent, null, null);
-    	instrumentation.waitForIdleSync();
+    	eventListFragment.onLoadFinished(null, eventList);
     	
     	// Postconditions
-    	assertNotNull(activity);
-    	assertTrue(EventDatabase.getInstance() instanceof EventDatabaseImpl);
-    	assertTrue(EventDatabaseLoader.getInstance() instanceof JsonUrlEventDatabaseLoader);
-    	JsonUrlEventDatabaseLoader loader = (JsonUrlEventDatabaseLoader)EventDatabaseLoader.getInstance();
-    	String expectedUrl = EventDatabaseLoaderFactory.productionSiteUrl;
-    	String actualUrl = loader.getUrl();
-    	assertEquals(expectedUrl, actualUrl);
+        eventListView = (ListView)eventListFragment.getListView();
+        assertEquals("List should have 1 item", 1, 
+        		eventListView.getCount());    	
     }
-    
-    public void testInitializationWhenAlreadyInitializedWithWrongEventDatabase() {
-    	// Preconditions
-    	EventDatabase.clearInstance();
-    	FakeEventDatabase.create();
-		intent.putExtra(EventListActivity.SKIP_INSTANTIATION_FOR_TESTING, false);
 
-    	// Method under test and postconditions
-		try {
-			startActivity(intent, null, null);
-			fail("Should throw exception");
-		} catch (DatabaseAlreadyInstantiatedException e) {}
-    }
-    
-    public void testInitializationWhenAlreadyInitializedWithWrongEventDatabaseLoader() {
-    	// Preconditions
-    	EventDatabaseLoader.clearInstance();
-    	FakeEventDatabaseLoader.create();
-		intent.putExtra(EventListActivity.SKIP_INSTANTIATION_FOR_TESTING, false);
 
-    	// Method under test and postconditions
-		try {
-			startActivity(intent, null, null);
-			fail("Should throw exception");
-		} catch (DatabaseLoaderAlreadyInstantiatedException e) {}
+    public void testListWithTwoItems() {
+    	List<Event> eventList = new ArrayList<Event>();
+    	Event event = new Event(10);
+    	eventList.add(event);
+    	event = new Event(20);
+    	eventList.add(event);
+    	EventListActivity activity = startActivity(intent, null, null);
+    	FragmentManager fragmentManager = activity.getSupportFragmentManager();
+    	EventListFragment eventListFragment = (EventListFragment)
+    		fragmentManager.findFragmentById
+    		(com.itllp.barleylegalhomebrewers.ontap.R.id.event_list_fragment);
+    	eventListFragment.onActivityCreated(null);
+
+    	// Method under test
+    	eventListFragment.onLoadFinished(null, eventList);
+    	
+    	// Postconditions
+        eventListView = (ListView)eventListFragment.getListView();
+        assertEquals("List should have 2 items", 2, 
+        		eventListView.getCount());
+        event = (Event)eventListView.getItemAtPosition(0);
+        assertEquals("First event ID should be 10", 10, event.getId());
+        event = (Event)eventListView.getItemAtPosition(1);
+        assertEquals("Second event ID should be 20", 20, event.getId());
     }
-    
+
 }
