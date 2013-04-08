@@ -23,11 +23,13 @@ import java.util.List;
 
 import android.support.v4.app.FragmentManager;
 import android.app.Instrumentation;
+import android.app.Instrumentation.ActivityMonitor;
 import android.content.Context;
 import android.content.Intent;
 import android.test.ActivityUnitTestCase;
 import android.widget.ListView;
 
+import com.itllp.barleylegalhomebrewers.ontap.BeerListActivity;
 import com.itllp.barleylegalhomebrewers.ontap.DatabaseAlreadyInstantiatedException;
 import com.itllp.barleylegalhomebrewers.ontap.DatabaseLoaderAlreadyInstantiatedException;
 import com.itllp.barleylegalhomebrewers.ontap.Event;
@@ -142,6 +144,8 @@ public class EventListFragmentTests extends
 
     public void testOnListItemClick() {
     	// TODO Verify event ID passed to BeerListActivity
+    	// See http://stackoverflow.com/questions/9405561/test-if-a-button-starts-a-new-activity-in-android-junit-pref-without-robotium
+    	ActivityMonitor activityMonitor = getInstrumentation().addMonitor(BeerListActivity.class.getName(), null, false);
     	fail("Not finished");
     }
 
