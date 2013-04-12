@@ -1,15 +1,19 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
+import java.util.List;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.Loader;
 
 // TODO:  Should BeerListActivity be a fragment instead?  
 public class BeerListActivity  extends FragmentActivity {
 	public static final String SKIP_INSTANTIATION_FOR_TESTING 
 	= "com.itllp.barleylegalhomebrewers.ontap.skipInstantiation_FOR_TESTING";
+	public int eventId = -1;
 	//private ListView beerListView;
 	//private BeerDatabase beerDb = null;
 	public static final String EVENT_ID = "EVENT_ID";
@@ -34,6 +38,16 @@ public class BeerListActivity  extends FragmentActivity {
         }
         setContentView(R.layout.beer_list_fragment);
         
-        //String eventId = intent.getStringExtra(EVENT_ID);
+        String eventIdString = intent.getStringExtra(EVENT_ID);
+        try {
+        	eventId = Integer.parseInt(eventIdString);
+        } catch (NumberFormatException e) {
+        	eventId = -1;
+        }
+        
+        // TODO pass event ID via fragment arguments
+		BeerDatabaseLoader loader = BeerDatabaseLoader.getInstance();
+		loader.setEventId(eventId);
+
     }
 }

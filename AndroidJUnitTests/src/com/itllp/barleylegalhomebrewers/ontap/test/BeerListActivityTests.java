@@ -82,4 +82,5 @@ public class BeerListActivityTests extends
     	assertEquals(expectedUrl, actualUrl);
     }
 
+    // TODO Create other initialization tests to mirror EventListActivityTests
 }
