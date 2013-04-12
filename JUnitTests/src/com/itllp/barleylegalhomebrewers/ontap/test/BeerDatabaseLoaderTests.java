@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import com.itllp.barleylegalhomebrewers.ontap.BeerDatabaseLoader;
 import com.itllp.barleylegalhomebrewers.ontap.DatabaseLoaderNotInstantiatedException;
-import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoader;
 
 public class BeerDatabaseLoaderTests {
 

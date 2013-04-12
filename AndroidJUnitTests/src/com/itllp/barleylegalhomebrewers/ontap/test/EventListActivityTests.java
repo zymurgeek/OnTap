@@ -18,10 +18,6 @@ along with Tip On Discount.  If not, see <http://www.gnu.org/licenses/>.
 
 package com.itllp.barleylegalhomebrewers.ontap.test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import android.support.v4.app.FragmentManager;
 import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
@@ -30,14 +26,12 @@ import android.widget.ListView;
 
 import com.itllp.barleylegalhomebrewers.ontap.DatabaseAlreadyInstantiatedException;
 import com.itllp.barleylegalhomebrewers.ontap.DatabaseLoaderAlreadyInstantiatedException;
-import com.itllp.barleylegalhomebrewers.ontap.Event;
+import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
+import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseImpl;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoader;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoaderFactory;
 import com.itllp.barleylegalhomebrewers.ontap.EventListActivity;
-import com.itllp.barleylegalhomebrewers.ontap.EventListFragment;
 import com.itllp.barleylegalhomebrewers.ontap.EventListLoaderFactory;
-import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
-import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseImpl;
 import com.itllp.barleylegalhomebrewers.ontap.json.JsonUrlEventDatabaseLoader;
 
 public class EventListActivityTests extends

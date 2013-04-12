@@ -1,6 +1,10 @@
 package com.itllp.barleylegalhomebrewers.ontap.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +16,6 @@ import org.junit.Test;
 import com.itllp.barleylegalhomebrewers.ontap.Beer;
 import com.itllp.barleylegalhomebrewers.ontap.BeerDatabase;
 import com.itllp.barleylegalhomebrewers.ontap.BeerDatabaseImpl;
-import com.itllp.barleylegalhomebrewers.ontap.Event;
-import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
-import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseImpl;
 
 public class BeerDatabaseImplTests {
 

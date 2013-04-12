@@ -3,7 +3,6 @@ package com.itllp.barleylegalhomebrewers.ontap.json.test;
 import org.json.JSONArray;
 
 import com.itllp.barleylegalhomebrewers.ontap.JsonArrayBeerDatabaseLoader;
-import com.itllp.barleylegalhomebrewers.ontap.JsonArrayEventDatabaseLoader;
 
 public class FakeJsonArrayBeerDatabaseLoader implements
 		JsonArrayBeerDatabaseLoader {

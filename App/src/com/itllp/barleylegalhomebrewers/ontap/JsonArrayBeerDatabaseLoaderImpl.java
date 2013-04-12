@@ -1,7 +1,5 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
-import java.util.Date;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,8 +12,6 @@ public class JsonArrayBeerDatabaseLoaderImpl implements JsonArrayBeerDatabaseLoa
 	public static final String EVENT_NAME = "BeerName";
 	public static final String EVENT_DATE = "BeerDate";
 	private BeerDatabase beerDatabase;
-	private StringToJavaDateConverter dateConverter;
-	
 	public JsonArrayBeerDatabaseLoaderImpl(StringToJavaDateConverter dateConverter,
 			BeerDatabase beerDatabase) {
 		if (null == dateConverter) {
@@ -24,7 +20,6 @@ public class JsonArrayBeerDatabaseLoaderImpl implements JsonArrayBeerDatabaseLoa
 		if (null == beerDatabase) {
 			throw new NullPointerException();
 		}
-		this.dateConverter = dateConverter;
 		this.beerDatabase = beerDatabase;
 	}
 
@@ -37,7 +32,6 @@ public class JsonArrayBeerDatabaseLoaderImpl implements JsonArrayBeerDatabaseLoa
     	for (int i = 0; i < jsonArray.length(); i++){
         	int id = -1;
         	String beerName = "";
-        	Date beerDate = new Date();
 
     		try {
     			JSONObject jsonBeer = jsonArray.getJSONObject(i);
@@ -49,11 +43,6 @@ public class JsonArrayBeerDatabaseLoaderImpl implements JsonArrayBeerDatabaseLoa
    
     			try {
     				beerName = jsonBeer.getString(EVENT_NAME);
-        		} catch (JSONException e) {}
-
-    			try {
-    				String jsonBeerDate = jsonBeer.getString(EVENT_DATE);
-    				beerDate = dateConverter.getJavaDate(jsonBeerDate);
         		} catch (JSONException e) {}
 
     			Beer beer = new Beer(id);

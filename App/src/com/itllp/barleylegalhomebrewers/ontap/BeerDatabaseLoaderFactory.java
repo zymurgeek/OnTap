@@ -5,7 +5,6 @@ import com.itllp.barleylegalhomebrewers.ontap.dateconverter.StringToJavaDateConv
 import com.itllp.barleylegalhomebrewers.ontap.json.JsonArrayRetriever;
 import com.itllp.barleylegalhomebrewers.ontap.json.JsonArrayRetrieverImpl;
 import com.itllp.barleylegalhomebrewers.ontap.json.JsonUrlBeerDatabaseLoader;
-import com.itllp.barleylegalhomebrewers.ontap.json.JsonUrlEventDatabaseLoader;
 
 
 public class BeerDatabaseLoaderFactory {

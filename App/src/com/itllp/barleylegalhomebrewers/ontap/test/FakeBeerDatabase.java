@@ -2,8 +2,6 @@ package com.itllp.barleylegalhomebrewers.ontap.test;
 
 import com.itllp.barleylegalhomebrewers.ontap.Beer;
 import com.itllp.barleylegalhomebrewers.ontap.BeerDatabase;
-import com.itllp.barleylegalhomebrewers.ontap.Event;
-import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
 
 public class FakeBeerDatabase extends BeerDatabase {
 
