@@ -7,6 +7,7 @@ public class Beer {
 	private final int id;
 	private String beerName;
 	private String brewerFirstName;
+	private String brewerLastName;
 	
 	public Beer(int id) {
 		this.id = id;
@@ -32,6 +33,7 @@ public class Beer {
 		return EqualsUtil.areEqual(this.id, that.id) 
 			&& EqualsUtil.areEqual(this.beerName, that.beerName)
 			&& EqualsUtil.areEqual(this.brewerFirstName, that.brewerFirstName)
+			&& EqualsUtil.areEqual(this.brewerLastName, that.brewerLastName)
 			;
 	}
 
@@ -44,11 +46,16 @@ public class Beer {
 		return "id: " + id
 				+ " beerName: \"" + beerName + "\""
 				+ " brewerFirstName: " + brewerFirstName
+				+ " brewerLastName: " + brewerLastName
 				;
 	}
 
 	public void setBrewerFirstName(String name) {
 		brewerFirstName = name;
+	}
+	
+	public void setBrewerLastName(String name) {
+		brewerLastName = name;
 	}
 	
 }

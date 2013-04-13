@@ -243,5 +243,27 @@ public class JsonArrayBeerDatabaseLoaderImplTests extends TestCase {
 		assertEquals(expectedBeerList, actualBeerList);
 	}
 
+	public void testLoadOfBrewerLastName() {
+		// Preconditions
+		final String BREWER_LAST_NAME = "Greenbaum";
+		expectedBeer1.setBrewerLastName(BREWER_LAST_NAME);
+		List<Beer> expectedBeerList = new ArrayList<Beer>();
+		expectedBeerList.add(expectedBeer1);
 
+		String jsonString = getJsonArrayString(EXPECTED_BEER_1_ID_STRING, EXPECTED_BEER_1_NAME,
+				JsonArrayBeerDatabaseLoaderImpl.BREWER_LAST_NAME, BREWER_LAST_NAME);
+		JSONArray jsonArray = null;
+		try {
+			jsonArray = new JSONArray(jsonString);
+		} catch (JSONException x) {
+			fail("Failed to parse JSON string" + x);
+		}
+
+		// Method under test
+		cut.load(jsonArray);
+		
+		// Postconditions
+		List<Beer> actualBeerList = fakeBeerDatabase.getBeerList();
+		assertEquals(expectedBeerList, actualBeerList);
+	}
 }
