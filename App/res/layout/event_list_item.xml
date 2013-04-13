@@ -14,7 +14,7 @@
 
 	<!-- Event Name -->
 	<TextView
-        android:id="@+id/name"
+        android:id="@+id/event_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="2dip"

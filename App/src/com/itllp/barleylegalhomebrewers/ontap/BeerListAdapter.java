@@ -36,14 +36,18 @@ public class BeerListAdapter extends ArrayAdapter<Beer> {
         }
 
         Beer beer = getItem(position);
-        String idString = String.valueOf(beer.getId());
-        String nameString = beer.getName();
         
+        String idString = String.valueOf(beer.getId());
         TextView idView = (TextView)view.findViewById(R.id.id);
         idView.setText(idString);
-
-        TextView nameView = (TextView)view.findViewById(R.id.name); 
-        nameView.setText(nameString);
+        
+        String beerNameString = beer.getBeerName();
+        TextView beerNameView = (TextView)view.findViewById(R.id.beer_name); 
+        beerNameView.setText(beerNameString);
+        
+        //String brewerNameString = beer.getBrewerName();
+        //TextView brewerNameView = (TextView)view.findViewById(R.id.brewer_name); 
+        //brewerNameView.setText(brewerNameString);
         
         return view;
     }

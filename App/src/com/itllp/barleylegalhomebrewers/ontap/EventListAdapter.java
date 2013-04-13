@@ -46,7 +46,7 @@ public class EventListAdapter extends ArrayAdapter<Event> {
         TextView idView = (TextView)view.findViewById(R.id.id);
         idView.setText(idString);
 
-        TextView nameView = (TextView)view.findViewById(R.id.name); 
+        TextView nameView = (TextView)view.findViewById(R.id.event_name); 
         nameView.setText(nameString);
         
         TextView dateView = (TextView)view.findViewById(R.id.date);

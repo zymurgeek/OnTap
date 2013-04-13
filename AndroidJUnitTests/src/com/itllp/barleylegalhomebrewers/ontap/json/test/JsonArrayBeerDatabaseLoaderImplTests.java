@@ -1,7 +1,6 @@
 package com.itllp.barleylegalhomebrewers.ontap.json.test;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -12,12 +11,39 @@ import junit.framework.TestCase;
 import com.itllp.barleylegalhomebrewers.ontap.Beer;
 import com.itllp.barleylegalhomebrewers.ontap.JsonArrayBeerDatabaseLoader;
 import com.itllp.barleylegalhomebrewers.ontap.JsonArrayBeerDatabaseLoaderImpl;
-import com.itllp.barleylegalhomebrewers.ontap.dateconverter.test.FakeStringToJavaDateConverter;
 import com.itllp.barleylegalhomebrewers.ontap.test.FakeBeerDatabase;
 
+/* Each element of the JSON beer array has these fields: 
+ * { 
+ * "BeerStyle": "10A", 
+ * "BeerStyleName": "American Pale Ale", 
+ * "BeerName": "Bees Suck", 
+ * "FirstName": "Chris", 
+ * "LastName": "Smith", 
+ * "EventName": "April Meeting", 
+ * "BeerStyleOverride": "", 
+ * "OG": "1.061", 
+ * "FG": "1.015", 
+ * "ABV": "6.0%", 
+ * "IBU": "65", 
+ * "SRM": "10.8", 
+ * "Description": "Bees Suck is a Pale Ale brewed while being attacked by a swarm of bees. It's dry hopped with the Zythos hop blend.", 
+ * "BrewerID": 1, 
+ * "Active": true, 
+ * "Deleted": false, 
+ * "EventID": 9, 
+ * "BeerStyleID": 33, 
+ * "ID": 26, 
+ * "KegOrBottle": "Keg", 
+ * "OnTap": 1, 
+ * "Kicked": false, 
+ * "EmailAddress": "chris@misdb.com", 
+ * "CanEmail": true, 
+ * "Starred": true 
+ * }
+ */
 public class JsonArrayBeerDatabaseLoaderImplTests extends TestCase {
-
-	private FakeStringToJavaDateConverter fakeJsonDateConverter;
+	
 	private FakeBeerDatabase fakeBeerDatabase;
 	private JsonArrayBeerDatabaseLoader cut;
 	
@@ -27,30 +53,18 @@ public class JsonArrayBeerDatabaseLoaderImplTests extends TestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		fakeJsonDateConverter = new FakeStringToJavaDateConverter();
 		fakeBeerDatabase = new FakeBeerDatabase();
-		cut = new JsonArrayBeerDatabaseLoaderImpl
-			(fakeJsonDateConverter, fakeBeerDatabase);
+		cut = new JsonArrayBeerDatabaseLoaderImpl(fakeBeerDatabase);
 	}
 
 	protected void tearDown() throws Exception {
 		super.tearDown();
 	}
 	
-	public void testCreateWithNullDateConverter() {
-		// Method under test and postconditions
-		try {
-			new JsonArrayBeerDatabaseLoaderImpl(null, fakeBeerDatabase);
-			fail("Should throw NullPointerException");
-		} catch (NullPointerException e) {
-			assertNotNull(e);
-		}
-	}
-
 	public void testCreateWithNullDatabase() {
 		// Method under test and postconditions
 		try {
-			new JsonArrayBeerDatabaseLoaderImpl(fakeJsonDateConverter, null);
+			new JsonArrayBeerDatabaseLoaderImpl(null);
 			fail("Should throw NullPointerException");
 		} catch (NullPointerException e) {
 			assertNotNull(e);
@@ -81,28 +95,20 @@ public class JsonArrayBeerDatabaseLoaderImplTests extends TestCase {
 		int expectedId = 99;
 		String idString = String.valueOf(expectedId);
 		String expectedBeerName = "A";
-		String expectedInputBeerDate = "input_date";
-		Date expectedOutputBeerDate = new Date(98765432109L);
 
 		Beer expectedBeer = new Beer(expectedId);
-		expectedBeer.setName(expectedBeerName);
-		//expectedBeer.setDate(expectedOutputBeerDate);
+		expectedBeer.setBeerName(expectedBeerName);
 
 		List<Beer> expectedBeerList = new ArrayList<Beer>();
 		expectedBeerList.add(expectedBeer);
 
-		String jsonString = "[ { ";
-		jsonString += "\"ID\": " + idString + ", ";
-		jsonString += "\"BeerName\": \"" + expectedBeerName + "\", ";
-		jsonString += "\"BeerDate\": \"" + expectedInputBeerDate + "\" ";
-		jsonString += "} ]";
+		String jsonString = getJsonString(idString, expectedBeerName);
 		JSONArray jsonArrayWithOneBeer = null;
 		try {
 			jsonArrayWithOneBeer = new JSONArray(jsonString);
 		} catch (JSONException x) {
 			fail("Failed to parse JSON string" + x);
 		}
-		fakeJsonDateConverter.FAKE_addConversion(expectedInputBeerDate, expectedOutputBeerDate);
 
 		// Method under test
 		cut.load(jsonArrayWithOneBeer);
@@ -112,25 +118,30 @@ public class JsonArrayBeerDatabaseLoaderImplTests extends TestCase {
 		assertEquals(expectedBeerList, actualBeerList);
 	}
 
+	private String getJsonString(String idString, String expectedBeerName) {
+		String jsonString = "[ { ";
+		jsonString += "\"ID\": " + idString + ", ";
+		jsonString += "\"BeerName\": \"" + expectedBeerName + "\", ";
+		jsonString += "} ]";
+		
+		return jsonString;
+	}
+
 	public void testDatabaseFromJsonArrayWithTwoBeers() {
 		// Preconditions
 		int expectedId1 = 1;
 		String idString1 = String.valueOf(expectedId1);
 		String expectedBeerName1 = "A";
 		String expectedInputBeerDate1 = "input_date1";
-		Date expectedOutputBeerDate1 = new Date(98765432109L);
 		Beer expectedBeer1 = new Beer(expectedId1);
-		expectedBeer1.setName(expectedBeerName1);
-		//expectedBeer1.setDate(expectedOutputBeerDate1);
+		expectedBeer1.setBeerName(expectedBeerName1);
 		
 		int expectedId2 = 2;
 		String idString2 = String.valueOf(expectedId2);
 		String expectedBeerName2 = "B";
 		String expectedInputBeerDate2 = "input_date2";
-		Date expectedOutputBeerDate2 = new Date(87654321098L);
 		Beer expectedBeer2 = new Beer(expectedId2);
-		expectedBeer2.setName(expectedBeerName2);
-//		expectedBeer2.setDate(expectedOutputBeerDate2);
+		expectedBeer2.setBeerName(expectedBeerName2);
 		
 		List<Beer> expectedBeerList = new ArrayList<Beer>();
 		expectedBeerList.add(expectedBeer1);
@@ -152,9 +163,6 @@ public class JsonArrayBeerDatabaseLoaderImplTests extends TestCase {
 			fail("Failed to parse JSON string" + x);
 		}
 		
-		fakeJsonDateConverter.FAKE_addConversion(expectedInputBeerDate1, expectedOutputBeerDate1);
-		fakeJsonDateConverter.FAKE_addConversion(expectedInputBeerDate2, expectedOutputBeerDate2);
-
 		// Method under test
 		cut.load(jsonArrayWithTwoBeers);
 		
@@ -182,10 +190,9 @@ public class JsonArrayBeerDatabaseLoaderImplTests extends TestCase {
 		String idString = String.valueOf(expectedId);
 		String expectedBeerName = "A";
 		String expectedInputBeerDate = "input_date";
-		Date expectedOutputBeerDate = new Date(98765432109L);
 
 		Beer expectedBeer = new Beer(expectedId);
-		expectedBeer.setName(expectedBeerName);
+		expectedBeer.setBeerName(expectedBeerName);
 
 		List<Beer> expectedBeerList = new ArrayList<Beer>();
 		expectedBeerList.add(expectedBeer);
@@ -201,7 +208,6 @@ public class JsonArrayBeerDatabaseLoaderImplTests extends TestCase {
 		} catch (JSONException x) {
 			fail("Failed to parse JSON string" + x);
 		}
-		fakeJsonDateConverter.FAKE_addConversion(expectedInputBeerDate, expectedOutputBeerDate);
 
 		// Method under test
 		cut.load(jsonArrayWithBeerTwo);

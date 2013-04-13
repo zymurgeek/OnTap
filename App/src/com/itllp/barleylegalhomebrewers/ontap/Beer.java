@@ -5,7 +5,7 @@ import com.itllp.barleylegalhomebrewers.ontap.util.EqualsUtil;
 public class Beer {
 
 	private final int id;
-	private String name;
+	private String beerName;
 	
 	public Beer(int id) {
 		this.id = id;
@@ -15,12 +15,12 @@ public class Beer {
 		return id;
 	}
 
-	public void setName(String newName) {
-		name = newName;
+	public void setBeerName(String newName) {
+		beerName = newName;
 	}
 
-	public String getName() {
-		return name;
+	public String getBeerName() {
+		return beerName;
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class Beer {
 		Beer that = (Beer)aThat;
 		return
 			EqualsUtil.areEqual(this.id, that.id) &&
-			EqualsUtil.areEqual(this.name, that.name);
+			EqualsUtil.areEqual(this.beerName, that.beerName);
 	}
 
 	@Override 
@@ -40,7 +40,7 @@ public class Beer {
 
 	public String toString() {
 		return "id: " + id +
-				" name: \"" + name + "\"" /*+
+				" beerName: \"" + beerName + "\"" /*+
 				" date: " + date*/;
 	}
 }

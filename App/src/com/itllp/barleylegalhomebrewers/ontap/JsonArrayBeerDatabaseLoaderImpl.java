@@ -4,19 +4,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.itllp.barleylegalhomebrewers.ontap.dateconverter.StringToJavaDateConverter;
-
 public class JsonArrayBeerDatabaseLoaderImpl implements JsonArrayBeerDatabaseLoader {
 
 	public static final String ID = "ID";
-	public static final String EVENT_NAME = "BeerName";
-	public static final String EVENT_DATE = "BeerDate";
+	public static final String BEER_NAME = "BeerName";
 	private BeerDatabase beerDatabase;
-	public JsonArrayBeerDatabaseLoaderImpl(StringToJavaDateConverter dateConverter,
-			BeerDatabase beerDatabase) {
-		if (null == dateConverter) {
-			throw new NullPointerException();
-		}
+	
+	public JsonArrayBeerDatabaseLoaderImpl(BeerDatabase beerDatabase) {
 		if (null == beerDatabase) {
 			throw new NullPointerException();
 		}
@@ -44,11 +38,11 @@ public class JsonArrayBeerDatabaseLoaderImpl implements JsonArrayBeerDatabaseLoa
         		} catch (JSONException e) {}
    
     			try {
-    				beerName = jsonBeer.getString(EVENT_NAME);
+    				beerName = jsonBeer.getString(BEER_NAME);
         		} catch (JSONException e) {}
 
     			Beer beer = new Beer(id);
-    			beer.setName(beerName);
+    			beer.setBeerName(beerName);
     			beerDatabase.addOrUpdateBeer(beer);
     		} catch (JSONException e) {}
     	}

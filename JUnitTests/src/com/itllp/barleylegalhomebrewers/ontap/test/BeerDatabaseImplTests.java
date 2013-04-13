@@ -118,7 +118,7 @@ public class BeerDatabaseImplTests {
 		// Preconditions
 		Beer updatedExpectedBeer2 = new Beer(expectedBeer2.getId());
 		String updatedExpectedName = "Updated Beer 2";
-		updatedExpectedBeer2.setName(updatedExpectedName);
+		updatedExpectedBeer2.setBeerName(updatedExpectedName);
 		
 		// Method under test
 		beerDatabase.addOrUpdateBeer(expectedBeer2);
