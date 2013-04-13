@@ -32,13 +32,7 @@ import com.itllp.barleylegalhomebrewers.ontap.BeerListActivity;
 import com.itllp.barleylegalhomebrewers.ontap.BeerListLoaderFactory;
 import com.itllp.barleylegalhomebrewers.ontap.DatabaseAlreadyInstantiatedException;
 import com.itllp.barleylegalhomebrewers.ontap.DatabaseLoaderAlreadyInstantiatedException;
-import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
-import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseImpl;
-import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoader;
-import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoaderFactory;
-import com.itllp.barleylegalhomebrewers.ontap.EventListActivity;
 import com.itllp.barleylegalhomebrewers.ontap.json.JsonUrlBeerDatabaseLoader;
-import com.itllp.barleylegalhomebrewers.ontap.json.JsonUrlEventDatabaseLoader;
 
 public class BeerListActivityTests extends
 	ActivityUnitTestCase<BeerListActivity> {

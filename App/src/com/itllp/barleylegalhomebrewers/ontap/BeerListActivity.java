@@ -1,16 +1,11 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
-import java.util.List;
-
 import com.itllp.barleylegalhomebrewers.ontap.json.JsonUrlBeerDatabaseLoader;
-import com.itllp.barleylegalhomebrewers.ontap.json.JsonUrlEventDatabaseLoader;
-
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.content.Loader;
 
 // TODO:  Should BeerListActivity be a fragment instead?  
 public class BeerListActivity  extends FragmentActivity {

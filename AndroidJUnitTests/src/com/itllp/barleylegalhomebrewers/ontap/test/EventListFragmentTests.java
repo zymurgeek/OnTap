@@ -22,15 +22,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Instrumentation;
-import android.app.Instrumentation.ActivityMonitor;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.test.ActivityUnitTestCase;
-import android.view.View;
 import android.widget.ListView;
 
-import com.itllp.barleylegalhomebrewers.ontap.BeerListActivity;
 import com.itllp.barleylegalhomebrewers.ontap.Event;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseImpl;
 import com.itllp.barleylegalhomebrewers.ontap.EventListActivity;

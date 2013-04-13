@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.itllp.barleylegalhomebrewers.ontap.BeerDatabaseLoader;
-import com.itllp.barleylegalhomebrewers.ontap.DatabaseLoaderNotInstantiatedException;
 
 public class BeerDatabaseLoaderTests {
 
