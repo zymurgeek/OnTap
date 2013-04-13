@@ -23,12 +23,7 @@ public class BeerDatabaseLoaderTests {
 	@Test
 	public void testGetInstanceWhenNotInitialized() {
 		// Method under test and postconditions
-		try {
-			BeerDatabaseLoader.getInstance();
-			fail("Should throw exception");
-		} catch (DatabaseLoaderNotInstantiatedException e) {
-			assertNotNull(e);
-		}
+		assertNull(BeerDatabaseLoader.getInstance());
 	}
 
 	@Test

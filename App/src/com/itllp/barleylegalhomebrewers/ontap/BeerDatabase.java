@@ -19,6 +19,10 @@ public abstract class BeerDatabase {
 		instance = newInstance;
 	}
 
+	public static void clearInstance() {
+		instance = null;		
+	}
+
 	public static BeerDatabase getInstance() {
 		return instance;
 	}

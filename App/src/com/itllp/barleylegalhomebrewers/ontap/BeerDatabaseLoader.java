@@ -8,9 +8,6 @@ public class BeerDatabaseLoader {
 	public void load(int eventId) {}
 
 	public static BeerDatabaseLoader getInstance() {
-		if (null == instance) {
-			throw new DatabaseLoaderNotInstantiatedException();
-		}
 		return instance;
 	}
 	
@@ -21,6 +18,10 @@ public class BeerDatabaseLoader {
 		instance = newInstance;
 	}
 
+	public static void clearInstance() {
+		instance = null;
+	}
+	
 	public int getEventId() {
 		return eventId;
 	}

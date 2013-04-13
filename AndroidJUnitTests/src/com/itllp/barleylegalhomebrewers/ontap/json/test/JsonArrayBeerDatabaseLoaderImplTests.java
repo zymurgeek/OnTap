@@ -162,4 +162,6 @@ public class JsonArrayBeerDatabaseLoaderImplTests extends TestCase {
 		List<Beer> actualBeerList = fakeBeerDatabase.getBeerList();
 		assertEquals(expectedBeerList, actualBeerList);
 	}
+	
+	// TODO add test for multiple loads
 }

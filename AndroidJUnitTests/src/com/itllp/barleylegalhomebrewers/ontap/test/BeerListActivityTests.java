@@ -18,6 +18,7 @@ along with On Tap.  If not, see <http://www.gnu.org/licenses/>.
 
 package com.itllp.barleylegalhomebrewers.ontap.test;
 
+import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
 import android.test.ActivityUnitTestCase;
@@ -29,7 +30,15 @@ import com.itllp.barleylegalhomebrewers.ontap.BeerDatabaseLoader;
 import com.itllp.barleylegalhomebrewers.ontap.BeerDatabaseLoaderFactory;
 import com.itllp.barleylegalhomebrewers.ontap.BeerListActivity;
 import com.itllp.barleylegalhomebrewers.ontap.BeerListLoaderFactory;
+import com.itllp.barleylegalhomebrewers.ontap.DatabaseAlreadyInstantiatedException;
+import com.itllp.barleylegalhomebrewers.ontap.DatabaseLoaderAlreadyInstantiatedException;
+import com.itllp.barleylegalhomebrewers.ontap.EventDatabase;
+import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseImpl;
+import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoader;
+import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoaderFactory;
+import com.itllp.barleylegalhomebrewers.ontap.EventListActivity;
 import com.itllp.barleylegalhomebrewers.ontap.json.JsonUrlBeerDatabaseLoader;
+import com.itllp.barleylegalhomebrewers.ontap.json.JsonUrlEventDatabaseLoader;
 
 public class BeerListActivityTests extends
 	ActivityUnitTestCase<BeerListActivity> {
@@ -37,6 +46,7 @@ public class BeerListActivityTests extends
 	private Intent intent;
     ListView beerListView;
 	private BeerListLoaderFactory blFactory;
+	private Instrumentation instrumentation;
 	private Context context;
 	private MockBeerListAsyncTaskLoader mockLoader;
     
@@ -49,7 +59,7 @@ public class BeerListActivityTests extends
     protected void setUp() throws Exception {
         super.setUp();
         
-        getInstrumentation();
+        instrumentation = getInstrumentation();
     	
     	FakeBeerDatabase.clearInstance();
     	BeerDatabaseImpl.create();
@@ -82,5 +92,47 @@ public class BeerListActivityTests extends
     	assertEquals(expectedUrl, actualUrl);
     }
 
-    // TODO Create other initialization tests to mirror EventListActivityTests
+    public void testInitializationWhenAlreadyInitializedWithRightClasses() {
+    	// Preconditions
+		intent.putExtra(BeerListActivity.SKIP_INSTANTIATION_FOR_TESTING, false);
+
+    	// Method under test
+    	BeerListActivity activity = startActivity(intent, null, null);
+    	instrumentation.waitForIdleSync();
+    	
+    	// Postconditions
+    	assertNotNull(activity);
+    	assertTrue(BeerDatabase.getInstance() instanceof BeerDatabaseImpl);
+    	assertTrue(BeerDatabaseLoader.getInstance() instanceof JsonUrlBeerDatabaseLoader);
+    	JsonUrlBeerDatabaseLoader loader = (JsonUrlBeerDatabaseLoader)BeerDatabaseLoader.getInstance();
+    	String expectedUrl = BeerDatabaseLoaderFactory.productionSiteUrl;
+    	String actualUrl = loader.getUrl();
+    	assertEquals(expectedUrl, actualUrl);
+    }
+    
+    public void testInitializationWhenAlreadyInitializedWithWrongBeerDatabase() {
+    	// Preconditions
+    	BeerDatabase.clearInstance();
+    	FakeBeerDatabase.create();
+		intent.putExtra(BeerListActivity.SKIP_INSTANTIATION_FOR_TESTING, false);
+
+    	// Method under test and postconditions
+		try {
+			startActivity(intent, null, null);
+			fail("Should throw exception");
+		} catch (DatabaseAlreadyInstantiatedException e) {}
+    }
+
+    public void testInitializationWhenAlreadyInitializedWithWrongBeerDatabaseLoader() {
+    	// Preconditions
+    	BeerDatabaseLoader.clearInstance();
+    	FakeBeerDatabaseLoader.create();
+		intent.putExtra(BeerListActivity.SKIP_INSTANTIATION_FOR_TESTING, false);
+
+    	// Method under test and postconditions
+		try {
+			startActivity(intent, null, null);
+			fail("Should throw exception");
+		} catch (DatabaseLoaderAlreadyInstantiatedException e) {}
+    }
 }
