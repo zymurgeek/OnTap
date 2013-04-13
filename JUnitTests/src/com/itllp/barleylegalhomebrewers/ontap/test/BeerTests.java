@@ -17,6 +17,7 @@ public class BeerTests {
 	private static final String BEER1_NAME = "Beer One";
 	private static final String BEER1_BREWER_FIRST_NAME = "Dave";
 	private static final String BEER1_BREWER_LAST_NAME = "Greenbaum";
+	private static final String BEER1_STYLE_CODE = "14B";
 
 	@Before
 	public void setUp() throws Exception {
@@ -153,4 +154,35 @@ public class BeerTests {
 		// method under test and postconditions
 		assertEquals(expectedBrewerName, beer1.getBrewerName());
 	}
+	
+	@Test
+	public void testBeerStyleCode() {
+		// method under test
+		beer1.setStyleCode(BEER1_STYLE_CODE);
+		
+		// postconditions
+		assertEquals(BEER1_STYLE_CODE, beer1.getStyleCode());
+	}
+
+	@Test
+	public void testEqualStyleCodes() {
+		// preconditions
+		beer1.setStyleCode(BEER1_STYLE_CODE);
+		beer2.setStyleCode(BEER1_STYLE_CODE);
+		
+		// postconditions
+		assertEquals(beer1, beer2);
+	}
+	
+	@Test
+	public void testUnEqualStyleCodes() {
+		// preconditions
+		beer1.setStyleCode(BEER1_STYLE_CODE);
+		beer2.setStyleCode("not " + BEER1_STYLE_CODE);
+		
+		// postconditions
+		assertFalse(beer1.equals(beer2));
+	}
+
+
 }

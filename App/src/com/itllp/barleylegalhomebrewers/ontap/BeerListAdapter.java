@@ -37,17 +37,17 @@ public class BeerListAdapter extends ArrayAdapter<Beer> {
 
         Beer beer = getItem(position);
         
-        String idString = String.valueOf(beer.getId());
         TextView idView = (TextView)view.findViewById(R.id.id);
-        idView.setText(idString);
+        idView.setText(String.valueOf(beer.getId()));
         
-        String beerNameString = beer.getBeerName();
         TextView beerNameView = (TextView)view.findViewById(R.id.beer_name); 
-        beerNameView.setText(beerNameString);
+        beerNameView.setText(beer.getBeerName());
         
-        String brewerNameString = beer.getBrewerName();
         TextView brewerNameView = (TextView)view.findViewById(R.id.brewer_name); 
-        brewerNameView.setText(brewerNameString);
+        brewerNameView.setText(beer.getBrewerName());
+        
+        TextView styleCodeView = (TextView)view.findViewById(R.id.beer_style_code); 
+        styleCodeView.setText(beer.getStyleCode());
         
         return view;
     }

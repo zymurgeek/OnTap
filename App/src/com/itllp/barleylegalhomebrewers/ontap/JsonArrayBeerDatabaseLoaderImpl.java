@@ -10,6 +10,7 @@ public class JsonArrayBeerDatabaseLoaderImpl implements JsonArrayBeerDatabaseLoa
 	public static final String BEER_NAME = "BeerName";
 	public static final String BREWER_FIRST_NAME = "FirstName";
 	public static final String BREWER_LAST_NAME = "LastName";
+	public static final String BEER_STYLE_CODE = "BeerStyle";
 	
 	private BeerDatabase beerDatabase;
 	
@@ -36,23 +37,28 @@ public class JsonArrayBeerDatabaseLoaderImpl implements JsonArrayBeerDatabaseLoa
     			try {
     				String idString = jsonBeer.getString(ID);
     				id = Integer.parseInt(idString);
-        		} catch (JSONException e) {}
+        		} catch (JSONException e) { /* ignore bad data */ }
     			Beer beer = new Beer(id);
    
     			try {
     				String beerName = jsonBeer.getString(BEER_NAME);
         			beer.setBeerName(beerName);
-        		} catch (JSONException e) {}
+        		} catch (JSONException e) { /* ignore bad data */ }
     			
     			try {
     				String brewerFirstName = jsonBeer.getString(BREWER_FIRST_NAME);
         			beer.setBrewerFirstName(brewerFirstName);
-        		} catch (JSONException e) {}
+        		} catch (JSONException e) { /* ignore bad data */ }
     			
     			try {
     				String brewerLastName = jsonBeer.getString(BREWER_LAST_NAME);
         			beer.setBrewerLastName(brewerLastName);
-        		} catch (JSONException e) {}
+        		} catch (JSONException e) { /* ignore bad data */ }
+
+    			try {
+    				String styleCode = jsonBeer.getString(BEER_STYLE_CODE);
+    				beer.setStyleCode(styleCode);
+    			} catch (JSONException e) { /* ignore bad data */ }
     			
     			beerDatabase.addOrUpdateBeer(beer);
     		} catch (JSONException e) {}
