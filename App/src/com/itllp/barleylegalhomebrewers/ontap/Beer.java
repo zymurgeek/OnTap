@@ -55,6 +55,7 @@ public class Beer {
 				+ " brewerLastName: " + brewerLastName
 				+ " styleCode: " + styleCode
 				+ " styleName: " + styleName
+				+ " styleOverride: " + styleOverride
 				;
 	}
 
