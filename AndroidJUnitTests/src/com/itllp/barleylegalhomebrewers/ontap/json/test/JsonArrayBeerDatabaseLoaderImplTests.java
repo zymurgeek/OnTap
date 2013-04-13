@@ -47,12 +47,29 @@ public class JsonArrayBeerDatabaseLoaderImplTests extends TestCase {
 	private FakeBeerDatabase fakeBeerDatabase;
 	private JsonArrayBeerDatabaseLoader cut;
 	
+	private static final int EXPECTED_BEER_1_ID = 101;
+	private static final String EXPECTED_BEER_1_NAME = "Beer One";
+	private static final String EXPECTED_BEER_1_ID_STRING = String.valueOf(EXPECTED_BEER_1_ID);
+	private Beer expectedBeer1;
+	
+	private static final int EXPECTED_BEER_2_ID = 102;
+	private static final String EXPECTED_BEER_2_NAME = "Beer Two";
+	private static final String EXPECTED_BEER_2_ID_STRING = String.valueOf(EXPECTED_BEER_2_ID);
+	private Beer expectedBeer2;
+	
 	public JsonArrayBeerDatabaseLoaderImplTests(String name) {
 		super(name);
 	}
 
 	protected void setUp() throws Exception {
 		super.setUp();
+		
+		expectedBeer1 = new Beer(EXPECTED_BEER_1_ID);
+		expectedBeer1.setBeerName(EXPECTED_BEER_1_NAME);
+
+		expectedBeer2 = new Beer(EXPECTED_BEER_2_ID);
+		expectedBeer2.setBeerName(EXPECTED_BEER_2_NAME);
+
 		fakeBeerDatabase = new FakeBeerDatabase();
 		cut = new JsonArrayBeerDatabaseLoaderImpl(fakeBeerDatabase);
 	}
@@ -91,18 +108,12 @@ public class JsonArrayBeerDatabaseLoaderImplTests extends TestCase {
 	}
 
 	public void testDatabaseFromJsonArrayWithOneBeer() {
-		// Preconditions
-		int expectedId = 99;
-		String idString = String.valueOf(expectedId);
-		String expectedBeerName = "A";
-
-		Beer expectedBeer = new Beer(expectedId);
-		expectedBeer.setBeerName(expectedBeerName);
 
 		List<Beer> expectedBeerList = new ArrayList<Beer>();
-		expectedBeerList.add(expectedBeer);
+		expectedBeerList.add(expectedBeer1);
 
-		String jsonString = getJsonString(idString, expectedBeerName);
+		String jsonString = getJsonArrayString(EXPECTED_BEER_1_ID_STRING, 
+				EXPECTED_BEER_1_NAME);
 		JSONArray jsonArrayWithOneBeer = null;
 		try {
 			jsonArrayWithOneBeer = new JSONArray(jsonString);
@@ -118,44 +129,36 @@ public class JsonArrayBeerDatabaseLoaderImplTests extends TestCase {
 		assertEquals(expectedBeerList, actualBeerList);
 	}
 
-	private String getJsonString(String idString, String expectedBeerName) {
-		String jsonString = "[ { ";
-		jsonString += "\"ID\": " + idString + ", ";
-		jsonString += "\"BeerName\": \"" + expectedBeerName + "\", ";
-		jsonString += "} ]";
+	private String getJsonArrayString(String idString, String expectedBeerName) {
+		String jsonString = "[ "; 
+		jsonString += getJsonArrayElementString(idString, expectedBeerName); 
+		jsonString += " ]";
 		
 		return jsonString;
 	}
 
+	private String getJsonArrayElementString(String idString,
+			String expectedBeerName) {
+		String jsonString = "{ ";
+		jsonString += "\"ID\": " + idString + ", ";
+		jsonString += "\"BeerName\": \"" + expectedBeerName + "\", ";
+		jsonString += "}";
+		return jsonString;
+	}
+
 	public void testDatabaseFromJsonArrayWithTwoBeers() {
-		// Preconditions
-		int expectedId1 = 1;
-		String idString1 = String.valueOf(expectedId1);
-		String expectedBeerName1 = "A";
-		String expectedInputBeerDate1 = "input_date1";
-		Beer expectedBeer1 = new Beer(expectedId1);
-		expectedBeer1.setBeerName(expectedBeerName1);
-		
-		int expectedId2 = 2;
-		String idString2 = String.valueOf(expectedId2);
-		String expectedBeerName2 = "B";
-		String expectedInputBeerDate2 = "input_date2";
-		Beer expectedBeer2 = new Beer(expectedId2);
-		expectedBeer2.setBeerName(expectedBeerName2);
-		
+		// Set up preconditions
 		List<Beer> expectedBeerList = new ArrayList<Beer>();
 		expectedBeerList.add(expectedBeer1);
 		expectedBeerList.add(expectedBeer2);
 
-		String jsonString = "[ { ";
-		jsonString += "\"ID\": " + idString1 + ", ";
-		jsonString += "\"BeerName\": \"" + expectedBeerName1 + "\", ";
-		jsonString += "\"BeerDate\": \"" + expectedInputBeerDate1 + "\" ";
-		jsonString += "}, { ";
-		jsonString += "\"ID\": " + idString2 + ", ";
-		jsonString += "\"BeerName\": \"" + expectedBeerName2 + "\", ";
-		jsonString += "\"BeerDate\": \"" + expectedInputBeerDate2 + "\" ";
-		jsonString += "} ]";
+		String jsonString = "[ "; 
+		jsonString += getJsonArrayElementString(EXPECTED_BEER_1_ID_STRING, 
+				EXPECTED_BEER_1_NAME);
+		jsonString += ", "; 
+		jsonString += getJsonArrayElementString(EXPECTED_BEER_2_ID_STRING, 
+				EXPECTED_BEER_2_NAME);
+		jsonString += " ]";
 		JSONArray jsonArrayWithTwoBeers = null;
 		try {
 			jsonArrayWithTwoBeers = new JSONArray(jsonString);
@@ -173,11 +176,8 @@ public class JsonArrayBeerDatabaseLoaderImplTests extends TestCase {
 	
 	public void testDatabaseFromJsonArrayWithMultipleLoads() {
 		// Preconditions
-		String jsonString = "[ { ";
-		jsonString += "\"ID\": 1, ";
-		jsonString += "\"BeerName\": \"Beer One\", ";
-		jsonString += "\"BeerDate\": \"Date One\" ";
-		jsonString += "} ]";
+		String jsonString = getJsonArrayString(EXPECTED_BEER_1_ID_STRING, 
+				EXPECTED_BEER_1_NAME);
 		JSONArray jsonArrayWithBeerOne = null;
 		try {
 			jsonArrayWithBeerOne = new JSONArray(jsonString);
@@ -186,22 +186,10 @@ public class JsonArrayBeerDatabaseLoaderImplTests extends TestCase {
 		}
 		cut.load(jsonArrayWithBeerOne);
 		
-		int expectedId = 99;
-		String idString = String.valueOf(expectedId);
-		String expectedBeerName = "A";
-		String expectedInputBeerDate = "input_date";
-
-		Beer expectedBeer = new Beer(expectedId);
-		expectedBeer.setBeerName(expectedBeerName);
-
 		List<Beer> expectedBeerList = new ArrayList<Beer>();
-		expectedBeerList.add(expectedBeer);
+		expectedBeerList.add(expectedBeer2);
 
-		jsonString = "[ { ";
-		jsonString += "\"ID\": " + idString + ", ";
-		jsonString += "\"BeerName\": \"" + expectedBeerName + "\", ";
-		jsonString += "\"BeerDate\": \"" + expectedInputBeerDate + "\" ";
-		jsonString += "} ]";
+		jsonString = getJsonArrayString(EXPECTED_BEER_2_ID_STRING, EXPECTED_BEER_2_NAME);
 		JSONArray jsonArrayWithBeerTwo = null;
 		try {
 			jsonArrayWithBeerTwo = new JSONArray(jsonString);
@@ -216,4 +204,27 @@ public class JsonArrayBeerDatabaseLoaderImplTests extends TestCase {
 		List<Beer> actualBeerList = fakeBeerDatabase.getBeerList();
 		assertEquals(expectedBeerList, actualBeerList);
 	}
+	
+	public void testLoadOfBrewerFirstName() {
+		// Preconditions
+		List<Beer> expectedBeerList = new ArrayList<Beer>();
+		expectedBeerList.add(expectedBeer1);
+
+		String jsonString = getJsonArrayString(EXPECTED_BEER_1_ID_STRING, EXPECTED_BEER_1_NAME);
+		JSONArray jsonArray = null;
+		try {
+			jsonArray = new JSONArray(jsonString);
+		} catch (JSONException x) {
+			fail("Failed to parse JSON string" + x);
+		}
+
+		// Method under test
+		cut.load(jsonArray);
+		
+		// Postconditions
+		List<Beer> actualBeerList = fakeBeerDatabase.getBeerList();
+		assertEquals(expectedBeerList, actualBeerList);
+	}
+
+
 }
