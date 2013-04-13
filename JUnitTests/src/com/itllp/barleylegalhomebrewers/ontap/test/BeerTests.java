@@ -17,8 +17,9 @@ public class BeerTests {
 	private static final String BEER1_NAME = "Beer One";
 	private static final String BEER1_BREWER_FIRST_NAME = "Dave";
 	private static final String BEER1_BREWER_LAST_NAME = "Greenbaum";
-	private static final String BEER1_STYLE_CODE = "14B";
-	private static final String BEER1_STYLE_NAME = "American IPA";
+	private static final String BEER1_STYLE_CODE = "13B";
+	private static final String BEER1_STYLE_NAME = "Sweet Stout";
+	private static final String BEER1_STYLE_OVERRIDE = "Milk Stout";
 
 	@Before
 	public void setUp() throws Exception {
@@ -209,6 +210,35 @@ public class BeerTests {
 		// preconditions
 		beer1.setStyleName(BEER1_STYLE_NAME);
 		beer2.setStyleName("not " + BEER1_STYLE_NAME);
+		
+		// postconditions
+		assertFalse(beer1.equals(beer2));
+	}
+
+	@Test
+	public void testBeerStyleOverride() {
+		// method under test
+		beer1.setStyleOverride(BEER1_STYLE_OVERRIDE);
+		
+		// postconditions
+		assertEquals(BEER1_STYLE_OVERRIDE, beer1.getStyleOverride());
+	}
+
+	@Test
+	public void testEqualStyleOverrides() {
+		// preconditions
+		beer1.setStyleOverride(BEER1_STYLE_OVERRIDE);
+		beer2.setStyleOverride(BEER1_STYLE_OVERRIDE);
+		
+		// postconditions
+		assertEquals(beer1, beer2);
+	}
+
+	@Test
+	public void testUnEqualStyleOverrides() {
+		// preconditions
+		beer1.setStyleOverride(BEER1_STYLE_OVERRIDE);
+		beer2.setStyleOverride("not " + BEER1_STYLE_OVERRIDE);
 		
 		// postconditions
 		assertFalse(beer1.equals(beer2));

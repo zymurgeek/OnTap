@@ -10,6 +10,7 @@ public class Beer {
 	private String brewerLastName;
 	private String styleCode;
 	private String styleName;
+	private String styleOverride;
 	
 	public Beer(int id) {
 		this.id = id;
@@ -38,6 +39,7 @@ public class Beer {
 			&& EqualsUtil.areEqual(this.brewerLastName, that.brewerLastName)
 			&& EqualsUtil.areEqual(this.styleCode, that.styleCode)
 			&& EqualsUtil.areEqual(this.styleName, that.styleName)
+			&& EqualsUtil.areEqual(this.styleOverride, that.styleOverride)
 			;
 	}
 
@@ -90,6 +92,14 @@ public class Beer {
 
 	public String getStyleName() {
 		return styleName;
+	}
+
+	public void setStyleOverride(String override) {
+		styleOverride = override;
+	}
+
+	public String getStyleOverride() {
+		return styleOverride;
 	}
 	
 }
