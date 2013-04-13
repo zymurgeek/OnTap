@@ -25,6 +25,8 @@ public class JsonArrayBeerDatabaseLoaderImpl implements JsonArrayBeerDatabaseLoa
 
 	@Override
 	public void load(JSONArray jsonArray) {
+		beerDatabase.clearBeerList();
+		
 		if (null == jsonArray) {
 			return;
 		}
