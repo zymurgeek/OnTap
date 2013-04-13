@@ -61,5 +61,13 @@ public class Beer {
 	public String getBrewerName() {
 		return brewerFirstName + " " + brewerLastName;
 	}
+
+	public String getBrewerFirstName() {
+		return brewerFirstName;
+	}
+
+	public String getBrewerLastName() {
+		return brewerLastName;
+	}
 	
 }
