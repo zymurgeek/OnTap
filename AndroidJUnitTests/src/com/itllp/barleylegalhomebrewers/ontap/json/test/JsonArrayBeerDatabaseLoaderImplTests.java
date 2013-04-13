@@ -129,19 +129,33 @@ public class JsonArrayBeerDatabaseLoaderImplTests extends TestCase {
 		assertEquals(expectedBeerList, actualBeerList);
 	}
 
-	private String getJsonArrayString(String idString, String expectedBeerName) {
+	private String getJsonArrayString(String id, String beerName) {
+		return getJsonArrayString(id, beerName, null, null);
+	}
+	
+	private String getJsonArrayString(String id, String beerName,
+			String fieldId, String fieldValue) {
 		String jsonString = "[ "; 
-		jsonString += getJsonArrayElementString(idString, expectedBeerName); 
+		jsonString += getJsonArrayElementString(id, beerName,
+				fieldId, fieldValue); 
 		jsonString += " ]";
 		
 		return jsonString;
 	}
 
-	private String getJsonArrayElementString(String idString,
-			String expectedBeerName) {
+	private String getJsonArrayElementString(String id,
+			String beerName) {
+		return getJsonArrayElementString(id, beerName, null, null);
+	}
+
+	private String getJsonArrayElementString(String id,
+			String beerName, String fieldId, String fieldValue) {
 		String jsonString = "{ ";
-		jsonString += "\"ID\": " + idString + ", ";
-		jsonString += "\"BeerName\": \"" + expectedBeerName + "\", ";
+		jsonString += "\"ID\": " + id + ", ";
+		jsonString += "\"BeerName\": \"" + beerName + "\", ";
+		if (null != fieldId) {
+			jsonString += "\"" + fieldId + "\": \"" + fieldValue + "\", ";
+		}
 		jsonString += "}";
 		return jsonString;
 	}
@@ -207,10 +221,13 @@ public class JsonArrayBeerDatabaseLoaderImplTests extends TestCase {
 	
 	public void testLoadOfBrewerFirstName() {
 		// Preconditions
+		final String BREWER_FIRST_NAME = "Dave";
+		expectedBeer1.setBrewerFirstName(BREWER_FIRST_NAME);
 		List<Beer> expectedBeerList = new ArrayList<Beer>();
 		expectedBeerList.add(expectedBeer1);
 
-		String jsonString = getJsonArrayString(EXPECTED_BEER_1_ID_STRING, EXPECTED_BEER_1_NAME);
+		String jsonString = getJsonArrayString(EXPECTED_BEER_1_ID_STRING, EXPECTED_BEER_1_NAME,
+				JsonArrayBeerDatabaseLoaderImpl.BREWER_FIRST_NAME, BREWER_FIRST_NAME);
 		JSONArray jsonArray = null;
 		try {
 			jsonArray = new JSONArray(jsonString);

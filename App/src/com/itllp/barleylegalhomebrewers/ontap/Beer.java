@@ -6,6 +6,7 @@ public class Beer {
 
 	private final int id;
 	private String beerName;
+	private String brewerFirstName;
 	
 	public Beer(int id) {
 		this.id = id;
@@ -28,9 +29,10 @@ public class Beer {
 		if ( this == aThat ) return true;
 		if ( !(aThat instanceof Beer) ) return false;
 		Beer that = (Beer)aThat;
-		return
-			EqualsUtil.areEqual(this.id, that.id) &&
-			EqualsUtil.areEqual(this.beerName, that.beerName);
+		return EqualsUtil.areEqual(this.id, that.id) 
+			&& EqualsUtil.areEqual(this.beerName, that.beerName)
+			&& EqualsUtil.areEqual(this.brewerFirstName, that.brewerFirstName)
+			;
 	}
 
 	@Override 
@@ -39,8 +41,14 @@ public class Beer {
 	  }
 
 	public String toString() {
-		return "id: " + id +
-				" beerName: \"" + beerName + "\"" /*+
-				" date: " + date*/;
+		return "id: " + id
+				+ " beerName: \"" + beerName + "\""
+				+ " brewerFirstName: " + brewerFirstName
+				;
 	}
+
+	public void setBrewerFirstName(String name) {
+		brewerFirstName = name;
+	}
+	
 }
