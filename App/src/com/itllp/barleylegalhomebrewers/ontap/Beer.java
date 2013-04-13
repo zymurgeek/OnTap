@@ -9,6 +9,7 @@ public class Beer {
 	private String brewerFirstName;
 	private String brewerLastName;
 	private String styleCode;
+	private String styleName;
 	
 	public Beer(int id) {
 		this.id = id;
@@ -36,6 +37,7 @@ public class Beer {
 			&& EqualsUtil.areEqual(this.brewerFirstName, that.brewerFirstName)
 			&& EqualsUtil.areEqual(this.brewerLastName, that.brewerLastName)
 			&& EqualsUtil.areEqual(this.styleCode, that.styleCode)
+			&& EqualsUtil.areEqual(this.styleName, that.styleName)
 			;
 	}
 
@@ -50,6 +52,7 @@ public class Beer {
 				+ " brewerFirstName: " + brewerFirstName
 				+ " brewerLastName: " + brewerLastName
 				+ " styleCode: " + styleCode
+				+ " styleName: " + styleName
 				;
 	}
 
@@ -79,6 +82,14 @@ public class Beer {
 
 	public String getStyleCode() {
 		return styleCode;
+	}
+
+	public void setStyleName(String name) {
+		styleName = name;
+	}
+
+	public String getStyleName() {
+		return styleName;
 	}
 	
 }
