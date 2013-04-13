@@ -45,9 +45,9 @@ public class BeerListAdapter extends ArrayAdapter<Beer> {
         TextView beerNameView = (TextView)view.findViewById(R.id.beer_name); 
         beerNameView.setText(beerNameString);
         
-        //String brewerNameString = beer.getBrewerName();
-        //TextView brewerNameView = (TextView)view.findViewById(R.id.brewer_name); 
-        //brewerNameView.setText(brewerNameString);
+        String brewerNameString = beer.getBrewerName();
+        TextView brewerNameView = (TextView)view.findViewById(R.id.brewer_name); 
+        brewerNameView.setText(brewerNameString);
         
         return view;
     }

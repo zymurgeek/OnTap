@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="2dip"
         android:paddingTop="6dip"
-        android:textColor="#43bd00"
+        android:textColor="#acacac"
         android:textSize="14sp"
         tools:ignore="SelectableText" />
 

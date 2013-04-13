@@ -57,5 +57,9 @@ public class Beer {
 	public void setBrewerLastName(String name) {
 		brewerLastName = name;
 	}
+
+	public String getBrewerName() {
+		return brewerFirstName + " " + brewerLastName;
+	}
 	
 }
