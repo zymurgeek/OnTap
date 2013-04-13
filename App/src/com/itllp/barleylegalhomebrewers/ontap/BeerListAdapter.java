@@ -57,6 +57,9 @@ public class BeerListAdapter extends ArrayAdapter<Beer> {
         }
         styleNameView.setText(styleName);
         
+        TextView styleOverrideView = (TextView)view.findViewById(R.id.beer_style_override); 
+        styleOverrideView.setText(beer.getStyleOverride());
+        
         return view;
     }
 }
