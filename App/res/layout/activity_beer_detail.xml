@@ -93,19 +93,44 @@
 		android:id="@+id/packaging_layout" 
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
+        android:paddingTop="6dip"
     >
 	<TextView
 		android:id="@+id/packaging_label"
     	android:layout_width="wrap_content" 
     	android:layout_height="wrap_content" 
     	android:layout_alignParentLeft="true"
-    	android:text="@string/packaging_label"
+        android:textStyle="bold"
+    	android:text="@string/packaging_label_text"
     />
 	<TextView
 	    android:id="@+id/packaging"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_alignBaseline="@+id/packaging_label"
+	    android:layout_alignParentRight="true"
+	    tools:ignore="SelectableText"
+	/>
+	</RelativeLayout>
+		
+    <RelativeLayout 
+		android:id="@+id/gravity_layout" 
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    >
+	<TextView
+		android:id="@+id/og_label"
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content" 
+    	android:layout_alignParentLeft="true"
+        android:textStyle="bold"
+    	android:text="@string/og_label_text"
+    />
+	<TextView
+	    android:id="@+id/og"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignBaseline="@+id/og_label"
 	    android:layout_alignParentRight="true"
 	    tools:ignore="SelectableText"
 	/>

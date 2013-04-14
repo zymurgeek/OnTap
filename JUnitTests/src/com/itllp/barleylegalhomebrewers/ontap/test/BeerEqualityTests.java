@@ -23,6 +23,7 @@ public class BeerEqualityTests {
 	private static final String DESCRIPTION = "This is a really nice beer "
 			+ "that doesn't taste like it's had a dead rat in it.";
 	private static final String PACKAGING = "bottle";
+	private static final String ORIGINAL_GRAVITY = "1.054";
 
 	@Before
 	public void setUp() throws Exception {
@@ -209,4 +210,23 @@ public class BeerEqualityTests {
 		assertFalse(beer1.equals(beer2));
 	}
 
+	@Test
+	public void testEqualOriginalGravity() {
+		// preconditions
+		beer1.setOriginalGravity(ORIGINAL_GRAVITY);
+		beer2.setOriginalGravity(ORIGINAL_GRAVITY);
+		
+		// postconditions
+		assertEquals(beer1, beer2);
+	}
+
+	@Test
+	public void testUnEqualOriginalGravity() {
+		// preconditions
+		beer1.setOriginalGravity(ORIGINAL_GRAVITY);
+		beer2.setOriginalGravity("not " + ORIGINAL_GRAVITY);
+		
+		// postconditions
+		assertFalse(beer1.equals(beer2));
+	}
 }

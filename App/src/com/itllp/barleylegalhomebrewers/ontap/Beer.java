@@ -13,6 +13,7 @@ public class Beer {
 	private String styleOverride;
 	private String description;
 	private String packaging;
+	private String originalGravity;
 	
 	public Beer(int id) {
 		this.id = id;
@@ -44,6 +45,7 @@ public class Beer {
 			&& EqualsUtil.areEqual(this.styleOverride, that.styleOverride)
 			&& EqualsUtil.areEqual(this.description, that.description)
 			&& EqualsUtil.areEqual(this.packaging, that.packaging)
+			&& EqualsUtil.areEqual(this.originalGravity, that.originalGravity)
 			;
 	}
 
@@ -62,6 +64,7 @@ public class Beer {
 				+ " styleOverride: " + styleOverride
 				+ " description: " + description
 				+ " packaging: " + packaging
+				+ " OG: " + originalGravity
 				;
 	}
 
@@ -123,6 +126,14 @@ public class Beer {
 
 	public String getPackaging() {
 		return packaging;
+	}
+
+	public void setOriginalGravity(String og) {
+		originalGravity = og;
+	}
+
+	public String getOriginalGravity() {
+		return originalGravity;
 	}
 	
 }

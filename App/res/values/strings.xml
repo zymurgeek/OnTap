@@ -10,6 +10,7 @@
     <string name="style_label_text">Style</string>
     <string name="brewer_label_text">Brewer</string>
     <string name="description_label_text">Description</string>
-    <string name="packaging_label">Packaging:</string>
+    <string name="packaging_label_text">Packaging</string>
+    <string name="og_label_text">O.G.</string>
     
 </resources>
