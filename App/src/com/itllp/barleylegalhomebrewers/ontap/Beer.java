@@ -223,11 +223,22 @@ public class Beer {
 		onTapNumber = tapNumber;
 	}
 
+	/** Returns the number of the tap this beer is pouring from.  If the
+	 * beer is not on a tap (i.e., it's on deck
+	 * or it's kicked or it's pouring from a bottle), 0 is returned.
+	 */
 	public int getOnTapNumber() {
-		if (onTapNumber > 0) {
+		if (onTapNumber > 0 && !isKicked) {
 			return onTapNumber;
 		}
 		return 0;
+	}
+
+	/** Returns true if this beer is being served, either from a bottle
+	 * or a keg; false otherwise.
+	 */
+	public boolean isPouring() {
+		return (0 != onTapNumber && !isKicked);
 	}
 	
 }

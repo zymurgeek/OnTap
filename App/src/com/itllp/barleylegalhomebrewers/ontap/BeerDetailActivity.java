@@ -38,7 +38,17 @@ public class BeerDetailActivity extends Activity {
 		if (beer.isKicked()) {
 			statusView.setText(R.string.kicked_text);
 		} else {
-			statusView.setText(R.string.not_kicked_text);
+			if (beer.isPouring()) {
+				if (0 != beer.getOnTapNumber()) {
+					String status = getString(R.string.on_tap_number) + " " 
+							+ beer.getOnTapNumber();
+					statusView.setText(status);
+				} else {
+					statusView.setText(R.string.pouring);
+				}
+			} else {
+				statusView.setText(R.string.on_deck);
+			}
 		}
 		
 		TextView beerStyleView = (TextView)findViewById(R.id.beer_style);
@@ -86,6 +96,9 @@ public class BeerDetailActivity extends Activity {
 		if (beer.getShowBrewerEmailAddress()) {
 			TextView brewerEmailView = (TextView)findViewById(R.id.brewer_email);
 			brewerEmailView.setText(beer.getBrewerEmailAddress());
+		} else {
+			TextView brewerEmailLabelView = (TextView)findViewById(R.id.brewer_email_label);
+			brewerEmailLabelView.setEnabled(false);
 		}
 	}
 

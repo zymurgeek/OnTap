@@ -19,6 +19,8 @@
     <string name="brewer_email_label_text">Brewer\'s Email Address</string>
     <string name="status_label_text">Status</string>
     <string name="kicked_text">Kicked</string>
-    <string name="not_kicked_text">Not Kicked</string>
+    <string name="on_tap_number">On tap #</string>
+    <string name="pouring">Now Pouring</string>
+    <string name="on_deck">On Deck</string>
     
 </resources>

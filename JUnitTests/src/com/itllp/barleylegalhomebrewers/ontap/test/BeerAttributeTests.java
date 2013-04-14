@@ -383,4 +383,51 @@ public class BeerAttributeTests {
 		assertTrue(beer.toString().contains("onTap: " + TAP_NUMBER));
 	}
 
+	@Test
+	public void testIsPouringForBottlesPouring() {
+		// method under test
+		beer.setOnTapNumber(-1);
+		
+		// postconditions
+		assertTrue(beer.isPouring());
+	}
+
+	@Test
+	public void testIsPouringForKegsOnTap() {
+		// method under test
+		beer.setOnTapNumber(3);
+		
+		// postconditions
+		assertTrue(beer.isPouring());
+	}
+
+	@Test
+	public void testIsPouringWhenOnDeck() {
+		// method under test
+		beer.setOnTapNumber(0);
+		
+		// postconditions
+		assertFalse(beer.isPouring());
+	}
+
+	@Test
+	public void testIsPouringWhenBottleKicked() {
+		// method under test
+		beer.setOnTapNumber(-1);
+		beer.setKicked(true);
+		
+		// postconditions
+		assertFalse(beer.isPouring());
+	}
+
+	@Test
+	public void testIsPouringWhenKegKicked() {
+		// method under test
+		beer.setOnTapNumber(3);
+		beer.setKicked(true);
+		
+		// postconditions
+		assertFalse(beer.isPouring());
+	}
+
 }
