@@ -2,12 +2,15 @@ package com.itllp.barleylegalhomebrewers.ontap;
 
 import java.util.List;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class BeerListFragment extends ListFragment 
 implements LoaderCallbacks<List<Beer>> {
@@ -41,13 +44,11 @@ implements LoaderCallbacks<List<Beer>> {
 
     @Override
 	public void onListItemClick(ListView l, View view, int position, long id) {
-    	/*
-		String eventIdString = ((TextView) view.findViewById(R.id.id)).getText().toString();
+		String beerIdString = ((TextView) view.findViewById(R.id.id)).getText().toString();
     	Context context = getActivity().getApplicationContext();
-		Intent in = new Intent(context, BeerListActivity.class);
-		in.putExtra(BeerListActivity.EVENT_ID, eventIdString);
+		Intent in = new Intent(context, BeerDetailActivity.class);
+		in.putExtra(BeerDetailActivity.BEER_ID, beerIdString);
 		startActivity(in);
-		*/
 	}
 	
 	@Override

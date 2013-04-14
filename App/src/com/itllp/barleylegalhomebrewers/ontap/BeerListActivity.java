@@ -12,8 +12,6 @@ public class BeerListActivity  extends FragmentActivity {
 	public static final String SKIP_INSTANTIATION_FOR_TESTING 
 	= "com.itllp.barleylegalhomebrewers.ontap.skipInstantiation_FOR_TESTING";
 	public int eventId = -1;
-	//private ListView beerListView;
-	//private BeerDatabase beerDb = null;
 	public static final String EVENT_ID = "EVENT_ID";
 	
 	public BeerListActivity() {
