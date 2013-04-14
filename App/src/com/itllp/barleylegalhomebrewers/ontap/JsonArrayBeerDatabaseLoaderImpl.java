@@ -21,6 +21,7 @@ public class JsonArrayBeerDatabaseLoaderImpl implements JsonArrayBeerDatabaseLoa
 	public static final String INTERNATIONAL_BITTERNESS_UNITS = "IBU";
 	public static final String STANDARD_REFERENCE_METHOD = "SRM";
 	public static final String BREWER_EMAIL_ADDRESS = "EmailAddress";
+	public static final String SHOW_BREWER_EMAIL_ADDRESS = "CanEmail";
 	
 	private BeerDatabase beerDatabase;
 	
@@ -118,6 +119,11 @@ public class JsonArrayBeerDatabaseLoaderImpl implements JsonArrayBeerDatabaseLoa
     			try {
     				String email = jsonBeer.getString(BREWER_EMAIL_ADDRESS);
     				beer.setBrewerEmailAddress(email);
+    			} catch (JSONException e) { /* ignore bad data */ }
+    			
+    			try {
+    				boolean showEmail = jsonBeer.getBoolean(SHOW_BREWER_EMAIL_ADDRESS);
+    				beer.setShowBrewerEmailAddress(showEmail);
     			} catch (JSONException e) { /* ignore bad data */ }
     			
     			beerDatabase.addOrUpdateBeer(beer);

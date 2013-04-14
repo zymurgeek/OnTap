@@ -143,6 +143,16 @@ public class JsonArrayBeerDatabaseLoaderImplTests extends TestCase {
 		return jsonString;
 	}
 
+	private String getJsonArrayString(String id, String beerName,
+			String fieldId, boolean fieldValue) {
+		String jsonString = "[ "; 
+		jsonString += getJsonArrayElementString(id, beerName,
+				fieldId, fieldValue); 
+		jsonString += " ]";
+		
+		return jsonString;
+	}
+
 	private String getJsonArrayElementString(String id,
 			String beerName) {
 		return getJsonArrayElementString(id, beerName, null, null);
@@ -155,6 +165,18 @@ public class JsonArrayBeerDatabaseLoaderImplTests extends TestCase {
 		jsonString += "\"BeerName\": \"" + beerName + "\", ";
 		if (null != fieldId) {
 			jsonString += "\"" + fieldId + "\": \"" + fieldValue + "\", ";
+		}
+		jsonString += "}";
+		return jsonString;
+	}
+
+	private String getJsonArrayElementString(String id,
+			String beerName, String fieldId, boolean fieldValue) {
+		String jsonString = "{ ";
+		jsonString += "\"ID\": " + id + ", ";
+		jsonString += "\"BeerName\": \"" + beerName + "\", ";
+		if (null != fieldId) {
+			jsonString += "\"" + fieldId + "\": " + fieldValue + ", ";
 		}
 		jsonString += "}";
 		return jsonString;
@@ -516,6 +538,30 @@ public class JsonArrayBeerDatabaseLoaderImplTests extends TestCase {
 
 		String jsonString = getJsonArrayString(EXPECTED_BEER_1_ID_STRING, EXPECTED_BEER_1_NAME,
 				JsonArrayBeerDatabaseLoaderImpl.BREWER_EMAIL_ADDRESS, EMAIL);
+		JSONArray jsonArray = null;
+		try {
+			jsonArray = new JSONArray(jsonString);
+		} catch (JSONException x) {
+			fail("Failed to parse JSON string" + x);
+		}
+
+		// Method under test
+		cut.load(jsonArray);
+		
+		// Postconditions
+		List<Beer> actualBeerList = fakeBeerDatabase.getBeerList();
+		assertEquals(expectedBeerList, actualBeerList);
+	}
+	
+	public void testLoadOfShowBrewerEmailAddress() {
+		// Preconditions
+		final boolean SHOW = true;
+		expectedBeer1.setShowBrewerEmailAddress(SHOW);
+		List<Beer> expectedBeerList = new ArrayList<Beer>();
+		expectedBeerList.add(expectedBeer1);
+
+		String jsonString = getJsonArrayString(EXPECTED_BEER_1_ID_STRING, EXPECTED_BEER_1_NAME,
+				JsonArrayBeerDatabaseLoaderImpl.SHOW_BREWER_EMAIL_ADDRESS, SHOW);
 		JSONArray jsonArray = null;
 		try {
 			jsonArray = new JSONArray(jsonString);
