@@ -4,6 +4,6 @@
     <dimen name="section_title_size">24dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="label_horizontal_padding">4dip</dimen>
+    <dimen name="label_horizontal_padding">6dip</dimen>
 
 </resources>

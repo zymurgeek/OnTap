@@ -13,5 +13,6 @@
     <string name="packaging_label_text">Packaging</string>
     <string name="og_label_text">O.G.</string>
     <string name="fg_label_text">F.G.</string>
+    <string name="abv_label_text">A.B.V.</string>
     
 </resources>
