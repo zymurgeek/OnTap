@@ -82,4 +82,27 @@
         android:textSize="14sp"
         tools:ignore="SelectableText"
     />
+    
+    <RelativeLayout 
+		android:id="@+id/packaging_layout" 
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    >
+	<TextView
+		android:id="@+id/packaging_label"
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content" 
+    	android:layout_alignParentLeft="true"
+    	android:text="@string/packaging_label"
+    />
+	<TextView
+	    android:id="@+id/packaging"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignBaseline="@+id/packaging_label"
+	    android:layout_alignParentRight="true"
+	    tools:ignore="SelectableText"
+	/>
+	</RelativeLayout>
+    
 </LinearLayout>
