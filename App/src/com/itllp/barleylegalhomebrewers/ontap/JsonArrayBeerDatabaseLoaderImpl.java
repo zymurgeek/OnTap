@@ -15,6 +15,7 @@ public class JsonArrayBeerDatabaseLoaderImpl implements JsonArrayBeerDatabaseLoa
 	public static final String BEER_STYLE_OVERRIDE = "BeerStyleOverride";
 	public static final String BEER_DESCRIPTION = "Description";
 	public static final String PACKAGING = "KegOrBottle";
+	public static final String ORIGINAL_GRAVITY = "OG";
 	
 	private BeerDatabase beerDatabase;
 	
@@ -82,6 +83,11 @@ public class JsonArrayBeerDatabaseLoaderImpl implements JsonArrayBeerDatabaseLoa
     			try {
     				String packaging = jsonBeer.getString(PACKAGING);
     				beer.setPackaging(packaging);
+    			} catch (JSONException e) { /* ignore bad data */ }
+    			
+    			try {
+    				String og = jsonBeer.getString(ORIGINAL_GRAVITY);
+    				beer.setOriginalGravity(og);
     			} catch (JSONException e) { /* ignore bad data */ }
     			
     			beerDatabase.addOrUpdateBeer(beer);
