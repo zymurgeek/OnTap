@@ -73,6 +73,9 @@ public class BeerDetailActivity extends Activity {
 		
 		TextView ibuView = (TextView)findViewById(R.id.ibu);
 		ibuView.setText(beer.getInternationalBitternessUnits());
+
+		TextView srmView = (TextView)findViewById(R.id.srm);
+		srmView.setText(beer.getStandardReferenceMethod());
 	}
 
 	@Override

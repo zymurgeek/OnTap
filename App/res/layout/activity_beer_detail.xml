@@ -199,7 +199,26 @@
 	    android:layout_height="wrap_content"
 	    tools:ignore="SelectableText" />
 	</LinearLayout>
-	</RelativeLayout>
+	
+    <LinearLayout 
+		android:id="@+id/srm_layout" 
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:layout_alignParentRight="true" >
+    <TextView
+        android:id="@+id/srm_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="@dimen/label_horizontal_padding"
+        android:text="@string/srm_label_text"
+        android:textStyle="bold" />
+	<TextView
+	    android:id="@+id/srm"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    tools:ignore="SelectableText" />
+	</LinearLayout>
+    </RelativeLayout>
     
 </LinearLayout>
 </ScrollView>
