@@ -335,4 +335,24 @@ public class BeerEqualityTests {
 		assertFalse(beer1.equals(beer2));
 	}
 
+	@Test
+	public void testEqualShowBrewerEmailAddress() {
+		// preconditions
+		beer1.setShowBrewerEmailAddress(true);
+		beer2.setShowBrewerEmailAddress(true);
+		
+		// postconditions
+		assertEquals(beer1, beer2);
+	}
+	
+	@Test
+	public void testUnEqualShowBrewerEmailAddress() {
+		// preconditions
+		beer1.setShowBrewerEmailAddress(true);
+		beer2.setShowBrewerEmailAddress(false);
+		
+		// postconditions
+		assertFalse(beer1.equals(beer2));
+	}
+
 }

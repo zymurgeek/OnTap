@@ -319,4 +319,22 @@ public class BeerAttributeTests {
 		assertTrue(beer.toString().contains("email: " + EMAIL));
 	}
 
+	@Test
+	public void testShowBrewerEmailAddress() {
+		// method under test
+		beer.setShowBrewerEmailAddress(true);
+		
+		// postconditions
+		assertEquals(true, beer.getShowBrewerEmailAddress());
+	}
+
+	@Test
+	public void testToStringShowBrewerEmailAddress() {
+		// preconditions
+		beer.setShowBrewerEmailAddress(true);
+		
+		// postconditions
+		assertTrue(beer.toString().contains("showEmail: " + true));
+	}
+
 }

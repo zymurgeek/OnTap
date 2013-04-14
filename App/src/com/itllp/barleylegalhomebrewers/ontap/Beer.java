@@ -19,6 +19,7 @@ public class Beer {
 	private String internationalBitternessUnits;
 	private String standardReferenceMethod;
 	private String brewerEmailAddress;
+	private boolean showBrewerEmailAddress;
 	
 	public Beer(int id) {
 		this.id = id;
@@ -58,6 +59,8 @@ public class Beer {
 			&& EqualsUtil.areEqual(this.standardReferenceMethod, 
 					that.standardReferenceMethod)
 			&& EqualsUtil.areEqual(this.brewerEmailAddress, that.brewerEmailAddress)
+			&& EqualsUtil.areEqual(this.showBrewerEmailAddress, 
+					that.showBrewerEmailAddress)
 			;
 	}
 
@@ -82,6 +85,7 @@ public class Beer {
 				+ " IBU: " + internationalBitternessUnits
 				+ " SRM: " + standardReferenceMethod
 				+ " email: " + brewerEmailAddress
+				+ " showEmail: " + showBrewerEmailAddress
 				;
 	}
 
@@ -191,6 +195,14 @@ public class Beer {
 
 	public String getBrewerEmailAddress() {
 		return brewerEmailAddress;
+	}
+
+	public void setShowBrewerEmailAddress(boolean show) {
+		showBrewerEmailAddress = show;
+	}
+
+	public boolean getShowBrewerEmailAddress() {
+		return showBrewerEmailAddress;
 	}
 	
 }
