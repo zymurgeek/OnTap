@@ -22,6 +22,7 @@ public class BeerAttributeTests {
 			+ "that doesn't taste like it's had a dead rat in it.";
 	private static final String PACKAGING = "Keg";
 	private static final String ORIGINAL_GRAVITY = "1.062";
+	private static final String FINAL_GRAVITY = "1.012";
 
 	@Before
 	public void setUp() throws Exception {
@@ -222,5 +223,23 @@ public class BeerAttributeTests {
 		
 		// postconditions
 		assertTrue(beer.toString().contains("OG: " + ORIGINAL_GRAVITY));
+	}
+	
+	@Test
+	public void testFinalGravity() {
+		// method under test
+		beer.setFinalGravity(FINAL_GRAVITY);
+		
+		// postconditions
+		assertEquals(FINAL_GRAVITY, beer.getFinalGravity());
+	}
+
+	@Test
+	public void testToStringFinalGravity() {
+		// preconditions
+		beer.setFinalGravity(FINAL_GRAVITY);
+		
+		// postconditions
+		assertTrue(beer.toString().contains("FG: " + FINAL_GRAVITY));
 	}
 }

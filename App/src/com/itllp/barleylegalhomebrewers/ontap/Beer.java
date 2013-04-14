@@ -14,6 +14,7 @@ public class Beer {
 	private String description;
 	private String packaging;
 	private String originalGravity;
+	private String finalGravity;
 	
 	public Beer(int id) {
 		this.id = id;
@@ -46,6 +47,7 @@ public class Beer {
 			&& EqualsUtil.areEqual(this.description, that.description)
 			&& EqualsUtil.areEqual(this.packaging, that.packaging)
 			&& EqualsUtil.areEqual(this.originalGravity, that.originalGravity)
+			&& EqualsUtil.areEqual(this.finalGravity, that.finalGravity)
 			;
 	}
 
@@ -65,6 +67,7 @@ public class Beer {
 				+ " description: " + description
 				+ " packaging: " + packaging
 				+ " OG: " + originalGravity
+				+ " FG: " + finalGravity
 				;
 	}
 
@@ -134,6 +137,14 @@ public class Beer {
 
 	public String getOriginalGravity() {
 		return originalGravity;
+	}
+
+	public void setFinalGravity(String gravity) {
+		finalGravity = gravity;
+	}
+
+	public String getFinalGravity() {
+		return finalGravity;
 	}
 	
 }
