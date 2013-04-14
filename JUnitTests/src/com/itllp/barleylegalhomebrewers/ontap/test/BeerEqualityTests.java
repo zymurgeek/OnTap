@@ -22,6 +22,7 @@ public class BeerEqualityTests {
 	private static final String BEER1_STYLE_OVERRIDE = "Milk Stout";
 	private static final String BEER1_DESCRIPTION = "This is a really nice beer "
 			+ "that doesn't taste like it's had a dead rat in it.";
+	private static final String BEER1_PACKAGING = "bottle";
 
 	@Before
 	public void setUp() throws Exception {
@@ -188,5 +189,24 @@ public class BeerEqualityTests {
 		assertFalse(beer1.equals(beer2));
 	}
 	
+	@Test
+	public void testEqualPackaging() {
+		// preconditions
+		beer1.setPackaging(BEER1_PACKAGING);
+		beer2.setPackaging(BEER1_PACKAGING);
+		
+		// postconditions
+		assertEquals(beer1, beer2);
+	}
+
+	@Test
+	public void testUnEqualPackaging() {
+		// preconditions
+		beer1.setPackaging(BEER1_PACKAGING);
+		beer2.setPackaging("not " + BEER1_PACKAGING);
+		
+		// postconditions
+		assertFalse(beer1.equals(beer2));
+	}
 
 }

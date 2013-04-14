@@ -20,6 +20,7 @@ public class BeerAttributeTests {
 	private static final String BEER1_STYLE_OVERRIDE = "Milk Stout";
 	private static final String BEER1_DESCRIPTION = "This is a really nice beer "
 			+ "that doesn't taste like it's had a dead rat in it.";
+	private static final String BEER1_PACKAGING = "Keg";
 
 	@Before
 	public void setUp() throws Exception {
@@ -184,6 +185,23 @@ public class BeerAttributeTests {
 		
 		// postconditions
 		assertTrue(beer1.toString().contains("description: " + BEER1_DESCRIPTION));
+	}
+	
+	@Test
+	public void testPackaging() {
+		// method under test
+		beer1.setPackaging(BEER1_PACKAGING);
 		
+		// postconditions
+		assertEquals(BEER1_PACKAGING, beer1.getPackaging());
+	}
+
+	@Test
+	public void testToStringPackaging() {
+		// preconditions
+		beer1.setPackaging(BEER1_PACKAGING);
+		
+		// postconditions
+		assertTrue(beer1.toString().contains("packaging: " + BEER1_PACKAGING));
 	}
 }

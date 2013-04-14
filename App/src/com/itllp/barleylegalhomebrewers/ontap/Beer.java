@@ -12,6 +12,7 @@ public class Beer {
 	private String styleName;
 	private String styleOverride;
 	private String description;
+	private String packaging;
 	
 	public Beer(int id) {
 		this.id = id;
@@ -42,6 +43,7 @@ public class Beer {
 			&& EqualsUtil.areEqual(this.styleName, that.styleName)
 			&& EqualsUtil.areEqual(this.styleOverride, that.styleOverride)
 			&& EqualsUtil.areEqual(this.description, that.description)
+			&& EqualsUtil.areEqual(this.packaging, that.packaging)
 			;
 	}
 
@@ -59,6 +61,7 @@ public class Beer {
 				+ " styleName: " + styleName
 				+ " styleOverride: " + styleOverride
 				+ " description: " + description
+				+ " packaging: " + packaging
 				;
 	}
 
@@ -112,6 +115,14 @@ public class Beer {
 
 	public String getDescription() {
 		return description;
+	}
+
+	public void setPackaging(String packageType) {
+		packaging = packageType;
+	}
+
+	public String getPackaging() {
+		return packaging;
 	}
 	
 }
