@@ -115,25 +115,53 @@
 		
     <RelativeLayout 
 		android:id="@+id/gravity_layout" 
+	    android:orientation="horizontal"
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
     >
-	<TextView
-		android:id="@+id/og_label"
-    	android:layout_width="wrap_content" 
-    	android:layout_height="wrap_content" 
+    <LinearLayout 
+		android:id="@+id/og_layout" 
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
     	android:layout_alignParentLeft="true"
-        android:textStyle="bold"
-    	android:text="@string/og_label_text"
-    />
+    >
+
+    <TextView
+        android:id="@+id/og_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="@dimen/label_horizontal_padding"
+        android:text="@string/og_label_text"
+        android:textStyle="bold" />
+
 	<TextView
 	    android:id="@+id/og"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_alignBaseline="@+id/og_label"
-	    android:layout_alignParentRight="true"
-	    tools:ignore="SelectableText"
-	/>
+	    tools:ignore="SelectableText" />
+	</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fg_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="false"
+        android:layout_centerInParent="true" >
+
+   	<TextView
+   	    android:id="@+id/fg_label"
+   	    android:layout_width="wrap_content"
+   	    android:layout_height="wrap_content"
+   	    android:paddingRight="@dimen/label_horizontal_padding"
+   	    android:text="@string/fg_label_text"
+   	    android:textStyle="bold" />
+
+	<TextView
+	    android:id="@+id/fg"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    tools:ignore="SelectableText" />
+	</LinearLayout>
 	</RelativeLayout>
     
 </LinearLayout>

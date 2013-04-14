@@ -64,6 +64,9 @@ public class BeerDetailActivity extends Activity {
 
 		TextView ogView = (TextView)findViewById(R.id.og);
 		ogView.setText(beer.getOriginalGravity());
+
+		TextView fgView = (TextView)findViewById(R.id.fg);
+		fgView.setText(beer.getFinalGravity());
 	}
 
 	@Override
