@@ -15,6 +15,7 @@ public class Beer {
 	private String packaging;
 	private String originalGravity;
 	private String finalGravity;
+	private String alcoholByVolume;
 	
 	public Beer(int id) {
 		this.id = id;
@@ -48,6 +49,7 @@ public class Beer {
 			&& EqualsUtil.areEqual(this.packaging, that.packaging)
 			&& EqualsUtil.areEqual(this.originalGravity, that.originalGravity)
 			&& EqualsUtil.areEqual(this.finalGravity, that.finalGravity)
+			&& EqualsUtil.areEqual(this.alcoholByVolume, that.alcoholByVolume)
 			;
 	}
 
@@ -68,6 +70,7 @@ public class Beer {
 				+ " packaging: " + packaging
 				+ " OG: " + originalGravity
 				+ " FG: " + finalGravity
+				+ " ABV: " + alcoholByVolume
 				;
 	}
 
@@ -145,6 +148,14 @@ public class Beer {
 
 	public String getFinalGravity() {
 		return finalGravity;
+	}
+
+	public void setAlcoholByVolume(String abv) {
+		alcoholByVolume = abv;
+	}
+
+	public String getAlcoholByVolume() {
+		return alcoholByVolume;
 	}
 	
 }

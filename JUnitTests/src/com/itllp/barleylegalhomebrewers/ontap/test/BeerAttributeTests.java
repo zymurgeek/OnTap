@@ -23,6 +23,7 @@ public class BeerAttributeTests {
 	private static final String PACKAGING = "Keg";
 	private static final String ORIGINAL_GRAVITY = "1.062";
 	private static final String FINAL_GRAVITY = "1.012";
+	private static final String ABV = "6.25%";
 
 	@Before
 	public void setUp() throws Exception {
@@ -242,4 +243,23 @@ public class BeerAttributeTests {
 		// postconditions
 		assertTrue(beer.toString().contains("FG: " + FINAL_GRAVITY));
 	}
+	
+	@Test
+	public void testAlcoholByVolume() {
+		// method under test
+		beer.setAlcoholByVolume(ABV);
+		
+		// postconditions
+		assertEquals(ABV, beer.getAlcoholByVolume());
+	}
+
+	@Test
+	public void testToStringAlcoholByVolume() {
+		// preconditions
+		beer.setAlcoholByVolume(ABV);
+		
+		// postconditions
+		assertTrue(beer.toString().contains("ABV: " + ABV));
+	}
+
 }

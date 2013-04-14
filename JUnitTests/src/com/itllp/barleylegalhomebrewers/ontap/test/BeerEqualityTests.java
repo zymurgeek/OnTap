@@ -25,6 +25,7 @@ public class BeerEqualityTests {
 	private static final String PACKAGING = "bottle";
 	private static final String ORIGINAL_GRAVITY = "1.054";
 	private static final String FINAL_GRAVITY = "1.009";
+	private static final String ABV = "5.3%";
 
 	@Before
 	public void setUp() throws Exception {
@@ -250,4 +251,25 @@ public class BeerEqualityTests {
 		// postconditions
 		assertFalse(beer1.equals(beer2));
 	}
+
+	@Test
+	public void testEqualAlcoholByVolume() {
+		// preconditions
+		beer1.setAlcoholByVolume(ABV);
+		beer2.setAlcoholByVolume(ABV);
+		
+		// postconditions
+		assertEquals(beer1, beer2);
+	}
+	
+	@Test
+	public void testUnEqualAlcoholByVolume() {
+		// preconditions
+		beer1.setAlcoholByVolume(ABV);
+		beer2.setAlcoholByVolume("not " + ABV);
+		
+		// postconditions
+		assertFalse(beer1.equals(beer2));
+	}
+
 }
