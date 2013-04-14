@@ -27,6 +27,7 @@ public class BeerAttributeTests {
 	private static final String IBU = "25";
 	private static final String SRM = "12.3";
 	private static final String EMAIL = "a.guy@beer.com";
+	private static final int TAP_NUMBER = 4;
 
 	@Before
 	public void setUp() throws Exception {
@@ -353,6 +354,33 @@ public class BeerAttributeTests {
 		
 		// postconditions
 		assertTrue(beer.toString().contains("kicked: " + true));
+	}
+
+	@Test
+	public void testOnTapNumber() {
+		// method under test
+		beer.setOnTapNumber(TAP_NUMBER);
+		
+		// postconditions
+		assertEquals(TAP_NUMBER, beer.getOnTapNumber());
+	}
+
+	@Test
+	public void testOnTapNumberForBottles() {
+		// method under test
+		beer.setOnTapNumber(-1);
+		
+		// postconditions
+		assertEquals(0, beer.getOnTapNumber());
+	}
+
+	@Test
+	public void testToStringOnTapNumber() {
+		// preconditions
+		beer.setOnTapNumber(TAP_NUMBER);
+		
+		// postconditions
+		assertTrue(beer.toString().contains("onTap: " + TAP_NUMBER));
 	}
 
 }

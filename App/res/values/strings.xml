@@ -18,5 +18,7 @@
     <string name="srm_label_text">S.R.M.</string>
     <string name="brewer_email_label_text">Brewer\'s Email Address</string>
     <string name="status_label_text">Status</string>
+    <string name="kicked_text">Kicked</string>
+    <string name="not_kicked_text">Not Kicked</string>
     
 </resources>

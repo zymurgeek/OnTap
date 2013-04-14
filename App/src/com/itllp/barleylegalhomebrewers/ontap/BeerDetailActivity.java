@@ -36,9 +36,9 @@ public class BeerDetailActivity extends Activity {
 		
 		TextView statusView = (TextView)findViewById(R.id.status);
 		if (beer.isKicked()) {
-			statusView.setText("kicked");
+			statusView.setText(R.string.kicked_text);
 		} else {
-			statusView.setText("not kicked");
+			statusView.setText(R.string.not_kicked_text);
 		}
 		
 		TextView beerStyleView = (TextView)findViewById(R.id.beer_style);

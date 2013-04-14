@@ -29,6 +29,7 @@ public class BeerEqualityTests {
 	private static final String IBU = "28";
 	private static final String SRM = "9.7";
 	private static final String EMAIL = "a.gal@beer.com";
+	private static final int TAP_NUMBER = -1;
 
 	@Before
 	public void setUp() throws Exception {
@@ -370,6 +371,26 @@ public class BeerEqualityTests {
 		// preconditions
 		beer1.setKicked(true);
 		beer2.setKicked(false);
+		
+		// postconditions
+		assertFalse(beer1.equals(beer2));
+	}
+
+	@Test
+	public void testEqualTapNumber() {
+		// preconditions
+		beer1.setOnTapNumber(TAP_NUMBER);
+		beer2.setOnTapNumber(TAP_NUMBER);
+		
+		// postconditions
+		assertEquals(beer1, beer2);
+	}
+	
+	@Test
+	public void testUnEqualTapNumber() {
+		// preconditions
+		beer1.setOnTapNumber(TAP_NUMBER);
+		beer2.setOnTapNumber(TAP_NUMBER - 1);
 		
 		// postconditions
 		assertFalse(beer1.equals(beer2));

@@ -21,6 +21,7 @@ public class Beer {
 	private String brewerEmailAddress;
 	private boolean showBrewerEmailAddress;
 	private boolean isKicked;
+	private int onTapNumber;
 	
 	public Beer(int id) {
 		this.id = id;
@@ -63,6 +64,7 @@ public class Beer {
 			&& EqualsUtil.areEqual(this.showBrewerEmailAddress, 
 					that.showBrewerEmailAddress)
 			&& EqualsUtil.areEqual(this.isKicked, that.isKicked)
+			&& EqualsUtil.areEqual(this.onTapNumber, that.onTapNumber)
 			;
 	}
 
@@ -89,6 +91,7 @@ public class Beer {
 				+ " email: " + brewerEmailAddress
 				+ " showEmail: " + showBrewerEmailAddress
 				+ " kicked: " + isKicked
+				+ " onTap: " + onTapNumber
 				;
 	}
 
@@ -214,6 +217,17 @@ public class Beer {
 
 	public boolean isKicked() {
 		return isKicked;
+	}
+
+	public void setOnTapNumber(int tapNumber) {
+		onTapNumber = tapNumber;
+	}
+
+	public int getOnTapNumber() {
+		if (onTapNumber > 0) {
+			return onTapNumber;
+		}
+		return 0;
 	}
 	
 }
