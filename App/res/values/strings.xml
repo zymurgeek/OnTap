@@ -14,5 +14,6 @@
     <string name="og_label_text">O.G.</string>
     <string name="fg_label_text">F.G.</string>
     <string name="abv_label_text">A.B.V.</string>
+    <string name="ibu_label_text">I.B.U.</string>
     
 </resources>

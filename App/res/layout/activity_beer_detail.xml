@@ -118,7 +118,6 @@
 	    android:orientation="horizontal"
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content" >
-	
     <LinearLayout 
 		android:id="@+id/og_layout" 
     	android:layout_width="wrap_content"
@@ -175,8 +174,32 @@
 	    android:layout_height="wrap_content"
 	    tools:ignore="SelectableText" />
 	</LinearLayout>
-	
-    	</RelativeLayout>
+   	</RelativeLayout>
+   	
+	<RelativeLayout 
+		android:id="@+id/ibu_and_srm_layout" 
+	    android:orientation="horizontal"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content" >
+    <LinearLayout 
+		android:id="@+id/ibu_layout" 
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:layout_alignParentLeft="true" >
+    <TextView
+        android:id="@+id/ibu_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="@dimen/label_horizontal_padding"
+        android:text="@string/ibu_label_text"
+        android:textStyle="bold" />
+	<TextView
+	    android:id="@+id/ibu"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    tools:ignore="SelectableText" />
+	</LinearLayout>
+	</RelativeLayout>
     
 </LinearLayout>
 </ScrollView>
