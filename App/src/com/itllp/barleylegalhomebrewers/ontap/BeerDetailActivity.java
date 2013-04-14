@@ -76,6 +76,9 @@ public class BeerDetailActivity extends Activity {
 
 		TextView srmView = (TextView)findViewById(R.id.srm);
 		srmView.setText(beer.getStandardReferenceMethod());
+		
+		TextView brewerEmailView = (TextView)findViewById(R.id.brewer_email);
+		brewerEmailView.setText(beer.getBrewerEmailAddress());
 	}
 
 	@Override

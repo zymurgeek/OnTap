@@ -220,5 +220,24 @@
 	</LinearLayout>
     </RelativeLayout>
     
+	<TextView
+        android:id="@+id/brewer_email_label" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="6dip"
+        android:textSize="16sp"
+        android:textStyle="bold"
+		android:text="@string/brewer_email_label_text"
+	/>
+    <TextView
+    	android:id="@+id/brewer_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:textColor="#acacac"
+        android:textSize="14sp"
+        tools:ignore="SelectableText"
+    />
+		
 </LinearLayout>
 </ScrollView>
