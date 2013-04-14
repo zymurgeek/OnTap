@@ -24,6 +24,7 @@ public class BeerAttributeTests {
 	private static final String ORIGINAL_GRAVITY = "1.062";
 	private static final String FINAL_GRAVITY = "1.012";
 	private static final String ABV = "6.25%";
+	private static final String IBU = "25";
 
 	@Before
 	public void setUp() throws Exception {
@@ -260,6 +261,24 @@ public class BeerAttributeTests {
 		
 		// postconditions
 		assertTrue(beer.toString().contains("ABV: " + ABV));
+	}
+
+	@Test
+	public void testInternationalBitternessUnits() {
+		// method under test
+		beer.setInternationalBitternessUnits(IBU);
+		
+		// postconditions
+		assertEquals(IBU, beer.getInternationalBitternessUnits());
+	}
+
+	@Test
+	public void testToStringInternationalBitternessUnits() {
+		// preconditions
+		beer.setInternationalBitternessUnits(IBU);
+		
+		// postconditions
+		assertTrue(beer.toString().contains("IBU: " + IBU));
 	}
 
 }

@@ -26,6 +26,7 @@ public class BeerEqualityTests {
 	private static final String ORIGINAL_GRAVITY = "1.054";
 	private static final String FINAL_GRAVITY = "1.009";
 	private static final String ABV = "5.3%";
+	private static final String IBU = "28";
 
 	@Before
 	public void setUp() throws Exception {
@@ -267,6 +268,26 @@ public class BeerEqualityTests {
 		// preconditions
 		beer1.setAlcoholByVolume(ABV);
 		beer2.setAlcoholByVolume("not " + ABV);
+		
+		// postconditions
+		assertFalse(beer1.equals(beer2));
+	}
+
+	@Test
+	public void testEqualInternationalBitternessUnits() {
+		// preconditions
+		beer1.setInternationalBitternessUnits(IBU);
+		beer2.setInternationalBitternessUnits(IBU);
+		
+		// postconditions
+		assertEquals(beer1, beer2);
+	}
+	
+	@Test
+	public void testUnEqualInternationalBitternessUnits() {
+		// preconditions
+		beer1.setInternationalBitternessUnits(IBU);
+		beer2.setInternationalBitternessUnits("not " + IBU);
 		
 		// postconditions
 		assertFalse(beer1.equals(beer2));
