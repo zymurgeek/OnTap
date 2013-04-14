@@ -25,6 +25,7 @@ public class BeerAttributeTests {
 	private static final String FINAL_GRAVITY = "1.012";
 	private static final String ABV = "6.25%";
 	private static final String IBU = "25";
+	private static final String SRM = "12.3";
 
 	@Before
 	public void setUp() throws Exception {
@@ -279,6 +280,24 @@ public class BeerAttributeTests {
 		
 		// postconditions
 		assertTrue(beer.toString().contains("IBU: " + IBU));
+	}
+
+	@Test
+	public void testStandardReferenceMethod() {
+		// method under test
+		beer.setStandardReferenceMethod(SRM);
+		
+		// postconditions
+		assertEquals(SRM, beer.getStandardReferenceMethod());
+	}
+
+	@Test
+	public void testToStringStandardReferenceMethod() {
+		// preconditions
+		beer.setStandardReferenceMethod(SRM);
+		
+		// postconditions
+		assertTrue(beer.toString().contains("SRM: " + SRM));
 	}
 
 }

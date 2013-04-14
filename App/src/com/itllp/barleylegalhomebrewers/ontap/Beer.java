@@ -17,6 +17,7 @@ public class Beer {
 	private String finalGravity;
 	private String alcoholByVolume;
 	private String internationalBitternessUnits;
+	private String standardReferenceMethod;
 	
 	public Beer(int id) {
 		this.id = id;
@@ -53,6 +54,8 @@ public class Beer {
 			&& EqualsUtil.areEqual(this.alcoholByVolume, that.alcoholByVolume)
 			&& EqualsUtil.areEqual(this.internationalBitternessUnits, 
 					that.internationalBitternessUnits)
+			&& EqualsUtil.areEqual(this.standardReferenceMethod, 
+					that.standardReferenceMethod)
 			;
 	}
 
@@ -75,6 +78,7 @@ public class Beer {
 				+ " FG: " + finalGravity
 				+ " ABV: " + alcoholByVolume
 				+ " IBU: " + internationalBitternessUnits
+				+ " SRM: " + standardReferenceMethod
 				;
 	}
 
@@ -168,6 +172,14 @@ public class Beer {
 
 	public String getInternationalBitternessUnits() {
 		return internationalBitternessUnits;
+	}
+
+	public void setStandardReferenceMethod(String srm) {
+		standardReferenceMethod = srm;
+	}
+
+	public String getStandardReferenceMethod() {
+		return standardReferenceMethod;
 	}
 	
 }

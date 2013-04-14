@@ -27,6 +27,7 @@ public class BeerEqualityTests {
 	private static final String FINAL_GRAVITY = "1.009";
 	private static final String ABV = "5.3%";
 	private static final String IBU = "28";
+	private static final String SRM = "9.7";
 
 	@Before
 	public void setUp() throws Exception {
@@ -288,6 +289,26 @@ public class BeerEqualityTests {
 		// preconditions
 		beer1.setInternationalBitternessUnits(IBU);
 		beer2.setInternationalBitternessUnits("not " + IBU);
+		
+		// postconditions
+		assertFalse(beer1.equals(beer2));
+	}
+
+	@Test
+	public void testEqualStandardReferenceMethod() {
+		// preconditions
+		beer1.setStandardReferenceMethod(SRM);
+		beer2.setStandardReferenceMethod(SRM);
+		
+		// postconditions
+		assertEquals(beer1, beer2);
+	}
+	
+	@Test
+	public void testUnEqualStandardReferenceMethod() {
+		// preconditions
+		beer1.setStandardReferenceMethod(SRM);
+		beer2.setStandardReferenceMethod("not " + IBU);
 		
 		// postconditions
 		assertFalse(beer1.equals(beer2));
