@@ -12,22 +12,22 @@ public class BeerEqualityTests {
 
 	private Beer beer1;
 	private Beer beer2;
-	private static final int BEER1_ID = 10;
-	private static final int BEER2_ID = 20;
-	private static final String BEER1_NAME = "Beer One";
-	private static final String BEER1_BREWER_FIRST_NAME = "Dave";
-	private static final String BEER1_BREWER_LAST_NAME = "Greenbaum";
-	private static final String BEER1_STYLE_CODE = "13B";
-	private static final String BEER1_STYLE_NAME = "Sweet Stout";
-	private static final String BEER1_STYLE_OVERRIDE = "Milk Stout";
-	private static final String BEER1_DESCRIPTION = "This is a really nice beer "
+	private static final int ID1 = 10;
+	private static final int ID2 = 20;
+	private static final String BEER_NAME = "Beer One";
+	private static final String BREWER_FIRST_NAME = "Dave";
+	private static final String BREWER_LAST_NAME = "Greenbaum";
+	private static final String STYLE_CODE = "13B";
+	private static final String STYLE_NAME = "Sweet Stout";
+	private static final String STYLE_OVERRIDE = "Milk Stout";
+	private static final String DESCRIPTION = "This is a really nice beer "
 			+ "that doesn't taste like it's had a dead rat in it.";
-	private static final String BEER1_PACKAGING = "bottle";
+	private static final String PACKAGING = "bottle";
 
 	@Before
 	public void setUp() throws Exception {
-		beer1 = new Beer(BEER1_ID);
-		beer2 = new Beer(BEER1_ID);
+		beer1 = new Beer(ID1);
+		beer2 = new Beer(ID1);
 	}
 
 	@After
@@ -43,7 +43,7 @@ public class BeerEqualityTests {
 	@Test
 	public void testUnEqualIds() {
 		// preconditions
-		beer2 = new Beer(BEER2_ID);
+		beer2 = new Beer(ID2);
 		
 		// method under test and postconditions
 		assertFalse(beer1.equals(beer2));
@@ -52,8 +52,8 @@ public class BeerEqualityTests {
 	@Test
 	public void testEqualBeerNames() {
 		// preconditions
-		beer1.setBeerName(BEER1_NAME);
-		beer2.setBeerName(BEER1_NAME);
+		beer1.setBeerName(BEER_NAME);
+		beer2.setBeerName(BEER_NAME);
 		
 		// postconditions
 		assertEquals(beer1, beer2);
@@ -62,8 +62,8 @@ public class BeerEqualityTests {
 	@Test
 	public void testUnEqualBeerNames() {
 		// preconditions
-		beer1.setBeerName(BEER1_NAME);
-		beer2.setBeerName("Beer Two");
+		beer1.setBeerName(BEER_NAME);
+		beer2.setBeerName("not" + BEER_NAME);
 		
 		// postconditions
 		assertFalse(beer1.equals(beer2));
@@ -72,8 +72,8 @@ public class BeerEqualityTests {
 	@Test
 	public void testEqualBrewerFirstNames() {
 		// preconditions
-		beer1.setBrewerFirstName(BEER1_BREWER_FIRST_NAME);
-		beer2.setBrewerFirstName(BEER1_BREWER_FIRST_NAME);
+		beer1.setBrewerFirstName(BREWER_FIRST_NAME);
+		beer2.setBrewerFirstName(BREWER_FIRST_NAME);
 		
 		// postconditions
 		assertEquals(beer1, beer2);
@@ -82,8 +82,8 @@ public class BeerEqualityTests {
 	@Test
 	public void testUnEqualBrewerFirstNames() {
 		// preconditions
-		beer1.setBrewerFirstName(BEER1_BREWER_FIRST_NAME);
-		beer2.setBrewerFirstName("Joe");
+		beer1.setBrewerFirstName(BREWER_FIRST_NAME);
+		beer2.setBrewerFirstName("not" + BREWER_FIRST_NAME);
 		
 		// postconditions
 		assertFalse(beer1.equals(beer2));
@@ -92,8 +92,8 @@ public class BeerEqualityTests {
 	@Test
 	public void testEqualBrewerLastNames() {
 		// preconditions
-		beer1.setBrewerLastName(BEER1_BREWER_LAST_NAME);
-		beer2.setBrewerLastName(BEER1_BREWER_LAST_NAME);
+		beer1.setBrewerLastName(BREWER_LAST_NAME);
+		beer2.setBrewerLastName(BREWER_LAST_NAME);
 		
 		// postconditions
 		assertEquals(beer1, beer2);
@@ -102,8 +102,8 @@ public class BeerEqualityTests {
 	@Test
 	public void testUnEqualBrewerLastNames() {
 		// preconditions
-		beer1.setBrewerLastName(BEER1_BREWER_LAST_NAME);
-		beer2.setBrewerLastName("Schmoe");
+		beer1.setBrewerLastName(BREWER_LAST_NAME);
+		beer2.setBrewerLastName("not" + BREWER_LAST_NAME);
 		
 		// postconditions
 		assertFalse(beer1.equals(beer2));
@@ -112,8 +112,8 @@ public class BeerEqualityTests {
 	@Test
 	public void testEqualStyleCodes() {
 		// preconditions
-		beer1.setStyleCode(BEER1_STYLE_CODE);
-		beer2.setStyleCode(BEER1_STYLE_CODE);
+		beer1.setStyleCode(STYLE_CODE);
+		beer2.setStyleCode(STYLE_CODE);
 		
 		// postconditions
 		assertEquals(beer1, beer2);
@@ -122,8 +122,8 @@ public class BeerEqualityTests {
 	@Test
 	public void testUnEqualStyleCodes() {
 		// preconditions
-		beer1.setStyleCode(BEER1_STYLE_CODE);
-		beer2.setStyleCode("not " + BEER1_STYLE_CODE);
+		beer1.setStyleCode(STYLE_CODE);
+		beer2.setStyleCode("not " + STYLE_CODE);
 		
 		// postconditions
 		assertFalse(beer1.equals(beer2));
@@ -132,8 +132,8 @@ public class BeerEqualityTests {
 	@Test
 	public void testEqualStyleNames() {
 		// preconditions
-		beer1.setStyleName(BEER1_STYLE_NAME);
-		beer2.setStyleName(BEER1_STYLE_NAME);
+		beer1.setStyleName(STYLE_NAME);
+		beer2.setStyleName(STYLE_NAME);
 		
 		// postconditions
 		assertEquals(beer1, beer2);
@@ -142,8 +142,8 @@ public class BeerEqualityTests {
 	@Test
 	public void testUnEqualStyleNames() {
 		// preconditions
-		beer1.setStyleName(BEER1_STYLE_NAME);
-		beer2.setStyleName("not " + BEER1_STYLE_NAME);
+		beer1.setStyleName(STYLE_NAME);
+		beer2.setStyleName("not " + STYLE_NAME);
 		
 		// postconditions
 		assertFalse(beer1.equals(beer2));
@@ -152,8 +152,8 @@ public class BeerEqualityTests {
 	@Test
 	public void testEqualStyleOverrides() {
 		// preconditions
-		beer1.setStyleOverride(BEER1_STYLE_OVERRIDE);
-		beer2.setStyleOverride(BEER1_STYLE_OVERRIDE);
+		beer1.setStyleOverride(STYLE_OVERRIDE);
+		beer2.setStyleOverride(STYLE_OVERRIDE);
 		
 		// postconditions
 		assertEquals(beer1, beer2);
@@ -162,8 +162,8 @@ public class BeerEqualityTests {
 	@Test
 	public void testUnEqualStyleOverrides() {
 		// preconditions
-		beer1.setStyleOverride(BEER1_STYLE_OVERRIDE);
-		beer2.setStyleOverride("not " + BEER1_STYLE_OVERRIDE);
+		beer1.setStyleOverride(STYLE_OVERRIDE);
+		beer2.setStyleOverride("not " + STYLE_OVERRIDE);
 		
 		// postconditions
 		assertFalse(beer1.equals(beer2));
@@ -172,8 +172,8 @@ public class BeerEqualityTests {
 	@Test
 	public void testEqualStyleDescriptions() {
 		// preconditions
-		beer1.setDescription(BEER1_DESCRIPTION);
-		beer2.setDescription(BEER1_DESCRIPTION);
+		beer1.setDescription(DESCRIPTION);
+		beer2.setDescription(DESCRIPTION);
 		
 		// postconditions
 		assertEquals(beer1, beer2);
@@ -182,8 +182,8 @@ public class BeerEqualityTests {
 	@Test
 	public void testUnEqualDescriptions() {
 		// preconditions
-		beer1.setDescription(BEER1_DESCRIPTION);
-		beer2.setDescription("not " + BEER1_DESCRIPTION);
+		beer1.setDescription(DESCRIPTION);
+		beer2.setDescription("not " + DESCRIPTION);
 		
 		// postconditions
 		assertFalse(beer1.equals(beer2));
@@ -192,8 +192,8 @@ public class BeerEqualityTests {
 	@Test
 	public void testEqualPackaging() {
 		// preconditions
-		beer1.setPackaging(BEER1_PACKAGING);
-		beer2.setPackaging(BEER1_PACKAGING);
+		beer1.setPackaging(PACKAGING);
+		beer2.setPackaging(PACKAGING);
 		
 		// postconditions
 		assertEquals(beer1, beer2);
@@ -202,8 +202,8 @@ public class BeerEqualityTests {
 	@Test
 	public void testUnEqualPackaging() {
 		// preconditions
-		beer1.setPackaging(BEER1_PACKAGING);
-		beer2.setPackaging("not " + BEER1_PACKAGING);
+		beer1.setPackaging(PACKAGING);
+		beer2.setPackaging("not " + PACKAGING);
 		
 		// postconditions
 		assertFalse(beer1.equals(beer2));

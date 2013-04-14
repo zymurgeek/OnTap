@@ -10,21 +10,21 @@ import com.itllp.barleylegalhomebrewers.ontap.Beer;
 
 public class BeerAttributeTests {
 
-	private Beer beer1;
-	private static final int BEER1_ID = 10;
-	private static final String BEER1_NAME = "Beer One";
-	private static final String BEER1_BREWER_FIRST_NAME = "Dave";
-	private static final String BEER1_BREWER_LAST_NAME = "Greenbaum";
-	private static final String BEER1_STYLE_CODE = "13B";
-	private static final String BEER1_STYLE_NAME = "Sweet Stout";
-	private static final String BEER1_STYLE_OVERRIDE = "Milk Stout";
-	private static final String BEER1_DESCRIPTION = "This is a really nice beer "
+	private Beer beer;
+	private static final int BEER_ID = 10;
+	private static final String BEER_NAME = "Some Beer";
+	private static final String BREWER_FIRST_NAME = "Dave";
+	private static final String BREWER_LAST_NAME = "Greenbaum";
+	private static final String STYLE_CODE = "13B";
+	private static final String STYLE_NAME = "Sweet Stout";
+	private static final String STYLE_OVERRIDE = "Milk Stout";
+	private static final String DESCRIPTION = "This is a really nice beer "
 			+ "that doesn't taste like it's had a dead rat in it.";
-	private static final String BEER1_PACKAGING = "Keg";
+	private static final String PACKAGING = "Keg";
 
 	@Before
 	public void setUp() throws Exception {
-		beer1 = new Beer(BEER1_ID);
+		beer = new Beer(BEER_ID);
 	}
 
 	@After
@@ -34,174 +34,174 @@ public class BeerAttributeTests {
 	@Test
 	public void testInitialization() {
 		// postconditions
-		assertNotNull(beer1);
+		assertNotNull(beer);
 	}
 	
 	@Test
 	public void testId() {
 		// method under test and postconditions
-		assertEquals(BEER1_ID, beer1.getId());
+		assertEquals(BEER_ID, beer.getId());
 	}
 
 	@Test
 	public void testToStringId() {
 		// postconditions
-		assertTrue(beer1.toString().contains("id: " + BEER1_ID));
+		assertTrue(beer.toString().contains("id: " + BEER_ID));
 	}
 	
 	@Test
 	public void testBeerName() {
 		// method under test
-		beer1.setBeerName(BEER1_NAME);
+		beer.setBeerName(BEER_NAME);
 		
 		// postconditions
-		assertEquals(BEER1_NAME, beer1.getBeerName());
+		assertEquals(BEER_NAME, beer.getBeerName());
 	}
 	
 	@Test
 	public void testToStringBeerName() {
 		// preconditions
-		beer1.setBeerName(BEER1_NAME);
+		beer.setBeerName(BEER_NAME);
 		
 		// postconditions
-		assertTrue(beer1.toString().contains("beerName: " + BEER1_NAME));
+		assertTrue(beer.toString().contains("beerName: " + BEER_NAME));
 	}
 	
 	@Test
 	public void testBrewerFirstName() {
 		// method under test
-		beer1.setBrewerFirstName(BEER1_BREWER_FIRST_NAME);
+		beer.setBrewerFirstName(BREWER_FIRST_NAME);
 		
 		// postconditions
-		assertEquals(BEER1_BREWER_FIRST_NAME, beer1.getBrewerFirstName());
+		assertEquals(BREWER_FIRST_NAME, beer.getBrewerFirstName());
 	}
 	
 	@Test
 	public void testToStringBrewerFirstName() {
 		// preconditions
-		beer1.setBrewerFirstName(BEER1_BREWER_FIRST_NAME);
+		beer.setBrewerFirstName(BREWER_FIRST_NAME);
 		
 		// postconditions
-		assertTrue(beer1.toString().contains("brewerFirstName: " + BEER1_BREWER_FIRST_NAME));
+		assertTrue(beer.toString().contains("brewerFirstName: " + BREWER_FIRST_NAME));
 	}
 	
 	@Test
 	public void testBrewerLastName() {
 		// method under test
-		beer1.setBrewerLastName(BEER1_BREWER_LAST_NAME);
+		beer.setBrewerLastName(BREWER_LAST_NAME);
 		
 		// postconditions
-		assertEquals(BEER1_BREWER_LAST_NAME, beer1.getBrewerLastName());
+		assertEquals(BREWER_LAST_NAME, beer.getBrewerLastName());
 	}
 	
 	@Test
 	public void testToStringBrewerLastName() {
 		// preconditions
-		beer1.setBrewerLastName(BEER1_BREWER_LAST_NAME);
+		beer.setBrewerLastName(BREWER_LAST_NAME);
 		
 		// postconditions
-		assertTrue(beer1.toString().contains("brewerLastName: " + BEER1_BREWER_LAST_NAME));
+		assertTrue(beer.toString().contains("brewerLastName: " + BREWER_LAST_NAME));
 	}
 	
 	@Test
 	public void testBrewerName() {
 		// preconditions
-		beer1.setBrewerFirstName(BEER1_BREWER_FIRST_NAME);
-		beer1.setBrewerLastName(BEER1_BREWER_LAST_NAME);
-		String expectedBrewerName = BEER1_BREWER_FIRST_NAME + " "
-				+ BEER1_BREWER_LAST_NAME;
+		beer.setBrewerFirstName(BREWER_FIRST_NAME);
+		beer.setBrewerLastName(BREWER_LAST_NAME);
+		String expectedBrewerName = BREWER_FIRST_NAME + " "
+				+ BREWER_LAST_NAME;
 		
 		// method under test and postconditions
-		assertEquals(expectedBrewerName, beer1.getBrewerName());
+		assertEquals(expectedBrewerName, beer.getBrewerName());
 	}
 	
 	@Test
 	public void testBeerStyleCode() {
 		// method under test
-		beer1.setStyleCode(BEER1_STYLE_CODE);
+		beer.setStyleCode(STYLE_CODE);
 		
 		// postconditions
-		assertEquals(BEER1_STYLE_CODE, beer1.getStyleCode());
+		assertEquals(STYLE_CODE, beer.getStyleCode());
 	}
 
 	@Test
 	public void testToStringStyleCode() {
 		// preconditions
-		beer1.setStyleCode(BEER1_STYLE_CODE);
+		beer.setStyleCode(STYLE_CODE);
 		
 		// postconditions
-		assertTrue(beer1.toString().contains("styleCode: " + BEER1_STYLE_CODE));
+		assertTrue(beer.toString().contains("styleCode: " + STYLE_CODE));
 	}
 	
 	@Test
 	public void testBeerStyleName() {
 		// method under test
-		beer1.setStyleName(BEER1_STYLE_NAME);
+		beer.setStyleName(STYLE_NAME);
 		
 		// postconditions
-		assertEquals(BEER1_STYLE_NAME, beer1.getStyleName());
+		assertEquals(STYLE_NAME, beer.getStyleName());
 	}
 
 	@Test
 	public void testToStringStyleName() {
 		// preconditions
-		beer1.setStyleName(BEER1_STYLE_NAME);
+		beer.setStyleName(STYLE_NAME);
 		
 		// postconditions
-		assertTrue(beer1.toString().contains("styleName: " + BEER1_STYLE_NAME));
+		assertTrue(beer.toString().contains("styleName: " + STYLE_NAME));
 	}
 	
 	@Test
 	public void testBeerStyleOverride() {
 		// method under test
-		beer1.setStyleOverride(BEER1_STYLE_OVERRIDE);
+		beer.setStyleOverride(STYLE_OVERRIDE);
 		
 		// postconditions
-		assertEquals(BEER1_STYLE_OVERRIDE, beer1.getStyleOverride());
+		assertEquals(STYLE_OVERRIDE, beer.getStyleOverride());
 	}
 
 	@Test
 	public void testToStringStyleOverride() {
 		// preconditions
-		beer1.setStyleOverride(BEER1_STYLE_OVERRIDE);
+		beer.setStyleOverride(STYLE_OVERRIDE);
 		
 		// postconditions
-		assertTrue(beer1.toString().contains("styleOverride: " + BEER1_STYLE_OVERRIDE));
+		assertTrue(beer.toString().contains("styleOverride: " + STYLE_OVERRIDE));
 	}
 	
 	@Test
 	public void testDescription() {
 		// method under test
-		beer1.setDescription(BEER1_DESCRIPTION);
+		beer.setDescription(DESCRIPTION);
 		
 		// postconditions
-		assertEquals(BEER1_DESCRIPTION, beer1.getDescription());
+		assertEquals(DESCRIPTION, beer.getDescription());
 	}
 
 	@Test
 	public void testToStringDescription() {
 		// preconditions
-		beer1.setDescription(BEER1_DESCRIPTION);
+		beer.setDescription(DESCRIPTION);
 		
 		// postconditions
-		assertTrue(beer1.toString().contains("description: " + BEER1_DESCRIPTION));
+		assertTrue(beer.toString().contains("description: " + DESCRIPTION));
 	}
 	
 	@Test
 	public void testPackaging() {
 		// method under test
-		beer1.setPackaging(BEER1_PACKAGING);
+		beer.setPackaging(PACKAGING);
 		
 		// postconditions
-		assertEquals(BEER1_PACKAGING, beer1.getPackaging());
+		assertEquals(PACKAGING, beer.getPackaging());
 	}
 
 	@Test
 	public void testToStringPackaging() {
 		// preconditions
-		beer1.setPackaging(BEER1_PACKAGING);
+		beer.setPackaging(PACKAGING);
 		
 		// postconditions
-		assertTrue(beer1.toString().contains("packaging: " + BEER1_PACKAGING));
+		assertTrue(beer.toString().contains("packaging: " + PACKAGING));
 	}
 }
