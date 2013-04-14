@@ -355,4 +355,24 @@ public class BeerEqualityTests {
 		assertFalse(beer1.equals(beer2));
 	}
 
+	@Test
+	public void testEqualKicked() {
+		// preconditions
+		beer1.setKicked(true);
+		beer2.setKicked(true);
+		
+		// postconditions
+		assertEquals(beer1, beer2);
+	}
+	
+	@Test
+	public void testUnEqualKicked() {
+		// preconditions
+		beer1.setKicked(true);
+		beer2.setKicked(false);
+		
+		// postconditions
+		assertFalse(beer1.equals(beer2));
+	}
+
 }

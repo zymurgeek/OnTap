@@ -20,6 +20,7 @@ public class Beer {
 	private String standardReferenceMethod;
 	private String brewerEmailAddress;
 	private boolean showBrewerEmailAddress;
+	private boolean isKicked;
 	
 	public Beer(int id) {
 		this.id = id;
@@ -61,6 +62,7 @@ public class Beer {
 			&& EqualsUtil.areEqual(this.brewerEmailAddress, that.brewerEmailAddress)
 			&& EqualsUtil.areEqual(this.showBrewerEmailAddress, 
 					that.showBrewerEmailAddress)
+			&& EqualsUtil.areEqual(this.isKicked, that.isKicked)
 			;
 	}
 
@@ -86,6 +88,7 @@ public class Beer {
 				+ " SRM: " + standardReferenceMethod
 				+ " email: " + brewerEmailAddress
 				+ " showEmail: " + showBrewerEmailAddress
+				+ " kicked: " + isKicked
 				;
 	}
 
@@ -203,6 +206,14 @@ public class Beer {
 
 	public boolean getShowBrewerEmailAddress() {
 		return showBrewerEmailAddress;
+	}
+
+	public void setKicked(boolean kicked) {
+		isKicked = kicked;
+	}
+
+	public boolean isKicked() {
+		return isKicked;
 	}
 	
 }

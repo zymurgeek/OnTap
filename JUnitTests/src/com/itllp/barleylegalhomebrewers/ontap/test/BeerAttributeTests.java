@@ -337,4 +337,22 @@ public class BeerAttributeTests {
 		assertTrue(beer.toString().contains("showEmail: " + true));
 	}
 
+	@Test
+	public void testIsKicked() {
+		// method under test
+		beer.setKicked(true);
+		
+		// postconditions
+		assertEquals(true, beer.isKicked());
+	}
+
+	@Test
+	public void testToStringIsKicked() {
+		// preconditions
+		beer.setKicked(true);
+		
+		// postconditions
+		assertTrue(beer.toString().contains("kicked: " + true));
+	}
+
 }
