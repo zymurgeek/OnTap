@@ -22,6 +22,7 @@ public class JsonArrayBeerDatabaseLoaderImpl implements JsonArrayBeerDatabaseLoa
 	public static final String STANDARD_REFERENCE_METHOD = "SRM";
 	public static final String BREWER_EMAIL_ADDRESS = "EmailAddress";
 	public static final String SHOW_BREWER_EMAIL_ADDRESS = "CanEmail";
+	public static final String KICKED = "Kicked";
 	
 	private BeerDatabase beerDatabase;
 	
@@ -124,6 +125,11 @@ public class JsonArrayBeerDatabaseLoaderImpl implements JsonArrayBeerDatabaseLoa
     			try {
     				boolean showEmail = jsonBeer.getBoolean(SHOW_BREWER_EMAIL_ADDRESS);
     				beer.setShowBrewerEmailAddress(showEmail);
+    			} catch (JSONException e) { /* ignore bad data */ }
+    			
+    			try {
+    				boolean isKicked = jsonBeer.getBoolean(KICKED);
+    				beer.setKicked(isKicked);
     			} catch (JSONException e) { /* ignore bad data */ }
     			
     			beerDatabase.addOrUpdateBeer(beer);
