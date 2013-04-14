@@ -26,6 +26,7 @@ public class BeerAttributeTests {
 	private static final String ABV = "6.25%";
 	private static final String IBU = "25";
 	private static final String SRM = "12.3";
+	private static final String EMAIL = "a.guy@beer.com";
 
 	@Before
 	public void setUp() throws Exception {
@@ -298,6 +299,24 @@ public class BeerAttributeTests {
 		
 		// postconditions
 		assertTrue(beer.toString().contains("SRM: " + SRM));
+	}
+
+	@Test
+	public void testBrewerEmailAddress() {
+		// method under test
+		beer.setBrewerEmailAddress(EMAIL);
+		
+		// postconditions
+		assertEquals(EMAIL, beer.getBrewerEmailAddress());
+	}
+
+	@Test
+	public void testToStringBrewerEmailAddress() {
+		// preconditions
+		beer.setBrewerEmailAddress(EMAIL);
+		
+		// postconditions
+		assertTrue(beer.toString().contains("email: " + EMAIL));
 	}
 
 }

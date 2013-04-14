@@ -18,6 +18,7 @@ public class Beer {
 	private String alcoholByVolume;
 	private String internationalBitternessUnits;
 	private String standardReferenceMethod;
+	private String brewerEmailAddress;
 	
 	public Beer(int id) {
 		this.id = id;
@@ -56,6 +57,7 @@ public class Beer {
 					that.internationalBitternessUnits)
 			&& EqualsUtil.areEqual(this.standardReferenceMethod, 
 					that.standardReferenceMethod)
+			&& EqualsUtil.areEqual(this.brewerEmailAddress, that.brewerEmailAddress)
 			;
 	}
 
@@ -79,6 +81,7 @@ public class Beer {
 				+ " ABV: " + alcoholByVolume
 				+ " IBU: " + internationalBitternessUnits
 				+ " SRM: " + standardReferenceMethod
+				+ " email: " + brewerEmailAddress
 				;
 	}
 
@@ -180,6 +183,14 @@ public class Beer {
 
 	public String getStandardReferenceMethod() {
 		return standardReferenceMethod;
+	}
+
+	public void setBrewerEmailAddress(String email) {
+		brewerEmailAddress = email;
+	}
+
+	public String getBrewerEmailAddress() {
+		return brewerEmailAddress;
 	}
 	
 }

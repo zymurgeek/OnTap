@@ -28,6 +28,7 @@ public class BeerEqualityTests {
 	private static final String ABV = "5.3%";
 	private static final String IBU = "28";
 	private static final String SRM = "9.7";
+	private static final String EMAIL = "a.gal@beer.com";
 
 	@Before
 	public void setUp() throws Exception {
@@ -308,7 +309,27 @@ public class BeerEqualityTests {
 	public void testUnEqualStandardReferenceMethod() {
 		// preconditions
 		beer1.setStandardReferenceMethod(SRM);
-		beer2.setStandardReferenceMethod("not " + IBU);
+		beer2.setStandardReferenceMethod("not " + SRM);
+		
+		// postconditions
+		assertFalse(beer1.equals(beer2));
+	}
+
+	@Test
+	public void testEqualBrewerEmailAddress() {
+		// preconditions
+		beer1.setBrewerEmailAddress(EMAIL);
+		beer2.setBrewerEmailAddress(EMAIL);
+		
+		// postconditions
+		assertEquals(beer1, beer2);
+	}
+	
+	@Test
+	public void testUnEqualBrewerEmailAddress() {
+		// preconditions
+		beer1.setBrewerEmailAddress(EMAIL);
+		beer2.setBrewerEmailAddress("not " + EMAIL);
 		
 		// postconditions
 		assertFalse(beer1.equals(beer2));
