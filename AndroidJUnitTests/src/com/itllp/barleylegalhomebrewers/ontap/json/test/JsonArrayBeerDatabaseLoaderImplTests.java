@@ -434,4 +434,28 @@ public class JsonArrayBeerDatabaseLoaderImplTests extends TestCase {
 		List<Beer> actualBeerList = fakeBeerDatabase.getBeerList();
 		assertEquals(expectedBeerList, actualBeerList);
 	}
+
+	public void testLoadOfAlcoholByVolume() {
+		// Preconditions
+		final String ABV = "6.89%";
+		expectedBeer1.setAlcoholByVolume(ABV);
+		List<Beer> expectedBeerList = new ArrayList<Beer>();
+		expectedBeerList.add(expectedBeer1);
+
+		String jsonString = getJsonArrayString(EXPECTED_BEER_1_ID_STRING, EXPECTED_BEER_1_NAME,
+				JsonArrayBeerDatabaseLoaderImpl.ALCOHOL_BY_VOLUME, ABV);
+		JSONArray jsonArray = null;
+		try {
+			jsonArray = new JSONArray(jsonString);
+		} catch (JSONException x) {
+			fail("Failed to parse JSON string" + x);
+		}
+
+		// Method under test
+		cut.load(jsonArray);
+		
+		// Postconditions
+		List<Beer> actualBeerList = fakeBeerDatabase.getBeerList();
+		assertEquals(expectedBeerList, actualBeerList);
+	}
 }
