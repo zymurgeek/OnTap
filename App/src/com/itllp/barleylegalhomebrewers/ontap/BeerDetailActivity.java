@@ -30,6 +30,7 @@ public class BeerDetailActivity extends Activity {
 	}
 
 	private void updateFields() {
+		// TODO add tests for these fields
 		TextView beerNameView = (TextView)findViewById(R.id.beer_name);
 		beerNameView.setText(beer.getBeerName());
 		
@@ -57,6 +58,9 @@ public class BeerDetailActivity extends Activity {
 		
 		TextView descriptionView = (TextView)findViewById(R.id.description);
 		descriptionView.setText(beer.getDescription());
+		
+		TextView packagingView = (TextView)findViewById(R.id.packaging);
+		packagingView.setText(beer.getPackaging());
 	}
 
 	@Override
