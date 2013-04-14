@@ -23,6 +23,7 @@ public class JsonArrayBeerDatabaseLoaderImpl implements JsonArrayBeerDatabaseLoa
 	public static final String BREWER_EMAIL_ADDRESS = "EmailAddress";
 	public static final String SHOW_BREWER_EMAIL_ADDRESS = "CanEmail";
 	public static final String KICKED = "Kicked";
+	public static final String ON_TAP_NUMBER = "OnTap";
 	
 	private BeerDatabase beerDatabase;
 	
@@ -130,6 +131,11 @@ public class JsonArrayBeerDatabaseLoaderImpl implements JsonArrayBeerDatabaseLoa
     			try {
     				boolean isKicked = jsonBeer.getBoolean(KICKED);
     				beer.setKicked(isKicked);
+    			} catch (JSONException e) { /* ignore bad data */ }
+    			
+    			try {
+    				int tapNumber = jsonBeer.getInt(ON_TAP_NUMBER);
+    				beer.setOnTapNumber(tapNumber);
     			} catch (JSONException e) { /* ignore bad data */ }
     			
     			beerDatabase.addOrUpdateBeer(beer);

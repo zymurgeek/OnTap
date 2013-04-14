@@ -146,8 +146,20 @@ public class JsonArrayBeerDatabaseLoaderImplTests extends TestCase {
 	private String getJsonArrayString(String id, String beerName,
 			String fieldId, boolean fieldValue) {
 		String jsonString = "[ "; 
+		String unquotedValue = "" + fieldValue;
 		jsonString += getJsonArrayElementString(id, beerName,
-				fieldId, fieldValue); 
+				fieldId, unquotedValue); 
+		jsonString += " ]";
+		
+		return jsonString;
+	}
+
+	private String getJsonArrayString(String id, String beerName,
+			String fieldId, int fieldValue) {
+		String jsonString = "[ ";
+		String unquotedValue = "" + fieldValue;
+		jsonString += getJsonArrayElementStringWithUnquotedValue(id, beerName,
+				fieldId, unquotedValue); 
 		jsonString += " ]";
 		
 		return jsonString;
@@ -170,13 +182,13 @@ public class JsonArrayBeerDatabaseLoaderImplTests extends TestCase {
 		return jsonString;
 	}
 
-	private String getJsonArrayElementString(String id,
-			String beerName, String fieldId, boolean fieldValue) {
+	private String getJsonArrayElementStringWithUnquotedValue(String id,
+			String beerName, String fieldId, String unquotedFieldValue) {
 		String jsonString = "{ ";
 		jsonString += "\"ID\": " + id + ", ";
 		jsonString += "\"BeerName\": \"" + beerName + "\", ";
 		if (null != fieldId) {
-			jsonString += "\"" + fieldId + "\": " + fieldValue + ", ";
+			jsonString += "\"" + fieldId + "\": " + unquotedFieldValue + ", ";
 		}
 		jsonString += "}";
 		return jsonString;
@@ -586,6 +598,30 @@ public class JsonArrayBeerDatabaseLoaderImplTests extends TestCase {
 
 		String jsonString = getJsonArrayString(EXPECTED_BEER_1_ID_STRING, EXPECTED_BEER_1_NAME,
 				JsonArrayBeerDatabaseLoaderImpl.KICKED, KICKED);
+		JSONArray jsonArray = null;
+		try {
+			jsonArray = new JSONArray(jsonString);
+		} catch (JSONException x) {
+			fail("Failed to parse JSON string" + x);
+		}
+
+		// Method under test
+		cut.load(jsonArray);
+		
+		// Postconditions
+		List<Beer> actualBeerList = fakeBeerDatabase.getBeerList();
+		assertEquals(expectedBeerList, actualBeerList);
+	}
+	
+	public void testLoadOfOnTapNumber() {
+		// Preconditions
+		final int TAP_NUMBER = 7;
+		expectedBeer1.setOnTapNumber(TAP_NUMBER);
+		List<Beer> expectedBeerList = new ArrayList<Beer>();
+		expectedBeerList.add(expectedBeer1);
+
+		String jsonString = getJsonArrayString(EXPECTED_BEER_1_ID_STRING, EXPECTED_BEER_1_NAME,
+				JsonArrayBeerDatabaseLoaderImpl.ON_TAP_NUMBER, TAP_NUMBER);
 		JSONArray jsonArray = null;
 		try {
 			jsonArray = new JSONArray(jsonString);
