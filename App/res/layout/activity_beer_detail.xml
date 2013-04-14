@@ -23,6 +23,30 @@
         android:textStyle="bold"
         tools:ignore="SelectableText" />
 
+    <RelativeLayout 
+		android:id="@+id/status_layout" 
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+        android:paddingTop="6dip"
+    >
+	<TextView
+		android:id="@+id/status_label"
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content" 
+    	android:layout_alignParentLeft="true"
+        android:textStyle="bold"
+    	android:text="@string/status_label_text"
+    />
+	<TextView
+	    android:id="@+id/status"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignBaseline="@+id/status_label"
+	    android:layout_alignParentRight="true"
+	    tools:ignore="SelectableText"
+	/>
+	</RelativeLayout>
+		
     <TextView
         android:id="@+id/style_label" 
         android:layout_width="wrap_content"

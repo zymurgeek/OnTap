@@ -17,5 +17,6 @@
     <string name="ibu_label_text">I.B.U.</string>
     <string name="srm_label_text">S.R.M.</string>
     <string name="brewer_email_label_text">Brewer\'s Email Address</string>
+    <string name="status_label_text">Status</string>
     
 </resources>
