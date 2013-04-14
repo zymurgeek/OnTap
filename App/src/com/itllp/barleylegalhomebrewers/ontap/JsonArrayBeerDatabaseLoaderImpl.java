@@ -18,6 +18,7 @@ public class JsonArrayBeerDatabaseLoaderImpl implements JsonArrayBeerDatabaseLoa
 	public static final String ORIGINAL_GRAVITY = "OG";
 	public static final String FINAL_GRAVITY = "FG";
 	public static final String ALCOHOL_BY_VOLUME = "ABV";
+	public static final String INTERNATIONAL_BITTERNESS_UNITS = "IBU";
 	
 	private BeerDatabase beerDatabase;
 	
@@ -100,6 +101,11 @@ public class JsonArrayBeerDatabaseLoaderImpl implements JsonArrayBeerDatabaseLoa
     			try {
     				String abv = jsonBeer.getString(ALCOHOL_BY_VOLUME);
     				beer.setAlcoholByVolume(abv);
+    			} catch (JSONException e) { /* ignore bad data */ }
+    			
+    			try {
+    				String ibu = jsonBeer.getString(INTERNATIONAL_BITTERNESS_UNITS);
+    				beer.setInternationalBitternessUnits(ibu);
     			} catch (JSONException e) { /* ignore bad data */ }
     			
     			beerDatabase.addOrUpdateBeer(beer);
