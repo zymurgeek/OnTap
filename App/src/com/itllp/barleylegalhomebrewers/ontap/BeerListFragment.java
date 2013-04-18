@@ -20,7 +20,7 @@ implements LoaderCallbacks<List<Beer>> {
     @Override public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        setEmptyText(getString(R.string.no_events_text));
+        setEmptyText(getString(R.string.no_beers_text));
 
         // Create an empty adapter we will use to display the loaded data.
         beerListAdapter = new BeerListAdapter(getActivity(), R.layout.beer_list_item);

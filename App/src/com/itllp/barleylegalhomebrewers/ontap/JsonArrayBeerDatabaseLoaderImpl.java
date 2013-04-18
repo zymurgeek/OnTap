@@ -83,10 +83,8 @@ public class JsonArrayBeerDatabaseLoaderImpl implements JsonArrayBeerDatabaseLoa
     				beer.setStyleOverride(styleOverride);
     			} catch (JSONException e) { /* ignore bad data */ }
     			
-    			try {
-    				String description = jsonBeer.getString(BEER_DESCRIPTION);
-    				beer.setDescription(description);
-    			} catch (JSONException e) { /* ignore bad data */ }
+    			String description = getJsonStringWithUnixLinefeeds(jsonBeer, BEER_DESCRIPTION);
+    			beer.setDescription(description);
     			
     			try {
     				String packaging = jsonBeer.getString(PACKAGING);
@@ -143,4 +141,13 @@ public class JsonArrayBeerDatabaseLoaderImpl implements JsonArrayBeerDatabaseLoa
     	}
 	}
 
+	String getJsonStringWithUnixLinefeeds(JSONObject jObject, String field) {
+		String string = "";
+		try {
+			string = jObject.getString(field);
+			string = string.replace("\r\n", "\n");
+			string = string.replace("\r", "\n");
+		} catch (JSONException e) { /* ignore bad data */ }
+		return string;
+	}
 }

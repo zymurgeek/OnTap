@@ -5,6 +5,7 @@
     <string name="event_list_label_text">All Events</string>
     <string name="beer_list_label_text">All Beers</string>
     <string name="no_events_text">No events</string>
+    <string name="no_beers_text">No beers</string>
     <string name="title_activity_beer_detail">Beer Details</string>
     <string name="action_settings">Settings</string>
     <string name="style_label_text">Style</string>
