@@ -37,6 +37,22 @@ public class BeerListAdapter extends ArrayAdapter<Beer> {
 
         Beer beer = getItem(position);
         
+        TextView sectionHeaderView = (TextView)view.findViewById(R.id.section_title);
+        int lastSectionTextId = -1;
+        if (position > 0) {
+        	Beer lastBeer = getItem(position - 1);
+        	if (lastBeer != null) {
+        		lastSectionTextId = getSectionTextId(lastBeer);
+        	}
+        }
+        int thisSectionTextId = getSectionTextId(beer);
+        if (thisSectionTextId != lastSectionTextId) {
+        	sectionHeaderView.setText(thisSectionTextId);
+        	sectionHeaderView.setVisibility(View.VISIBLE);
+        } else {
+        	sectionHeaderView.setVisibility(View.GONE);
+        }
+        
         TextView idView = (TextView)view.findViewById(R.id.id);
         idView.setText(String.valueOf(beer.getId()));
         
@@ -67,5 +83,15 @@ public class BeerListAdapter extends ArrayAdapter<Beer> {
         
         return view;
     }
+
+	private int getSectionTextId(Beer beer) {
+		int sectionText = R.string.on_deck;
+		if (beer.isKicked()) {
+			sectionText = R.string.kicked_text;
+		} else if (beer.isPouring()) {
+			sectionText = R.string.pouring;
+		}
+		return sectionText;
+	}
 }
 
