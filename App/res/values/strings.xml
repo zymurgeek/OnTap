@@ -24,5 +24,6 @@
     <string name="pouring">Now Pouring</string>
     <string name="on_deck">On Deck</string>
     <string name="section_text">--NEW SECTION--</string>
+    <string name="refresh">Refresh</string>
     
 </resources>
