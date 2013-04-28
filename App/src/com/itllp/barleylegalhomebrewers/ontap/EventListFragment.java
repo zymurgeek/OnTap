@@ -5,13 +5,16 @@ import java.util.List;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ListFragment;
+import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class EventListFragment extends android.support.v4.app.ListFragment 
+public class EventListFragment extends ListFragment 
 implements LoaderCallbacks<List<Event>> {
 	
 	private EventListAdapter eventListAdapter = null;
@@ -30,7 +33,18 @@ implements LoaderCallbacks<List<Event>> {
 
         // Prepare the loader.  Either re-connect with an existing one,
         // or start a new one.
-        getLoaderManager().initLoader(0, null, this);
+        final LoaderManager loaderManager = getLoaderManager();
+        loaderManager.initLoader(0, null, this);
+
+        View view = getView().getRootView();
+        Button refreshButton = (Button)view.findViewById
+        		(R.id.refresh_button);
+        final LoaderManager.LoaderCallbacks<List<Event>> callbacks = this;
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+        	public void onClick(View v) {
+        		loaderManager.restartLoader(0, null, callbacks);
+        	}
+        });
     }
 
 	@Override
