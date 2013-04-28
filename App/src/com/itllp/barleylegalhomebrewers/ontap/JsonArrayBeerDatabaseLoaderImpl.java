@@ -142,12 +142,16 @@ public class JsonArrayBeerDatabaseLoaderImpl implements JsonArrayBeerDatabaseLoa
 	}
 
 	String getJsonStringWithUnixLinefeeds(JSONObject jObject, String field) {
-		String string = "";
+		String string = null;
 		try {
 			string = jObject.getString(field);
+		} catch (JSONException e) { /* ignore bad data */ }
+		
+		if (null != string) {
 			string = string.replace("\r\n", "\n");
 			string = string.replace("\r", "\n");
-		} catch (JSONException e) { /* ignore bad data */ }
+		}
+		
 		return string;
 	}
 }
