@@ -19,6 +19,10 @@ public interface EventTable {
 	
 	ContentValues getContentValuesInTable(Integer id);
 	List<ContentValues> getContentValuesInTableList();
+	/**
+	 * 
+	 * @return List of IDs in the table.  This is never null.
+	 */
 	List<Integer> getIdsInTableList();
 	void insert(ContentValues contentValues);
 	void update(ContentValues contentValues);

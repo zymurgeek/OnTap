@@ -98,8 +98,8 @@ public class SQLiteEventTable implements EventTable {
 	
 	@Override
 	public List<Integer> getIdsInTableList() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Integer> result = new ArrayList<Integer>();
+		return result;
 	}
 
 	
