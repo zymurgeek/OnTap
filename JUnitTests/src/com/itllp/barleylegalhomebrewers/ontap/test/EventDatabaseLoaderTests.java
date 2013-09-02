@@ -6,13 +6,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoaderIF;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoader;
 
 public class EventDatabaseLoaderTests {
 
 	@Before
 	public void setUp() throws Exception {
-		FakeEventDatabaseLoader.clearInstance();
+		StubEventDatabaseLoader.clearInstance();
 	}
 
 	@After
@@ -28,20 +29,20 @@ public class EventDatabaseLoaderTests {
 	@Test
 	public void testGetInstanceWhenInitialized() {
 		// Preconditions
-		FakeEventDatabaseLoader.create();
+		StubEventDatabaseLoader.create();
 
 		// Method under test
-		EventDatabaseLoader loader = EventDatabaseLoader.getInstance();
+		EventDatabaseLoaderIF loader = EventDatabaseLoader.getInstance();
 		
 		// Postconditions
 		assertNotNull(loader);
-		assertTrue(loader instanceof FakeEventDatabaseLoader);
+		assertTrue(loader instanceof StubEventDatabaseLoader);
 	}
 	
 	@Test
 	public void testClearInstance() {
 		// Preconditions
-		FakeEventDatabaseLoader.create();
+		StubEventDatabaseLoader.create();
 		
 		// Method under test
 		EventDatabaseLoader.clearInstance();

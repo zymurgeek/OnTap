@@ -1,6 +1,6 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
-import com.itllp.barleylegalhomebrewers.ontap.json.JsonUrlBeerDatabaseLoader;
+import com.itllp.barleylegalhomebrewers.ontap.json.JSONUrlBeerDatabaseLoader;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -58,7 +58,7 @@ public class BeerListActivity  extends FragmentActivity {
 	        	NetworkConnectivity netConn = new AndroidNetworkConnectivity(connMgr);
 	        	BeerDatabaseLoaderFactory.createProductionSiteBeerDatabaseLoader(netConn);
         	} else {
-        		if (!(BeerDatabaseLoader.getInstance() instanceof JsonUrlBeerDatabaseLoader)) {
+        		if (!(BeerDatabaseLoader.getInstance() instanceof JSONUrlBeerDatabaseLoader)) {
         			throw (new DatabaseLoaderAlreadyInstantiatedException());
         		}
         	}

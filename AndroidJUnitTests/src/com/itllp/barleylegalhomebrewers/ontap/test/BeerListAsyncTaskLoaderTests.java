@@ -43,9 +43,9 @@ public class BeerListAsyncTaskLoaderTests extends
     
     public void testLoadInBackground() {
     	// Preconditions
-    	FakeBeerDatabaseLoader.clearInstance();
-    	FakeBeerDatabaseLoader.create();
-    	FakeBeerDatabaseLoader fakeLoader = (FakeBeerDatabaseLoader)BeerDatabaseLoader.getInstance();
+    	StubBeerDatabaseLoader.clearInstance();
+    	StubBeerDatabaseLoader.create();
+    	StubBeerDatabaseLoader stubLoader = (StubBeerDatabaseLoader)BeerDatabaseLoader.getInstance();
 
     	FakeBeerDatabase.clearInstance();
     	FakeBeerDatabase.create();
@@ -60,7 +60,7 @@ public class BeerListAsyncTaskLoaderTests extends
     	List<Beer> actualBeerList = loader.loadInBackground();
     	
     	// Postconditions
-    	assertEquals(1, fakeLoader.MOCK_getLoadCount());
+    	assertEquals(1, stubLoader.MOCK_getLoadCount());
     	assertEquals(expectedBeerList, actualBeerList);
     }
     

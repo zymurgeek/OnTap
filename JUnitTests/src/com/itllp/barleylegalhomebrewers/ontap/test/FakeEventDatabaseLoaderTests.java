@@ -22,10 +22,10 @@ public class FakeEventDatabaseLoaderTests {
 	@Test
 	public void testCreateWhenNotInitialized() {
 		// Preconditions
-		FakeEventDatabaseLoader.clearInstance();
+		StubEventDatabaseLoader.clearInstance();
 		
 		// Method under test
-		FakeEventDatabaseLoader.create();
+		StubEventDatabaseLoader.create();
 		
 		// Postconditions
 		assertNotNull(EventDatabaseLoader.getInstance());
@@ -34,12 +34,12 @@ public class FakeEventDatabaseLoaderTests {
 	@Test
 	public void testCreateWhenInitialized() {
 		// Preconditions
-		FakeEventDatabaseLoader.clearInstance();
-		FakeEventDatabaseLoader.create();
+		StubEventDatabaseLoader.clearInstance();
+		StubEventDatabaseLoader.create();
 
 		// Method under test and postconditions
 		try {
-			FakeEventDatabaseLoader.create();
+			StubEventDatabaseLoader.create();
 			fail("Should throw exception");
 		} catch (DatabaseLoaderAlreadyInstantiatedException e) {
 			assertNotNull(e);

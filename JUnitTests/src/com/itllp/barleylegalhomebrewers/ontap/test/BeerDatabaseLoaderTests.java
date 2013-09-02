@@ -12,7 +12,7 @@ public class BeerDatabaseLoaderTests {
 
 	@Before
 	public void setUp() throws Exception {
-		FakeBeerDatabaseLoader.clearInstance();
+		StubBeerDatabaseLoader.clearInstance();
 	}
 
 	@After
@@ -28,14 +28,14 @@ public class BeerDatabaseLoaderTests {
 	@Test
 	public void testGetInstanceWhenInitialized() {
 		// Preconditions
-		FakeBeerDatabaseLoader.create();
+		StubBeerDatabaseLoader.create();
 
 		// Method under test
 		BeerDatabaseLoader loader = BeerDatabaseLoader.getInstance();
 		
 		// Postconditions
 		assertNotNull(loader);
-		assertTrue(loader instanceof FakeBeerDatabaseLoader);
+		assertTrue(loader instanceof StubBeerDatabaseLoader);
 	}
 	
 

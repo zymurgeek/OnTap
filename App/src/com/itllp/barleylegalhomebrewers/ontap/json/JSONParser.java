@@ -30,7 +30,7 @@ public class JSONParser {
      * Gets the JSON tree from a given URL.
      * @param url Location to query.  If null, returns an empty object.
      */
-    public JSONObject getJsonObjectFromUrl(String url) {
+    public JSONObject getJSONObjectFromUrl(String url) {
 
     	if (null == url) {
     		return new JSONObject();
@@ -74,7 +74,7 @@ public class JSONParser {
     }
 
 
-    public JSONArray getJsonArrayFromUrl(String url) {
+    public JSONArray getJSONArrayFromUrl(String url) {
     	 
         try {
             DefaultHttpClient httpClient = new DefaultHttpClient();

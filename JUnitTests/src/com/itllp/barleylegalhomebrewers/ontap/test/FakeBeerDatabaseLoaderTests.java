@@ -22,10 +22,10 @@ public class FakeBeerDatabaseLoaderTests {
 	@Test
 	public void testCreateWhenNotInitialized() {
 		// Preconditions
-		FakeBeerDatabaseLoader.clearInstance();
+		StubBeerDatabaseLoader.clearInstance();
 		
 		// Method under test
-		FakeBeerDatabaseLoader.create();
+		StubBeerDatabaseLoader.create();
 		
 		// Postconditions
 		assertNotNull(BeerDatabaseLoader.getInstance());
@@ -34,12 +34,12 @@ public class FakeBeerDatabaseLoaderTests {
 	@Test
 	public void testCreateWhenInitialized() {
 		// Preconditions
-		FakeEventDatabaseLoader.clearInstance();
-		FakeEventDatabaseLoader.create();
+		StubEventDatabaseLoader.clearInstance();
+		StubEventDatabaseLoader.create();
 
 		// Method under test and postconditions
 		try {
-			FakeEventDatabaseLoader.create();
+			StubEventDatabaseLoader.create();
 			fail("Should throw exception");
 		} catch (DatabaseLoaderAlreadyInstantiatedException e) {
 			assertNotNull(e);

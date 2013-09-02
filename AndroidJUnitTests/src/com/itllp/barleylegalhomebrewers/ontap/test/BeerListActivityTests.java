@@ -32,7 +32,7 @@ import com.itllp.barleylegalhomebrewers.ontap.BeerListActivity;
 import com.itllp.barleylegalhomebrewers.ontap.BeerListLoaderFactory;
 import com.itllp.barleylegalhomebrewers.ontap.DatabaseAlreadyInstantiatedException;
 import com.itllp.barleylegalhomebrewers.ontap.DatabaseLoaderAlreadyInstantiatedException;
-import com.itllp.barleylegalhomebrewers.ontap.json.JsonUrlBeerDatabaseLoader;
+import com.itllp.barleylegalhomebrewers.ontap.json.JSONUrlBeerDatabaseLoader;
 
 public class BeerListActivityTests extends
 	ActivityUnitTestCase<BeerListActivity> {
@@ -70,7 +70,7 @@ public class BeerListActivityTests extends
     public void testInitialization() {
     	// Preconditions
     	FakeBeerDatabase.clearInstance();
-    	FakeBeerDatabaseLoader.clearInstance();
+    	StubBeerDatabaseLoader.clearInstance();
 		intent.putExtra(BeerListActivity.SKIP_INSTANTIATION_FOR_TESTING, false);
 
     	// Method under test
@@ -79,8 +79,8 @@ public class BeerListActivityTests extends
     	// Postconditions
     	assertNotNull(activity);
     	assertTrue(BeerDatabase.getInstance() instanceof BeerDatabaseImpl);
-    	assertTrue(BeerDatabaseLoader.getInstance() instanceof JsonUrlBeerDatabaseLoader);
-    	JsonUrlBeerDatabaseLoader loader = (JsonUrlBeerDatabaseLoader)BeerDatabaseLoader.getInstance();
+    	assertTrue(BeerDatabaseLoader.getInstance() instanceof JSONUrlBeerDatabaseLoader);
+    	JSONUrlBeerDatabaseLoader loader = (JSONUrlBeerDatabaseLoader)BeerDatabaseLoader.getInstance();
     	String expectedUrl = BeerDatabaseLoaderFactory.productionSiteUrl;
     	String actualUrl = loader.getUrl();
     	assertEquals(expectedUrl, actualUrl);
@@ -97,8 +97,8 @@ public class BeerListActivityTests extends
     	// Postconditions
     	assertNotNull(activity);
     	assertTrue(BeerDatabase.getInstance() instanceof BeerDatabaseImpl);
-    	assertTrue(BeerDatabaseLoader.getInstance() instanceof JsonUrlBeerDatabaseLoader);
-    	JsonUrlBeerDatabaseLoader loader = (JsonUrlBeerDatabaseLoader)BeerDatabaseLoader.getInstance();
+    	assertTrue(BeerDatabaseLoader.getInstance() instanceof JSONUrlBeerDatabaseLoader);
+    	JSONUrlBeerDatabaseLoader loader = (JSONUrlBeerDatabaseLoader)BeerDatabaseLoader.getInstance();
     	String expectedUrl = BeerDatabaseLoaderFactory.productionSiteUrl;
     	String actualUrl = loader.getUrl();
     	assertEquals(expectedUrl, actualUrl);
@@ -120,7 +120,7 @@ public class BeerListActivityTests extends
     public void testInitializationWhenAlreadyInitializedWithWrongBeerDatabaseLoader() {
     	// Preconditions
     	BeerDatabaseLoader.clearInstance();
-    	FakeBeerDatabaseLoader.create();
+    	StubBeerDatabaseLoader.create();
 		intent.putExtra(BeerListActivity.SKIP_INSTANTIATION_FOR_TESTING, false);
 
     	// Method under test and postconditions

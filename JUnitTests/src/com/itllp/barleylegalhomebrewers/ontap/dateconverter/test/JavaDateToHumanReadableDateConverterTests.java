@@ -11,7 +11,7 @@ import com.itllp.barleylegalhomebrewers.ontap.dateconverter.StringToJavaDateConv
 public class JavaDateToHumanReadableDateConverterTests extends TestCase {
 
 	private JavaDateToHumanReadableDateConverter cut = null;
-	StringToJavaDateConverter mockJsonDateConverter = null;
+	StringToJavaDateConverter mockJSONDateConverter = null;
 	JavaDateToStringConverter mockJavaDateConverter = null; 
 	
 	public JavaDateToHumanReadableDateConverterTests(String name) {
@@ -20,8 +20,8 @@ public class JavaDateToHumanReadableDateConverterTests extends TestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		mockJsonDateConverter = mock(StringToJavaDateConverter.class);
-		when(mockJsonDateConverter.getJavaDate(anyString())).thenReturn(new Date());
+		mockJSONDateConverter = mock(StringToJavaDateConverter.class);
+		when(mockJSONDateConverter.getJavaDate(anyString())).thenReturn(new Date());
 		mockJavaDateConverter = mock(JavaDateToStringConverter.class);
 		when(mockJavaDateConverter.getString((Date)anyObject())).thenReturn("");
 		
