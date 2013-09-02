@@ -1,12 +1,13 @@
-package com.itllp.barleylegalhomebrewers.ontap;
+package com.itllp.barleylegalhomebrewers.ontap.contentprovider;
 
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-public class OnTap {
+public class Event {
+	public static final String AUTHORITY = 
+			"com.itllp.barleylegalhomebrewers.ontap.Event";
+	
 	public static final class Events implements BaseColumns {
-		public static final String AUTHORITY = 
-				"com.itllp.barleylegalhomebrewers.ontap.contentprovider.Event";
 		public static final Uri CONTENT_URI =
 				Uri.parse("content://" + AUTHORITY + "/event");
 		public static final String CONTENT_TYPE =

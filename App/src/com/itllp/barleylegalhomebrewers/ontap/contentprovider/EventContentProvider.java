@@ -1,9 +1,9 @@
 package com.itllp.barleylegalhomebrewers.ontap.contentprovider;
 
-import com.itllp.barleylegalhomebrewers.ontap.OnTap;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -17,17 +17,22 @@ public class EventContentProvider extends ContentProvider {
 	private static final int DATABASE_VERSION = 1;
 	private static final String EVENT_TABLE_NAME = "event";
 	private DatabaseHelper mOpenHelper;	
+    private SQLiteDatabase mDb;
 	private static UriMatcher sUriMatcher;
 	private static final int EVENTS = 1;
 	private static final int EVENT_ID = 2;
 	static {
 		sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-		sUriMatcher.addURI(OnTap.Events.AUTHORITY, OnTap.Events.NAME, EVENTS);
+		sUriMatcher.addURI(Event.AUTHORITY, Event.Events.NAME, EVENTS);
 	}
 
 	// FIXME continue "Programming Android", page 363
 	
 	private static class DatabaseHelper extends SQLiteOpenHelper {
+        private DatabaseHelper(Context context, String name,
+                SQLiteDatabase.CursorFactory factory) {
+        	super(context, name, factory, DATABASE_VERSION);
+        }
 		public void onCreate(SQLiteDatabase sqLiteDatabase) {
 			createTable(sqLiteDatabase);
 		}
@@ -35,9 +40,9 @@ public class EventContentProvider extends ContentProvider {
 		// create table method may also be called from onUpgrade
 		private void createTable(SQLiteDatabase sqLiteDatabase) {
 			String qs = "CREATE TABLE " + EVENT_TABLE_NAME + " (" +
-			OnTap.Events._ID + " INTEGER PRIMARY KEY, " +
-			OnTap.Events.NAME + " TEXT, " +
-			OnTap.Events.DATE + " TEXT);";
+			Event.Events._ID + " INTEGER PRIMARY KEY, " +
+			Event.Events.NAME + " TEXT, " +
+			Event.Events.DATE + " TEXT);";
 			sqLiteDatabase.execSQL(qs);
 		}
 
@@ -57,7 +62,7 @@ public class EventContentProvider extends ContentProvider {
 	public String getType(Uri uri) {
 		switch (sUriMatcher.match(uri)) {
 		case EVENTS:
-			return OnTap.Events.CONTENT_TYPE;
+			return Event.Events.CONTENT_TYPE;
 		default:
 			throw new IllegalArgumentException("Unknown event type: " + uri);
 		}
@@ -81,7 +86,8 @@ public class EventContentProvider extends ContentProvider {
 		// If no sort order is specified use the default
 		String orderBy;
 		if (TextUtils.isEmpty(sortOrder)) {
-			orderBy = OnTap.Events.DEFAULT_SORT_ORDER;
+			// FIXME Implement default sort order
+			// orderBy = Event.Events.DEFAULT_SORT_ORDER;
 		} else {
 			orderBy = sortOrder;
 		}
@@ -95,7 +101,7 @@ public class EventContentProvider extends ContentProvider {
 						null, null, sortOrder);
 				cursor.setNotificationUri(
 						getContext().getContentResolver(),
-						OnTap.Events.CONTENT_URI);
+						Event.Events.CONTENT_URI);
 				break;
 			default:
 				throw new IllegalArgumentException("unsupported uri: " + uri);

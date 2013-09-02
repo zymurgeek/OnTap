@@ -32,6 +32,10 @@
             android:name="com.itllp.barleylegalhomebrewers.ontap.BeerDetailActivity"
             android:label="@string/title_activity_beer_detail" >
         </activity>
+        
+        <provider android:name=".contentprovider.EventContentProvider"
+			android:authorities="com.itllp.barleylegalhomebrewers.ontap.Event"/>
+
     </application>
 
 </manifest>
