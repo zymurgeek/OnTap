@@ -43,12 +43,11 @@
         </activity>
         
         <provider 
-			android:authorities="com.itllp.barleylegalhomebrewers.ontap.contentprovider"
-            android:name=".contentprovider.EventContentProvider"
-			android:exported="false"
-			android:multiprocess="true"
-			/>
-
+		android:authorities="com.itllp.barleylegalhomebrewers.ontap.Event"
+        	android:name=".contentprovider.EventContentProvider"
+		android:exported="false"
+		android:multiprocess="true"
+	/>
     </application>
 
 </manifest>

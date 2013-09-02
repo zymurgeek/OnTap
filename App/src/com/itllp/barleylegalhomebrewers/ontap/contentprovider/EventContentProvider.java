@@ -10,6 +10,7 @@ import com.itllp.barleylegalhomebrewers.ontap.database.OnTapDatabaseHelper;
 import android.content.ContentProvider;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
