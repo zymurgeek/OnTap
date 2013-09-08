@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>com.itllp.barleylegalhomebrewers</groupId>
-        <artifactId>OnTap-parent</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
-    </parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+          <groupId>com.itllp.barleylegalhomebrewers</groupId>
+          <artifactId>OnTap-parent</artifactId>
+          <version>1.0.0-SNAPSHOT</version>
+	</parent>
     
-    <artifactId>OnTap-instrumentation</artifactId>
-    <packaging>apk</packaging>
-    <name>OnTap - Android JUnit Test</name>
+	<artifactId>AndroidJUnitTests</artifactId>
+	<packaging>apk</packaging>
+	<name>OnTap - Android JUnit Tests</name>
 
     <dependencies>
         <dependency>
             <groupId>android</groupId>
             <artifactId>android</artifactId>
+	    <version>${platform.version}</version>
             <scope>provided</scope>
         </dependency>
+		<dependency>
+		  <groupId>android.support</groupId>
+		  <artifactId>compatibility-v4</artifactId>
+		  <version>18</version>
+		</dependency>
         <dependency>
             <groupId>com.google.android</groupId>
             <artifactId>android-test</artifactId>
@@ -24,13 +31,13 @@
         </dependency>
         <dependency>
             <groupId>com.itllp.barleylegalhomebrewers</groupId>
-            <artifactId>OnTap-app</artifactId>
+            <artifactId>App</artifactId>
             <version>${project.version}</version>
             <type>apk</type>
         </dependency>
         <dependency>
             <groupId>com.itllp.barleylegalhomebrewers</groupId>
-            <artifactId>OnTap-app</artifactId>
+            <artifactId>App</artifactId>
             <version>${project.version}</version>
             <scope>provided</scope>
             <type>jar</type>

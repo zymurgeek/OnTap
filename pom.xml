@@ -123,8 +123,8 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<modules>
-				<module>OnTap-app</module>
-				<module>OnTap-instrumentation</module>
+				<module>App</module>
+				<module>AndroidJUnitTests</module>
 			</modules>
 			<properties>
 				<!-- when i will try to enter this address the app will start :) -->
