@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/OnTap"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="lib/robolectric-2.2-20130802.075524-31-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="/home/dave/android-sdk-linux/add-ons/addon-google_apis-google-8/libs/maps.jar"/>
+	<classpathentry kind="lib" path="lib/robolectric-2.2-20130802.075524-31.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
