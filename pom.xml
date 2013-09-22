@@ -124,6 +124,7 @@
 			</activation>
 			<modules>
 				<module>App</module>
+				<module>JUnitTests</module>
 				<module>AndroidJUnitTests</module>
 			</modules>
 			<properties>
