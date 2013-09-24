@@ -1,6 +1,9 @@
 package com.itllp.barleylegalhomebrewers.ontap.database.test;
 
 import junit.framework.TestCase;
+import static org.mockito.Mockito.*;
+
+import android.database.sqlite.SQLiteDatabase;
 
 import com.itllp.barleylegalhomebrewers.ontap.database.SQLiteEventTable;
 
@@ -66,19 +69,17 @@ public class SQLiteEventTableTests extends TestCase {
 		
 	}
 	
-	/*
 	public void testOnCreate() {
 		// Set up preconditions
-		SQLiteEventTable table = new SQLiteEventTable();
-		//TODO Use RenamingDelegatingContext to test
+		SQLiteDatabase mockDatabase = mock(SQLiteDatabase.class);
 		
 		// Call method under test
-		table.onCreate(database);
+		SQLiteEventTable.onCreate(mockDatabase);
 		
 		// Verify postconditions
-		fail("Not yet implemented");
+		verify(mockDatabase).execSQL(SQLiteEventTable.DATABASE_CREATE);
 	}
-	*/
+
 	
 /*	
 	public void testUpdateTableWithNullJSONArray() {
