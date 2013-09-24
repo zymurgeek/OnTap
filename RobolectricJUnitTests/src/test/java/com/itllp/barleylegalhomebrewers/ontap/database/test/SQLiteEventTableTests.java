@@ -5,8 +5,8 @@ import junit.framework.TestCase;
 import com.itllp.barleylegalhomebrewers.ontap.database.SQLiteEventTable;
 
 public class SQLiteEventTableTests extends TestCase {
-/*
 	private StubEventTable stubEventTable;
+	/*
 	private StubJSONArrayToContentValuesConverter stubConverter;
 	private SQLiteEventTableFromJSONArrayUpdaterImpl cut;
 	private final String inputJSONString = "[ { } ]";

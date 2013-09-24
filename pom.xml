@@ -17,16 +17,17 @@
 
 	<dependencyManagement>
 		<dependencies>
+<!--
 			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>4.10</version>
+			  <groupId>junit</groupId>
+			  <artifactId>junit</artifactId>
+			  <version>4.10</version>
 			</dependency>
 			<dependency>
-				<groupId>android</groupId>
-				<artifactId>android</artifactId>
-				<version>${platform.version}</version>
-				<scope>provided</scope>
+			  <groupId>android</groupId>
+			  <artifactId>android</artifactId>
+			  <version>${platform.version}</version>
+			  <scope>provided</scope>
 			</dependency>
 			<dependency>
 			  <groupId>android.support</groupId>
@@ -39,10 +40,11 @@
 			  <version>4.1.1.4</version>
 			</dependency>
 			<dependency>
-				<groupId>com.google.android</groupId>
-				<artifactId>android-test</artifactId>
-				<version>4.1.1.4</version>
+			  <groupId>com.google.android</groupId>
+			  <artifactId>android-test</artifactId>
+			  <version>4.1.1.4</version>
 			</dependency>
+-->
 		</dependencies>
 	</dependencyManagement>
 
@@ -123,6 +125,8 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<modules>
+				<module>Library</module>
+				<module>LibraryJUnitTests</module>
 				<module>App</module>
 				<module>JUnitTests</module>
 				<module>AndroidJUnitTests</module>
