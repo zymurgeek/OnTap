@@ -31,6 +31,9 @@ public class EventDatabaseTests {
 		
 		// Postconditions
 		assertNotNull(EventDatabase.getInstance());
+		
+		// Clean up
+		FakeEventDatabase.clearInstance();
 	}
 
 	@Test
@@ -46,6 +49,10 @@ public class EventDatabaseTests {
 		} catch (DatabaseAlreadyInstantiatedException e) {
 			assertNotNull(e);
 		}
+		
+		// Clean up
+		FakeEventDatabase.clearInstance();
+
 	}
 	
 	@Test

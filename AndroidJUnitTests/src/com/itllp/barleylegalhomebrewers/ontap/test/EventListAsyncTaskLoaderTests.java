@@ -43,9 +43,9 @@ public class EventListAsyncTaskLoaderTests extends
     
     public void testLoadInBackground() {
     	// Preconditions
-    	FakeEventDatabaseLoader.clearInstance();
-    	FakeEventDatabaseLoader.create();
-    	FakeEventDatabaseLoader fakeLoader = (FakeEventDatabaseLoader)EventDatabaseLoader.getInstance();
+    	StubEventDatabaseLoader.clearInstance();
+    	StubEventDatabaseLoader.create();
+    	StubEventDatabaseLoader stubLoader = (StubEventDatabaseLoader)EventDatabaseLoader.getInstance();
 
     	FakeEventDatabase.clearInstance();
     	FakeEventDatabase.create();
@@ -60,7 +60,7 @@ public class EventListAsyncTaskLoaderTests extends
     	List<Event> actualEventList = loader.loadInBackground();
     	
     	// Postconditions
-    	assertEquals(1, fakeLoader.MOCK_getLoadCount());
+    	assertEquals(1, stubLoader.MOCK_getLoadCount());
     	assertEquals(expectedEventList, actualEventList);
     }
     

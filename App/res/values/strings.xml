@@ -2,6 +2,8 @@
 <resources>
 
     <string name="app_name">On Tap</string>
+    <string name="old_app_name">On Tap with direct I/O</string>
+    <string name="new_app_name">On Tap with Content Provider</string>
     <string name="event_list_label_text">All Events</string>
     <string name="beer_list_label_text">All Beers</string>
     <string name="no_events_text">No events</string>

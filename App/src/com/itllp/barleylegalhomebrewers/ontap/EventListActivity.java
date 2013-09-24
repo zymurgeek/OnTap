@@ -1,7 +1,7 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
 import com.itllp.barleylegalhomebrewers.ontap.R;
-import com.itllp.barleylegalhomebrewers.ontap.json.JsonUrlEventDatabaseLoader;
+import com.itllp.barleylegalhomebrewers.ontap.json.JSONUrlEventDatabaseLoader;
 
 import android.content.Context;
 import android.content.Intent;
@@ -43,7 +43,7 @@ public class EventListActivity extends FragmentActivity
 	        	NetworkConnectivity netConn = new AndroidNetworkConnectivity(connMgr);
 	        	EventDatabaseLoaderFactory.createProductionSiteEventDatabaseLoader(netConn);
         	} else {
-        		if (!(EventDatabaseLoader.getInstance() instanceof JsonUrlEventDatabaseLoader)) {
+        		if (!(EventDatabaseLoader.getInstance() instanceof JSONUrlEventDatabaseLoader)) {
         			throw (new DatabaseLoaderAlreadyInstantiatedException());
         		}
         	}

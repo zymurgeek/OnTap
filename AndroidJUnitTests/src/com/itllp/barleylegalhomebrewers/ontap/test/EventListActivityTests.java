@@ -32,7 +32,7 @@ import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoader;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoaderFactory;
 import com.itllp.barleylegalhomebrewers.ontap.EventListActivity;
 import com.itllp.barleylegalhomebrewers.ontap.EventListLoaderFactory;
-import com.itllp.barleylegalhomebrewers.ontap.json.JsonUrlEventDatabaseLoader;
+import com.itllp.barleylegalhomebrewers.ontap.json.JSONUrlEventDatabaseLoader;
 
 public class EventListActivityTests extends
 	ActivityUnitTestCase<EventListActivity> {
@@ -72,7 +72,7 @@ public class EventListActivityTests extends
     public void testInitialization() {
     	// Preconditions
     	FakeEventDatabase.clearInstance();
-    	FakeEventDatabaseLoader.clearInstance();
+    	StubEventDatabaseLoader.clearInstance();
 		intent.putExtra(EventListActivity.SKIP_INSTANTIATION_FOR_TESTING, false);
 
     	// Method under test
@@ -82,8 +82,8 @@ public class EventListActivityTests extends
     	// Postconditions
     	assertNotNull(activity);
     	assertTrue(EventDatabase.getInstance() instanceof EventDatabaseImpl);
-    	assertTrue(EventDatabaseLoader.getInstance() instanceof JsonUrlEventDatabaseLoader);
-    	JsonUrlEventDatabaseLoader loader = (JsonUrlEventDatabaseLoader)EventDatabaseLoader.getInstance();
+    	assertTrue(EventDatabaseLoader.getInstance() instanceof JSONUrlEventDatabaseLoader);
+    	JSONUrlEventDatabaseLoader loader = (JSONUrlEventDatabaseLoader)EventDatabaseLoader.getInstance();
     	String expectedUrl = EventDatabaseLoaderFactory.productionSiteUrl;
     	String actualUrl = loader.getUrl();
     	assertEquals(expectedUrl, actualUrl);
@@ -100,8 +100,8 @@ public class EventListActivityTests extends
     	// Postconditions
     	assertNotNull(activity);
     	assertTrue(EventDatabase.getInstance() instanceof EventDatabaseImpl);
-    	assertTrue(EventDatabaseLoader.getInstance() instanceof JsonUrlEventDatabaseLoader);
-    	JsonUrlEventDatabaseLoader loader = (JsonUrlEventDatabaseLoader)EventDatabaseLoader.getInstance();
+    	assertTrue(EventDatabaseLoader.getInstance() instanceof JSONUrlEventDatabaseLoader);
+    	JSONUrlEventDatabaseLoader loader = (JSONUrlEventDatabaseLoader)EventDatabaseLoader.getInstance();
     	String expectedUrl = EventDatabaseLoaderFactory.productionSiteUrl;
     	String actualUrl = loader.getUrl();
     	assertEquals(expectedUrl, actualUrl);
@@ -123,7 +123,7 @@ public class EventListActivityTests extends
     public void testInitializationWhenAlreadyInitializedWithWrongEventDatabaseLoader() {
     	// Preconditions
     	EventDatabaseLoader.clearInstance();
-    	FakeEventDatabaseLoader.create();
+    	StubEventDatabaseLoader.create();
 		intent.putExtra(EventListActivity.SKIP_INSTANTIATION_FOR_TESTING, false);
 
     	// Method under test and postconditions

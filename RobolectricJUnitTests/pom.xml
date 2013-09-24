@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+      <groupId>com.itllp.barleylegalhomebrewers</groupId>
+      <artifactId>OnTap-parent</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>RobolectricJUnitTests</artifactId>
+    <name>OnTap - Robolectric JUnit Tests</name>
+
+    <dependencies>
+	  <dependency>
+	    <groupId>com.itllp.barleylegalhomebrewers</groupId>
+	    <artifactId>App</artifactId>
+	    <version>1.0.0-SNAPSHOT</version>
+	    <scope>test</scope>
+	  </dependency>
+          <dependency>
+            <groupId>com.google.android</groupId>
+            <artifactId>android</artifactId>
+            <version>2.2.1</version>
+            <scope>provided</scope>
+          </dependency>
+          <!-- Make sure this is below the android dependencies -->
+          <dependency>
+            <groupId>org.robolectric</groupId>
+            <artifactId>robolectric</artifactId>
+            <version>2.1.1</version>
+            <scope>test</scope>
+          </dependency>
+	  <dependency>
+	    <groupId>junit</groupId>
+	    <artifactId>junit</artifactId>
+	    <version>4.8.2</version>
+	    <scope>test</scope>
+	  </dependency>
+	  <dependency>
+	    <groupId>org.mockito</groupId>
+	    <artifactId>mockito-all</artifactId>
+	    <version>1.9.5</version>
+	  </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                <artifactId>android-maven-plugin</artifactId>
+                <version>3.5.0</version>
+                <configuration>
+                    <sdk>
+                        <!-- platform or api level (api level 4 = platform 1.6)-->
+                        <platform>4</platform>
+                    </sdk>
+                    <undeployBeforeDeploy>true</undeployBeforeDeploy>
+                </configuration>
+                <extensions>true</extensions>
+            </plugin>
+	    <plugin>
+	      <groupId>org.apache.maven.plugins</groupId>
+	      <artifactId>maven-surefire-plugin</artifactId>
+	      <version>2.16</version>
+	      <configuration>
+		<includes>
+		  <include>**/*Tests.java</include>
+		</includes>
+	      </configuration>
+	    </plugin>
+        </plugins>
+    </build>
+</project>

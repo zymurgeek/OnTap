@@ -1,1 +1,8 @@
 doc
+*.jar
+*~
+*.ap_
+*.apk
+*.dex
+*.class
+*/target/*

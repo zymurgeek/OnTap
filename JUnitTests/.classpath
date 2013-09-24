@@ -5,5 +5,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/OnTap"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="var" path="MOCKITO_HOME/mockito-all-1.9.5.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/OnTap Library"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
