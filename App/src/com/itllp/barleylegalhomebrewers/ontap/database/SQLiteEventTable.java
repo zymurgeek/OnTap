@@ -32,7 +32,8 @@ public class SQLiteEventTable implements EventTable {
 			+ " " + SQLiteEventTable.NAME_COLUMN_TYPE + " NOT NULL, " 
 			+ SQLiteEventTable.START_LOCAL_TIME_COLUMN 
 			+ " " + SQLiteEventTable.START_LOCAL_TIME_COLUMN_TYPE + " NOT NULL);";
-
+	public static final String DROP_TABLE = "DROP TABLE IF EXISTS ";
+	
 	public SQLiteEventTable() {
 		openHelper = OnTapDatabaseHelper.getInstance();
 	}
@@ -49,7 +50,7 @@ public class SQLiteEventTable implements EventTable {
 		Log.w(SQLiteEventTable.class.getName(),
 				"Upgrading database from version " + oldVersion + " to "
 						+ newVersion + ", which will delete all old data");
-		db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+		db.execSQL(DROP_TABLE + TABLE_NAME);
 		onCreate(db);
 	}
 

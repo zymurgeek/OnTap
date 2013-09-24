@@ -1,13 +1,20 @@
 package com.itllp.barleylegalhomebrewers.ontap.database.test;
 
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import android.database.sqlite.SQLiteDatabase;
 
 import com.itllp.barleylegalhomebrewers.ontap.database.SQLiteEventTable;
 
-public class SQLiteEventTableTests extends TestCase {
+@RunWith(RobolectricTestRunner.class)
+public class SQLiteEventTableTests {
 	/*
 	private StubEventTable stubEventTable;
 	private StubJSONArrayToContentValuesConverter stubConverter;
@@ -22,13 +29,8 @@ public class SQLiteEventTableTests extends TestCase {
 	private List<ContentValues> inputContentValuesList;
 	*/
 	
-	public SQLiteEventTableTests(String name) {
-		super(name);
-	}
-
-	
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		/*
 		inputJSONArray = null;
 		try {
@@ -56,10 +58,12 @@ public class SQLiteEventTableTests extends TestCase {
 	}
 
 	
-	protected void tearDown() throws Exception {
-		super.tearDown();
+	@After
+	public void tearDown() throws Exception {
 	}
 
+	
+	@Test
 	public void testCreate() {
 		// Call method under test
 		SQLiteEventTable table = new SQLiteEventTable();
@@ -69,6 +73,8 @@ public class SQLiteEventTableTests extends TestCase {
 		
 	}
 	
+	
+	@Test
 	public void testOnCreate() {
 		// Set up preconditions
 		SQLiteDatabase mockDatabase = mock(SQLiteDatabase.class);
@@ -78,6 +84,22 @@ public class SQLiteEventTableTests extends TestCase {
 		
 		// Verify postconditions
 		verify(mockDatabase).execSQL(SQLiteEventTable.DATABASE_CREATE);
+	}
+
+
+	@Test
+	public void testOnUpgrade() {
+		// Set up preconditions
+		SQLiteDatabase mockDatabase = mock(SQLiteDatabase.class);
+		
+		// Call method under test
+		SQLiteEventTable.onUpgrade(mockDatabase, 0, 0);
+		
+		// Verify postconditions
+		verify(mockDatabase).execSQL(SQLiteEventTable.DATABASE_CREATE);
+		String DROP_TABLE_COMMAND = SQLiteEventTable.DROP_TABLE 
+				+ SQLiteEventTable.TABLE_NAME;
+		verify(mockDatabase).execSQL(DROP_TABLE_COMMAND);
 	}
 
 	
