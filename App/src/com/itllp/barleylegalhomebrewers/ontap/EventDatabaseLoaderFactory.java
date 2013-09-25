@@ -3,6 +3,8 @@ package com.itllp.barleylegalhomebrewers.ontap;
 import com.itllp.barleylegalhomebrewers.ontap.contentprovider.TableFromJSONArrayUpdater;
 import com.itllp.barleylegalhomebrewers.ontap.contentprovider.EventTableUpdater;
 import com.itllp.barleylegalhomebrewers.ontap.contentprovider.SQLiteEventTableFromJSONArrayUpdaterImpl;
+import com.itllp.barleylegalhomebrewers.ontap.database.CursorConverter;
+import com.itllp.barleylegalhomebrewers.ontap.database.CursorConverterImpl;
 import com.itllp.barleylegalhomebrewers.ontap.database.EventTable;
 import com.itllp.barleylegalhomebrewers.ontap.database.SQLiteEventTable;
 import com.itllp.barleylegalhomebrewers.ontap.dateconverter.JavaDateToSQLiteDateConverter;
@@ -36,7 +38,8 @@ public class EventDatabaseLoaderFactory {
 				(jsonDateConverter,	javaDateConverter);
 		JSONArrayToContentValuesListConverter listConverter =
 				new JSONArrayToContentValuesListConverterImpl(objectConverter);
-		EventTable eventTable = new SQLiteEventTable();
+		CursorConverter cursorConverter = new CursorConverterImpl();
+		EventTable eventTable = new SQLiteEventTable(cursorConverter);
 		TableFromJSONArrayUpdater eventTableFromJSONArrayUpdater = 
 				new SQLiteEventTableFromJSONArrayUpdaterImpl(listConverter,
 						eventTable);

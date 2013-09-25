@@ -7,10 +7,11 @@ import com.itllp.barleylegalhomebrewers.ontap.contentprovider.EventContentProvid
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class SQLiteEventTable implements EventTable {
-	private OnTapDatabaseHelper openHelper = null;
+	private SQLiteOpenHelper openHelper = null;
 	// Database table
 	public static final String TABLE_NAME = "event";
 	
@@ -33,8 +34,11 @@ public class SQLiteEventTable implements EventTable {
 			+ SQLiteEventTable.START_LOCAL_TIME_COLUMN 
 			+ " " + SQLiteEventTable.START_LOCAL_TIME_COLUMN_TYPE + " NOT NULL);";
 	public static final String DROP_TABLE = "DROP TABLE IF EXISTS ";
+	private CursorConverter cursorConverter;
 	
-	public SQLiteEventTable() {
+	
+	public SQLiteEventTable(CursorConverter converter) {
+		cursorConverter = converter;
 		openHelper = OnTapDatabaseHelper.getInstance();
 	}
 	  
@@ -54,18 +58,17 @@ public class SQLiteEventTable implements EventTable {
 		onCreate(db);
 	}
 
+	
 	@Override
-	public ContentValues getContentValuesInTable(Integer id) {
+	public ContentValues getEvent(Integer id) {
 		SQLiteDatabase db = openHelper.getReadableDatabase();
 		String selection = ID_COLUMN + "=?";
 		String[] selectionArgs = { id.toString() };
 		android.database.Cursor cursor = db.query(TABLE_NAME, null, 
 				selection, selectionArgs, null, null, null);
-		ContentValues contentValues = null;
+		ContentValues contentValues = new ContentValues();
 		if (cursor.moveToFirst()) {
-			contentValues = new ContentValues();
-	        android.database.DatabaseUtils.cursorRowToContentValues(cursor, 
-	        		contentValues);     
+			contentValues = cursorConverter.getContentValues(cursor);
 		}
 		cursor.close();
 		return contentValues;
@@ -73,7 +76,7 @@ public class SQLiteEventTable implements EventTable {
 
 	
 	@Override
-	public List<ContentValues> getContentValuesInTableList() {
+	public List<ContentValues> getAllEvents() {
 		SQLiteDatabase db = openHelper.getReadableDatabase();
 		String selection = null;
 		String[] selectionArgs = null;
@@ -98,7 +101,7 @@ public class SQLiteEventTable implements EventTable {
 	
 	
 	@Override
-	public List<Integer> getIdsInTableList() {
+	public List<Integer> getAllIds() {
 		List<Integer> result = new ArrayList<Integer>();
 		return result;
 	}
@@ -134,7 +137,7 @@ public class SQLiteEventTable implements EventTable {
 	}
 
 	@Override
-	public void deleteID(Integer id) {
+	public void delete(Integer id) {
 		if (id == null) {
 			return;
 		}

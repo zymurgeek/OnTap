@@ -29,7 +29,7 @@ public class SQLiteEventTableFromJSONArrayUpdaterImpl implements
 			return;
 		}
 		
-		List<Integer> idsInTable = eventTable.getIdsInTableList();
+		List<Integer> idsInTable = eventTable.getAllIds();
 		List<ContentValues> insertList = new ArrayList<ContentValues>();
 		List<ContentValues> updateList = new ArrayList<ContentValues>();
 		List<Integer> deleteList = new ArrayList<Integer>();
@@ -49,13 +49,13 @@ public class SQLiteEventTableFromJSONArrayUpdaterImpl implements
 		for (ContentValues contentValues : updateList) {
 			Integer id = contentValues.getAsInteger(EventTable.ID_COLUMN);
 			ContentValues contentValuesInTable = 
-					eventTable.getContentValuesInTable(id);
+					eventTable.getEvent(id);
 			if (contentValues != contentValuesInTable) {
 				eventTable.update(contentValues);
 			}
 		}
 		for (Integer id : deleteList) {
-			eventTable.deleteID(id);
+			eventTable.delete(id);
 		}
 	}
 

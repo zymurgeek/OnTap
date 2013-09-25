@@ -10,13 +10,13 @@ import com.itllp.barleylegalhomebrewers.ontap.database.EventTable;
 public class StubEventTable implements EventTable {
 
 	@Override
-	public List<ContentValues> getContentValuesInTableList() {
+	public List<ContentValues> getAllEvents() {
 		return stub_contentValuesInTableList;
 	}
 	
 	
 	@Override
-	public List<Integer> getIdsInTableList() {
+	public List<Integer> getAllIds() {
 		List<Integer> idsInTableList = new ArrayList<Integer>();
 		for (ContentValues contentValues : stub_contentValuesInTableList) {
 			idsInTableList.add(contentValues.getAsInteger(EventTable.ID_COLUMN));
@@ -38,13 +38,13 @@ public class StubEventTable implements EventTable {
 	
 	
 	@Override
-	public void deleteID(Integer id) {
+	public void delete(Integer id) {
 		stub_deletedIdsList.add(id);
 	}
 	
 	
 	@Override
-	public ContentValues getContentValuesInTable(Integer id) {
+	public ContentValues getEvent(Integer id) {
 		for (ContentValues contentValue : stub_contentValuesInTableList) {
 			Integer idInTable = contentValue.getAsInteger(ID_COLUMN);
 			if (idInTable == id) {

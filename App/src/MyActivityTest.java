@@ -1,6 +1,6 @@
 
 //import com.itllp.barleylegalhomebrewers.ontap.EventListActivity;
-import com.itllp.barleylegalhomebrewers.ontap.R;
+//import com.itllp.barleylegalhomebrewers.ontap.R;
 //import com.xtremelabs.robolectric.RobolectricTestRunner;
 //import org.junit.Test;
 //import org.junit.runner.RunWith;

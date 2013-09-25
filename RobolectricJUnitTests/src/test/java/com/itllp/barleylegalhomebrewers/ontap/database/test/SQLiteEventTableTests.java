@@ -9,12 +9,27 @@ import org.robolectric.RobolectricTestRunner;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
+import com.itllp.barleylegalhomebrewers.ontap.database.CursorConverter;
+import com.itllp.barleylegalhomebrewers.ontap.database.OnTapDatabaseHelper;
 import com.itllp.barleylegalhomebrewers.ontap.database.SQLiteEventTable;
 
 @RunWith(RobolectricTestRunner.class)
 public class SQLiteEventTableTests {
+	private SQLiteDatabase mockDatabase;
+	private SQLiteDatabase mockDb;
+	private SQLiteOpenHelper mockOpenHelper;
+	private Cursor mockCursor;
+	private Integer eventId = 42;
+	private CursorConverter mockCursorConverter;
+	private ContentValues expectedEvent;
+	private SQLiteEventTable sqliteEventTable;
+
+
 	/*
 	private StubEventTable stubEventTable;
 	private StubJSONArrayToContentValuesConverter stubConverter;
@@ -31,6 +46,23 @@ public class SQLiteEventTableTests {
 	
 	@Before
 	public void setUp() throws Exception {
+		mockDatabase = mock(SQLiteDatabase.class);
+		mockDb = mock(SQLiteDatabase.class);
+		mockOpenHelper = mock(SQLiteOpenHelper.class);
+		OnTapDatabaseHelper.setInstance(mockOpenHelper);
+		when(mockOpenHelper.getReadableDatabase()).thenReturn(mockDb);
+		String selection = SQLiteEventTable.ID_COLUMN + "=?";
+		String[] selectionArgs = { eventId.toString() };
+		mockCursor = mock(Cursor.class);
+		when(mockDb.query(SQLiteEventTable.TABLE_NAME, null, 
+				selection, selectionArgs, null, null, null))
+				.thenReturn(mockCursor);
+		mockCursorConverter = mock(CursorConverter.class);
+		expectedEvent = new ContentValues();
+		expectedEvent.put("A", 2);
+		when(mockCursorConverter.getContentValues(mockCursor))
+		.thenReturn(expectedEvent);
+		sqliteEventTable = new SQLiteEventTable(mockCursorConverter);
 		/*
 		inputJSONArray = null;
 		try {
@@ -60,25 +92,14 @@ public class SQLiteEventTableTests {
 	
 	@After
 	public void tearDown() throws Exception {
+		if (null != OnTapDatabaseHelper.getInstance()) {
+			OnTapDatabaseHelper.setInstance(null);
+		}
 	}
 
 	
 	@Test
-	public void testCreate() {
-		// Call method under test
-		SQLiteEventTable table = new SQLiteEventTable();
-		
-		// Verify postconditions
-		assertNotNull(table);
-		
-	}
-	
-	
-	@Test
 	public void testOnCreate() {
-		// Set up preconditions
-		SQLiteDatabase mockDatabase = mock(SQLiteDatabase.class);
-		
 		// Call method under test
 		SQLiteEventTable.onCreate(mockDatabase);
 		
@@ -89,9 +110,6 @@ public class SQLiteEventTableTests {
 
 	@Test
 	public void testOnUpgrade() {
-		// Set up preconditions
-		SQLiteDatabase mockDatabase = mock(SQLiteDatabase.class);
-		
 		// Call method under test
 		SQLiteEventTable.onUpgrade(mockDatabase, 0, 0);
 		
@@ -102,7 +120,36 @@ public class SQLiteEventTableTests {
 		verify(mockDatabase).execSQL(DROP_TABLE_COMMAND);
 	}
 
+
+	@Test
+	public void testGetEventWhenEventExists() {
+		// Set up preconditions
+		when(mockCursor.moveToFirst()).thenReturn(true).thenReturn(false);
+		
+		// Call method under test
+		ContentValues actualEvent = sqliteEventTable.getEvent(eventId);
+		
+		// Verify postconditions
+		verify(mockCursor).close();
+		assertEquals(expectedEvent, actualEvent);
+	}
 	
+	
+	@Test
+	public void testGetEventWhenEventDoesNotExist() {
+		// Set up preconditions
+		when(mockCursor.moveToFirst()).thenReturn(false);
+		
+		// Call method under test
+		ContentValues actualEvent = sqliteEventTable.getEvent(eventId);
+		
+		// Verify postconditions
+		verify(mockCursor).close();
+		assertEquals(0, actualEvent.size());
+	}
+	
+	
+	// TODO add test for registering table with database helper
 /*	
 	public void testUpdateTableWithNullJSONArray() {
 		// Call method under test
