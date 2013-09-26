@@ -1,2 +1,45 @@
 OnTap is an Android app that provides information about what's
 available at a Barley Legal Homebrewers beer festival.
+
+To build this software requires:
+     The Android SDK with platform 1.6 (API 4)
+These are required to run the Robolectric unit tests:
+     Maven 2
+     Maven Android SDK Deployer
+     Maven Eclipse Plug-In (Required only if you use Eclipse)
+     Robolectric
+
+* Android SDK
+
+ http://developer.android.com/tools/index.html
+
+* Maven 3.0.5 or later
+
+ http://http://maven.apache.org/
+
+* Maven Android SDK Deployer
+
+Available at https://github.com/mosabua/maven-android-sdk-deployer
+
+Before using the Maven Android SDK Deployer, I recommend to install
+*everything* from the Android SDK Manager.  I tried to install only
+the SDK platforms I needed and the deployer complained it couldn't
+find things I wasn't using.
+
+* Maven Eclipse Plug-In 
+
+In Eclipse, from the menu, select Help > Install New Software.  Set
+"Work With" to "<Eclipse version name> -
+http://download/eclipse.org/releases/<Eclipse version name>".  Set
+filter text to "m2e".  Select "m2e - Maven Integration for Eclipse"
+and "m2e - slf4j over logback logging (Optional)".  If you do not load
+the latter, Eclipse will write this error to the screen when it
+starts: 
+
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".  
+
+This doesn't seem to have any other negative effects.
+
+* Robolectric 
+
+Available at http://pivotal.github.io/robolectric/
