@@ -56,9 +56,16 @@ public class EventContentProvider extends ContentProvider {
 		// return rowsAffected;
 	}
 
+	
 	public static EventContentProvider getInstance() {
 		return instance;
 	}
+	
+	
+	public static void setInstance(EventContentProvider newProvider) {
+		instance = newProvider;
+	}
+
 	
 	@Override
 	public String getType(Uri uri) {

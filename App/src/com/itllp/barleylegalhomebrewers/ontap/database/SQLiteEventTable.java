@@ -86,9 +86,7 @@ public class SQLiteEventTable implements EventTable {
 				new ArrayList<ContentValues>();
 		if(cursor.moveToFirst()) {       
 		   do {
-		        ContentValues contentValues = new ContentValues();
-		        android.database.DatabaseUtils.cursorRowToContentValues(cursor, 
-		        		contentValues);                 
+		        ContentValues contentValues = cursorConverter.getContentValues(cursor);                 
 		        contentValuesList.add(contentValues);
 		    } while(cursor.moveToNext());
 		}
@@ -103,6 +101,10 @@ public class SQLiteEventTable implements EventTable {
 	@Override
 	public List<Integer> getAllIds() {
 		List<Integer> result = new ArrayList<Integer>();
+		List<ContentValues> allEvents = getAllEvents();
+		for (ContentValues values : allEvents) {
+			result.add(values.getAsInteger(EventTable.ID_COLUMN));
+		}
 		return result;
 	}
 
