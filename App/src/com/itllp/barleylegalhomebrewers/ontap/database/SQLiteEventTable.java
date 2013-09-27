@@ -147,6 +147,7 @@ public class SQLiteEventTable implements EventTable {
 		String whereClause = ID_COLUMN + "=?";
 		String[] whereArgs = { id.toString() };
 		db.delete(TABLE_NAME, whereClause, whereArgs);
+		notifyOfEventTableChange();
 	}
 
 }

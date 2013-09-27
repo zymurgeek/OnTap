@@ -36,22 +36,11 @@ public class SQLiteEventTableTests {
 	private ContentValues expectedEvent1;
 	private ContentValues expectedEvent2;
 	private SQLiteEventTable sqliteEventTable;
+	private ContentResolver mockContentResolver;
+	private Context mockContext;
+	private EventContentProvider mockEventCP;
 
 
-	/*
-	private StubEventTable stubEventTable;
-	private StubJSONArrayToContentValuesConverter stubConverter;
-	private SQLiteEventTableFromJSONArrayUpdaterImpl cut;
-	private final String inputJSONString = "[ { } ]";
-	private final org.json.JSONArray emptyJSONArray = new org.json.JSONArray();
-	private org.json.JSONArray inputJSONArray;	
-	private ContentValues contentValues1;
-	private ContentValues contentValues2;
-	private ContentValues updatedContentValues1;
-	private List<ContentValues> contentValuesInTableList;
-	private List<ContentValues> inputContentValuesList;
-	*/
-	
 	@Before
 	public void setUp() throws Exception {
 		mockDatabase = mock(SQLiteDatabase.class);
@@ -77,30 +66,12 @@ public class SQLiteEventTableTests {
 		.thenReturn(expectedEvent1)
 		.thenReturn(expectedEvent2);
 		sqliteEventTable = new SQLiteEventTable(mockCursorConverter);
-		/*
-		inputJSONArray = null;
-		try {
-			inputJSONArray = new org.json.JSONArray(inputJSONString);
-		} catch (org.json.JSONException x) {
-			fail("Failed to parse JSON string" + x);
-		}
-		contentValues1 = new ContentValues();
-		contentValues1.put(EventTable.ID_COLUMN, 1);
-		contentValues1.put(EventTable.NAME_COLUMN, "event 1");
-		contentValues2 = new ContentValues();
-		contentValues2.put(EventTable.ID_COLUMN, 2);
-		contentValues2.put(EventTable.NAME_COLUMN, "event 2");
-		updatedContentValues1 = new ContentValues();
-		updatedContentValues1.put(EventTable.ID_COLUMN, 1);
-		updatedContentValues1.put(EventTable.NAME_COLUMN, "updated event 1");
-		contentValuesInTableList = new ArrayList<ContentValues>();
-		inputContentValuesList = new ArrayList<ContentValues>();
-
-		stubEventTable = new StubEventTable();
-		stubConverter = new StubJSONArrayToContentValuesConverter();
-		cut = new SQLiteEventTableFromJSONArrayUpdaterImpl(stubConverter, 
-				stubEventTable);
-		*/
+		mockContentResolver = mock(ContentResolver.class);
+		mockContext = mock(Context.class);
+		when(mockContext.getContentResolver()).thenReturn(mockContentResolver);
+		mockEventCP = mock(EventContentProvider.class);
+		when(mockEventCP.getContext()).thenReturn(mockContext);
+		EventContentProvider.setInstance(mockEventCP);
 	}
 
 	
@@ -225,14 +196,6 @@ public class SQLiteEventTableTests {
 	
 	@Test
 	public void testInsert() {
-		// Set up preconditions
-		ContentResolver mockContentResolver = mock(ContentResolver.class);
-		Context mockContext = mock(Context.class);
-		when(mockContext.getContentResolver()).thenReturn(mockContentResolver);
-		EventContentProvider mockEventCP = mock(EventContentProvider.class);
-		when(mockEventCP.getContext()).thenReturn(mockContext);
-		EventContentProvider.setInstance(mockEventCP);
-		
 		// Call method under test
 		sqliteEventTable.insert(expectedEvent1);
 		
@@ -241,141 +204,44 @@ public class SQLiteEventTableTests {
 		verify(mockContentResolver).notifyChange(EventContentProvider.CONTENT_URI, null);
 	}
 	
+	
+	@Test
+	public void testUpdate() {
+		// Set up preconditions
+		String whereClause = SQLiteEventTable.ID_COLUMN + "=?";
+		Integer id = expectedEvent2.getAsInteger(SQLiteEventTable.ID_COLUMN_TYPE);
+		if (id == null) {
+			return;
+		}
+		String[] whereArgs = { id.toString() };
+
+		// Call method under test
+		sqliteEventTable.update(expectedEvent2);
+		
+		// Verify postconditions
+		verify(mockDatabase).update(SQLiteEventTable.TABLE_NAME, expectedEvent2,
+				whereClause, whereArgs);
+		verify(mockContentResolver).notifyChange(EventContentProvider.CONTENT_URI, null);
+	}
+	
+	
+	@Test
+	public void testDelete() {
+		// Set up preconditions
+		String whereClause = SQLiteEventTable.ID_COLUMN + "=?";
+		String[] whereArgs = { eventId42.toString() };
+		
+		// Call method under test
+		sqliteEventTable.delete(eventId42);
+		
+		// Verify postconditions
+		verify(mockDatabase).delete(SQLiteEventTable.TABLE_NAME, 
+				whereClause, whereArgs);
+		verify(mockContentResolver).notifyChange(EventContentProvider.CONTENT_URI, 
+				null);
+	}
+	
+	
 	// FIXME 1: Continue here
 	// TODO add test for registering table with database helper
-/*	
-	public void testUpdateTableWithNullJSONArray() {
-		// Call method under test
-		cut.updateTable(null);
-		
-		// Verify postconditions
-		assertEquals(0, stubEventTable.stub_getInsertedContentValuesList().
-				size());
-		assertEquals(0, stubEventTable.stub_getUpdatedContentValuesList().
-				size());
-		assertEquals(0, stubEventTable.stub_getDeletedIdsList().size());
-	}
-
-	
-	public void testUpdateEmptyTableWithEmptyJSONArray() {
-		// Call method under test
-		cut.updateTable(emptyJSONArray);
-
-		// Verify postconditions
-		assertEquals(0, stubEventTable.stub_getInsertedContentValuesList().
-				size());
-		assertEquals(0, stubEventTable.stub_getUpdatedContentValuesList().
-				size());
-		assertEquals(0, stubEventTable.stub_getDeletedIdsList().size());
-	}
-
-	
-	public void testUpdateTableWithOneNewEvent() {
-		// Set up Preconditions
-		inputContentValuesList.add(contentValues1);
-		stubConverter.stub_addConversion(inputJSONArray, 
-				inputContentValuesList);
-
-		// Call method under test
-		cut.updateTable(inputJSONArray);
-		
-		// Verify postconditions
-		assertEquals(inputContentValuesList, 
-				stubEventTable.stub_getInsertedContentValuesList());
-		assertEquals(0, stubEventTable.stub_getUpdatedContentValuesList().
-				size());
-		assertEquals(0, stubEventTable.stub_getDeletedIdsList().size());
-	}
-
-	
-	public void testUpdateTableWithTwoNewEvents() {
-		// Set up Preconditions
-		inputContentValuesList.add(contentValues1);
-		inputContentValuesList.add(contentValues2);
-		stubConverter.stub_addConversion(inputJSONArray, 
-				inputContentValuesList);
-
-		// Call method under test
-		cut.updateTable(inputJSONArray);
-		
-		// Verify postconditions
-		assertEquals(inputContentValuesList, stubEventTable
-				.stub_getInsertedContentValuesList());
-		assertEquals(0, stubEventTable.stub_getUpdatedContentValuesList().
-				size());
-		assertEquals(0, stubEventTable.stub_getDeletedIdsList().size());
-	}
-
-	
-	public void testUpdateTableWithOneUpdatedEvent() {
-		// Set up Preconditions
-		contentValuesInTableList.add(contentValues1);
-		stubEventTable.stub_setContentValuesInTable(contentValuesInTableList);
-		
-		inputContentValuesList.add(updatedContentValues1);
-		stubConverter.stub_addConversion(inputJSONArray, 
-				inputContentValuesList);
-
-		// Call method under test
-		cut.updateTable(inputJSONArray);
-		
-		// Verify postconditions
-		assertEquals(0, stubEventTable
-				.stub_getInsertedContentValuesList().size());
-		assertEquals(inputContentValuesList, 
-				stubEventTable.stub_getUpdatedContentValuesList());
-		assertEquals(0, stubEventTable.stub_getDeletedIdsList().size());
-
-	}
-
-
-	public void testUpdateTableWithSameEvent() {
-		// Set up Preconditions
-		contentValuesInTableList.add(contentValues1);
-		stubEventTable.stub_setContentValuesInTable(contentValuesInTableList);
-		
-		inputContentValuesList.add(contentValues1);
-		stubConverter.stub_addConversion(inputJSONArray, 
-				inputContentValuesList);
-
-		// Call method under test
-		cut.updateTable(inputJSONArray);
-		
-		// Verify postconditions
-		assertEquals(0, stubEventTable
-				.stub_getInsertedContentValuesList().size());
-		assertEquals(0,	stubEventTable.
-				stub_getUpdatedContentValuesList().size());
-		assertEquals(0, stubEventTable.stub_getDeletedIdsList().size());
-
-	}
-
-
-	public void testUpdateTableWithOneDeletedEvent() {
-		// Set up Preconditions
-		contentValuesInTableList.add(contentValues1);
-		stubEventTable.stub_setContentValuesInTable(contentValuesInTableList);
-		
-		stubConverter.stub_addConversion(inputJSONArray, 
-				inputContentValuesList);
-		
-		List<Integer> expectedDeletedIds = new ArrayList<Integer>();
-		expectedDeletedIds.add(Integer.valueOf(1));
-
-		// Call method under test
-		cut.updateTable(inputJSONArray);
-		
-		// Verify postconditions
-		assertEquals(0, stubEventTable
-				.stub_getInsertedContentValuesList().size());
-		assertEquals(0,	stubEventTable.stub_getUpdatedContentValuesList().
-				size());
-		assertEquals(expectedDeletedIds, stubEventTable.
-				stub_getDeletedIdsList());
-
-	}
-
-*/
-	
-	// TODO Finish tests
 }
