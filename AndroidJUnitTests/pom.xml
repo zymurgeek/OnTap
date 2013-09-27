@@ -25,19 +25,10 @@
 	  <artifactId>compatibility-v4</artifactId>
 	  <version>18</version>
 	</dependency>
-<!--
-	<dependency>
-	  <groupId>com.google.android.annotations</groupId>
-	  <artifactId>annotations</artifactId>
-	  <version>22.0.1</version>
-	  <scope>provided</scope>
-	</dependency>
--->
-
         <dependency>
             <groupId>com.google.android</groupId>
             <artifactId>android-test</artifactId>
-	    <version>4.1.1.4</version>
+	    <version>${platform.test.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
