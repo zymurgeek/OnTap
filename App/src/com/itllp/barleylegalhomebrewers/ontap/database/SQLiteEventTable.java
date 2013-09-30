@@ -7,11 +7,10 @@ import com.itllp.barleylegalhomebrewers.ontap.contentprovider.EventContentProvid
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class SQLiteEventTable implements EventTable {
-	private SQLiteOpenHelper openHelper = null;
+	private OnTapDatabaseHelper openHelper = null;
 	// Database table
 	public static final String TABLE_NAME = "event";
 	
@@ -40,9 +39,10 @@ public class SQLiteEventTable implements EventTable {
 	public SQLiteEventTable(CursorConverter converter) {
 		cursorConverter = converter;
 		openHelper = OnTapDatabaseHelper.getInstance();
+		openHelper.registerTable(this);
 	}
-	  
-	public static void onCreate(SQLiteDatabase database) {
+
+	public void onCreate(SQLiteDatabase database) {
 		database.execSQL(DATABASE_CREATE);
 
 		// For working directly with the SQLite database:
@@ -50,7 +50,8 @@ public class SQLiteEventTable implements EventTable {
 
 	}
 
-	public static void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+	
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		Log.w(SQLiteEventTable.class.getName(),
 				"Upgrading database from version " + oldVersion + " to "
 						+ newVersion + ", which will delete all old data");
@@ -129,7 +130,7 @@ public class SQLiteEventTable implements EventTable {
 	public void update(ContentValues contentValues) {
 		SQLiteDatabase db = openHelper.getWritableDatabase();
 		String whereClause = ID_COLUMN + "=?";
-		Integer id = contentValues.getAsInteger(ID_COLUMN_TYPE);
+		Integer id = contentValues.getAsInteger(ID_COLUMN);
 		if (id == null) {
 			return;
 		}

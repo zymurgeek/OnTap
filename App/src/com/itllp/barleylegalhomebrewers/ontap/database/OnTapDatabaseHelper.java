@@ -7,7 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class OnTapDatabaseHelper extends SQLiteOpenHelper {
 	private static final String DATABASE_NAME = "ontap.db";
 	private static final int DATABASE_VERSION = 1;
-	private static SQLiteOpenHelper instance = null;
+	private static OnTapDatabaseHelper instance = null;
+	private SQLiteEventTable sqliteEventTable = null;
 
 	
 	public OnTapDatabaseHelper(Context context) {
@@ -21,25 +22,34 @@ public class OnTapDatabaseHelper extends SQLiteOpenHelper {
 	}
 
 	
-	public static SQLiteOpenHelper getInstance() {
+	public static OnTapDatabaseHelper getInstance() {
 		return instance;
 	}
 	
 
 	public void onCreate(SQLiteDatabase sqLiteDatabase) {
-		SQLiteEventTable.onCreate(sqLiteDatabase);
+		if (null != sqliteEventTable) {
+			sqliteEventTable.onCreate(sqLiteDatabase);
+		}
 	}
 
 	
 	@Override
 	public void onUpgrade(SQLiteDatabase database, int oldVersion,
 			int newVersion) {
-		SQLiteEventTable.onUpgrade(database, oldVersion, newVersion);
+		if (null != sqliteEventTable) {
+			sqliteEventTable.onUpgrade(database, oldVersion, newVersion);
+		}
 	}
 
 
-	public static void setInstance(SQLiteOpenHelper openHelper) {
+	public static void setInstance(OnTapDatabaseHelper openHelper) {
 		instance = openHelper;
+	}
+
+
+	public void registerTable(SQLiteEventTable newTable) {
+		sqliteEventTable = newTable;
 	}
 
 

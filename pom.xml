@@ -106,8 +106,9 @@
 			<modules>
 				<module>Library</module>
 				<module>LibraryJUnitTests</module>
-				<module>App</module>
 				<module>JUnitTests</module>
+				<module>RobolectricJUnitTests</module>
+				<module>App</module>
 				<module>AndroidJUnitTests</module>
 			</modules>
 			<properties>

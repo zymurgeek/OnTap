@@ -16,8 +16,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-
 import com.itllp.barleylegalhomebrewers.ontap.contentprovider.EventContentProvider;
 import com.itllp.barleylegalhomebrewers.ontap.database.CursorConverter;
 import com.itllp.barleylegalhomebrewers.ontap.database.EventTable;
@@ -27,7 +25,7 @@ import com.itllp.barleylegalhomebrewers.ontap.database.SQLiteEventTable;
 @RunWith(RobolectricTestRunner.class)
 public class SQLiteEventTableTests {
 	private SQLiteDatabase mockDatabase;
-	private SQLiteOpenHelper mockOpenHelper;
+	private OnTapDatabaseHelper mockDatabaseHelper;
 	private Cursor mockCursor;
 	private Integer eventId42 = 42;
 	final private Integer expectedId1 = 2;
@@ -44,10 +42,10 @@ public class SQLiteEventTableTests {
 	@Before
 	public void setUp() throws Exception {
 		mockDatabase = mock(SQLiteDatabase.class);
-		mockOpenHelper = mock(SQLiteOpenHelper.class);
-		OnTapDatabaseHelper.setInstance(mockOpenHelper);
-		when(mockOpenHelper.getReadableDatabase()).thenReturn(mockDatabase);
-		when(mockOpenHelper.getWritableDatabase()).thenReturn(mockDatabase);
+		mockDatabaseHelper = mock(OnTapDatabaseHelper.class);
+		OnTapDatabaseHelper.setInstance(mockDatabaseHelper);
+		when(mockDatabaseHelper.getReadableDatabase()).thenReturn(mockDatabase);
+		when(mockDatabaseHelper.getWritableDatabase()).thenReturn(mockDatabase);
 		String selection = SQLiteEventTable.ID_COLUMN + "=?";
 		String[] selectionArgs = { eventId42.toString() };
 		mockCursor = mock(Cursor.class);
@@ -86,7 +84,7 @@ public class SQLiteEventTableTests {
 	@Test
 	public void testOnCreate() {
 		// Call method under test
-		SQLiteEventTable.onCreate(mockDatabase);
+		sqliteEventTable.onCreate(mockDatabase);
 		
 		// Verify postconditions
 		verify(mockDatabase).execSQL(SQLiteEventTable.DATABASE_CREATE);
@@ -96,7 +94,7 @@ public class SQLiteEventTableTests {
 	@Test
 	public void testOnUpgrade() {
 		// Call method under test
-		SQLiteEventTable.onUpgrade(mockDatabase, 0, 0);
+		sqliteEventTable.onUpgrade(mockDatabase, 0, 0);
 		
 		// Verify postconditions
 		verify(mockDatabase).execSQL(SQLiteEventTable.DATABASE_CREATE);
@@ -209,10 +207,7 @@ public class SQLiteEventTableTests {
 	public void testUpdate() {
 		// Set up preconditions
 		String whereClause = SQLiteEventTable.ID_COLUMN + "=?";
-		Integer id = expectedEvent2.getAsInteger(SQLiteEventTable.ID_COLUMN_TYPE);
-		if (id == null) {
-			return;
-		}
+		Integer id = expectedEvent2.getAsInteger(SQLiteEventTable.ID_COLUMN);
 		String[] whereArgs = { id.toString() };
 
 		// Call method under test
@@ -242,6 +237,12 @@ public class SQLiteEventTableTests {
 	}
 	
 	
-	// FIXME 1: Continue here
-	// TODO add test for registering table with database helper
+	@Test
+	public void testRegisterWithOnTapDatabaseHelper() {
+		// Call method under test
+		SQLiteEventTable newTable = new SQLiteEventTable(mockCursorConverter);
+		
+		// Verify postconditions
+		verify(mockDatabaseHelper).registerTable(newTable);
+	}
 }

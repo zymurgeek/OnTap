@@ -57,6 +57,37 @@
 		</includes>
 	      </configuration>
 	    </plugin>
+<!-- This plugin tries to generate a coverage report for source contained in the same module, so it doesn't
+     see any classes. -->
+<!-- 
+	    <plugin>
+	      <groupId>org.jacoco</groupId>
+	      <artifactId>jacoco-maven-plugin</artifactId>
+	      <version>0.6.2.201302030002</version>
+	      <executions>
+		<execution>
+		  <goals>
+		    <goal>prepare-agent</goal>
+		  </goals>
+		</execution>
+		<execution>
+		  <id>report</id>
+		  <phase>prepare-package</phase>
+		  <goals>
+		    <goal>report</goal>
+		  </goals>
+		</execution>
+	      </executions>
+	      <configuration>
+		<includes>
+		  <include>com/itllp/barleylegalhomebrewers/ontap/*</include>
+		  <include>com/itllp/barleylegalhomebrewers/ontap/test/*</include>
+		  <include>com/itllp/barleylegalhomebrewers/ontap/database/*</include>
+		  <include>com/itllp/barleylegalhomebrewers/ontap/database/test/*</include>
+		</includes>
+	      </configuration>
+	    </plugin>  
+-->
         </plugins>
     </build>
 </project>
