@@ -1,7 +1,5 @@
 package com.itllp.barleylegalhomebrewers.ontap.test;
 
-import android.content.Context;
-
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoader;
 
 public class StubEventDatabaseLoader extends EventDatabaseLoader {
@@ -17,7 +15,7 @@ public class StubEventDatabaseLoader extends EventDatabaseLoader {
 	}
 
 	@Override
-	public void load(Context unused) {
+	public void load() {
 		++loadCount;
 	}
 	

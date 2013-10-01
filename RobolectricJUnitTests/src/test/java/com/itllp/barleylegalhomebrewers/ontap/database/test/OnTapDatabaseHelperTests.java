@@ -101,6 +101,5 @@ public class OnTapDatabaseHelperTests {
 		verify(mockEventTable).onUpgrade(sqliteDb, 1, 2);
 	}
 
-//TODO 1 continue implementing tests
 
 }

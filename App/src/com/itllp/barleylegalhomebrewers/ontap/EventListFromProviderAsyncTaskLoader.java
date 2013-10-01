@@ -14,9 +14,7 @@ public class EventListFromProviderAsyncTaskLoader extends AsyncTaskLoader<List<E
 	@Override
 	public List<Event> loadInBackground() {
 		EventDatabaseLoaderIF loader = EventDatabaseLoader.getInstance();
-		// FIXME Get context from parent?
-		Context context = null;
-		loader.load(context);
+		loader.load();
 		
 		EventDatabase database = EventDatabase.getInstance();
 		List<Event> eventList = database.getEventList();

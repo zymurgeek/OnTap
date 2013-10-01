@@ -2,8 +2,6 @@ package com.itllp.barleylegalhomebrewers.ontap.json;
 
 import org.json.JSONArray;
 
-import android.content.Context;
-
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoader;
 import com.itllp.barleylegalhomebrewers.ontap.JSONArrayEventDatabaseLoader;
 import com.itllp.barleylegalhomebrewers.ontap.NetworkConnectivity;
@@ -25,7 +23,7 @@ public class JSONUrlEventDatabaseLoader extends EventDatabaseLoader {
 		this.jsonArrayLoader = jsonArrayLoader;
 	}
 	
-	public void load(Context context) {
+	public void load() {
 		if (networkConnectivity.isConnected()) {
 			JSONArray jsonArray = jsonArrayRetriever.getJSONArray();
 			jsonArrayLoader.load(jsonArray);

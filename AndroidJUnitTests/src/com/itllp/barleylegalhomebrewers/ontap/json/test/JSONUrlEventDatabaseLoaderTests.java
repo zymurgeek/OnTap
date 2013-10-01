@@ -4,8 +4,6 @@ import org.json.JSONArray;
 
 import junit.framework.TestCase;
 
-import android.content.Context;
-
 import com.itllp.barleylegalhomebrewers.ontap.DatabaseLoaderAlreadyInstantiatedException;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoaderIF;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoader;
@@ -66,9 +64,7 @@ public class JSONUrlEventDatabaseLoaderTests extends TestCase {
 		EventDatabaseLoaderIF loader = EventDatabaseLoader.getInstance();
 		
 		// Method under test
-		// FIXME get context
-		Context context = null;
-		loader.load(context);
+		loader.load();
 		
 		// Postconditions
 		assertEquals(1, stubJSONArrayLoader.getLoadCount());
@@ -83,9 +79,7 @@ public class JSONUrlEventDatabaseLoaderTests extends TestCase {
 		EventDatabaseLoaderIF loader = EventDatabaseLoader.getInstance();
 		
 		// Method under test
-		// FIXME Get context
-		Context context = null;
-		loader.load(context);
+		loader.load();
 		
 		// Postconditions
 		assertEquals(0, stubJSONArrayLoader.getLoadCount());
