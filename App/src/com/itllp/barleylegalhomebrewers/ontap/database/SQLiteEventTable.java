@@ -44,10 +44,6 @@ public class SQLiteEventTable implements EventTable {
 
 	public void onCreate(SQLiteDatabase database) {
 		database.execSQL(DATABASE_CREATE);
-
-		// For working directly with the SQLite database:
-		// http://www.vogella.com/articles/AndroidSQLite/article.html#sqlite_commnandline
-
 	}
 
 	
@@ -96,8 +92,6 @@ public class SQLiteEventTable implements EventTable {
 		return contentValuesList;
 	}
 
-	//TODO Test this class
-	
 	
 	@Override
 	public List<Integer> getAllIds() {
@@ -117,6 +111,7 @@ public class SQLiteEventTable implements EventTable {
 		notifyOfEventTableChange();
 	}
 
+	
 	private void notifyOfEventTableChange() {
 		EventContentProvider contentProvider = 
 				EventContentProvider.getInstance();
@@ -126,6 +121,7 @@ public class SQLiteEventTable implements EventTable {
 		resolver.notifyChange(EventContentProvider.CONTENT_URI, null);
 	}
 
+	
 	@Override
 	public void update(ContentValues contentValues) {
 		SQLiteDatabase db = openHelper.getWritableDatabase();
@@ -139,6 +135,7 @@ public class SQLiteEventTable implements EventTable {
 		notifyOfEventTableChange();
 	}
 
+	
 	@Override
 	public void delete(Integer id) {
 		if (id == null) {
