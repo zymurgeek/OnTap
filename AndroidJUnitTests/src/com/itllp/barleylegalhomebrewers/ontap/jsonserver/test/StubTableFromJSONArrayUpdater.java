@@ -4,7 +4,7 @@ import org.json.JSONArray;
 
 import com.itllp.barleylegalhomebrewers.ontap.contentprovider.TableFromJSONArrayUpdater;
 
-public class StubEventTableFromJSONArrayUpdater implements
+public class StubTableFromJSONArrayUpdater implements
 		TableFromJSONArrayUpdater {
 
 	@Override

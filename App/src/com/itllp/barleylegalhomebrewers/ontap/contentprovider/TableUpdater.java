@@ -1,5 +1,5 @@
 package com.itllp.barleylegalhomebrewers.ontap.contentprovider;
 
-public interface EventTableUpdater {
+public interface TableUpdater {
 	public void update();
 }

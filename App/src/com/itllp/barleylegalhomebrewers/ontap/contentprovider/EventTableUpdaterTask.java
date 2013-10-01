@@ -4,7 +4,7 @@ package com.itllp.barleylegalhomebrewers.ontap.contentprovider;
 public class EventTableUpdaterTask implements Runnable {
 
 	
-	public EventTableUpdaterTask(EventTableUpdater eventTableUpdater) {
+	public EventTableUpdaterTask(TableUpdater eventTableUpdater) {
 		updater = eventTableUpdater;
 	}
 
@@ -15,5 +15,5 @@ public class EventTableUpdaterTask implements Runnable {
 	}
 	
 	
-	private EventTableUpdater updater;
+	private TableUpdater updater;
 }

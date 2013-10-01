@@ -1,7 +1,7 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
 import com.itllp.barleylegalhomebrewers.ontap.contentprovider.TableFromJSONArrayUpdater;
-import com.itllp.barleylegalhomebrewers.ontap.contentprovider.EventTableUpdater;
+import com.itllp.barleylegalhomebrewers.ontap.contentprovider.TableUpdater;
 import com.itllp.barleylegalhomebrewers.ontap.contentprovider.SQLiteEventTableFromJSONArrayUpdaterImpl;
 import com.itllp.barleylegalhomebrewers.ontap.database.CursorConverter;
 import com.itllp.barleylegalhomebrewers.ontap.database.CursorConverterImpl;
@@ -18,7 +18,7 @@ import com.itllp.barleylegalhomebrewers.ontap.json.JSONArrayToContentValuesListC
 import com.itllp.barleylegalhomebrewers.ontap.json.JSONObjectToContentValuesConverter;
 import com.itllp.barleylegalhomebrewers.ontap.json.JSONServerJSONArrayRetriever;
 import com.itllp.barleylegalhomebrewers.ontap.json.JSONUrlEventDatabaseLoader;
-import com.itllp.barleylegalhomebrewers.ontap.jsonserver.EventTableFromJSONArrayRetrieverUpdater;
+import com.itllp.barleylegalhomebrewers.ontap.jsonserver.TableFromJSONArrayRetrieverUpdater;
 
 
 public class EventDatabaseLoaderFactory {
@@ -43,7 +43,7 @@ public class EventDatabaseLoaderFactory {
 		TableFromJSONArrayUpdater eventTableFromJSONArrayUpdater = 
 				new SQLiteEventTableFromJSONArrayUpdaterImpl(listConverter,
 						eventTable);
-		eventTableUpdater = new EventTableFromJSONArrayRetrieverUpdater
+		eventTableUpdater = new TableFromJSONArrayRetrieverUpdater
 				(arrayRetriever, eventTableFromJSONArrayUpdater);
 	}
 
@@ -82,10 +82,10 @@ public class EventDatabaseLoaderFactory {
 	}
 
 	
-	public static EventTableUpdater getInstance() {
+	public static TableUpdater getInstance() {
 		return eventTableUpdater;
 	}
 	
 	
-	private static EventTableUpdater eventTableUpdater = null;
+	private static TableUpdater eventTableUpdater = null;
 }

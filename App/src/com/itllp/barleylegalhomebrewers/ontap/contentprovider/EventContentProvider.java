@@ -114,7 +114,7 @@ public class EventContentProvider extends ContentProvider {
 		
 		cursor.setNotificationUri(getContext().getContentResolver(), uri);
 		
-		EventTableUpdater eventTableUpdater 
+		TableUpdater eventTableUpdater 
 		= EventTableUpdaterFactory.getInstance();
 		Runnable sqlLoadTask = new EventTableUpdaterTask(eventTableUpdater);
 		Thread t = new Thread(sqlLoadTask);

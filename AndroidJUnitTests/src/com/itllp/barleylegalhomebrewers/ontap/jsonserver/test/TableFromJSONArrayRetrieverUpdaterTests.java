@@ -5,9 +5,10 @@ import org.json.JSONArray;
 import junit.framework.TestCase;
 
 import com.itllp.barleylegalhomebrewers.ontap.json.test.StubJSONArrayRetriever;
-import com.itllp.barleylegalhomebrewers.ontap.jsonserver.EventTableFromJSONArrayRetrieverUpdater;
+import com.itllp.barleylegalhomebrewers.ontap.jsonserver.TableFromJSONArrayRetrieverUpdater;
 
-public class EventTableFromJSONArrayRetrieverUpdaterTests extends TestCase {
+//TODO Can this test be run by Robolectric?
+public class TableFromJSONArrayRetrieverUpdaterTests extends TestCase {
 
 	
 	public void setUp() throws Exception {
@@ -22,10 +23,10 @@ public class EventTableFromJSONArrayRetrieverUpdaterTests extends TestCase {
 		expectedJSONArray.put(true);
 		StubJSONArrayRetriever stubRetriever = new StubJSONArrayRetriever();
 		stubRetriever.stub_setReturnArray(expectedJSONArray);
-		StubEventTableFromJSONArrayUpdater stubUpdater 
-		= new StubEventTableFromJSONArrayUpdater();
-		EventTableFromJSONArrayRetrieverUpdater cut 
-		= new EventTableFromJSONArrayRetrieverUpdater(stubRetriever, 
+		StubTableFromJSONArrayUpdater stubUpdater 
+		= new StubTableFromJSONArrayUpdater();
+		TableFromJSONArrayRetrieverUpdater cut 
+		= new TableFromJSONArrayRetrieverUpdater(stubRetriever, 
 				stubUpdater);
 		// Call method under test
 		cut.update();
