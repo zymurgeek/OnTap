@@ -13,6 +13,7 @@ public class EventDatabaseTests {
 
 	@Before
 	public void setUp() throws Exception {
+		FakeEventDatabase.clearInstance();
 	}
 
 	@After
