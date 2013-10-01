@@ -34,11 +34,6 @@
             <type>jar</type>
             <scope>provided</scope>
         </dependency>
-	<dependency>
-	  <groupId>com.google.android</groupId>
-	  <artifactId>annotations</artifactId>
-	  <version>4.1.1.4</version>
-	</dependency>
         <dependency>
             <groupId>com.itllp.barleylegalhomebrewers</groupId>
             <artifactId>Library</artifactId>
