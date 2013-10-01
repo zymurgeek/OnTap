@@ -44,16 +44,10 @@ public class EventContentProvider extends ContentProvider {
 		  instance = this;
 	  }
 
-	// FIXME continue "Programming Android", page 363
-	
-	  // TODO Implement Event delete
-	  // see http://www.vogella.com/articles/AndroidSQLite/#todo_contentprovider
-	  // or Programming Android page 362
+	  
 	@Override
 	public int delete(Uri arg0, String arg1, String[] arg2) {
 		throw new UnsupportedOperationException();
-		// int rowsAffected = 0;
-		// return rowsAffected;
 	}
 
 	
@@ -81,20 +75,6 @@ public class EventContentProvider extends ContentProvider {
 	@Override
 	public Uri insert(Uri uri, ContentValues values) {
 		throw new UnsupportedOperationException();
-		/*
-		int uriType = sURIMatcher.match(uri);
-		SQLiteDatabase sqlDB = mOpenHelper.getWritableDatabase();
-		long id = 0;
-		switch (uriType) {
-		case EVENTS:
-			id = sqlDB.insert(SQLiteEventTable.TABLE_NAME, null, values);
-			break;
-		default:
-			throw new IllegalArgumentException("Unknown URI: " + uri);
-		}
-		getContext().getContentResolver().notifyChange(uri, null);
-		return Uri.parse(BASE_PATH + "/" + id);
-		*/
 	}
 
 	
@@ -157,15 +137,11 @@ public class EventContentProvider extends ContentProvider {
 		}
 	}
 
-	// TODO Implement Event update
-	// see http://www.vogella.com/articles/AndroidSQLite/#todo_contentprovider
-	// or Programming Android page 361
+	
 	@Override
 	public int update(Uri uri, ContentValues values, String selection,
 			String[] selectionArgs) {
 		throw new UnsupportedOperationException();
-		//int rowsAffected = 0;
-		//return rowsAffected;
 	}
 
 }
