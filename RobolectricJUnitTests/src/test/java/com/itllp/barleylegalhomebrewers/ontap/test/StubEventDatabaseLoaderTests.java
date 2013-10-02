@@ -9,7 +9,7 @@ import org.junit.Test;
 import com.itllp.barleylegalhomebrewers.ontap.DatabaseLoaderAlreadyInstantiatedException;
 import com.itllp.barleylegalhomebrewers.ontap.EventDatabaseLoader;
 
-public class FakeEventDatabaseLoaderTests {
+public class StubEventDatabaseLoaderTests {
 
 	@Before
 	public void setUp() throws Exception {

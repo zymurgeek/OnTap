@@ -9,7 +9,7 @@ import org.junit.Test;
 import com.itllp.barleylegalhomebrewers.ontap.BeerDatabaseLoader;
 import com.itllp.barleylegalhomebrewers.ontap.DatabaseLoaderAlreadyInstantiatedException;
 
-public class FakeBeerDatabaseLoaderTests {
+public class StubBeerDatabaseLoaderTests {
 
 	@Before
 	public void setUp() throws Exception {
@@ -34,12 +34,12 @@ public class FakeBeerDatabaseLoaderTests {
 	@Test
 	public void testCreateWhenInitialized() {
 		// Preconditions
-		StubEventDatabaseLoader.clearInstance();
-		StubEventDatabaseLoader.create();
+		StubBeerDatabaseLoader.clearInstance();
+		StubBeerDatabaseLoader.create();
 
 		// Method under test and postconditions
 		try {
-			StubEventDatabaseLoader.create();
+			StubBeerDatabaseLoader.create();
 			fail("Should throw exception");
 		} catch (DatabaseLoaderAlreadyInstantiatedException e) {
 			assertNotNull(e);
