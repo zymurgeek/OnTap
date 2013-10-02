@@ -1,22 +1,30 @@
 package com.itllp.barleylegalhomebrewers.ontap.jsonserver.test;
 
-import org.json.JSONArray;
+import static org.junit.Assert.*;
 
-import junit.framework.TestCase;
+import org.json.JSONArray;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import com.itllp.barleylegalhomebrewers.ontap.json.test.StubJSONArrayRetriever;
 import com.itllp.barleylegalhomebrewers.ontap.jsonserver.TableFromJSONArrayRetrieverUpdater;
 
-//TODO Can this test be run by Robolectric?
-public class TableFromJSONArrayRetrieverUpdaterTests extends TestCase {
 
-	
+@RunWith(RobolectricTestRunner.class)
+public class TableFromJSONArrayRetrieverUpdaterTests {
+
+	@Before
 	public void setUp() throws Exception {
 	}
 
+	@After
 	public void tearDown() throws Exception {
 	}
 	
+	@Test
 	public void testUpdate() {
 		// Set up preconditions
 		JSONArray expectedJSONArray = new JSONArray();
