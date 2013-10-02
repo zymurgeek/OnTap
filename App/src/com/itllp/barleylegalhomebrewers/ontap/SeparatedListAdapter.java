@@ -1,3 +1,6 @@
+/*
+ * http://jsharkey.org/blog/2008/08/18/separating-lists-with-headers-in-android-09/
+ */
 package com.itllp.barleylegalhomebrewers.ontap;
 
 import java.util.LinkedHashMap;
