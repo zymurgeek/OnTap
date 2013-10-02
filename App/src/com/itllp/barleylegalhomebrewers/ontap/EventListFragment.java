@@ -35,7 +35,7 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
         // or start a new one.
         final android.support.v4.app.LoaderManager loaderManager 
         = getLoaderManager();
-        getLoaderManager().initLoader(0, null, this);
+        loaderManager.initLoader(0, null, this);
 
         createListAdapter();
         

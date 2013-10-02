@@ -1,9 +1,6 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
-import com.itllp.barleylegalhomebrewers.ontap.json.JSONUrlBeerDatabaseLoader;
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
@@ -21,7 +18,8 @@ public class BeerListActivity  extends FragmentActivity {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         
-        createBeerDatabaseAndLoader(intent);
+        //TODO Delete me 
+        //createBeerDatabaseAndLoader(intent);
         
         setContentView(R.layout.beer_list_fragment);
         
@@ -33,11 +31,13 @@ public class BeerListActivity  extends FragmentActivity {
         }
         
         // TODO pass event ID via fragment arguments
-		BeerDatabaseLoader loader = BeerDatabaseLoader.getInstance();
-		loader.setEventId(eventId);
+		//BeerDatabaseLoader loader = BeerDatabaseLoader.getInstance();
+		//loader.setEventId(eventId);
 
     }
 
+	//TODO Delete me
+	/*
 	private void createBeerDatabaseAndLoader(Intent intent) {
         
         boolean skipInstantiation = intent.getBooleanExtra(SKIP_INSTANTIATION_FOR_TESTING, false);
@@ -63,4 +63,5 @@ public class BeerListActivity  extends FragmentActivity {
         	}
         }
 	}
+	*/
 }

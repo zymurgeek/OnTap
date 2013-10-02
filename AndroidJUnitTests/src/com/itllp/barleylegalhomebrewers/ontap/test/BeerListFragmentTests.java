@@ -18,115 +18,98 @@ along with Tip On Discount.  If not, see <http://www.gnu.org/licenses/>.
 
 package com.itllp.barleylegalhomebrewers.ontap.test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
+import android.database.MatrixCursor;
 import android.support.v4.app.FragmentManager;
 import android.test.ActivityUnitTestCase;
 import android.widget.ListView;
 
-import com.itllp.barleylegalhomebrewers.ontap.Beer;
-import com.itllp.barleylegalhomebrewers.ontap.BeerDatabaseImpl;
 import com.itllp.barleylegalhomebrewers.ontap.BeerListActivity;
 import com.itllp.barleylegalhomebrewers.ontap.BeerListFragment;
-import com.itllp.barleylegalhomebrewers.ontap.BeerListLoaderFactory;
+import com.itllp.barleylegalhomebrewers.ontap.database.BeerTable;
+import com.itllp.barleylegalhomebrewers.ontap.database.EventTable;
 
 public class BeerListFragmentTests extends
 	ActivityUnitTestCase<BeerListActivity> {
 
+	private static final String[] COLUMN_NAMES = { 
+		BeerTable.ID_COLUMN, 
+		BeerTable.NAME_COLUMN };
+	private static final Object[] ROW1_COLUMN_VALUES = {Integer.valueOf(10), 
+		"Beer #10"};
+	private static final Object[] ROW2_COLUMN_VALUES = {Integer.valueOf(20), 
+		"Beer #20"};
 	private Intent intent;
     ListView beerListView;
-	private Instrumentation mInstrumentation;
-	private BeerListLoaderFactory blFactory;
+	private Instrumentation instrumentation;
 	private Context context;
-	private MockBeerListAsyncTaskLoader mockLoader;
-    
+	private BeerListActivity activity;
+	private FragmentManager fragmentManager;
+	private BeerListFragment beerListFragment;
+	private MatrixCursor mockCursor;
+
     
 	public BeerListFragmentTests() {
 		super(BeerListActivity.class);
 	}
 
+	
     @Override
     protected void setUp() throws Exception {
         super.setUp();
         
-        mInstrumentation = getInstrumentation();
-    	
-    	FakeBeerDatabase.clearInstance();
-    	BeerDatabaseImpl.create();
-    	
-    	blFactory = new BeerListLoaderFactory();
+        instrumentation = getInstrumentation();
     	context = getInstrumentation().getContext();
-    	mockLoader = new MockBeerListAsyncTaskLoader(context);
-    	blFactory.setLoader(mockLoader);
-    	
         intent = new Intent(context, BeerListActivity.class);
-		intent.putExtra(BeerListActivity.SKIP_INSTANTIATION_FOR_TESTING, true);
+    	activity = startActivity(intent, null, null);
+    	instrumentation.waitForIdleSync();
+    	fragmentManager = activity.getSupportFragmentManager();
+    	beerListFragment = (BeerListFragment)
+    			fragmentManager.findFragmentById
+    			(com.itllp.barleylegalhomebrewers.ontap.R.id.beer_list_fragment);
+        beerListView = (ListView)beerListFragment.getListView();
+        beerListFragment.onActivityCreated(null);
+        mockCursor = new MatrixCursor(COLUMN_NAMES);
     }
+
     
     public void testEmptyList() {
-    	
-    	// Method under test
-    	BeerListActivity activity = startActivity(intent, null, null);
-    	mInstrumentation.waitForIdleSync();
-    	
-    	// Postconditions
-    	FragmentManager fragmentManager = activity.getSupportFragmentManager();
-    	BeerListFragment beerListFragment = (BeerListFragment)
-    		fragmentManager.findFragmentById
-    		(com.itllp.barleylegalhomebrewers.ontap.R.id.beer_list_fragment);
-        beerListView = (ListView)beerListFragment.getListView();
+    	// Verify Postconditions
         assertEquals("List should be empty", 0, 
         		beerListView.getCount());    	
     }
 
+    
     public void testListWithOneItem() {
-    	List<Beer> beerList = new ArrayList<Beer>();
-    	Beer beer = new Beer(1);
-    	beerList.add(beer);
-    	BeerListActivity activity = startActivity(intent, null, null);
-    	FragmentManager fragmentManager = activity.getSupportFragmentManager();
-    	BeerListFragment beerListFragment = (BeerListFragment)
-    		fragmentManager.findFragmentById
-    		(com.itllp.barleylegalhomebrewers.ontap.R.id.beer_list_fragment);
-    	beerListFragment.onActivityCreated(null);
+    	// Set up preconditions
+    	mockCursor.addRow(ROW1_COLUMN_VALUES);
+
+    	// Call method under test
+    	beerListFragment.onLoadFinished(null, mockCursor);
     	
-    	// Method under test
-    	beerListFragment.onLoadFinished(null, beerList);
-    	
-    	// Postconditions
-        beerListView = (ListView)beerListFragment.getListView();
+    	// Verify postconditions
         assertEquals("List should have 1 item", 1, 
         		beerListView.getCount());    	
     }
+
     
     public void testListWithTwoItems() {
-    	List<Beer> beerList = new ArrayList<Beer>();
-    	Beer beer = new Beer(10);
-    	beerList.add(beer);
-    	beer = new Beer(20);
-    	beerList.add(beer);
-    	BeerListActivity activity = startActivity(intent, null, null);
-    	FragmentManager fragmentManager = activity.getSupportFragmentManager();
-    	BeerListFragment beerListFragment = (BeerListFragment)
-    		fragmentManager.findFragmentById
-    		(com.itllp.barleylegalhomebrewers.ontap.R.id.beer_list_fragment);
-    	beerListFragment.onActivityCreated(null);
+    	// Set up preconditions
+		mockCursor.addRow(ROW1_COLUMN_VALUES);
+    	mockCursor.addRow(ROW2_COLUMN_VALUES);
 
-    	// Method under test
-    	beerListFragment.onLoadFinished(null, beerList);
+    	// Call method under test
+    	beerListFragment.onLoadFinished(null, mockCursor);
     	
-    	// Postconditions
-        beerListView = (ListView)beerListFragment.getListView();
+    	// Verify postconditions
         assertEquals("List should have 2 items", 2, 
         		beerListView.getCount());
-        beer = (Beer)beerListView.getItemAtPosition(0);
-        assertEquals("First beer ID should be 10", 10, beer.getId());
-        beer = (Beer)beerListView.getItemAtPosition(1);
-        assertEquals("Second beer ID should be 20", 20, beer.getId());
+        MatrixCursor row1 = (MatrixCursor)beerListView.getItemAtPosition(0);
+        int idColumnIndex = row1.getColumnIndex(EventTable.ID_COLUMN);
+        assertEquals("First beer ID should be 10", 10, row1.getInt(idColumnIndex));
+        MatrixCursor row2 = (MatrixCursor)beerListView.getItemAtPosition(1);
+        assertEquals("Second beer ID should be 20", 20, row2.getInt(idColumnIndex));
     }
-
 }
