@@ -26,13 +26,13 @@ import android.support.v4.app.FragmentManager;
 import android.test.ActivityUnitTestCase;
 import android.widget.ListView;
 
-import com.itllp.barleylegalhomebrewers.ontap.EventListFromProviderActivity;
-import com.itllp.barleylegalhomebrewers.ontap.EventListFromProviderFragment;
+import com.itllp.barleylegalhomebrewers.ontap.EventListActivity;
+import com.itllp.barleylegalhomebrewers.ontap.EventListFragment;
 import com.itllp.barleylegalhomebrewers.ontap.database.EventTable;
 import com.itllp.barleylegalhomebrewers.ontap.database.SQLiteEventTable;
 
-public class EventListFromProviderFragmentTests extends
-	ActivityUnitTestCase<EventListFromProviderActivity> {
+public class EventListFragmentTests extends
+	ActivityUnitTestCase<EventListActivity> {
 
 	private Intent intent;
     ListView eventListView;
@@ -43,13 +43,13 @@ public class EventListFromProviderFragmentTests extends
 	private static final Object[] ROW1_COLUMN_VALUES = {Integer.valueOf(10), "Event10", "10/10/2013"};
 	private static final Object[] ROW2_COLUMN_VALUES = {Integer.valueOf(20), "Event20", "10/20/2013"};
 	private MatrixCursor mockCursor;
-	private EventListFromProviderActivity activity;
+	private EventListActivity activity;
 	private FragmentManager fragmentManager;
-	private EventListFromProviderFragment eventListFragment;
+	private EventListFragment eventListFragment;
     
     
-	public EventListFromProviderFragmentTests() {
-		super(EventListFromProviderActivity.class);
+	public EventListFragmentTests() {
+		super(EventListActivity.class);
 	}
 
 	
@@ -61,11 +61,11 @@ public class EventListFromProviderFragmentTests extends
     	
     	context = getInstrumentation().getContext();
     	
-        intent = new Intent(context, EventListFromProviderActivity.class);
+        intent = new Intent(context, EventListActivity.class);
         activity = startActivity(intent, null, null);
     	instrumentation.waitForIdleSync();
     	fragmentManager = activity.getSupportFragmentManager();
-    	eventListFragment = (EventListFromProviderFragment)
+    	eventListFragment = (EventListFragment)
     			fragmentManager.findFragmentById
     			(com.itllp.barleylegalhomebrewers.ontap.R.id.event_list_fragment);
         eventListView = (ListView)eventListFragment.getListView();

@@ -7,7 +7,6 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
-// TODO:  Should BeerListActivity be a fragment instead?  
 public class BeerListActivity  extends FragmentActivity {
 	public static final String SKIP_INSTANTIATION_FOR_TESTING 
 	= "com.itllp.barleylegalhomebrewers.ontap.skipInstantiation_FOR_TESTING";

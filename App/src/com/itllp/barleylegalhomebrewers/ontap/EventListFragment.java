@@ -17,7 +17,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class EventListFromProviderFragment extends ListFragment 
+public class EventListFragment extends ListFragment 
 implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
 	
 	private SimpleCursorAdapter adapter = null;

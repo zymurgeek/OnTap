@@ -4,15 +4,15 @@ import com.itllp.barleylegalhomebrewers.ontap.R;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
-public class EventListFromProviderActivity extends FragmentActivity 
+public class EventListActivity extends FragmentActivity 
 {
-	public EventListFromProviderActivity() {
+	public EventListActivity() {
 	}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.event_list_from_provider_fragment);
+        setContentView(R.layout.event_list_fragment);
     }
 
 }
