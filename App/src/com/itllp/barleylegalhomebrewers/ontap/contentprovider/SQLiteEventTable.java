@@ -10,7 +10,7 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-public class SQLiteEventTable implements EventTable {
+class SQLiteEventTable implements EventTable {
 	private OnTapDatabaseHelper openHelper = null;
 	// Database table
 	public static final String TABLE_NAME = "event";

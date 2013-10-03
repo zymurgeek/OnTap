@@ -4,7 +4,7 @@ import java.util.List;
 
 import android.content.ContentValues;
 
-public interface EventTable {
+interface EventTable {
 
 	/** @return An event in the table.  This is never null, but if the ID 
 	 * does not exist, the ContentValues returned will contain no values. */

@@ -1,4 +1,4 @@
-package com.itllp.barleylegalhomebrewers.ontap.contentprovider.test;
+package com.itllp.barleylegalhomebrewers.ontap.contentprovider;
 
 import java.util.ArrayList;
 import java.util.List;

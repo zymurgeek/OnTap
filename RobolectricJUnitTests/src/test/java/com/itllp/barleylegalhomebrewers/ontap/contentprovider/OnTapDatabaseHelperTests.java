@@ -1,4 +1,4 @@
-package com.itllp.barleylegalhomebrewers.ontap.contentprovider.test;
+package com.itllp.barleylegalhomebrewers.ontap.contentprovider;
 
 import org.junit.After;
 import org.junit.Before;
