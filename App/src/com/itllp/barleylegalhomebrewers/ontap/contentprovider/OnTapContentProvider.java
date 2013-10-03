@@ -22,21 +22,20 @@ public class OnTapContentProvider extends ContentProvider {
 	private OnTapDatabaseHelper mOpenHelper;	
     public static final String AUTHORITY = 
 	"com.itllp.barleylegalhomebrewers.ontap.contentprovider";
-	public static final String BASE_PATH = "events";
+	public static final String EVENT_BASE_PATH = "event";
 	public static final Uri CONTENT_URI =
-	Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);
-	//public static final String CONTENT_TYPE =	"vnd.android.cursor.dir/vnd.ontap.event";
+	Uri.parse("content://" + AUTHORITY + "/" + EVENT_BASE_PATH);
 	public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE
-			+ "/events";
+			+ "/" + EVENT_BASE_PATH;
 	public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE
-			+ "/event";
+			+ "/" + EVENT_BASE_PATH;
 	private static UriMatcher sUriMatcher;
 	private static final int EVENTS = 10;
 	private static final int EVENT_ID = 20;
 	private static final UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 	  static {
-	    sURIMatcher.addURI(AUTHORITY, BASE_PATH, EVENTS);
-	    sURIMatcher.addURI(AUTHORITY, BASE_PATH + "/#", EVENT_ID);
+	    sURIMatcher.addURI(AUTHORITY, EVENT_BASE_PATH, EVENTS);
+	    sURIMatcher.addURI(AUTHORITY, EVENT_BASE_PATH + "/#", EVENT_ID);
 	  }
 	  
 	  public OnTapContentProvider() {
