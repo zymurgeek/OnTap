@@ -34,7 +34,7 @@
         
         <provider 
 			android:authorities="com.itllp.barleylegalhomebrewers.ontap.contentprovider"
-            android:name=".contentprovider.EventContentProvider"
+            android:name=".contentprovider.OnTapContentProvider"
 			android:exported="false"
 			android:multiprocess="true"
 		/>

@@ -16,7 +16,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import com.itllp.barleylegalhomebrewers.ontap.contentprovider.EventContentProvider;
+import com.itllp.barleylegalhomebrewers.ontap.contentprovider.OnTapContentProvider;
 import com.itllp.barleylegalhomebrewers.ontap.database.CursorConverter;
 import com.itllp.barleylegalhomebrewers.ontap.database.EventTable;
 import com.itllp.barleylegalhomebrewers.ontap.database.OnTapDatabaseHelper;
@@ -36,7 +36,7 @@ public class SQLiteEventTableTests {
 	private SQLiteEventTable sqliteEventTable;
 	private ContentResolver mockContentResolver;
 	private Context mockContext;
-	private EventContentProvider mockEventCP;
+	private OnTapContentProvider mockEventCP;
 
 
 	@Before
@@ -67,9 +67,9 @@ public class SQLiteEventTableTests {
 		mockContentResolver = mock(ContentResolver.class);
 		mockContext = mock(Context.class);
 		when(mockContext.getContentResolver()).thenReturn(mockContentResolver);
-		mockEventCP = mock(EventContentProvider.class);
+		mockEventCP = mock(OnTapContentProvider.class);
 		when(mockEventCP.getContext()).thenReturn(mockContext);
-		EventContentProvider.setInstance(mockEventCP);
+		OnTapContentProvider.setInstance(mockEventCP);
 	}
 
 	
@@ -199,7 +199,7 @@ public class SQLiteEventTableTests {
 		
 		// Verify postconditions
 		verify(mockDatabase).insert(SQLiteEventTable.TABLE_NAME, null, expectedEvent1);
-		verify(mockContentResolver).notifyChange(EventContentProvider.CONTENT_URI, null);
+		verify(mockContentResolver).notifyChange(OnTapContentProvider.CONTENT_URI, null);
 	}
 	
 	
@@ -216,7 +216,7 @@ public class SQLiteEventTableTests {
 		// Verify postconditions
 		verify(mockDatabase).update(SQLiteEventTable.TABLE_NAME, expectedEvent2,
 				whereClause, whereArgs);
-		verify(mockContentResolver).notifyChange(EventContentProvider.CONTENT_URI, null);
+		verify(mockContentResolver).notifyChange(OnTapContentProvider.CONTENT_URI, null);
 	}
 	
 	
@@ -232,7 +232,7 @@ public class SQLiteEventTableTests {
 		// Verify postconditions
 		verify(mockDatabase).delete(SQLiteEventTable.TABLE_NAME, 
 				whereClause, whereArgs);
-		verify(mockContentResolver).notifyChange(EventContentProvider.CONTENT_URI, 
+		verify(mockContentResolver).notifyChange(OnTapContentProvider.CONTENT_URI, 
 				null);
 	}
 	

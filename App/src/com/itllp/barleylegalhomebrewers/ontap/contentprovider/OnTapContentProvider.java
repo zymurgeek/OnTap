@@ -16,9 +16,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 
-public class EventContentProvider extends ContentProvider {
+public class OnTapContentProvider extends ContentProvider {
 
-	private static EventContentProvider instance = null;
+	private static OnTapContentProvider instance = null;
 	private OnTapDatabaseHelper mOpenHelper;	
     public static final String AUTHORITY = 
 	"com.itllp.barleylegalhomebrewers.ontap.contentprovider";
@@ -39,7 +39,7 @@ public class EventContentProvider extends ContentProvider {
 	    sURIMatcher.addURI(AUTHORITY, BASE_PATH + "/#", EVENT_ID);
 	  }
 	  
-	  public EventContentProvider() {
+	  public OnTapContentProvider() {
 		  super();
 		  instance = this;
 	  }
@@ -51,12 +51,12 @@ public class EventContentProvider extends ContentProvider {
 	}
 
 	
-	public static EventContentProvider getInstance() {
+	public static OnTapContentProvider getInstance() {
 		return instance;
 	}
 	
 	
-	public static void setInstance(EventContentProvider newProvider) {
+	public static void setInstance(OnTapContentProvider newProvider) {
 		instance = newProvider;
 	}
 
@@ -65,7 +65,7 @@ public class EventContentProvider extends ContentProvider {
 	public String getType(Uri uri) {
 		switch (sUriMatcher.match(uri)) {
 		case EVENTS:
-			return EventContentProvider.CONTENT_TYPE;
+			return OnTapContentProvider.CONTENT_TYPE;
 		default:
 			throw new IllegalArgumentException("Unknown event type: " + uri);
 		}

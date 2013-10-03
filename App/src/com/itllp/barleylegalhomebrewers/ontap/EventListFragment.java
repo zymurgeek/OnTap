@@ -1,6 +1,6 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
-import com.itllp.barleylegalhomebrewers.ontap.contentprovider.EventContentProvider;
+import com.itllp.barleylegalhomebrewers.ontap.contentprovider.OnTapContentProvider;
 import com.itllp.barleylegalhomebrewers.ontap.database.EventTable;
 import com.itllp.barleylegalhomebrewers.ontap.database.SQLiteEventTable;
 
@@ -80,7 +80,7 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     			SQLiteEventTable.START_LOCAL_TIME_COLUMN};
     	String sortOrder = SQLiteEventTable.START_LOCAL_TIME_COLUMN + " DESC";
     	CursorLoader cursorLoader = new CursorLoader(getActivity(),
-    			EventContentProvider.CONTENT_URI, projection, null, null, sortOrder);
+    			OnTapContentProvider.CONTENT_URI, projection, null, null, sortOrder);
     	return cursorLoader;
     }
 

@@ -3,7 +3,7 @@ package com.itllp.barleylegalhomebrewers.ontap.database;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.itllp.barleylegalhomebrewers.ontap.contentprovider.EventContentProvider;
+import com.itllp.barleylegalhomebrewers.ontap.contentprovider.OnTapContentProvider;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
@@ -113,12 +113,12 @@ public class SQLiteEventTable implements EventTable {
 
 	
 	private void notifyOfEventTableChange() {
-		EventContentProvider contentProvider = 
-				EventContentProvider.getInstance();
+		OnTapContentProvider contentProvider = 
+				OnTapContentProvider.getInstance();
 		android.content.Context context = contentProvider.getContext();
 		android.content.ContentResolver resolver = 
 				context.getContentResolver();
-		resolver.notifyChange(EventContentProvider.CONTENT_URI, null);
+		resolver.notifyChange(OnTapContentProvider.CONTENT_URI, null);
 	}
 
 	

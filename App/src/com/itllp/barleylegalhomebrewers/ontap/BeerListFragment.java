@@ -1,6 +1,6 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
-import com.itllp.barleylegalhomebrewers.ontap.contentprovider.EventContentProvider;
+import com.itllp.barleylegalhomebrewers.ontap.contentprovider.OnTapContentProvider;
 import com.itllp.barleylegalhomebrewers.ontap.database.BeerTable;
 import com.itllp.barleylegalhomebrewers.ontap.database.EventTable;
 import android.content.Context;
@@ -85,7 +85,7 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     	String[] projection = { BeerTable.ID_COLUMN, BeerTable.NAME_COLUMN };
     	String sortOrder = BeerTable.NAME_COLUMN + " DESC";
     	CursorLoader cursorLoader = new CursorLoader(getActivity(),
-    			EventContentProvider.CONTENT_URI, projection, null, null, sortOrder);
+    			OnTapContentProvider.CONTENT_URI, projection, null, null, sortOrder);
     	return cursorLoader;
 	}
 
