@@ -8,7 +8,6 @@ import junit.framework.TestCase;
 import android.content.ContentValues;
 import com.itllp.barleylegalhomebrewers.ontap.contentprovider.SQLiteEventTableFromJSONArrayUpdaterImpl;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
-import com.itllp.barleylegalhomebrewers.ontap.database.test.StubEventTable;
 import com.itllp.barleylegalhomebrewers.ontap.json.test.StubJSONArrayToContentValuesConverter;
 
 public class SQLiteEventTableFromJSONArrayUpdaterImplTests extends TestCase {

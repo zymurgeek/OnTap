@@ -1,4 +1,4 @@
-package com.itllp.barleylegalhomebrewers.ontap.database.test;
+package com.itllp.barleylegalhomebrewers.ontap.contentprovider.test;
 
 import org.junit.After;
 import org.junit.Before;
@@ -10,8 +10,9 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import android.database.sqlite.SQLiteDatabase;
-import com.itllp.barleylegalhomebrewers.ontap.database.OnTapDatabaseHelper;
-import com.itllp.barleylegalhomebrewers.ontap.database.SQLiteEventTable;
+
+import com.itllp.barleylegalhomebrewers.ontap.contentprovider.OnTapDatabaseHelper;
+import com.itllp.barleylegalhomebrewers.ontap.contentprovider.SQLiteEventTable;
 
 @RunWith(RobolectricTestRunner.class)
 public class OnTapDatabaseHelperTests {

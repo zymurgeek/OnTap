@@ -1,9 +1,5 @@
 package com.itllp.barleylegalhomebrewers.ontap.contentprovider;
 
-import com.itllp.barleylegalhomebrewers.ontap.database.CursorConverter;
-import com.itllp.barleylegalhomebrewers.ontap.database.CursorConverterImpl;
-import com.itllp.barleylegalhomebrewers.ontap.database.EventTable;
-import com.itllp.barleylegalhomebrewers.ontap.database.SQLiteEventTable;
 import com.itllp.barleylegalhomebrewers.ontap.dateconverter.JavaDateToSQLiteDateConverter;
 import com.itllp.barleylegalhomebrewers.ontap.dateconverter.JavaDateToStringConverter;
 import com.itllp.barleylegalhomebrewers.ontap.dateconverter.JSONDateToJavaDate;

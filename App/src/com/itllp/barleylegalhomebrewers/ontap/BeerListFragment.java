@@ -1,8 +1,8 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
+import com.itllp.barleylegalhomebrewers.ontap.contentprovider.BeerTable;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.OnTapContentProviderMetadata;
-import com.itllp.barleylegalhomebrewers.ontap.database.BeerTable;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;

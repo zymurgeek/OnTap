@@ -1,4 +1,5 @@
-package com.itllp.barleylegalhomebrewers.ontap.database;
+package com.itllp.barleylegalhomebrewers.ontap.contentprovider;
+
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

@@ -7,7 +7,6 @@ import org.json.JSONArray;
 import android.content.ContentValues;
 
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
-import com.itllp.barleylegalhomebrewers.ontap.database.EventTable;
 import com.itllp.barleylegalhomebrewers.ontap.json.JSONArrayToContentValuesListConverter;
 
 public class SQLiteEventTableFromJSONArrayUpdaterImpl implements

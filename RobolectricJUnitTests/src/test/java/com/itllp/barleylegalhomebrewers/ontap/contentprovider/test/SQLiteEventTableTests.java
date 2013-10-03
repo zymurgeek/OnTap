@@ -1,4 +1,4 @@
-package com.itllp.barleylegalhomebrewers.ontap.database.test;
+package com.itllp.barleylegalhomebrewers.ontap.contentprovider.test;
 
 import java.util.List;
 
@@ -16,12 +16,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.itllp.barleylegalhomebrewers.ontap.contentprovider.CursorConverter;
 import com.itllp.barleylegalhomebrewers.ontap.contentprovider.OnTapContentProvider;
+import com.itllp.barleylegalhomebrewers.ontap.contentprovider.OnTapDatabaseHelper;
+import com.itllp.barleylegalhomebrewers.ontap.contentprovider.SQLiteEventTable;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.OnTapContentProviderMetadata;
-import com.itllp.barleylegalhomebrewers.ontap.database.CursorConverter;
-import com.itllp.barleylegalhomebrewers.ontap.database.OnTapDatabaseHelper;
-import com.itllp.barleylegalhomebrewers.ontap.database.SQLiteEventTable;
 
 @RunWith(RobolectricTestRunner.class)
 public class SQLiteEventTableTests {

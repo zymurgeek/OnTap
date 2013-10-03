@@ -28,8 +28,8 @@ import android.widget.ListView;
 
 import com.itllp.barleylegalhomebrewers.ontap.BeerListActivity;
 import com.itllp.barleylegalhomebrewers.ontap.BeerListFragment;
+import com.itllp.barleylegalhomebrewers.ontap.contentprovider.BeerTable;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
-import com.itllp.barleylegalhomebrewers.ontap.database.BeerTable;
 
 public class BeerListFragmentTests extends
 	ActivityUnitTestCase<BeerListActivity> {

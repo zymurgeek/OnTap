@@ -6,8 +6,6 @@ import java.util.HashSet;
 
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.OnTapContentProviderMetadata;
-import com.itllp.barleylegalhomebrewers.ontap.database.SQLiteEventTable;
-import com.itllp.barleylegalhomebrewers.ontap.database.OnTapDatabaseHelper;
 import android.content.ContentProvider;
 import android.content.ContentResolver;
 import android.content.ContentValues;

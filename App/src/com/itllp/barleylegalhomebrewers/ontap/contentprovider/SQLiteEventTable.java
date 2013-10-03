@@ -1,9 +1,8 @@
-package com.itllp.barleylegalhomebrewers.ontap.database;
+package com.itllp.barleylegalhomebrewers.ontap.contentprovider;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.itllp.barleylegalhomebrewers.ontap.contentprovider.OnTapContentProvider;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.OnTapContentProviderMetadata;
 

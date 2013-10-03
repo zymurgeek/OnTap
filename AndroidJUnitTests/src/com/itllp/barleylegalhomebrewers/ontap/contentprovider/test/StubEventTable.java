@@ -1,12 +1,12 @@
-package com.itllp.barleylegalhomebrewers.ontap.database.test;
+package com.itllp.barleylegalhomebrewers.ontap.contentprovider.test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import android.content.ContentValues;
 
+import com.itllp.barleylegalhomebrewers.ontap.contentprovider.EventTable;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
-import com.itllp.barleylegalhomebrewers.ontap.database.EventTable;
 
 public class StubEventTable implements EventTable {
 
