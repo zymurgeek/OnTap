@@ -28,8 +28,7 @@ import android.widget.ListView;
 
 import com.itllp.barleylegalhomebrewers.ontap.EventListActivity;
 import com.itllp.barleylegalhomebrewers.ontap.EventListFragment;
-import com.itllp.barleylegalhomebrewers.ontap.database.EventTable;
-import com.itllp.barleylegalhomebrewers.ontap.database.SQLiteEventTable;
+import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
 
 public class EventListFragmentTests extends
 	ActivityUnitTestCase<EventListActivity> {
@@ -38,8 +37,8 @@ public class EventListFragmentTests extends
     ListView eventListView;
 	private Instrumentation instrumentation;
 	private Context context;
-	private static final String[] COLUMN_NAMES = { EventTable.ID_COLUMN, EventTable.NAME_COLUMN,
-			SQLiteEventTable.START_LOCAL_TIME_COLUMN };
+	private static final String[] COLUMN_NAMES = { EventTableMetadata.ID_COLUMN, EventTableMetadata.NAME_COLUMN,
+			EventTableMetadata.START_LOCAL_TIME_COLUMN };
 	private static final Object[] ROW1_COLUMN_VALUES = {Integer.valueOf(10), "Event10", "10/10/2013"};
 	private static final Object[] ROW2_COLUMN_VALUES = {Integer.valueOf(20), "Event20", "10/20/2013"};
 	private MatrixCursor mockCursor;
@@ -107,7 +106,7 @@ public class EventListFragmentTests extends
         assertEquals("List should have 2 items", 2, 
         		eventListView.getCount());
         MatrixCursor row1 = (MatrixCursor)eventListView.getItemAtPosition(0);
-        int idColumnIndex = row1.getColumnIndex(EventTable.ID_COLUMN);
+        int idColumnIndex = row1.getColumnIndex(EventTableMetadata.ID_COLUMN);
         assertEquals("First event ID should be 10", 10, row1.getInt(idColumnIndex));
         MatrixCursor row2 = (MatrixCursor)eventListView.getItemAtPosition(1);
         assertEquals("Second event ID should be 20", 20, row2.getInt(idColumnIndex));

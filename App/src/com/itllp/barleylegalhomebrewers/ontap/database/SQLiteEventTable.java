@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.itllp.barleylegalhomebrewers.ontap.contentprovider.OnTapContentProvider;
+import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
+import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.OnTapContentProviderMetadata;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,21 +18,16 @@ public class SQLiteEventTable implements EventTable {
 	
 	public static final String ID_COLUMN_TYPE = "INTEGER";
 	public static final String NAME_COLUMN_TYPE = "TEXT";
-	/**
-	 * Column name for the date of the event
-	 * <P>Type: TEXT</P>
-	 */
-	public static final String START_LOCAL_TIME_COLUMN = "startlocaltime";
 	public static final String START_LOCAL_TIME_COLUMN_TYPE = "TEXT";
 	
 	public static final String DATABASE_CREATE = "create table " 
 			+ TABLE_NAME
 			+ "(" 
-			+ EventTable.ID_COLUMN 
+			+ EventTableMetadata.ID_COLUMN 
 			+ " " + SQLiteEventTable.ID_COLUMN_TYPE + " PRIMARY KEY, " 
-			+ EventTable.NAME_COLUMN 
+			+ EventTableMetadata.NAME_COLUMN 
 			+ " " + SQLiteEventTable.NAME_COLUMN_TYPE + " NOT NULL, " 
-			+ SQLiteEventTable.START_LOCAL_TIME_COLUMN 
+			+ EventTableMetadata.START_LOCAL_TIME_COLUMN 
 			+ " " + SQLiteEventTable.START_LOCAL_TIME_COLUMN_TYPE + " NOT NULL);";
 	public static final String DROP_TABLE = "DROP TABLE IF EXISTS ";
 	private CursorConverter cursorConverter;
@@ -59,7 +56,7 @@ public class SQLiteEventTable implements EventTable {
 	@Override
 	public ContentValues getEvent(Integer id) {
 		SQLiteDatabase db = openHelper.getReadableDatabase();
-		String selection = ID_COLUMN + "=?";
+		String selection = EventTableMetadata.ID_COLUMN + "=?";
 		String[] selectionArgs = { id.toString() };
 		android.database.Cursor cursor = db.query(TABLE_NAME, null, 
 				selection, selectionArgs, null, null, null);
@@ -98,7 +95,7 @@ public class SQLiteEventTable implements EventTable {
 		List<Integer> result = new ArrayList<Integer>();
 		List<ContentValues> allEvents = getAllEvents();
 		for (ContentValues values : allEvents) {
-			result.add(values.getAsInteger(EventTable.ID_COLUMN));
+			result.add(values.getAsInteger(EventTableMetadata.ID_COLUMN));
 		}
 		return result;
 	}
@@ -118,15 +115,15 @@ public class SQLiteEventTable implements EventTable {
 		android.content.Context context = contentProvider.getContext();
 		android.content.ContentResolver resolver = 
 				context.getContentResolver();
-		resolver.notifyChange(OnTapContentProvider.CONTENT_URI, null);
+		resolver.notifyChange(OnTapContentProviderMetadata.CONTENT_URI, null);
 	}
 
 	
 	@Override
 	public void update(ContentValues contentValues) {
 		SQLiteDatabase db = openHelper.getWritableDatabase();
-		String whereClause = ID_COLUMN + "=?";
-		Integer id = contentValues.getAsInteger(ID_COLUMN);
+		String whereClause = EventTableMetadata.ID_COLUMN + "=?";
+		Integer id = contentValues.getAsInteger(EventTableMetadata.ID_COLUMN);
 		if (id == null) {
 			return;
 		}
@@ -142,7 +139,7 @@ public class SQLiteEventTable implements EventTable {
 			return;
 		}
 		SQLiteDatabase db = openHelper.getWritableDatabase();
-		String whereClause = ID_COLUMN + "=?";
+		String whereClause = EventTableMetadata.ID_COLUMN + "=?";
 		String[] whereArgs = { id.toString() };
 		db.delete(TABLE_NAME, whereClause, whereArgs);
 		notifyOfEventTableChange();

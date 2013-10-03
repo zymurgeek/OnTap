@@ -4,7 +4,8 @@ package com.itllp.barleylegalhomebrewers.ontap.contentprovider;
 import java.util.Arrays;
 import java.util.HashSet;
 
-import com.itllp.barleylegalhomebrewers.ontap.database.EventTable;
+import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
+import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.OnTapContentProviderMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.database.SQLiteEventTable;
 import com.itllp.barleylegalhomebrewers.ontap.database.OnTapDatabaseHelper;
 import android.content.ContentProvider;
@@ -20,22 +21,17 @@ public class OnTapContentProvider extends ContentProvider {
 
 	private static OnTapContentProvider instance = null;
 	private OnTapDatabaseHelper mOpenHelper;	
-    public static final String AUTHORITY = 
-	"com.itllp.barleylegalhomebrewers.ontap.contentprovider";
-	public static final String EVENT_BASE_PATH = "event";
-	public static final Uri CONTENT_URI =
-	Uri.parse("content://" + AUTHORITY + "/" + EVENT_BASE_PATH);
-	public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE
-			+ "/" + EVENT_BASE_PATH;
+    public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE
+			+ "/" + OnTapContentProviderMetadata.EVENT_BASE_PATH;
 	public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE
-			+ "/" + EVENT_BASE_PATH;
+			+ "/" + OnTapContentProviderMetadata.EVENT_BASE_PATH;
 	private static UriMatcher sUriMatcher;
 	private static final int EVENTS = 10;
 	private static final int EVENT_ID = 20;
 	private static final UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 	  static {
-	    sURIMatcher.addURI(AUTHORITY, EVENT_BASE_PATH, EVENTS);
-	    sURIMatcher.addURI(AUTHORITY, EVENT_BASE_PATH + "/#", EVENT_ID);
+	    sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.EVENT_BASE_PATH, EVENTS);
+	    sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.EVENT_BASE_PATH + "/#", EVENT_ID);
 	  }
 	  
 	  public OnTapContentProvider() {
@@ -101,7 +97,7 @@ public class OnTapContentProvider extends ContentProvider {
 		case EVENTS:
 			break;
 		case EVENT_ID:
-			queryBuilder.appendWhere(EventTable.ID_COLUMN + "="
+			queryBuilder.appendWhere(EventTableMetadata.ID_COLUMN + "="
 					+ uri.getLastPathSegment());
 			break;
 		default:
@@ -124,8 +120,8 @@ public class OnTapContentProvider extends ContentProvider {
 
 	
 	private void checkForUnknownColumns(String[] projection) {
-		String[] available = { EventTable.ID_COLUMN , EventTable.NAME_COLUMN,
-				SQLiteEventTable.START_LOCAL_TIME_COLUMN };
+		String[] available = { EventTableMetadata.ID_COLUMN , EventTableMetadata.NAME_COLUMN,
+				EventTableMetadata.START_LOCAL_TIME_COLUMN };
 		if (projection != null) {
 			HashSet<String> requestedColumns = new HashSet<String>(Arrays.asList(projection));
 			HashSet<String> availableColumns = new HashSet<String>(Arrays.asList(available));

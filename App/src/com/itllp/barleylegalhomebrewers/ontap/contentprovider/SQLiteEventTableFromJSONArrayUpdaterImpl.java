@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.json.JSONArray;
 import android.content.ContentValues;
+
+import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.database.EventTable;
 import com.itllp.barleylegalhomebrewers.ontap.json.JSONArrayToContentValuesListConverter;
 
@@ -35,7 +37,7 @@ public class SQLiteEventTableFromJSONArrayUpdaterImpl implements
 		List<Integer> deleteList = new ArrayList<Integer>();
 		deleteList.addAll(idsInTable);
 		for (ContentValues contentValues : contentValuesList) {
-			Integer id = contentValues.getAsInteger(EventTable.ID_COLUMN);
+			Integer id = contentValues.getAsInteger(EventTableMetadata.ID_COLUMN);
 			if (!idsInTable.contains(id)) {
 				insertList.add(contentValues);
 			} else {
@@ -47,7 +49,7 @@ public class SQLiteEventTableFromJSONArrayUpdaterImpl implements
 			eventTable.insert(contentValues);
 		}
 		for (ContentValues contentValues : updateList) {
-			Integer id = contentValues.getAsInteger(EventTable.ID_COLUMN);
+			Integer id = contentValues.getAsInteger(EventTableMetadata.ID_COLUMN);
 			ContentValues contentValuesInTable = 
 					eventTable.getEvent(id);
 			if (contentValues != contentValuesInTable) {

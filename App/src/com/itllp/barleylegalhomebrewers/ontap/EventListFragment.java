@@ -1,8 +1,7 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
-import com.itllp.barleylegalhomebrewers.ontap.contentprovider.OnTapContentProvider;
-import com.itllp.barleylegalhomebrewers.ontap.database.EventTable;
-import com.itllp.barleylegalhomebrewers.ontap.database.SQLiteEventTable;
+import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
+import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.OnTapContentProviderMetadata;
 
 import android.content.Context;
 import android.content.Intent;
@@ -57,9 +56,9 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
         // Fields from the database (projection)
         // Must include the _id column for the adapter to work
         String[] from = new String[] { 
-        		EventTable.ID_COLUMN, 
-        		EventTable.NAME_COLUMN,
-        		SQLiteEventTable.START_LOCAL_TIME_COLUMN };
+        		EventTableMetadata.ID_COLUMN, 
+        		EventTableMetadata.NAME_COLUMN,
+        		EventTableMetadata.START_LOCAL_TIME_COLUMN };
         // Fields on the UI to which we map
         int[] to = new int[] { 
         		R.id.id,
@@ -76,11 +75,11 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     // Creates a new loader after the initLoader () call
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-    	String[] projection = { EventTable.ID_COLUMN, EventTable.NAME_COLUMN,
-    			SQLiteEventTable.START_LOCAL_TIME_COLUMN};
-    	String sortOrder = SQLiteEventTable.START_LOCAL_TIME_COLUMN + " DESC";
+    	String[] projection = { EventTableMetadata.ID_COLUMN, EventTableMetadata.NAME_COLUMN,
+    			EventTableMetadata.START_LOCAL_TIME_COLUMN};
+    	String sortOrder = EventTableMetadata.START_LOCAL_TIME_COLUMN + " DESC";
     	CursorLoader cursorLoader = new CursorLoader(getActivity(),
-    			OnTapContentProvider.CONTENT_URI, projection, null, null, sortOrder);
+    			OnTapContentProviderMetadata.CONTENT_URI, projection, null, null, sortOrder);
     	return cursorLoader;
     }
 

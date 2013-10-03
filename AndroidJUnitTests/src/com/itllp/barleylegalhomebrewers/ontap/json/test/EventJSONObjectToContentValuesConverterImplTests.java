@@ -91,16 +91,15 @@ public class EventJSONObjectToContentValuesConverterImplTests extends TestCase {
 		
 		// Verify postconditions
 		assertEquals(validJSONObjectKeys, actual.size());
-		Integer id = actual.getAsInteger(com.itllp.barleylegalhomebrewers.ontap.database.EventTable.ID_COLUMN);
+		Integer id = actual.getAsInteger(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata.ID_COLUMN);
 		int actualID = -1;
 		if (null != id) {
 			actualID = id.shortValue();
 		}
 		assertEquals(expectedID, actualID);
-		String actualEventName = actual.getAsString(com.itllp.barleylegalhomebrewers.ontap.database.EventTable.NAME_COLUMN);
+		String actualEventName = actual.getAsString(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata.NAME_COLUMN);
 		assertEquals(expectedEventName, actualEventName);
-		String actualEventDate = actual.getAsString(com.itllp
-				.barleylegalhomebrewers.ontap.database.SQLiteEventTable
+		String actualEventDate = actual.getAsString(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata
 				.START_LOCAL_TIME_COLUMN);
 		assertEquals(expectedEventDate, actualEventDate);
 	}

@@ -7,7 +7,7 @@ import junit.framework.TestCase;
 
 import android.content.ContentValues;
 import com.itllp.barleylegalhomebrewers.ontap.contentprovider.SQLiteEventTableFromJSONArrayUpdaterImpl;
-import com.itllp.barleylegalhomebrewers.ontap.database.EventTable;
+import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.database.test.StubEventTable;
 import com.itllp.barleylegalhomebrewers.ontap.json.test.StubJSONArrayToContentValuesConverter;
 
@@ -40,14 +40,14 @@ public class SQLiteEventTableFromJSONArrayUpdaterImplTests extends TestCase {
 			fail("Failed to parse JSON string" + x);
 		}
 		contentValues1 = new ContentValues();
-		contentValues1.put(EventTable.ID_COLUMN, 1);
-		contentValues1.put(EventTable.NAME_COLUMN, "event 1");
+		contentValues1.put(EventTableMetadata.ID_COLUMN, 1);
+		contentValues1.put(EventTableMetadata.NAME_COLUMN, "event 1");
 		contentValues2 = new ContentValues();
-		contentValues2.put(EventTable.ID_COLUMN, 2);
-		contentValues2.put(EventTable.NAME_COLUMN, "event 2");
+		contentValues2.put(EventTableMetadata.ID_COLUMN, 2);
+		contentValues2.put(EventTableMetadata.NAME_COLUMN, "event 2");
 		updatedContentValues1 = new ContentValues();
-		updatedContentValues1.put(EventTable.ID_COLUMN, 1);
-		updatedContentValues1.put(EventTable.NAME_COLUMN, "updated event 1");
+		updatedContentValues1.put(EventTableMetadata.ID_COLUMN, 1);
+		updatedContentValues1.put(EventTableMetadata.NAME_COLUMN, "updated event 1");
 		contentValuesInTableList = new ArrayList<ContentValues>();
 		inputContentValuesList = new ArrayList<ContentValues>();
 

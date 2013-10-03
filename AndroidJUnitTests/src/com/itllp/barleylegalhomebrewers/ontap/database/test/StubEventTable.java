@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.content.ContentValues;
 
+import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.database.EventTable;
 
 public class StubEventTable implements EventTable {
@@ -19,7 +20,7 @@ public class StubEventTable implements EventTable {
 	public List<Integer> getAllIds() {
 		List<Integer> idsInTableList = new ArrayList<Integer>();
 		for (ContentValues contentValues : stub_contentValuesInTableList) {
-			idsInTableList.add(contentValues.getAsInteger(EventTable.ID_COLUMN));
+			idsInTableList.add(contentValues.getAsInteger(EventTableMetadata.ID_COLUMN));
 		}
 		return idsInTableList;
 	}
@@ -46,7 +47,7 @@ public class StubEventTable implements EventTable {
 	@Override
 	public ContentValues getEvent(Integer id) {
 		for (ContentValues contentValue : stub_contentValuesInTableList) {
-			Integer idInTable = contentValue.getAsInteger(ID_COLUMN);
+			Integer idInTable = contentValue.getAsInteger(EventTableMetadata.ID_COLUMN);
 			if (idInTable == id) {
 				return contentValue;
 			}

@@ -1,8 +1,8 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
-import com.itllp.barleylegalhomebrewers.ontap.contentprovider.OnTapContentProvider;
+import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
+import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.OnTapContentProviderMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.database.BeerTable;
-import com.itllp.barleylegalhomebrewers.ontap.database.EventTable;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -64,8 +64,8 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     	// Fields from the database (projection)
     	// Must include the _id column for the adapter to work
     	String[] from = new String[] { 
-    			EventTable.ID_COLUMN, 
-    			EventTable.NAME_COLUMN };
+    			EventTableMetadata.ID_COLUMN, 
+    			EventTableMetadata.NAME_COLUMN };
     	// Fields on the UI to which we map
     	int[] to = new int[] { 
     			R.id.id,
@@ -85,7 +85,7 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     	String[] projection = { BeerTable.ID_COLUMN, BeerTable.NAME_COLUMN };
     	String sortOrder = BeerTable.NAME_COLUMN + " DESC";
     	CursorLoader cursorLoader = new CursorLoader(getActivity(),
-    			OnTapContentProvider.CONTENT_URI, projection, null, null, sortOrder);
+    			OnTapContentProviderMetadata.CONTENT_URI, projection, null, null, sortOrder);
     	return cursorLoader;
 	}
 

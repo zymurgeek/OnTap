@@ -43,7 +43,7 @@ public class EventJSONObjectToContentValuesConverterImpl implements
 					com.itllp.barleylegalhomebrewers.ontap.jsonserver.Event.ID);
 			int id = Integer.parseInt(idString);
 			result.put(
-					com.itllp.barleylegalhomebrewers.ontap.database.EventTable.ID_COLUMN, 
+					com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata.ID_COLUMN, 
 					id);
 		} catch (JSONException e) {}
 	}
@@ -52,7 +52,7 @@ public class EventJSONObjectToContentValuesConverterImpl implements
 		try {
 			String eventName = jsonObject.getString(com.itllp
 					.barleylegalhomebrewers.ontap.jsonserver.Event.EVENT_NAME);
-			result.put(com.itllp.barleylegalhomebrewers.ontap.database.EventTable.NAME_COLUMN, eventName);
+			result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata.NAME_COLUMN, eventName);
 		} catch (JSONException e) {}
 	}
 
@@ -62,8 +62,7 @@ public class EventJSONObjectToContentValuesConverterImpl implements
 					.barleylegalhomebrewers.ontap.jsonserver.Event.EVENT_DATE);
 			java.util.Date javaDate = jsonDateConverter.getJavaDate(jsonEventDate);
 			String sqliteDate = javaDateConverter.getString(javaDate);
-			result.put(com.itllp.barleylegalhomebrewers.ontap.database
-					.SQLiteEventTable.START_LOCAL_TIME_COLUMN, sqliteDate);
+			result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata.START_LOCAL_TIME_COLUMN, sqliteDate);
 		} catch (JSONException e) {}
 	}
 

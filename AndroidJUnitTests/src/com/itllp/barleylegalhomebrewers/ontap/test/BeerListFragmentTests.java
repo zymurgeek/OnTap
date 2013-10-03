@@ -28,8 +28,8 @@ import android.widget.ListView;
 
 import com.itllp.barleylegalhomebrewers.ontap.BeerListActivity;
 import com.itllp.barleylegalhomebrewers.ontap.BeerListFragment;
+import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.database.BeerTable;
-import com.itllp.barleylegalhomebrewers.ontap.database.EventTable;
 
 public class BeerListFragmentTests extends
 	ActivityUnitTestCase<BeerListActivity> {
@@ -107,7 +107,7 @@ public class BeerListFragmentTests extends
         assertEquals("List should have 2 items", 2, 
         		beerListView.getCount());
         MatrixCursor row1 = (MatrixCursor)beerListView.getItemAtPosition(0);
-        int idColumnIndex = row1.getColumnIndex(EventTable.ID_COLUMN);
+        int idColumnIndex = row1.getColumnIndex(EventTableMetadata.ID_COLUMN);
         assertEquals("First beer ID should be 10", 10, row1.getInt(idColumnIndex));
         MatrixCursor row2 = (MatrixCursor)beerListView.getItemAtPosition(1);
         assertEquals("Second beer ID should be 20", 20, row2.getInt(idColumnIndex));

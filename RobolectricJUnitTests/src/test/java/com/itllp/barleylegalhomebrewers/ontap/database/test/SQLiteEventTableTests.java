@@ -17,8 +17,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import com.itllp.barleylegalhomebrewers.ontap.contentprovider.OnTapContentProvider;
+import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
+import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.OnTapContentProviderMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.database.CursorConverter;
-import com.itllp.barleylegalhomebrewers.ontap.database.EventTable;
 import com.itllp.barleylegalhomebrewers.ontap.database.OnTapDatabaseHelper;
 import com.itllp.barleylegalhomebrewers.ontap.database.SQLiteEventTable;
 
@@ -46,7 +47,7 @@ public class SQLiteEventTableTests {
 		OnTapDatabaseHelper.setInstance(mockDatabaseHelper);
 		when(mockDatabaseHelper.getReadableDatabase()).thenReturn(mockDatabase);
 		when(mockDatabaseHelper.getWritableDatabase()).thenReturn(mockDatabase);
-		String selection = SQLiteEventTable.ID_COLUMN + "=?";
+		String selection = EventTableMetadata.ID_COLUMN + "=?";
 		String[] selectionArgs = { eventId42.toString() };
 		mockCursor = mock(Cursor.class);
 		when(mockDatabase.query(SQLiteEventTable.TABLE_NAME, null, 
@@ -57,9 +58,9 @@ public class SQLiteEventTableTests {
 				.thenReturn(mockCursor);
 		mockCursorConverter = mock(CursorConverter.class);
 		expectedEvent1 = new ContentValues();
-		expectedEvent1.put(EventTable.ID_COLUMN, expectedId1.intValue());
+		expectedEvent1.put(EventTableMetadata.ID_COLUMN, expectedId1.intValue());
 		expectedEvent2 = new ContentValues();
-		expectedEvent2.put(EventTable.ID_COLUMN, expectedId2.intValue());
+		expectedEvent2.put(EventTableMetadata.ID_COLUMN, expectedId2.intValue());
 		when(mockCursorConverter.getContentValues(mockCursor))
 		.thenReturn(expectedEvent1)
 		.thenReturn(expectedEvent2);
@@ -199,15 +200,15 @@ public class SQLiteEventTableTests {
 		
 		// Verify postconditions
 		verify(mockDatabase).insert(SQLiteEventTable.TABLE_NAME, null, expectedEvent1);
-		verify(mockContentResolver).notifyChange(OnTapContentProvider.CONTENT_URI, null);
+		verify(mockContentResolver).notifyChange(OnTapContentProviderMetadata.CONTENT_URI, null);
 	}
 	
 	
 	@Test
 	public void testUpdate() {
 		// Set up preconditions
-		String whereClause = SQLiteEventTable.ID_COLUMN + "=?";
-		Integer id = expectedEvent2.getAsInteger(SQLiteEventTable.ID_COLUMN);
+		String whereClause = EventTableMetadata.ID_COLUMN + "=?";
+		Integer id = expectedEvent2.getAsInteger(EventTableMetadata.ID_COLUMN);
 		String[] whereArgs = { id.toString() };
 
 		// Call method under test
@@ -216,14 +217,14 @@ public class SQLiteEventTableTests {
 		// Verify postconditions
 		verify(mockDatabase).update(SQLiteEventTable.TABLE_NAME, expectedEvent2,
 				whereClause, whereArgs);
-		verify(mockContentResolver).notifyChange(OnTapContentProvider.CONTENT_URI, null);
+		verify(mockContentResolver).notifyChange(OnTapContentProviderMetadata.CONTENT_URI, null);
 	}
 	
 	
 	@Test
 	public void testDelete() {
 		// Set up preconditions
-		String whereClause = SQLiteEventTable.ID_COLUMN + "=?";
+		String whereClause = EventTableMetadata.ID_COLUMN + "=?";
 		String[] whereArgs = { eventId42.toString() };
 		
 		// Call method under test
@@ -232,7 +233,7 @@ public class SQLiteEventTableTests {
 		// Verify postconditions
 		verify(mockDatabase).delete(SQLiteEventTable.TABLE_NAME, 
 				whereClause, whereArgs);
-		verify(mockContentResolver).notifyChange(OnTapContentProvider.CONTENT_URI, 
+		verify(mockContentResolver).notifyChange(OnTapContentProviderMetadata.CONTENT_URI, 
 				null);
 	}
 	
