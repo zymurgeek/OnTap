@@ -120,4 +120,15 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
         adapter.swapCursor(null);
 	}
 
+
+	public void setEventId(int eventId) {
+		// TODO Auto-generated method stub
+	}
+
+
+	public String getEventId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

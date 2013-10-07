@@ -1,8 +1,22 @@
 doc
 *.jar
 *~
+
+# built application files
 *.ap_
 *.apk
+
+# Files for the Dalvic VM
 *.dex
+
+# Java compiled classes
 *.class
+
+# Maven build directory
 */target/*
+
+# Intellij project files
+*.iml
+*.ipr
+*.iws
+.idea/

@@ -33,7 +33,12 @@ public class BeerListActivity  extends FragmentActivity {
         // TODO pass event ID via fragment arguments
 		//BeerDatabaseLoader loader = BeerDatabaseLoader.getInstance();
 		//loader.setEventId(eventId);
-
+        BeerListFragment beerListFrag = (BeerListFragment)
+        	    getSupportFragmentManager().findFragmentById(com.itllp
+        	    		.barleylegalhomebrewers.ontap.R.id.beer_list_fragment);
+        if (null != beerListFrag) {
+        	beerListFrag.setEventId(eventId);
+        }
     }
 
 	//TODO Delete me
