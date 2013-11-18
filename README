@@ -13,7 +13,7 @@ These are required to run the Robolectric unit tests:
 
  http://developer.android.com/tools/index.html
 
-* Maven 3.0.5 or later
+* Maven 3.0.5
 
  http://http://maven.apache.org/
 
@@ -43,3 +43,15 @@ This doesn't seem to have any other negative effects.
 * Robolectric 
 
 Available at http://pivotal.github.io/robolectric/
+
+* Mockito 1.9.5
+
+Available at https://code.google.com/p/mockito/
+
+In Eclipse, set MOCKITO_HOME to the directory into which you
+downloaded mockito-all-1.9.5.jar, e.g., /home/myuser for Linux or c:\
+Windows.  To do this, from the Eclipse menu, select Window ->
+Preferences.  In the left pane, expand Java and then Build Path.
+Select Classpath Variables.  On the right, select New.  Set the Name
+to MOCKITO_HOME and select Folder next to Path.  Select the directory
+containing the Mockito JAR.
