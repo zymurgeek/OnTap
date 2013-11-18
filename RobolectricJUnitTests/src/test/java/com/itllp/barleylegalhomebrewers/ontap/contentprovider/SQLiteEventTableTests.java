@@ -19,7 +19,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.itllp.barleylegalhomebrewers.ontap.contentprovider.CursorConverter;
 import com.itllp.barleylegalhomebrewers.ontap.contentprovider.OnTapContentProvider;
-import com.itllp.barleylegalhomebrewers.ontap.contentprovider.OnTapDatabaseHelper;
+import com.itllp.barleylegalhomebrewers.ontap.contentprovider.OnTapDatabaseHelperImpl;
 import com.itllp.barleylegalhomebrewers.ontap.contentprovider.SQLiteEventTable;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.OnTapContentProviderMetadata;
@@ -27,7 +27,7 @@ import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.OnTapCont
 @RunWith(RobolectricTestRunner.class)
 public class SQLiteEventTableTests {
 	private SQLiteDatabase mockDatabase;
-	private OnTapDatabaseHelper mockDatabaseHelper;
+	private OnTapDatabaseHelperImpl mockDatabaseHelper;
 	private Cursor mockCursor;
 	private Integer eventId42 = 42;
 	final private Integer expectedId1 = 2;
@@ -44,8 +44,8 @@ public class SQLiteEventTableTests {
 	@Before
 	public void setUp() throws Exception {
 		mockDatabase = mock(SQLiteDatabase.class);
-		mockDatabaseHelper = mock(OnTapDatabaseHelper.class);
-		OnTapDatabaseHelper.setInstance(mockDatabaseHelper);
+		mockDatabaseHelper = mock(OnTapDatabaseHelperImpl.class);
+		OnTapDatabaseHelperImpl.setInstance(mockDatabaseHelper);
 		when(mockDatabaseHelper.getReadableDatabase()).thenReturn(mockDatabase);
 		when(mockDatabaseHelper.getWritableDatabase()).thenReturn(mockDatabase);
 		String selection = EventTableMetadata.ID_COLUMN + "=?";
@@ -77,8 +77,8 @@ public class SQLiteEventTableTests {
 	
 	@After
 	public void tearDown() throws Exception {
-		if (null != OnTapDatabaseHelper.getInstance()) {
-			OnTapDatabaseHelper.setInstance(null);
+		if (null != OnTapDatabaseHelperImpl.getInstance()) {
+			OnTapDatabaseHelperImpl.setInstance(null);
 		}
 	}
 

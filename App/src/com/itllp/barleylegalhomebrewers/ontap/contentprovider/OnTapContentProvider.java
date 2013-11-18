@@ -18,7 +18,7 @@ import android.net.Uri;
 public class OnTapContentProvider extends ContentProvider {
 
 	private static OnTapContentProvider instance = null;
-	private OnTapDatabaseHelper mOpenHelper;	
+	private OnTapDatabaseHelperImpl mOpenHelper;	
     public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE
 			+ "/" + OnTapContentProviderMetadata.EVENT_BASE_PATH;
 	public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE
@@ -73,7 +73,7 @@ public class OnTapContentProvider extends ContentProvider {
 	
 	@Override
 	public boolean onCreate() {
-		mOpenHelper = new OnTapDatabaseHelper(getContext());
+		mOpenHelper = new OnTapDatabaseHelperImpl(getContext());
 		return false;
 	}
 
