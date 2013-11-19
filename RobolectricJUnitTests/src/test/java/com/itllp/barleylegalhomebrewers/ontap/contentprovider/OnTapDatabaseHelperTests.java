@@ -11,19 +11,19 @@ import static org.mockito.Mockito.*;
 
 import android.database.sqlite.SQLiteDatabase;
 
-import com.itllp.barleylegalhomebrewers.ontap.contentprovider.OnTapDatabaseHelperImpl;
+import com.itllp.barleylegalhomebrewers.ontap.contentprovider.OnTapDatabaseHelper;
 import com.itllp.barleylegalhomebrewers.ontap.contentprovider.SQLiteEventTable;
 
 @RunWith(RobolectricTestRunner.class)
-public class OnTapDatabaseHelperImplTests {
+public class OnTapDatabaseHelperTests {
 
-	private OnTapDatabaseHelperImpl onTapDatabaseHelper;
+	private OnTapDatabaseHelper onTapDatabaseHelper;
 	private SQLiteEventTable mockEventTable;
 	private SQLiteDatabase sqliteDb;
 
 	@Before
 	public void setUp() throws Exception {
-		onTapDatabaseHelper = new OnTapDatabaseHelperImpl(null);
+		onTapDatabaseHelper = new OnTapDatabaseHelper(null);
 		mockEventTable = mock(SQLiteEventTable.class);
 		sqliteDb = null;
 	}
@@ -31,14 +31,14 @@ public class OnTapDatabaseHelperImplTests {
 	
 	@After
 	public void tearDown() throws Exception {
-		OnTapDatabaseHelperImpl.setInstance(null);
+		OnTapDatabaseHelper.setInstance(null);
 	}
 
 	
 	@Test
 	public void testInitialization() {
 		// Call method under test
-		OnTapDatabaseHelperImpl actualHelper = OnTapDatabaseHelperImpl.getInstance();
+		OnTapDatabaseHelper actualHelper = OnTapDatabaseHelper.getInstance();
 		
 		// Verify postconditions
 		assertEquals(onTapDatabaseHelper, actualHelper);
@@ -49,7 +49,7 @@ public class OnTapDatabaseHelperImplTests {
 	public void testSecondInitialization() {
 		// Call method under test
 		try {
-			new OnTapDatabaseHelperImpl(null);
+			new OnTapDatabaseHelper(null);
 			fail("Second instantiation should throw an exception");
 		} catch (UnsupportedOperationException e) {
 			// pass

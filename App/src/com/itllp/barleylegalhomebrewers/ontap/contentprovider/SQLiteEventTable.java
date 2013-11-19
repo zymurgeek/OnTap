@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 class SQLiteEventTable implements EventTable {
-	private OnTapDatabaseHelperImpl openHelper = null;
+	private OnTapDatabaseHelper openHelper = null;
 	// Database table
 	public static final String TABLE_NAME = "event";
 	
@@ -34,7 +34,7 @@ class SQLiteEventTable implements EventTable {
 	
 	public SQLiteEventTable(CursorConverter converter) {
 		cursorConverter = converter;
-		openHelper = OnTapDatabaseHelperImpl.getInstance();
+		openHelper = OnTapDatabaseHelper.getInstance();
 		openHelper.registerTable(this);
 	}
 

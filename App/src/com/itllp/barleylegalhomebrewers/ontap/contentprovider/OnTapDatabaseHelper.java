@@ -5,14 +5,14 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-class OnTapDatabaseHelperImpl extends SQLiteOpenHelper {
+class OnTapDatabaseHelper extends SQLiteOpenHelper {
 	private static final String DATABASE_NAME = "ontap.db";
 	private static final int DATABASE_VERSION = 1;
-	private static OnTapDatabaseHelperImpl instance = null;
+	private static OnTapDatabaseHelper instance = null;
 	private SQLiteEventTable sqliteEventTable = null;
 
 	
-	public OnTapDatabaseHelperImpl(Context context) {
+	public OnTapDatabaseHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 		// TODO Make a proper factory out of this
 		if (null != instance) {
@@ -23,7 +23,7 @@ class OnTapDatabaseHelperImpl extends SQLiteOpenHelper {
 	}
 
 	
-	public static OnTapDatabaseHelperImpl getInstance() {
+	public static OnTapDatabaseHelper getInstance() {
 		return instance;
 	}
 	
@@ -44,7 +44,7 @@ class OnTapDatabaseHelperImpl extends SQLiteOpenHelper {
 	}
 
 
-	public static void setInstance(OnTapDatabaseHelperImpl openHelper) {
+	public static void setInstance(OnTapDatabaseHelper openHelper) {
 		instance = openHelper;
 	}
 
