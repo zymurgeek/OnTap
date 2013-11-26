@@ -48,7 +48,7 @@ public class BeerListActivityTests {
 		ActivityController<BeerListActivity> beerListActivityController =
 				Robolectric.buildActivity(BeerListActivity.class);
 		BeerListActivity beerListActivity = beerListActivityController.
-				withIntent(intent).create().get();
+				withIntent(intent).create().visible().get();
 		Bundle savedInstanceState = new Bundle();
 		
 		// Call method under test
