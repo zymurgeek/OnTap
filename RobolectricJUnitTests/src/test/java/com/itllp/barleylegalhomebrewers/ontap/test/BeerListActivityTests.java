@@ -1,8 +1,6 @@
 package com.itllp.barleylegalhomebrewers.ontap.test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -12,7 +10,6 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.util.ActivityController;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -34,7 +31,7 @@ public class BeerListActivityTests {
 	}
 
 
-	//FIXME this test throws a no resource exception
+	//TODO this test throws a no resource exception
 	@Ignore @Test
 	public void testOnCreate() {
 		// Set up preconditions
@@ -43,8 +40,9 @@ public class BeerListActivityTests {
 		
 		Intent intent = new Intent(Robolectric.getShadowApplication().getApplicationContext(),
                 BeerListActivity.class);
-		String expectedId = "42";
-		intent.putExtra(BeerListActivity.EVENT_ID, expectedId);
+		int expectedId = 42;
+		String expectedIdString = String.valueOf(expectedId);
+		intent.putExtra(BeerListActivity.EVENT_ID, expectedIdString);
 		ActivityController<BeerListActivity> beerListActivityController =
 				Robolectric.buildActivity(BeerListActivity.class);
 		BeerListActivity beerListActivity = beerListActivityController.
@@ -59,7 +57,7 @@ public class BeerListActivityTests {
         	    beerListActivity.getSupportFragmentManager().
         	    findFragmentById(com.itllp.barleylegalhomebrewers.ontap
         	    		.R.id.beer_list_fragment);
-        String actualId = "0";
+        int actualId = 0;
         if (null != beerListFrag) {
         	actualId = beerListFrag.getEventId();
         }
