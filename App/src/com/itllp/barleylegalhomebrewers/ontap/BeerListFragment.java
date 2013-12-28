@@ -25,6 +25,7 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
 	
 	//private BeerListAdapter beerListAdapter = null;
 	private SimpleCursorAdapter adapter = null;
+	private int eventId = -1;
 
 	
     @Override public void onActivityCreated(Bundle savedInstanceState) {
@@ -122,13 +123,12 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
 
 
 	public void setEventId(int eventId) {
-		// TODO Auto-generated method stub
+		this.eventId = eventId;
 	}
 
 
-	public String getEventId() {
-		// TODO Auto-generated method stub
-		return null;
+	public int getEventId() {
+		return eventId;
 	}
 
 }
