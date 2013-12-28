@@ -15,7 +15,7 @@ These are required to run the Robolectric unit tests:
 
 * Maven 3.0.5 or later
 
- http://http://maven.apache.org/
+http://maven.apache.org/
 
 * Maven Android SDK Deployer
 
