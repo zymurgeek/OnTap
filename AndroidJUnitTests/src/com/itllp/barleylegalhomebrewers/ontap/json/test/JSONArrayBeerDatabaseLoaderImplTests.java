@@ -174,9 +174,9 @@ public class JSONArrayBeerDatabaseLoaderImplTests extends TestCase {
 			String beerName, String fieldId, String fieldValue) {
 		String jsonString = "{ ";
 		jsonString += "\"ID\": " + id + ", ";
-		jsonString += "\"BeerName\": \"" + beerName + "\", ";
+		jsonString += "\"BeerName\": \"" + beerName + "\"";
 		if (null != fieldId) {
-			jsonString += "\"" + fieldId + "\": \"" + fieldValue + "\", ";
+			jsonString += ", \"" + fieldId + "\": \"" + fieldValue + "\"";
 		}
 		jsonString += "}";
 		return jsonString;
@@ -186,9 +186,9 @@ public class JSONArrayBeerDatabaseLoaderImplTests extends TestCase {
 			String beerName, String fieldId, String unquotedFieldValue) {
 		String jsonString = "{ ";
 		jsonString += "\"ID\": " + id + ", ";
-		jsonString += "\"BeerName\": \"" + beerName + "\", ";
+		jsonString += "\"BeerName\": \"" + beerName + "\"";
 		if (null != fieldId) {
-			jsonString += "\"" + fieldId + "\": " + unquotedFieldValue + ", ";
+			jsonString += ", \"" + fieldId + "\": " + unquotedFieldValue;
 		}
 		jsonString += "}";
 		return jsonString;
