@@ -201,7 +201,7 @@ public class SQLiteEventTableTests {
 		
 		// Verify postconditions
 		verify(mockDatabase).insert(SQLiteEventTable.TABLE_NAME, null, expectedEvent1);
-		verify(mockContentResolver).notifyChange(OnTapContentProviderMetadata.CONTENT_URI, null);
+		verify(mockContentResolver).notifyChange(OnTapContentProviderMetadata.EVENT_CONTENT_URI, null);
 	}
 	
 	
@@ -218,7 +218,7 @@ public class SQLiteEventTableTests {
 		// Verify postconditions
 		verify(mockDatabase).update(SQLiteEventTable.TABLE_NAME, expectedEvent2,
 				whereClause, whereArgs);
-		verify(mockContentResolver).notifyChange(OnTapContentProviderMetadata.CONTENT_URI, null);
+		verify(mockContentResolver).notifyChange(OnTapContentProviderMetadata.EVENT_CONTENT_URI, null);
 	}
 	
 	
@@ -234,7 +234,7 @@ public class SQLiteEventTableTests {
 		// Verify postconditions
 		verify(mockDatabase).delete(SQLiteEventTable.TABLE_NAME, 
 				whereClause, whereArgs);
-		verify(mockContentResolver).notifyChange(OnTapContentProviderMetadata.CONTENT_URI, 
+		verify(mockContentResolver).notifyChange(OnTapContentProviderMetadata.EVENT_CONTENT_URI, 
 				null);
 	}
 	

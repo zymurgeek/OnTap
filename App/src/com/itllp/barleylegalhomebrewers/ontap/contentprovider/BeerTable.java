@@ -19,7 +19,7 @@ public interface BeerTable {
 	
 	/** @return A beer in the table.  This is never null, but if the ID 
 	 * does not exist, the ContentValues returned will contain no values. */
-	ContentValues getEvent(Integer id);
+	ContentValues getBeer(Integer id);
 	
 	/** @return List of beers in the table.  This is never null. */
 	List<ContentValues> getAllBeers();

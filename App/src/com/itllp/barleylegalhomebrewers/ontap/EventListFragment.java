@@ -79,7 +79,7 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     			EventTableMetadata.START_LOCAL_TIME_COLUMN};
     	String sortOrder = EventTableMetadata.START_LOCAL_TIME_COLUMN + " DESC";
     	CursorLoader cursorLoader = new CursorLoader(getActivity(),
-    			OnTapContentProviderMetadata.CONTENT_URI, projection, null, null, sortOrder);
+    			OnTapContentProviderMetadata.EVENT_CONTENT_URI, projection, null, null, sortOrder);
     	return cursorLoader;
     }
 

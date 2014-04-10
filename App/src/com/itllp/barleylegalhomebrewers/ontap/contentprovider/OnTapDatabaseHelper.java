@@ -10,6 +10,7 @@ class OnTapDatabaseHelper extends SQLiteOpenHelper {
 	private static final int DATABASE_VERSION = 1;
 	private static OnTapDatabaseHelper instance = null;
 	private SQLiteEventTable sqliteEventTable = null;
+	private SQLiteBeerTable sqliteBeerTable = null;
 
 	
 	public OnTapDatabaseHelper(Context context) {
@@ -32,6 +33,9 @@ class OnTapDatabaseHelper extends SQLiteOpenHelper {
 		if (null != sqliteEventTable) {
 			sqliteEventTable.onCreate(sqLiteDatabase);
 		}
+		if (null != sqliteBeerTable) {
+			sqliteBeerTable.onCreate(sqLiteDatabase);			
+		}
 	}
 
 	
@@ -40,6 +44,9 @@ class OnTapDatabaseHelper extends SQLiteOpenHelper {
 			int newVersion) {
 		if (null != sqliteEventTable) {
 			sqliteEventTable.onUpgrade(database, oldVersion, newVersion);
+		}
+		if (null != sqliteBeerTable) {
+			sqliteBeerTable.onUpgrade(database, oldVersion, newVersion);
 		}
 	}
 
@@ -54,6 +61,9 @@ class OnTapDatabaseHelper extends SQLiteOpenHelper {
 	}
 
 
+	public void registerTable(SQLiteBeerTable newTable) {
+		sqliteBeerTable = newTable;
+	}
+
+
 }
-
-

@@ -1,7 +1,6 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
 import com.itllp.barleylegalhomebrewers.ontap.contentprovider.BeerTable;
-import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.OnTapContentProviderMetadata;
 import android.content.Context;
 import android.content.Intent;
@@ -65,12 +64,12 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     	// Fields from the database (projection)
     	// Must include the _id column for the adapter to work
     	String[] from = new String[] { 
-    			EventTableMetadata.ID_COLUMN, 
-    			EventTableMetadata.NAME_COLUMN };
+    			BeerTable.ID_COLUMN, 
+    			BeerTable.NAME_COLUMN };
     	// Fields on the UI to which we map
     	int[] to = new int[] { 
     			R.id.id,
-    			R.id.event_name };
+    			R.id.beer_name };
     	// TODO Use UtcDateToHumbanReadableDateConverter for the startlocaltime database TEXT field
 
     	adapter = new SimpleCursorAdapter
@@ -86,7 +85,7 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     	String[] projection = { BeerTable.ID_COLUMN, BeerTable.NAME_COLUMN };
     	String sortOrder = BeerTable.NAME_COLUMN + " DESC";
     	CursorLoader cursorLoader = new CursorLoader(getActivity(),
-    			OnTapContentProviderMetadata.CONTENT_URI, projection, null, null, sortOrder);
+    			OnTapContentProviderMetadata.BEER_CONTENT_URI, projection, null, null, sortOrder);
     	return cursorLoader;
 	}
 

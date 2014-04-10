@@ -3,7 +3,9 @@ package com.itllp.barleylegalhomebrewers.ontap.contentprovider;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
+import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.OnTapContentProviderMetadata;
 import android.content.ContentProvider;
@@ -19,17 +21,27 @@ public class OnTapContentProvider extends ContentProvider {
 
 	private static OnTapContentProvider instance = null;
 	private OnTapDatabaseHelper mOpenHelper;	
-    public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE
-			+ "/" + OnTapContentProviderMetadata.EVENT_BASE_PATH;
-	public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE
-			+ "/" + OnTapContentProviderMetadata.EVENT_BASE_PATH;
+    public static final String EVENT_CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE
+			+ "/" + OnTapContentProviderMetadata.AUTHORITY + "." + OnTapContentProviderMetadata.EVENT_BASE_PATH;
+	public static final String EVENT_CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE
+			+ "/" + OnTapContentProviderMetadata.AUTHORITY + "." + OnTapContentProviderMetadata.EVENT_BASE_PATH;
+    public static final String BEER_CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE
+			+ "/" + OnTapContentProviderMetadata.AUTHORITY + "." + OnTapContentProviderMetadata.BEER_BASE_PATH;
+    public static final String BEER_CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE
+			+ "/" + OnTapContentProviderMetadata.AUTHORITY + "." + OnTapContentProviderMetadata.BEER_BASE_PATH;
 	private static UriMatcher sUriMatcher;
 	private static final int EVENTS = 10;
 	private static final int EVENT_ID = 20;
+	private static final int BEERS = 30;
+	private static final int BEER_ID = 40;
 	private static final UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 	  static {
 	    sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.EVENT_BASE_PATH, EVENTS);
 	    sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.EVENT_BASE_PATH + "/#", EVENT_ID);
+	    sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.EVENT_BASE_PATH + "/#"
+	    		+ OnTapContentProviderMetadata.BEER_BASE_PATH, BEERS);
+	    sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.EVENT_BASE_PATH + "/#"
+	    		+ OnTapContentProviderMetadata.BEER_BASE_PATH + "/#", BEER_ID);
 	  }
 	  
 	  public OnTapContentProvider() {
@@ -58,7 +70,13 @@ public class OnTapContentProvider extends ContentProvider {
 	public String getType(Uri uri) {
 		switch (sUriMatcher.match(uri)) {
 		case EVENTS:
-			return OnTapContentProvider.CONTENT_TYPE;
+			return OnTapContentProvider.EVENT_CONTENT_TYPE;
+		case EVENT_ID:
+			return OnTapContentProvider.EVENT_CONTENT_ITEM_TYPE;
+		case BEERS:
+			return OnTapContentProvider.BEER_CONTENT_TYPE;
+		case BEER_ID:
+			return OnTapContentProvider.BEER_CONTENT_ITEM_TYPE;
 		default:
 			throw new IllegalArgumentException("Unknown event type: " + uri);
 		}
@@ -88,14 +106,28 @@ public class OnTapContentProvider extends ContentProvider {
 
 		checkForUnknownColumns(projection);
 
-		queryBuilder.setTables(SQLiteEventTable.TABLE_NAME);
-
 		int uriType = sURIMatcher.match(uri);
+
 		switch (uriType) {
 		case EVENTS:
+			queryBuilder.setTables(SQLiteEventTable.TABLE_NAME);
 			break;
 		case EVENT_ID:
+			queryBuilder.setTables(SQLiteEventTable.TABLE_NAME);
 			queryBuilder.appendWhere(EventTableMetadata.ID_COLUMN + "="
+					+ uri.getLastPathSegment());
+			break;
+		case BEERS:
+			queryBuilder.setTables(SQLiteBeerTable.TABLE_NAME);
+			queryBuilder.appendWhere(BeerTableMetadata.ID_COLUMN + "="
+					+ uri.getLastPathSegment());
+			break;
+		case BEER_ID:
+			queryBuilder.setTables(SQLiteBeerTable.TABLE_NAME);
+			List<String> segments = uri.getPathSegments();
+			queryBuilder.appendWhere(BeerTableMetadata.EVENT_ID_COLUMN + "="
+					+ segments.get(segments.size()-3));
+			queryBuilder.appendWhere(BeerTableMetadata.ID_COLUMN + "="
 					+ uri.getLastPathSegment());
 			break;
 		default:
@@ -106,10 +138,18 @@ public class OnTapContentProvider extends ContentProvider {
 				selectionArgs, null, null, sortOrder);
 		
 		cursor.setNotificationUri(getContext().getContentResolver(), uri);
-		
-		TableUpdater eventTableUpdater 
-		= EventTableUpdaterFactory.getInstance();
-		Runnable sqlLoadTask = new EventTableUpdaterTask(eventTableUpdater);
+
+		TableUpdater tableUpdater = null;
+		switch (uriType) {
+		case EVENTS:
+		case EVENT_ID:
+			tableUpdater = EventTableUpdaterFactory.getInstance();
+			break;
+		case BEERS:
+			tableUpdater = BeerTableUpdaterFactory.getInstance();
+			break;
+		}
+		Runnable sqlLoadTask = new EventTableUpdaterTask(tableUpdater);
 		Thread t = new Thread(sqlLoadTask);
 		t.start();
 		
