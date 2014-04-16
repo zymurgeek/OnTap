@@ -51,7 +51,8 @@ class SQLiteEventTableFromJSONArrayUpdaterImpl implements
 			Integer id = contentValues.getAsInteger(EventTableMetadata.ID_COLUMN);
 			ContentValues contentValuesInTable = 
 					eventTable.getEvent(id);
-			if (contentValues != contentValuesInTable) {
+			//FIXME equals is always false
+			if (!contentValues.equals(contentValuesInTable)) {
 				eventTable.update(contentValues);
 			}
 		}
