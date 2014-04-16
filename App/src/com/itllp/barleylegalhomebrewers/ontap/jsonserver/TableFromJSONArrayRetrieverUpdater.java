@@ -18,6 +18,11 @@ public class TableFromJSONArrayRetrieverUpdater implements
 		
 	}
 
+	public JSONArrayRetriever getRetriever() {
+		return retriever;
+	}
+	
+	
 	@Override
 	public void update() {
 		JSONArray jsonArray = retriever.getJSONArray();

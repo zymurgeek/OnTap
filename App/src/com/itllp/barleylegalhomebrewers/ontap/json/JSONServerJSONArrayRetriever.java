@@ -22,7 +22,9 @@ public class JSONServerJSONArrayRetriever implements JSONArrayRetriever {
 
 	@Override
 	public JSONArray getJSONArray(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		String eventServerURL = serverURL.replace("#", Integer.toString(id));
+    	JSONParser jParser = new JSONParser();
+    	JSONArray jsonArray = jParser.getJSONArrayFromUrl(eventServerURL);
+		return jsonArray;
 	}
 }

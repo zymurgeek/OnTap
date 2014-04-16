@@ -15,8 +15,8 @@ import com.itllp.barleylegalhomebrewers.ontap.jsonserver.TableFromJSONArrayRetri
 
 public class BeerTableUpdaterFactory {
 
-	public static final String betaSiteUrl = "http://misdb.com/barleylegalapp/getbeersforevent.aspx?id=1";
-	public static final String productionSiteUrl = "http://barleylegalevents.com/barleylegal/getbeersforevent.aspx?id=9";
+	public static final String betaSiteUrl = "http://misdb.com/barleylegalapp/getbeersforevent.aspx?id=#";
+	public static final String productionSiteUrl = "http://barleylegalevents.com/barleylegal/getbeersforevent.aspx?id=#";
 
 	
 	private static void createSQLiteBeerTableUpdater(String serverURL) {

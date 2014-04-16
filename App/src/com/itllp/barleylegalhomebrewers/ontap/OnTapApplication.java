@@ -1,12 +1,13 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
+import java.lang.reflect.Method;
+
 import com.itllp.barleylegalhomebrewers.ontap.contentprovider.BeerTableUpdaterFactory;
 import com.itllp.barleylegalhomebrewers.ontap.contentprovider.EventTableUpdaterFactory;
 
 import android.annotation.TargetApi;
 import android.app.Application;
 import android.os.Build;
-import android.os.StrictMode;
 
 public class OnTapApplication extends Application {
 	
@@ -23,7 +24,14 @@ public class OnTapApplication extends Application {
 	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	private void enableStrictModeForDebug() {
 		if ( Build.VERSION.SDK_INT >= 9 && isDebug() ) {
-			StrictMode.enableDefaults();
+			try {
+				Class<?> strictModeClass = Class.forName("android.os.StrictMode", true, Thread.currentThread()
+						.getContextClassLoader());
+				Method enableDefaultsMethod = strictModeClass.getMethod("enableDefaults", strictModeClass);
+				enableDefaultsMethod.invoke(strictModeClass);
+			} catch (Exception e) {
+				// StrictMode not available
+		    }
 		}
 	}
 

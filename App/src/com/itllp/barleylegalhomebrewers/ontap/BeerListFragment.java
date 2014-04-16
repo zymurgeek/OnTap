@@ -2,9 +2,11 @@ package com.itllp.barleylegalhomebrewers.ontap;
 
 import com.itllp.barleylegalhomebrewers.ontap.contentprovider.BeerTable;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.OnTapContentProviderMetadata;
+
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
@@ -84,8 +86,12 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
 	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
     	String[] projection = { BeerTable.ID_COLUMN, BeerTable.NAME_COLUMN };
     	String sortOrder = BeerTable.NAME_COLUMN + " DESC";
+    	final Uri uri = Uri.parse("content://" + 
+    			OnTapContentProviderMetadata.AUTHORITY + "/" +
+    			OnTapContentProviderMetadata.EVENT_BASE_PATH + "/" + eventId + 
+    			"/" + OnTapContentProviderMetadata.BEER_BASE_PATH);
     	CursorLoader cursorLoader = new CursorLoader(getActivity(),
-    			OnTapContentProviderMetadata.BEER_CONTENT_URI, projection, null, null, sortOrder);
+    			uri, projection, null, null, sortOrder);
     	return cursorLoader;
 	}
 

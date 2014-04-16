@@ -38,9 +38,9 @@ public class OnTapContentProvider extends ContentProvider {
 	  static {
 	    sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.EVENT_BASE_PATH, EVENTS);
 	    sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.EVENT_BASE_PATH + "/#", EVENT_ID);
-	    sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.EVENT_BASE_PATH + "/#"
+	    sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.EVENT_BASE_PATH + "/#/"
 	    		+ OnTapContentProviderMetadata.BEER_BASE_PATH, BEERS);
-	    sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.EVENT_BASE_PATH + "/#"
+	    sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.EVENT_BASE_PATH + "/#/"
 	    		+ OnTapContentProviderMetadata.BEER_BASE_PATH + "/#", BEER_ID);
 	  }
 	  
@@ -107,20 +107,25 @@ public class OnTapContentProvider extends ContentProvider {
 		checkForUnknownColumns(projection);
 
 		int uriType = sURIMatcher.match(uri);
-
+		String eventId;
+		List<String> paths;
+		
 		switch (uriType) {
 		case EVENTS:
 			queryBuilder.setTables(SQLiteEventTable.TABLE_NAME);
 			break;
 		case EVENT_ID:
 			queryBuilder.setTables(SQLiteEventTable.TABLE_NAME);
+			eventId = uri.getLastPathSegment();
 			queryBuilder.appendWhere(EventTableMetadata.ID_COLUMN + "="
-					+ uri.getLastPathSegment());
+					+ eventId);
 			break;
 		case BEERS:
 			queryBuilder.setTables(SQLiteBeerTable.TABLE_NAME);
-			queryBuilder.appendWhere(BeerTableMetadata.ID_COLUMN + "="
-					+ uri.getLastPathSegment());
+			paths = uri.getPathSegments();
+			eventId = paths.get(paths.size()-2);
+			queryBuilder.appendWhere(EventTableMetadata.ID_COLUMN + "="
+					+ eventId);
 			break;
 		case BEER_ID:
 			queryBuilder.setTables(SQLiteBeerTable.TABLE_NAME);

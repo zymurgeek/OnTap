@@ -11,9 +11,9 @@
 	<properties>
 		<server_schema>http</server_schema>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<platform.version>1.6_r3</platform.version>
+		<platform.version>4.4.2_r3</platform.version>
 		<platform.test.version>1.6_r2</platform.test.version>
-		<android.plugin.version>3.6.0</android.plugin.version>
+		<android.plugin.version>3.8.0</android.plugin.version>
 	</properties>
 
 	<build>
@@ -44,7 +44,7 @@
 				<plugin>
 					<groupId>com.jayway.maven.plugins.android.generation2</groupId>
 					<artifactId>android-maven-plugin</artifactId>
-					<version>3.6.1</version>
+					<version>${android.plugin.version}</version>
 					<configuration>
 						<sdk>
 							<platform>4</platform>
