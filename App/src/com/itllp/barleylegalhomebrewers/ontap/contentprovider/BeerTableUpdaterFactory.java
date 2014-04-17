@@ -17,11 +17,12 @@ public class BeerTableUpdaterFactory {
 
 	public static final String betaSiteUrl = "http://misdb.com/barleylegalapp/getbeersforevent.aspx?id=#";
 	public static final String productionSiteUrl = "http://barleylegalevents.com/barleylegal/getbeersforevent.aspx?id=#";
-
+	private static String serverUrlTemplate;
+	private static JSONArrayRetriever arrayRetriever;
 	
 	private static void createSQLiteBeerTableUpdater(String serverURL) {
-		JSONArrayRetriever arrayRetriever = 
-				new JSONServerJSONArrayRetriever(serverURL);
+		serverUrlTemplate = serverURL;
+		arrayRetriever = new JSONServerJSONArrayRetriever(serverURL);
 		StringToJavaDateConverter jsonDateConverter = new JSONDateToJavaDate();
 		JavaDateToStringConverter javaDateConverter = 
 				new JavaDateToSQLiteDateConverter();
@@ -50,7 +51,9 @@ public class BeerTableUpdaterFactory {
 	}
 
 	
-	public static TableUpdater getInstance() {
+	public static TableUpdater getInstance(String eventId) {
+		String serverUrl = serverUrlTemplate.replace("#", eventId);
+		arrayRetriever.setServerUrl(serverUrl);
 		return beerTableUpdater;
 	}
 	

@@ -1,7 +1,5 @@
 package com.itllp.barleylegalhomebrewers.ontap.contentprovider;
 
-import java.util.Set;
-
 import android.content.ContentValues;
 
 public class ContentValuesComparator {

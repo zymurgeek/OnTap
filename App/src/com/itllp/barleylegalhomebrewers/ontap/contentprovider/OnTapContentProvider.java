@@ -107,7 +107,7 @@ public class OnTapContentProvider extends ContentProvider {
 		checkForUnknownColumns(projection);
 
 		int uriType = sURIMatcher.match(uri);
-		String eventId;
+		String eventId = "";
 		List<String> paths;
 		
 		switch (uriType) {
@@ -151,7 +151,7 @@ public class OnTapContentProvider extends ContentProvider {
 			tableUpdater = EventTableUpdaterFactory.getInstance();
 			break;
 		case BEERS:
-			tableUpdater = BeerTableUpdaterFactory.getInstance();
+			tableUpdater = BeerTableUpdaterFactory.getInstance(eventId);
 			break;
 		}
 		Runnable sqlLoadTask = new EventTableUpdaterTask(tableUpdater);

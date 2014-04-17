@@ -6,5 +6,6 @@ public interface JSONArrayRetriever {
 
 	JSONArray getJSONArray();
 	JSONArray getJSONArray(int id);
+	void setServerUrl(String serverUrl);
 
 }
