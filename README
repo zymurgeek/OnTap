@@ -13,7 +13,7 @@ These are required to run the Robolectric unit tests:
 
 * Android SDK
 
- http://developer.android.com/tools/index.html
+http://developer.android.com/tools/index.html
 
 * Maven 3.1.1
 

@@ -51,8 +51,7 @@ class SQLiteEventTableFromJSONArrayUpdaterImpl implements
 			Integer id = contentValues.getAsInteger(EventTableMetadata.ID_COLUMN);
 			ContentValues contentValuesInTable = 
 					eventTable.getEvent(id);
-			//FIXME equals is always false
-			if (!contentValues.equals(contentValuesInTable)) {
+			if (!cvComp.areEqual(contentValues, contentValuesInTable)) {
 				eventTable.update(contentValues);
 			}
 		}
@@ -63,4 +62,5 @@ class SQLiteEventTableFromJSONArrayUpdaterImpl implements
 
 	private JSONArrayToContentValuesListConverter converter;
 	private EventTable eventTable;
+	private ContentValuesComparator cvComp = new ContentValuesComparator();
 }
