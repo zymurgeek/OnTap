@@ -1,10 +1,10 @@
 package com.itllp.barleylegalhomebrewers.ontap.contentprovider;
 
 
-class EventTableUpdaterTask implements Runnable {
+class TableUpdaterTask implements Runnable {
 
 	
-	public EventTableUpdaterTask(TableUpdater eventTableUpdater) {
+	public TableUpdaterTask(TableUpdater eventTableUpdater) {
 		updater = eventTableUpdater;
 	}
 

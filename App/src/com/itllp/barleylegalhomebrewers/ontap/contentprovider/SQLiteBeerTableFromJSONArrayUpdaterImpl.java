@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
+
 import android.content.ContentValues;
 
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata;
@@ -51,9 +52,10 @@ class SQLiteBeerTableFromJSONArrayUpdaterImpl implements
 			Integer id = contentValues.getAsInteger(BeerTableMetadata.ID_COLUMN);
 			ContentValues contentValuesInTable = 
 					beerTable.getBeer(id);
-			if (contentValues != contentValuesInTable) {
+			if (!cvComp.areEqual(contentValues, contentValuesInTable)) {
 				beerTable.update(contentValues);
 			}
+
 		}
 		for (Integer id : deleteList) {
 			beerTable.delete(id);
@@ -62,4 +64,5 @@ class SQLiteBeerTableFromJSONArrayUpdaterImpl implements
 
 	private JSONArrayToContentValuesListConverter converter;
 	private BeerTable beerTable;
+	private ContentValuesComparator cvComp = new ContentValuesComparator();
 }

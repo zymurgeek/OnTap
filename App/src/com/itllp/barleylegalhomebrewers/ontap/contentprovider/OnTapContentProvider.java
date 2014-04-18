@@ -29,7 +29,7 @@ public class OnTapContentProvider extends ContentProvider {
 			+ "/" + OnTapContentProviderMetadata.AUTHORITY + "." + OnTapContentProviderMetadata.BEER_BASE_PATH;
     public static final String BEER_CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE
 			+ "/" + OnTapContentProviderMetadata.AUTHORITY + "." + OnTapContentProviderMetadata.BEER_BASE_PATH;
-	private static UriMatcher sUriMatcher;
+    private static UriMatcher sUriMatcher;
 	private static final int EVENTS = 10;
 	private static final int EVENT_ID = 20;
 	private static final int BEERS = 30;
@@ -38,8 +38,7 @@ public class OnTapContentProvider extends ContentProvider {
 	  static {
 	    sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.EVENT_BASE_PATH, EVENTS);
 	    sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.EVENT_BASE_PATH + "/#", EVENT_ID);
-	    sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.EVENT_BASE_PATH + "/#/"
-	    		+ OnTapContentProviderMetadata.BEER_BASE_PATH, BEERS);
+	    sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.BEER_BASE_PATH, BEERS);
 	    sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.EVENT_BASE_PATH + "/#/"
 	    		+ OnTapContentProviderMetadata.BEER_BASE_PATH + "/#", BEER_ID);
 	  }
@@ -108,8 +107,6 @@ public class OnTapContentProvider extends ContentProvider {
 
 		int uriType = sURIMatcher.match(uri);
 		String eventId = "";
-		List<String> paths;
-		
 		switch (uriType) {
 		case EVENTS:
 			queryBuilder.setTables(SQLiteEventTable.TABLE_NAME);
@@ -122,10 +119,11 @@ public class OnTapContentProvider extends ContentProvider {
 			break;
 		case BEERS:
 			queryBuilder.setTables(SQLiteBeerTable.TABLE_NAME);
-			paths = uri.getPathSegments();
-			eventId = paths.get(paths.size()-2);
-			queryBuilder.appendWhere(EventTableMetadata.ID_COLUMN + "="
-					+ eventId);
+			eventId = uri.getQueryParameter(OnTapContentProviderMetadata.EVENT_ID_PARAM);
+			if (eventId != null) {
+				queryBuilder.appendWhere(BeerTableMetadata.EVENT_ID_COLUMN + "="
+						+ eventId);
+			}
 			break;
 		case BEER_ID:
 			queryBuilder.setTables(SQLiteBeerTable.TABLE_NAME);
@@ -144,17 +142,18 @@ public class OnTapContentProvider extends ContentProvider {
 		
 		cursor.setNotificationUri(getContext().getContentResolver(), uri);
 
-		TableUpdater tableUpdater = null;
+		Runnable sqlLoadTask = null;
 		switch (uriType) {
 		case EVENTS:
 		case EVENT_ID:
-			tableUpdater = EventTableUpdaterFactory.getInstance();
+			TableUpdater eventUpdater = EventTableUpdaterFactory.getInstance();
+			sqlLoadTask = new TableUpdaterTask(eventUpdater);
 			break;
 		case BEERS:
-			tableUpdater = BeerTableUpdaterFactory.getInstance(eventId);
+			BeerTableUpdater beerUpdater = BeerTableUpdaterFactory.getInstance();
+			sqlLoadTask = new BeerTableUpdaterTask(beerUpdater, eventId);
 			break;
 		}
-		Runnable sqlLoadTask = new EventTableUpdaterTask(tableUpdater);
 		Thread t = new Thread(sqlLoadTask);
 		t.start();
 		

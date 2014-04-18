@@ -86,12 +86,13 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
 	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
     	String[] projection = { BeerTable.ID_COLUMN, BeerTable.NAME_COLUMN };
     	String sortOrder = BeerTable.NAME_COLUMN + " DESC";
-    	final Uri uri = Uri.parse("content://" + 
-    			OnTapContentProviderMetadata.AUTHORITY + "/" +
-    			OnTapContentProviderMetadata.EVENT_BASE_PATH + "/" + eventId + 
-    			"/" + OnTapContentProviderMetadata.BEER_BASE_PATH);
+    	String queryString =
+    			OnTapContentProviderMetadata.EVENT_ID_PARAM + "=" +
+    			Uri.encode(String.valueOf(eventId));
+    	Uri queryUri = Uri.parse(OnTapContentProviderMetadata.BEER_CONTENT_URI 
+    			+ "?" +	queryString);
     	CursorLoader cursorLoader = new CursorLoader(getActivity(),
-    			uri, projection, null, null, sortOrder);
+    			queryUri, projection, null, null, sortOrder);
     	return cursorLoader;
 	}
 

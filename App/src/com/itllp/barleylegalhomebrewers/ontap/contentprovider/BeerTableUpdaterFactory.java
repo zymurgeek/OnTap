@@ -10,19 +10,17 @@ import com.itllp.barleylegalhomebrewers.ontap.json.JSONArrayToContentValuesListC
 import com.itllp.barleylegalhomebrewers.ontap.json.JSONArrayToContentValuesListConverterImpl;
 import com.itllp.barleylegalhomebrewers.ontap.json.JSONObjectToContentValuesConverter;
 import com.itllp.barleylegalhomebrewers.ontap.json.JSONServerJSONArrayRetriever;
-import com.itllp.barleylegalhomebrewers.ontap.jsonserver.TableFromJSONArrayRetrieverUpdater;
+import com.itllp.barleylegalhomebrewers.ontap.jsonserver.BeerTableFromJSONArrayRetrieverUpdater;
 
 
 public class BeerTableUpdaterFactory {
 
 	public static final String betaSiteUrl = "http://misdb.com/barleylegalapp/getbeersforevent.aspx?id=#";
 	public static final String productionSiteUrl = "http://barleylegalevents.com/barleylegal/getbeersforevent.aspx?id=#";
-	private static String serverUrlTemplate;
-	private static JSONArrayRetriever arrayRetriever;
 	
 	private static void createSQLiteBeerTableUpdater(String serverURL) {
-		serverUrlTemplate = serverURL;
-		arrayRetriever = new JSONServerJSONArrayRetriever(serverURL);
+		JSONArrayRetriever arrayRetriever = 
+				new JSONServerJSONArrayRetriever(serverURL);
 		StringToJavaDateConverter jsonDateConverter = new JSONDateToJavaDate();
 		JavaDateToStringConverter javaDateConverter = 
 				new JavaDateToSQLiteDateConverter();
@@ -36,7 +34,7 @@ public class BeerTableUpdaterFactory {
 		TableFromJSONArrayUpdater beerTableFromJSONArrayUpdater = 
 				new SQLiteBeerTableFromJSONArrayUpdaterImpl(listConverter,
 						beerTable);
-		beerTableUpdater = new TableFromJSONArrayRetrieverUpdater
+		beerTableUpdater = new BeerTableFromJSONArrayRetrieverUpdater
 				(arrayRetriever, beerTableFromJSONArrayUpdater);
 	}
 
@@ -51,12 +49,10 @@ public class BeerTableUpdaterFactory {
 	}
 
 	
-	public static TableUpdater getInstance(String eventId) {
-		String serverUrl = serverUrlTemplate.replace("#", eventId);
-		arrayRetriever.setServerUrl(serverUrl);
+	public static BeerTableUpdater getInstance() {
 		return beerTableUpdater;
 	}
 	
 	
-	private static TableUpdater beerTableUpdater = null;
+	private static BeerTableUpdater beerTableUpdater = null;
 }

@@ -5,26 +5,29 @@ import org.json.JSONArray;
 public class JSONServerJSONArrayRetriever implements JSONArrayRetriever {
 
 	public JSONServerJSONArrayRetriever(String serverURL) {
-		this.serverURL = serverURL;
+		this.serverUrlTemplate = serverURL;
 	}
 	
 	
 	@Override
 	public JSONArray getJSONArray() {
     	JSONParser jParser = new JSONParser();
-    	JSONArray jsonArray = jParser.getJSONArrayFromUrl(serverURL);
+    	JSONArray jsonArray = jParser.getJSONArrayFromUrl(serverUrlTemplate);
 		return jsonArray;
 	}
 
 	
-	private String serverURL = null;
+	private String serverUrlTemplate = null;
 
 
 	@Override
-	public JSONArray getJSONArray(int id) {
-		String eventServerURL = serverURL.replace("#", Integer.toString(id));
+	public JSONArray getJSONArray(String id) {
+		if (id == null) {
+			return getJSONArray();
+		}
+		String serverURL = serverUrlTemplate.replace("#", id);
     	JSONParser jParser = new JSONParser();
-    	JSONArray jsonArray = jParser.getJSONArrayFromUrl(eventServerURL);
+    	JSONArray jsonArray = jParser.getJSONArrayFromUrl(serverURL);
 		return jsonArray;
 	}
 }

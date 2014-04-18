@@ -20,8 +20,9 @@ public class StubJSONArrayRetriever implements JSONArrayRetriever {
 	}
 
 	@Override
-	public JSONArray getJSONArray(int id) {
-		return returnJSONArrayForID.get(id);
+	public JSONArray getJSONArray(String id) {
+		int intId = Integer.parseInt(id);
+		return returnJSONArrayForID.get(intId);
 	}
 
 	public void stub_setReturnArray(int id, JSONArray expectedJSONArray) {

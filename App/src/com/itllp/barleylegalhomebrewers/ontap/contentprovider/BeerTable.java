@@ -26,7 +26,7 @@ public interface BeerTable {
 
 	/** @return List of IDs in the table.  This is never null. */
 	List<Integer> getAllIds();
-	void insert(ContentValues event);
-	void update(ContentValues event);
+	void insert(ContentValues beer);
+	void update(ContentValues beer);
 	void delete(Integer id);
 }

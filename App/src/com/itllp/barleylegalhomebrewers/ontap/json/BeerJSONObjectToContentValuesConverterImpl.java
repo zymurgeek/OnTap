@@ -30,6 +30,7 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 		
 		convertID(jsonObject, result);
 		convertBeerName(jsonObject, result);
+		convertEventID(jsonObject, result);
 
 		return result;
 	}
@@ -52,4 +53,17 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 			result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.NAME_COLUMN, beerName);
 		} catch (JSONException e) {}
 	}
+	
+	private void convertEventID(JSONObject jsonObject, ContentValues result) {
+		try {
+			String idString = jsonObject.getString(
+					com.itllp.barleylegalhomebrewers.ontap.jsonserver.Beer.EVENT_ID);
+			int id = Integer.parseInt(idString);
+			result.put(
+					com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.EVENT_ID_COLUMN, 
+					id);
+		} catch (JSONException e) {}
+	}
+
+
 }

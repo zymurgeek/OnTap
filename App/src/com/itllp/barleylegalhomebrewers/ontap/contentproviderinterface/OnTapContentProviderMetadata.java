@@ -14,5 +14,6 @@ public class OnTapContentProviderMetadata {
 			AUTHORITY + "/" + OnTapContentProviderMetadata.BEER_BASE_PATH);
 	public static final String EVENT_BASE_PATH = "events";
 	public static final String BEER_BASE_PATH = "beers";
+	public static final String EVENT_ID_PARAM = "event";
 
 }
