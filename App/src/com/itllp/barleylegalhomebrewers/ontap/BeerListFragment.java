@@ -69,13 +69,15 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     			BeerTableMetadata.ID_COLUMN, 
     			BeerTableMetadata.NAME_COLUMN,
     			BeerTableMetadata.BREWER_NAME_COLUMN,
-    			BeerTableMetadata.STYLE_CODE_COLUMN};
+    			BeerTableMetadata.STYLE_CODE_COLUMN,
+    			BeerTableMetadata.STYLE_NAME_COLUMN};
     	// Fields on the UI to which we map
     	int[] to = new int[] { 
     			R.id.id,
     			R.id.beer_name,
     			R.id.brewer_name,
-    			R.id.beer_style_code};
+    			R.id.beer_style_code,
+    			R.id.beer_style_name};
     	// TODO Use UtcDateToHumbanReadableDateConverter for the startlocaltime database TEXT field
 
     	adapter = new SimpleCursorAdapter
@@ -91,7 +93,8 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     	String[] projection = { BeerTableMetadata.ID_COLUMN, 
     			BeerTableMetadata.NAME_COLUMN, 
     			BeerTableMetadata.BREWER_NAME_COLUMN,
-    			BeerTableMetadata.STYLE_CODE_COLUMN};
+    			BeerTableMetadata.STYLE_CODE_COLUMN,
+    			BeerTableMetadata.STYLE_NAME_COLUMN};
     	String sortOrder = BeerTableMetadata.NAME_COLUMN + " DESC";
     	String queryString =
     			OnTapContentProviderMetadata.EVENT_ID_PARAM + "=" +

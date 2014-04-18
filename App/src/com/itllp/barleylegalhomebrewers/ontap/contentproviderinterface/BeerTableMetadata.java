@@ -27,5 +27,10 @@ public class BeerTableMetadata {
 	 * <P>Type: TEXT</P>
 	 */
 	public static final String STYLE_CODE_COLUMN = "style_code";
+	/**
+	 * Column name for the beer style name
+	 * <P>Type: TEXT</P>
+	 */
+	public static final String STYLE_NAME_COLUMN = "style_name";
 
 }

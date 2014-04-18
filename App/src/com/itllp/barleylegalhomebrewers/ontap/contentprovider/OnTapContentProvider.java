@@ -176,7 +176,8 @@ public class OnTapContentProvider extends ContentProvider {
 				BeerTableMetadata.NAME_COLUMN,
 				BeerTableMetadata.EVENT_ID_COLUMN,
 				BeerTableMetadata.BREWER_NAME_COLUMN,
-				BeerTableMetadata.STYLE_CODE_COLUMN};
+				BeerTableMetadata.STYLE_CODE_COLUMN,
+				BeerTableMetadata.STYLE_NAME_COLUMN};
 		checkForUnknownColumns(projection, available);
 	}
 

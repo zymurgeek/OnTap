@@ -33,6 +33,7 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 		convertEventID(jsonObject, result);
 		convertBrewerName(jsonObject, result);
 		convertStyleCode(jsonObject, result);
+		convertStyleName(jsonObject, result);
 
 		return result;
 	}
@@ -83,6 +84,14 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 			String styleCode = jsonObject.getString(com.itllp
 					.barleylegalhomebrewers.ontap.jsonserver.Beer.STYLE_CODE);
 			result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.STYLE_CODE_COLUMN, styleCode);
+		} catch (JSONException e) {}
+	}
+	
+	private void convertStyleName(JSONObject jsonObject, ContentValues result) {
+		try {
+			String styleName = jsonObject.getString(com.itllp
+					.barleylegalhomebrewers.ontap.jsonserver.Beer.STYLE_NAME);
+			result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.STYLE_NAME_COLUMN, styleName);
 		} catch (JSONException e) {}
 	}
 	
