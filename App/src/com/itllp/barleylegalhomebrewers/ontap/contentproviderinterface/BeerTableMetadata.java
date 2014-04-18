@@ -32,5 +32,10 @@ public class BeerTableMetadata {
 	 * <P>Type: TEXT</P>
 	 */
 	public static final String STYLE_NAME_COLUMN = "style_name";
+	/**
+	 * Column name for the beer style override
+	 * <P>Type: TEXT</P>
+	 */
+	public static final String STYLE_OVERRIDE_COLUMN = "style_override";
 
 }

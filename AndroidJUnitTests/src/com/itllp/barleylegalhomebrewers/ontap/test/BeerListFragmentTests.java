@@ -39,11 +39,12 @@ public class BeerListFragmentTests extends
 		BeerTableMetadata.NAME_COLUMN,
 		BeerTableMetadata.BREWER_NAME_COLUMN,
 		BeerTableMetadata.STYLE_CODE_COLUMN,
-		BeerTableMetadata.STYLE_NAME_COLUMN};
+		BeerTableMetadata.STYLE_NAME_COLUMN,
+		BeerTableMetadata.STYLE_OVERRIDE_COLUMN};
 	private static final Object[] ROW1_COLUMN_VALUES = {Integer.valueOf(10), 
-		"Beer #10", "Joe", "1A", "Lite American Lager"};
+		"Beer #10", "Joe", "1A", "Lite American Lager", "Extra light"};
 	private static final Object[] ROW2_COLUMN_VALUES = {Integer.valueOf(20), 
-		"Beer #20", "Steve", "2B", "Bohemian Pilsner"};
+		"Beer #20", "Steve", "2B", "Bohemian Pilsner", "New Zealand swing"};
 	private Intent intent;
     ListView beerListView;
 	private Instrumentation instrumentation;

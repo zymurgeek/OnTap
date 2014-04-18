@@ -21,6 +21,7 @@ class SQLiteBeerTable implements BeerTable {
 	public static final String BREWER_NAME_COLUMN_TYPE = "TEXT";
 	public static final String STYLE_CODE_COLUMN_TYPE = "TEXT";
 	public static final String STYLE_NAME_COLUMN_TYPE = "TEXT";
+	public static final String STYLE_OVERRIDE_COLUMN_TYPE = "TEXT";
 	
 	public static final String DATABASE_CREATE = "create table " 
 			+ TABLE_NAME
@@ -36,7 +37,9 @@ class SQLiteBeerTable implements BeerTable {
 			+ BeerTableMetadata.STYLE_CODE_COLUMN 
 			+ " " + SQLiteBeerTable.STYLE_CODE_COLUMN_TYPE + ", " 
 			+ BeerTableMetadata.STYLE_NAME_COLUMN 
-			+ " " + SQLiteBeerTable.STYLE_NAME_COLUMN_TYPE + " " 
+			+ " " + SQLiteBeerTable.STYLE_NAME_COLUMN_TYPE + ", " 
+			+ BeerTableMetadata.STYLE_OVERRIDE_COLUMN 
+			+ " " + SQLiteBeerTable.STYLE_OVERRIDE_COLUMN_TYPE + " " 
 			+ ");";
 	public static final String DROP_TABLE = "DROP TABLE IF EXISTS ";
 	private CursorConverter cursorConverter;

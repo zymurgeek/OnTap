@@ -9,4 +9,5 @@ public class Beer {
 	public static final String BREWER_LAST_NAME = "LastName";
 	public static final String STYLE_CODE = "BeerStyle";
 	public static final String STYLE_NAME = "BeerStyleName";
+	public static final String STYLE_OVERRIDE = "BeerStyleOverride";
 }
