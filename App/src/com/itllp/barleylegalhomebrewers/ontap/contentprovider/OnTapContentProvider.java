@@ -175,7 +175,8 @@ public class OnTapContentProvider extends ContentProvider {
 		String[] available = { BeerTableMetadata.ID_COLUMN , 
 				BeerTableMetadata.NAME_COLUMN,
 				BeerTableMetadata.EVENT_ID_COLUMN,
-				BeerTableMetadata.BREWER_NAME_COLUMN};
+				BeerTableMetadata.BREWER_NAME_COLUMN,
+				BeerTableMetadata.STYLE_CODE_COLUMN};
 		checkForUnknownColumns(projection, available);
 	}
 
