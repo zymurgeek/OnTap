@@ -1,6 +1,6 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
-import com.itllp.barleylegalhomebrewers.ontap.contentprovider.BeerTable;
+import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.OnTapContentProviderMetadata;
 
 import android.content.Context;
@@ -66,12 +66,14 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     	// Fields from the database (projection)
     	// Must include the _id column for the adapter to work
     	String[] from = new String[] { 
-    			BeerTable.ID_COLUMN, 
-    			BeerTable.NAME_COLUMN };
+    			BeerTableMetadata.ID_COLUMN, 
+    			BeerTableMetadata.NAME_COLUMN,
+    			BeerTableMetadata.BREWER_NAME_COLUMN};
     	// Fields on the UI to which we map
     	int[] to = new int[] { 
     			R.id.id,
-    			R.id.beer_name };
+    			R.id.beer_name,
+    			R.id.brewer_name};
     	// TODO Use UtcDateToHumbanReadableDateConverter for the startlocaltime database TEXT field
 
     	adapter = new SimpleCursorAdapter
@@ -84,8 +86,10 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     
 	@Override
 	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
-    	String[] projection = { BeerTable.ID_COLUMN, BeerTable.NAME_COLUMN };
-    	String sortOrder = BeerTable.NAME_COLUMN + " DESC";
+    	String[] projection = { BeerTableMetadata.ID_COLUMN, 
+    			BeerTableMetadata.NAME_COLUMN, 
+    			BeerTableMetadata.BREWER_NAME_COLUMN};
+    	String sortOrder = BeerTableMetadata.NAME_COLUMN + " DESC";
     	String queryString =
     			OnTapContentProviderMetadata.EVENT_ID_PARAM + "=" +
     			Uri.encode(String.valueOf(eventId));

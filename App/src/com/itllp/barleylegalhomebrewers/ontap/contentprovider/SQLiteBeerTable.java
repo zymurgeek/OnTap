@@ -18,6 +18,7 @@ class SQLiteBeerTable implements BeerTable {
 	public static final String ID_COLUMN_TYPE = "INTEGER";
 	public static final String NAME_COLUMN_TYPE = "TEXT";
 	public static final String EVENT_ID_COLUMN_TYPE = "INTEGER";
+	public static final String BREWER_NAME_COLUMN_TYPE = "TEXT";
 	
 	public static final String DATABASE_CREATE = "create table " 
 			+ TABLE_NAME
@@ -27,7 +28,9 @@ class SQLiteBeerTable implements BeerTable {
 			+ BeerTableMetadata.NAME_COLUMN 
 			+ " " + SQLiteBeerTable.NAME_COLUMN_TYPE + " NOT NULL, " 
 			+ BeerTableMetadata.EVENT_ID_COLUMN 
-			+ " " + SQLiteBeerTable.EVENT_ID_COLUMN_TYPE + " SECONDARY KEY" 
+			+ " " + SQLiteBeerTable.EVENT_ID_COLUMN_TYPE + " SECONDARY KEY," 
+			+ BeerTableMetadata.BREWER_NAME_COLUMN 
+			+ " " + SQLiteBeerTable.BREWER_NAME_COLUMN_TYPE + " " 
 			+ ");";
 	public static final String DROP_TABLE = "DROP TABLE IF EXISTS ";
 	private CursorConverter cursorConverter;

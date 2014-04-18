@@ -28,19 +28,20 @@ import android.widget.ListView;
 
 import com.itllp.barleylegalhomebrewers.ontap.BeerListActivity;
 import com.itllp.barleylegalhomebrewers.ontap.BeerListFragment;
-import com.itllp.barleylegalhomebrewers.ontap.contentprovider.BeerTable;
+import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
 
 public class BeerListFragmentTests extends
 	ActivityUnitTestCase<BeerListActivity> {
 
 	private static final String[] COLUMN_NAMES = { 
-		BeerTable.ID_COLUMN, 
-		BeerTable.NAME_COLUMN };
+		BeerTableMetadata.ID_COLUMN, 
+		BeerTableMetadata.NAME_COLUMN,
+		BeerTableMetadata.BREWER_NAME_COLUMN};
 	private static final Object[] ROW1_COLUMN_VALUES = {Integer.valueOf(10), 
-		"Beer #10"};
+		"Beer #10", "Joe"};
 	private static final Object[] ROW2_COLUMN_VALUES = {Integer.valueOf(20), 
-		"Beer #20"};
+		"Beer #20", "Steve"};
 	private Intent intent;
     ListView beerListView;
 	private Instrumentation instrumentation;

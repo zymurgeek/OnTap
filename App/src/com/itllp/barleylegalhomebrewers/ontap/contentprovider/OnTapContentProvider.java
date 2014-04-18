@@ -103,21 +103,23 @@ public class OnTapContentProvider extends ContentProvider {
 
 		SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
 
-		checkForUnknownColumns(projection);
 
 		int uriType = sURIMatcher.match(uri);
 		String eventId = "";
 		switch (uriType) {
 		case EVENTS:
+			checkForUnknownEventColumns(projection);
 			queryBuilder.setTables(SQLiteEventTable.TABLE_NAME);
 			break;
 		case EVENT_ID:
+			checkForUnknownEventColumns(projection);
 			queryBuilder.setTables(SQLiteEventTable.TABLE_NAME);
 			eventId = uri.getLastPathSegment();
 			queryBuilder.appendWhere(EventTableMetadata.ID_COLUMN + "="
 					+ eventId);
 			break;
 		case BEERS:
+			checkForUnknownBeerColumns(projection);
 			queryBuilder.setTables(SQLiteBeerTable.TABLE_NAME);
 			eventId = uri.getQueryParameter(OnTapContentProviderMetadata.EVENT_ID_PARAM);
 			if (eventId != null) {
@@ -126,6 +128,7 @@ public class OnTapContentProvider extends ContentProvider {
 			}
 			break;
 		case BEER_ID:
+			checkForUnknownBeerColumns(projection);
 			queryBuilder.setTables(SQLiteBeerTable.TABLE_NAME);
 			List<String> segments = uri.getPathSegments();
 			queryBuilder.appendWhere(BeerTableMetadata.EVENT_ID_COLUMN + "="
@@ -161,9 +164,23 @@ public class OnTapContentProvider extends ContentProvider {
 	}
 
 	
-	private void checkForUnknownColumns(String[] projection) {
+	private void checkForUnknownEventColumns(String[] projection) {
 		String[] available = { EventTableMetadata.ID_COLUMN , EventTableMetadata.NAME_COLUMN,
 				EventTableMetadata.START_LOCAL_TIME_COLUMN };
+		checkForUnknownColumns(projection, available);
+	}
+
+
+	private void checkForUnknownBeerColumns(String[] projection) {
+		String[] available = { BeerTableMetadata.ID_COLUMN , 
+				BeerTableMetadata.NAME_COLUMN,
+				BeerTableMetadata.EVENT_ID_COLUMN,
+				BeerTableMetadata.BREWER_NAME_COLUMN};
+		checkForUnknownColumns(projection, available);
+	}
+
+	
+	private void checkForUnknownColumns(String[] projection, String[] available) {
 		if (projection != null) {
 			HashSet<String> requestedColumns = new HashSet<String>(Arrays.asList(projection));
 			HashSet<String> availableColumns = new HashSet<String>(Arrays.asList(available));
