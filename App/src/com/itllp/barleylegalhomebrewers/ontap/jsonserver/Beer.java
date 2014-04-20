@@ -10,4 +10,6 @@ public class Beer {
 	public static final String STYLE_CODE = "BeerStyle";
 	public static final String STYLE_NAME = "BeerStyleName";
 	public static final String STYLE_OVERRIDE = "BeerStyleOverride";
+	public static final String IS_KICKED = "Kicked";
+	public static final String TAP_NUMBER = "OnTap";
 }

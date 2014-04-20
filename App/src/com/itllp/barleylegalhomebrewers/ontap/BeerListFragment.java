@@ -24,7 +24,6 @@ import android.widget.TextView;
 public class BeerListFragment extends ListFragment 
 implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
 	
-	//private BeerListAdapter beerListAdapter = null;
 	private SimpleCursorAdapter adapter = null;
 	private int eventId = -1;
 
@@ -33,12 +32,6 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
         super.onActivityCreated(savedInstanceState);
 
         setEmptyText(getString(R.string.no_beers_text));
-
-        // Create an empty adapter we will use to display the loaded data.
-        /*
-        beerListAdapter = new BeerListAdapter(getActivity(), R.layout.beer_list_item);
-        setListAdapter(beerListAdapter);
-        */
 
         // Start out with a progress indicator.
         setListShown(false);
@@ -71,7 +64,8 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     			BeerTableMetadata.BREWER_NAME_COLUMN,
     			BeerTableMetadata.STYLE_CODE_COLUMN,
     			BeerTableMetadata.STYLE_NAME_COLUMN,
-    			BeerTableMetadata.STYLE_OVERRIDE_COLUMN};
+    			BeerTableMetadata.STYLE_OVERRIDE_COLUMN,
+    			BeerTableMetadata.IS_KICKED_COLUMN};
     	// Fields on the UI to which we map
     	int[] to = new int[] { 
     			R.id.id,
@@ -79,10 +73,16 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     			R.id.brewer_name,
     			R.id.beer_style_code,
     			R.id.beer_style_name,
-    			R.id.beer_style_override};
+    			R.id.beer_style_override,
+    			R.id.is_kicked};
     	// TODO Use UtcDateToHumbanReadableDateConverter for the startlocaltime database TEXT field
 
-    	adapter = new SimpleCursorAdapter
+        // Create an empty adapter we will use to display the loaded data.
+        /*
+        beerListAdapter = new BeerListAdapter(getActivity(), R.layout.beer_list_item);
+        setListAdapter(beerListAdapter);
+        */
+    	adapter = new BeerListAdapter
     			(getActivity(), R.layout.beer_list_item, null, from, to, 0);
 
     	setListAdapter(adapter);

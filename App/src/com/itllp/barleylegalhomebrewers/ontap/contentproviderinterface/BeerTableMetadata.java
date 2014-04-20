@@ -38,4 +38,10 @@ public class BeerTableMetadata {
 	 */
 	public static final String STYLE_OVERRIDE_COLUMN = "style_override";
 
+	/**
+	 * Column name for if the beer is kicked.  0 = no, !0 = yes
+	 * <P>Type: INTEGER</P>
+	 */
+	public static final String IS_KICKED_COLUMN = "is_kicked";
+
 }
