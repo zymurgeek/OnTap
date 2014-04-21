@@ -35,11 +35,6 @@ public class BeerListAdapter extends SimpleCursorAdapter {
         View view;
 
         view = super.getView(position, convertView, parent);
-//        if (convertView == null) {
-//            view = mInflater.inflate(R.layout.beer_list_item, parent, false);
-//        } else {
-//            view = convertView;
-//        }
 
         Cursor itemCursor = (Cursor)getItem(position);
         //itemCursor.getString(cursor.getColumnIndex("my_column_name"))
@@ -47,30 +42,21 @@ public class BeerListAdapter extends SimpleCursorAdapter {
 //        Beer beer = getItem(position);
 //        
         TextView sectionHeaderView = (TextView)view.findViewById(R.id.section_title);
-//        int lastSectionTextId = -1;
-//        if (position > 0) {
-//        	Beer lastBeer = getItem(position - 1);
-//        	if (lastBeer != null) {
-//        		lastSectionTextId = getSectionTextId(lastBeer);
-//        	}
-//        }
+        int lastSectionTextId = -1;
+        if (position > 0) {
+        	Cursor lastBeer = (Cursor)getItem(position - 1);
+        	if (lastBeer != null) {
+        		lastSectionTextId = getSectionTextId(lastBeer);
+        	}
+        }
         int thisSectionTextId = getSectionTextId(itemCursor);
-//        if (thisSectionTextId != lastSectionTextId) {
+        if (thisSectionTextId != lastSectionTextId) {
         	sectionHeaderView.setText(thisSectionTextId);
         	sectionHeaderView.setVisibility(View.VISIBLE);
-//        } else {
-//        	sectionHeaderView.setVisibility(View.GONE);
-//        }
-//        
-//        TextView idView = (TextView)view.findViewById(R.id.id);
-//        idView.setText(String.valueOf(beer.getId()));
-//        
-//        TextView beerNameView = (TextView)view.findViewById(R.id.beer_name); 
-//        beerNameView.setText(beer.getBeerName());
-//        
-//        TextView brewerNameView = (TextView)view.findViewById(R.id.brewer_name); 
-//        brewerNameView.setText(beer.getBrewerName());
-//        
+        } else {
+        	sectionHeaderView.setVisibility(View.GONE);
+        }
+        
 //        TextView styleCodeView = (TextView)view.findViewById(R.id.beer_style_code);
 //        String styleCode = beer.getStyleCode();
 //        styleCodeView.setText(styleCode);
