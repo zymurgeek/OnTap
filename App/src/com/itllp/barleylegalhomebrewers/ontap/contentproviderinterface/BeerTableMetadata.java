@@ -7,31 +7,37 @@ public class BeerTableMetadata {
 	 * <P>Type: TEXT</P>
 	 */
 	public static final String ID_COLUMN = "_id";
+	
 	/**
 	 * Column name for the identification number of the event
 	 * <P>Type: TEXT</P>
 	 */
 	public static final String EVENT_ID_COLUMN = "event_id";
+	
 	/**
 	 * Column name for the name of the event
 	 * <P>Type: TEXT</P>
 	 */
 	public static final String NAME_COLUMN = "name";
+	
 	/**
 	 * Column name for the name of the brewer
 	 * <P>Type: TEXT</P>
 	 */
 	public static final String BREWER_NAME_COLUMN = "brewer";
+	
 	/**
 	 * Column name for the beer style code
 	 * <P>Type: TEXT</P>
 	 */
 	public static final String STYLE_CODE_COLUMN = "style_code";
+	
 	/**
 	 * Column name for the beer style name
 	 * <P>Type: TEXT</P>
 	 */
 	public static final String STYLE_NAME_COLUMN = "style_name";
+
 	/**
 	 * Column name for the beer style override
 	 * <P>Type: TEXT</P>
@@ -50,5 +56,11 @@ public class BeerTableMetadata {
 	 * <P>Type: INTEGER</P>
 	 */
 	public static final String TAP_NUMBER_COLUMN = "tap_number";
+
+	/**
+	 * Column name for the beer packaging type
+	 * <P>Type: TEXT</P>
+	 */
+	public static final String PACKAGING_COLUMN = "packaging";
 
 }

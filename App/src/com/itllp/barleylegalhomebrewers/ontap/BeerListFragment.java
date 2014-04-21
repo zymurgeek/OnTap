@@ -91,7 +91,8 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     			BeerTableMetadata.STYLE_NAME_COLUMN,
     			BeerTableMetadata.STYLE_OVERRIDE_COLUMN,
     			BeerTableMetadata.IS_KICKED_COLUMN,
-    			BeerTableMetadata.TAP_NUMBER_COLUMN};
+    			BeerTableMetadata.TAP_NUMBER_COLUMN,
+    			BeerTableMetadata.PACKAGING_COLUMN};
     	String sortOrder = BeerTableMetadata.IS_KICKED_COLUMN +	",  ( " +
     			BeerTableMetadata.TAP_NUMBER_COLUMN + " <> 0 ) DESC, " +
     			BeerTableMetadata.NAME_COLUMN;

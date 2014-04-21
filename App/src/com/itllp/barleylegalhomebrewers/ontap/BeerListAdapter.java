@@ -1,13 +1,10 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
-import java.util.List;
-
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.widget.SimpleCursorAdapter;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -17,20 +14,9 @@ public class BeerListAdapter extends SimpleCursorAdapter {
 	public BeerListAdapter(Context context, int layout, Cursor c,
 			String[] from, int[] to, int flags) {
 		super(context, layout, c, from, to, flags);
-      mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
-    private final LayoutInflater mInflater;
-    
-//    public void setData(List<Beer> data) {
-//        clear();
-//        if (data != null) {
-//        	for (Beer beer : data) {
-//        		add(beer);
-//        	}
-//        }
-//    }
-//
+	
     @Override public View getView(int position, View convertView, ViewGroup parent) {
         View view;
 
@@ -41,8 +27,8 @@ public class BeerListAdapter extends SimpleCursorAdapter {
 
         TextView locationView = (TextView)view.findViewById(R.id.beer_location);
         String location = "";
+        int tapNumber = getTapNumber(cursor);
         if (!isKicked(cursor)) {
-            int tapNumber = getTapNumber(cursor);
             if (tapNumber > 0) {
             	location = "Tap #" + tapNumber; 
             } else {
@@ -51,7 +37,9 @@ public class BeerListAdapter extends SimpleCursorAdapter {
             	}
             }
         }
-        //TODO Mark on-deck and kicked beer locations as keg or bottle
+        if (isKicked(cursor) || tapNumber == 0) {
+        	location = getPackaging(cursor);
+        }
     	locationView.setText(location);
         
         TextView styleOverrideView = (TextView)view.findViewById(R.id.beer_style_override); 
@@ -95,5 +83,12 @@ public class BeerListAdapter extends SimpleCursorAdapter {
 		int isKicked = beer.getInt(kickedColIndex);
 		return (isKicked != 0);
 	}
+	
+	private String getPackaging(Cursor beer) {
+		int packagingColIndex = beer.getColumnIndex(BeerTableMetadata.PACKAGING_COLUMN);
+		String packaging = beer.getString(packagingColIndex);
+		return packaging;
+	}
+
 }
 

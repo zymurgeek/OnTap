@@ -180,7 +180,8 @@ public class OnTapContentProvider extends ContentProvider {
 				BeerTableMetadata.STYLE_NAME_COLUMN,
 				BeerTableMetadata.STYLE_OVERRIDE_COLUMN,
 				BeerTableMetadata.IS_KICKED_COLUMN,
-				BeerTableMetadata.TAP_NUMBER_COLUMN};
+				BeerTableMetadata.TAP_NUMBER_COLUMN,
+				BeerTableMetadata.PACKAGING_COLUMN};
 		checkForUnknownColumns(projection, available);
 	}
 
