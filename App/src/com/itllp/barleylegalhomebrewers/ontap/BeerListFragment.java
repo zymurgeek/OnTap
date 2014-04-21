@@ -64,8 +64,7 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     			BeerTableMetadata.BREWER_NAME_COLUMN,
     			BeerTableMetadata.STYLE_CODE_COLUMN,
     			BeerTableMetadata.STYLE_NAME_COLUMN,
-    			BeerTableMetadata.STYLE_OVERRIDE_COLUMN,
-    			BeerTableMetadata.IS_KICKED_COLUMN};
+    			BeerTableMetadata.STYLE_OVERRIDE_COLUMN};
     	// Fields on the UI to which we map
     	int[] to = new int[] { 
     			R.id.id,
@@ -73,15 +72,8 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     			R.id.brewer_name,
     			R.id.beer_style_code,
     			R.id.beer_style_name,
-    			R.id.beer_style_override,
-    			R.id.is_kicked};
-    	// TODO Use UtcDateToHumbanReadableDateConverter for the startlocaltime database TEXT field
+    			R.id.beer_style_override};
 
-        // Create an empty adapter we will use to display the loaded data.
-        /*
-        beerListAdapter = new BeerListAdapter(getActivity(), R.layout.beer_list_item);
-        setListAdapter(beerListAdapter);
-        */
     	adapter = new BeerListAdapter
     			(getActivity(), R.layout.beer_list_item, null, from, to, 0);
 

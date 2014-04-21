@@ -22,12 +22,6 @@
         android:layout_height="0dp"
         tools:ignore="SelectableText"
     />
-    <TextView
-        android:id="@+id/is_kicked"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        tools:ignore="SelectableText"
-    />
     
     <TextView
         android:id="@+id/beer_name"
