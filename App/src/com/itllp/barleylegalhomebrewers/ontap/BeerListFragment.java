@@ -90,8 +90,11 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     			BeerTableMetadata.STYLE_CODE_COLUMN,
     			BeerTableMetadata.STYLE_NAME_COLUMN,
     			BeerTableMetadata.STYLE_OVERRIDE_COLUMN,
-    			BeerTableMetadata.IS_KICKED_COLUMN};
-    	String sortOrder = BeerTableMetadata.NAME_COLUMN + " DESC";
+    			BeerTableMetadata.IS_KICKED_COLUMN,
+    			BeerTableMetadata.TAP_NUMBER_COLUMN};
+    	String sortOrder = BeerTableMetadata.IS_KICKED_COLUMN +	",  ( " +
+    			BeerTableMetadata.TAP_NUMBER_COLUMN + " <> 0 ) DESC, " +
+    			BeerTableMetadata.NAME_COLUMN;
     	String queryString =
     			OnTapContentProviderMetadata.EVENT_ID_PARAM + "=" +
     			Uri.encode(String.valueOf(eventId));

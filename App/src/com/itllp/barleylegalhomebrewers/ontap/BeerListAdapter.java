@@ -36,26 +36,8 @@ public class BeerListAdapter extends SimpleCursorAdapter {
 
         view = super.getView(position, convertView, parent);
 
-        Cursor itemCursor = (Cursor)getItem(position);
-        //itemCursor.getString(cursor.getColumnIndex("my_column_name"))
-        
-//        Beer beer = getItem(position);
-//        
-        TextView sectionHeaderView = (TextView)view.findViewById(R.id.section_title);
-        int lastSectionTextId = -1;
-        if (position > 0) {
-        	Cursor lastBeer = (Cursor)getItem(position - 1);
-        	if (lastBeer != null) {
-        		lastSectionTextId = getSectionTextId(lastBeer);
-        	}
-        }
-        int thisSectionTextId = getSectionTextId(itemCursor);
-        if (thisSectionTextId != lastSectionTextId) {
-        	sectionHeaderView.setText(thisSectionTextId);
-        	sectionHeaderView.setVisibility(View.VISIBLE);
-        } else {
-        	sectionHeaderView.setVisibility(View.GONE);
-        }
+        Cursor cursor = (Cursor)getItem(position);
+        int thisSectionTextId = getSectionTextId(cursor);
         
 //        TextView styleCodeView = (TextView)view.findViewById(R.id.beer_style_code);
 //        String styleCode = beer.getStyleCode();
@@ -76,16 +58,33 @@ public class BeerListAdapter extends SimpleCursorAdapter {
 //			styleOverrideView.setVisibility(View.GONE);
 //		}
         
+        int lastSectionTextId = -1;
+        if (cursor.moveToPrevious()) {
+        	lastSectionTextId = getSectionTextId(cursor);
+        }
+        
+        TextView sectionHeaderView = (TextView)view.findViewById(R.id.section_title);
+        if (thisSectionTextId != lastSectionTextId) {
+        	sectionHeaderView.setText(thisSectionTextId);
+        	sectionHeaderView.setVisibility(View.VISIBLE);
+        } else {
+        	sectionHeaderView.setVisibility(View.GONE);
+        }
+        
         return view;
     }
 
 	private int getSectionTextId(Cursor beer) {
+		int nameColIndex = beer.getColumnIndex(BeerTableMetadata.NAME_COLUMN);
+		int kickedColIndex = beer.getColumnIndex(BeerTableMetadata.IS_KICKED_COLUMN);
+		int tapColIndex = beer.getColumnIndex(BeerTableMetadata.TAP_NUMBER_COLUMN);
+		String name = beer.getString(nameColIndex);
+		int isKicked = beer.getInt(kickedColIndex);
+		int tapNumber = beer.getInt(tapColIndex);
 		int sectionText = R.string.on_deck;
-		int colIndex = beer.getColumnIndex(BeerTableMetadata.IS_KICKED_COLUMN);
-		int isKicked = beer.getInt(colIndex);
 		if (isKicked != 0) {
 			sectionText = R.string.kicked_text;
-//		} else if (beer.isPouring()) {
+		} else if (tapNumber != 0) {
 			sectionText = R.string.pouring;
 		}
 		return sectionText;

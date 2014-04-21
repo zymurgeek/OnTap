@@ -44,4 +44,11 @@ public class BeerTableMetadata {
 	 */
 	public static final String IS_KICKED_COLUMN = "is_kicked";
 
+	/**
+	 * Column name for tap number. 0 = not on tap, -1 = bottle pouring,
+	 * positive # = tap number from which beer is pouring
+	 * <P>Type: INTEGER</P>
+	 */
+	public static final String TAP_NUMBER_COLUMN = "tap_number";
+
 }
