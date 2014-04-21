@@ -1,7 +1,5 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
-import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.widget.SimpleCursorAdapter;
@@ -27,8 +25,8 @@ public class BeerListAdapter extends SimpleCursorAdapter {
 
         TextView locationView = (TextView)view.findViewById(R.id.beer_location);
         String location = "";
-        int tapNumber = getTapNumber(cursor);
-        if (!isKicked(cursor)) {
+        int tapNumber = cursorUtil.getTapNumber(cursor);
+        if (!cursorUtil.isKicked(cursor)) {
             if (tapNumber > 0) {
             	location = "Tap #" + tapNumber; 
             } else {
@@ -37,8 +35,8 @@ public class BeerListAdapter extends SimpleCursorAdapter {
             	}
             }
         }
-        if (isKicked(cursor) || tapNumber == 0) {
-        	location = getPackaging(cursor);
+        if (cursorUtil.isKicked(cursor) || tapNumber == 0) {
+        	location = cursorUtil.getPackaging(cursor);
         }
     	locationView.setText(location);
         
@@ -64,31 +62,14 @@ public class BeerListAdapter extends SimpleCursorAdapter {
 
 	private int getSectionTextId(Cursor beer) {
 		int sectionText = R.string.on_deck;
-		if (isKicked(beer)) {
+		if (cursorUtil.isKicked(beer)) {
 			sectionText = R.string.kicked_text;
-		} else if (getTapNumber(beer) != 0) {
+		} else if (cursorUtil.getTapNumber(beer) != 0) {
 			sectionText = R.string.pouring;
 		}
 		return sectionText;
 	}
 
-	private int getTapNumber(Cursor beer) {
-		int tapColIndex = beer.getColumnIndex(BeerTableMetadata.TAP_NUMBER_COLUMN);
-		int tapNumber = beer.getInt(tapColIndex);
-		return tapNumber;
-	}
-
-	private boolean isKicked(Cursor beer) {
-		int kickedColIndex = beer.getColumnIndex(BeerTableMetadata.IS_KICKED_COLUMN);
-		int isKicked = beer.getInt(kickedColIndex);
-		return (isKicked != 0);
-	}
-	
-	private String getPackaging(Cursor beer) {
-		int packagingColIndex = beer.getColumnIndex(BeerTableMetadata.PACKAGING_COLUMN);
-		String packaging = beer.getString(packagingColIndex);
-		return packaging;
-	}
-
+	private BeerCursorUtility cursorUtil = new BeerCursorUtility();
 }
 

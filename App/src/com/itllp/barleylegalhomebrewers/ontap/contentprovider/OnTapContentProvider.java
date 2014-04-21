@@ -39,8 +39,7 @@ public class OnTapContentProvider extends ContentProvider {
 	    sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.EVENT_BASE_PATH, EVENTS);
 	    sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.EVENT_BASE_PATH + "/#", EVENT_ID);
 	    sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.BEER_BASE_PATH, BEERS);
-	    sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.EVENT_BASE_PATH + "/#/"
-	    		+ OnTapContentProviderMetadata.BEER_BASE_PATH + "/#", BEER_ID);
+	    sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.BEER_BASE_PATH + "/#", BEER_ID);
 	  }
 	  
 	  public OnTapContentProvider() {
@@ -130,11 +129,9 @@ public class OnTapContentProvider extends ContentProvider {
 		case BEER_ID:
 			checkForUnknownBeerColumns(projection);
 			queryBuilder.setTables(SQLiteBeerTable.TABLE_NAME);
-			List<String> segments = uri.getPathSegments();
-			queryBuilder.appendWhere(BeerTableMetadata.EVENT_ID_COLUMN + "="
-					+ segments.get(segments.size()-3));
-			queryBuilder.appendWhere(BeerTableMetadata.ID_COLUMN + "="
-					+ uri.getLastPathSegment());
+			String whereClause = BeerTableMetadata.ID_COLUMN + "="
+					+ uri.getLastPathSegment();
+			queryBuilder.appendWhere(whereClause);
 			break;
 		default:
 			throw new IllegalArgumentException("Unknown URI: " + uri);
@@ -157,8 +154,10 @@ public class OnTapContentProvider extends ContentProvider {
 			sqlLoadTask = new BeerTableUpdaterTask(beerUpdater, eventId);
 			break;
 		}
-		Thread t = new Thread(sqlLoadTask);
-		t.start();
+		if (sqlLoadTask != null) {
+			Thread t = new Thread(sqlLoadTask);
+			t.start();
+		}
 		
 		return cursor;
 	}
