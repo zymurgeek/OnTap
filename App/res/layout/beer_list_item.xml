@@ -44,8 +44,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_gravity="right"
-            android:gravity="right"
-            android:textAlignment="gravity"
             android:paddingRight="8dip"
             android:textColor="#acacac"
             android:textSize="14sp"
