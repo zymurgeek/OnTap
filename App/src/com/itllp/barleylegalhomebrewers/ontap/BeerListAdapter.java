@@ -38,31 +38,31 @@ public class BeerListAdapter extends SimpleCursorAdapter {
 
         Cursor cursor = (Cursor)getItem(position);
         int thisSectionTextId = getSectionTextId(cursor);
+
+        TextView locationView = (TextView)view.findViewById(R.id.beer_location);
+        String location = "";
+        if (!isKicked(cursor)) {
+            int tapNumber = getTapNumber(cursor);
+            if (tapNumber > 0) {
+            	location = "Tap #" + tapNumber; 
+            } else {
+            	if (tapNumber < 0) {
+            		location = "Bottle";
+            	}
+            }
+        }
+        //TODO Mark on-deck and kicked beer locations as keg or bottle
+    	locationView.setText(location);
         
-//        TextView styleCodeView = (TextView)view.findViewById(R.id.beer_style_code);
-//        String styleCode = beer.getStyleCode();
-//        styleCodeView.setText(styleCode);
-//        
-//        TextView styleNameView = (TextView)view.findViewById(R.id.beer_style_name);
-//        String styleName = beer.getStyleName();
-//        if (null != styleCode && null != styleName) {
-//        	styleName = " - " + styleName;
-//        }
-//        styleNameView.setText(styleName);
-//
-//        TextView styleOverrideView = (TextView)view.findViewById(R.id.beer_style_override); 
-//        String styleOverride = beer.getStyleOverride();
-//		if (null != styleOverride && 0 != styleOverride.length()) {
-//			styleOverrideView.setText(styleOverride);
-//		} else {
-//			styleOverrideView.setVisibility(View.GONE);
-//		}
+        TextView styleOverrideView = (TextView)view.findViewById(R.id.beer_style_override); 
+		if (0 == styleOverrideView.length()) {
+			styleOverrideView.setVisibility(View.GONE);
+		}
         
         int lastSectionTextId = -1;
         if (cursor.moveToPrevious()) {
         	lastSectionTextId = getSectionTextId(cursor);
         }
-        
         TextView sectionHeaderView = (TextView)view.findViewById(R.id.section_title);
         if (thisSectionTextId != lastSectionTextId) {
         	sectionHeaderView.setText(thisSectionTextId);
@@ -75,19 +75,25 @@ public class BeerListAdapter extends SimpleCursorAdapter {
     }
 
 	private int getSectionTextId(Cursor beer) {
-		int nameColIndex = beer.getColumnIndex(BeerTableMetadata.NAME_COLUMN);
-		int kickedColIndex = beer.getColumnIndex(BeerTableMetadata.IS_KICKED_COLUMN);
-		int tapColIndex = beer.getColumnIndex(BeerTableMetadata.TAP_NUMBER_COLUMN);
-		String name = beer.getString(nameColIndex);
-		int isKicked = beer.getInt(kickedColIndex);
-		int tapNumber = beer.getInt(tapColIndex);
 		int sectionText = R.string.on_deck;
-		if (isKicked != 0) {
+		if (isKicked(beer)) {
 			sectionText = R.string.kicked_text;
-		} else if (tapNumber != 0) {
+		} else if (getTapNumber(beer) != 0) {
 			sectionText = R.string.pouring;
 		}
 		return sectionText;
+	}
+
+	private int getTapNumber(Cursor beer) {
+		int tapColIndex = beer.getColumnIndex(BeerTableMetadata.TAP_NUMBER_COLUMN);
+		int tapNumber = beer.getInt(tapColIndex);
+		return tapNumber;
+	}
+
+	private boolean isKicked(Cursor beer) {
+		int kickedColIndex = beer.getColumnIndex(BeerTableMetadata.IS_KICKED_COLUMN);
+		int isKicked = beer.getInt(kickedColIndex);
+		return (isKicked != 0);
 	}
 }
 
