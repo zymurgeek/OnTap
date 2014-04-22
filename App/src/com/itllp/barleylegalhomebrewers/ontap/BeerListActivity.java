@@ -18,9 +18,6 @@ public class BeerListActivity  extends FragmentActivity {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         
-        //TODO Delete me 
-        //createBeerDatabaseAndLoader(intent);
-        
         setContentView(R.layout.beer_list_fragment);
         
         String eventIdString = intent.getStringExtra(EVENT_ID);
@@ -41,32 +38,4 @@ public class BeerListActivity  extends FragmentActivity {
         }
     }
 
-	//TODO Delete me
-	/*
-	private void createBeerDatabaseAndLoader(Intent intent) {
-        
-        boolean skipInstantiation = intent.getBooleanExtra(SKIP_INSTANTIATION_FOR_TESTING, false);
-        if (!skipInstantiation) {
-        	if (null == BeerDatabase.getInstance()) {
-        		BeerDatabaseImpl.create();
-        	} else {
-        		if (! (BeerDatabase.getInstance() instanceof BeerDatabaseImpl)) {
-        			throw (new DatabaseAlreadyInstantiatedException());
-        		}
-        	}
-        	
-        	if (null == BeerDatabaseLoader.getInstance()) {
-	        	Context context = this.getApplicationContext();
-	        	ConnectivityManager connMgr = (ConnectivityManager) 
-	        	        context.getSystemService(Context.CONNECTIVITY_SERVICE);
-	        	NetworkConnectivity netConn = new AndroidNetworkConnectivity(connMgr);
-	        	BeerDatabaseLoaderFactory.createProductionSiteBeerDatabaseLoader(netConn);
-        	} else {
-        		if (!(BeerDatabaseLoader.getInstance() instanceof JSONUrlBeerDatabaseLoader)) {
-        			throw (new DatabaseLoaderAlreadyInstantiatedException());
-        		}
-        	}
-        }
-	}
-	*/
 }
