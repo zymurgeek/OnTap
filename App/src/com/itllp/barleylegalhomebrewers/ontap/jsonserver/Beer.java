@@ -17,4 +17,5 @@ public class Beer {
 	public static final String ORIGINAL_GRAVITY = "OG";
 	public static final String FINAL_GRAVITY = "FG";
 	public static final String ALCOHOL_BY_VOLUME = "ABV";
+	public static final String INTERNATIONAL_BITTERNESS_UNITS = "IBU";
 }

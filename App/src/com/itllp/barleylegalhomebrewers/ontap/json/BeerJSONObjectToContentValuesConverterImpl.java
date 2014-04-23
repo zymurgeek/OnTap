@@ -42,6 +42,7 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 		convertOriginalGravity(jsonObject, result);
 		convertFinalGravity(jsonObject, result);
 		convertAlcoholByVolume(jsonObject, result);
+		convertInternationalBitternessUnits(jsonObject, result);
 
 		return result;
 	}
@@ -165,6 +166,14 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 			double abv = jsonObject.getDouble(com.itllp
 					.barleylegalhomebrewers.ontap.jsonserver.Beer.ALCOHOL_BY_VOLUME);
 			result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.ALCOHOL_BY_VOLUME_COLUMN, abv);
+		} catch (JSONException e) {}
+	}
+
+	private void convertInternationalBitternessUnits(JSONObject jsonObject, ContentValues result) {
+		try {
+			double ibu = jsonObject.getDouble(com.itllp
+					.barleylegalhomebrewers.ontap.jsonserver.Beer.INTERNATIONAL_BITTERNESS_UNITS);
+			result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.INTERNATIONAL_BITTERNESS_UNITS_COLUMN, ibu);
 		} catch (JSONException e) {}
 	}
 

@@ -87,4 +87,10 @@ public class BeerTableMetadata {
 	 */
 	public static final String ALCOHOL_BY_VOLUME_COLUMN = "alcohol_by_volume";
 
+	/**
+	 * Column name for beer's international bitterness units
+	 * <P>Type: REAL</P>
+	 */
+	public static final String INTERNATIONAL_BITTERNESS_UNITS_COLUMN = "international_bitterness_units";
+
 }

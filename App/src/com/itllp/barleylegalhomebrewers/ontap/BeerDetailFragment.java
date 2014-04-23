@@ -65,7 +65,8 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     			BeerTableMetadata.PACKAGING_COLUMN,
     			BeerTableMetadata.ORIGINAL_GRAVITY_COLUMN,
     			BeerTableMetadata.FINAL_GRAVITY_COLUMN,
-    			BeerTableMetadata.ALCOHOL_BY_VOLUME_COLUMN
+    			BeerTableMetadata.ALCOHOL_BY_VOLUME_COLUMN,
+    			BeerTableMetadata.INTERNATIONAL_BITTERNESS_UNITS_COLUMN
     			};
     	// Fields on the UI to which we map
     	int[] to = new int[] { 
@@ -76,7 +77,8 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     			R.id.packaging,
     			R.id.og,
     			R.id.fg,
-    			R.id.abv
+    			R.id.abv,
+    			R.id.ibu
     			};
 
     	adapter = new BeerDetailAdapter(getActivity(), R.layout.beer_detail_view, null, from, to, 0);
@@ -98,7 +100,8 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     			BeerTableMetadata.DESCRIPTION_COLUMN,
     			BeerTableMetadata.ORIGINAL_GRAVITY_COLUMN,
     			BeerTableMetadata.FINAL_GRAVITY_COLUMN,
-    			BeerTableMetadata.ALCOHOL_BY_VOLUME_COLUMN
+    			BeerTableMetadata.ALCOHOL_BY_VOLUME_COLUMN,
+    			BeerTableMetadata.INTERNATIONAL_BITTERNESS_UNITS_COLUMN
     			};
     	String sortOrder = null;
     	Uri queryUri = Uri.parse(OnTapContentProviderMetadata.BEER_CONTENT_URI

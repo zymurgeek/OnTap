@@ -57,9 +57,6 @@ public class BeerDetailAdapter extends SimpleCursorAdapter {
 			beerStyleOverrideView.setVisibility(View.GONE);
 		}
 		
-//		TextView ibuView = (TextView)findViewById(R.id.ibu);
-//		ibuView.setText(beer.getInternationalBitternessUnits());
-//
 //		TextView srmView = (TextView)findViewById(R.id.srm);
 //		srmView.setText(beer.getStandardReferenceMethod());
 //		
