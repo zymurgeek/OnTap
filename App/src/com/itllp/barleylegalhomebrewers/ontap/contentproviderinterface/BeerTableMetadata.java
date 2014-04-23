@@ -81,4 +81,10 @@ public class BeerTableMetadata {
 	 */
 	public static final String FINAL_GRAVITY_COLUMN = "final_gravity";
 
+	/**
+	 * Column name for beer's percentage alcohol by volume
+	 * <P>Type: REAL</P>
+	 */
+	public static final String ALCOHOL_BY_VOLUME_COLUMN = "alcohol_by_volume";
+
 }

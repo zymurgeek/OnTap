@@ -41,6 +41,7 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 		convertDescription(jsonObject, result);
 		convertOriginalGravity(jsonObject, result);
 		convertFinalGravity(jsonObject, result);
+		convertAlcoholByVolume(jsonObject, result);
 
 		return result;
 	}
@@ -156,6 +157,14 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 			double finalGravity = jsonObject.getDouble(com.itllp
 					.barleylegalhomebrewers.ontap.jsonserver.Beer.FINAL_GRAVITY);
 			result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.FINAL_GRAVITY_COLUMN, finalGravity);
+		} catch (JSONException e) {}
+	}
+
+	private void convertAlcoholByVolume(JSONObject jsonObject, ContentValues result) {
+		try {
+			double abv = jsonObject.getDouble(com.itllp
+					.barleylegalhomebrewers.ontap.jsonserver.Beer.ALCOHOL_BY_VOLUME);
+			result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.ALCOHOL_BY_VOLUME_COLUMN, abv);
 		} catch (JSONException e) {}
 	}
 
