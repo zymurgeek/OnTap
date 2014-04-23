@@ -61,14 +61,16 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     			BeerTableMetadata.ID_COLUMN, 
     			BeerTableMetadata.NAME_COLUMN,
     			BeerTableMetadata.BREWER_NAME_COLUMN,
-    			BeerTableMetadata.DESCRIPTION_COLUMN
+    			BeerTableMetadata.DESCRIPTION_COLUMN,
+    			BeerTableMetadata.PACKAGING_COLUMN
     			};
     	// Fields on the UI to which we map
     	int[] to = new int[] { 
     			R.id.id,
     			R.id.beer_name,
     			R.id.brewer,
-    			R.id.description
+    			R.id.description,
+    			R.id.packaging
     			};
 
 //    	adapter = new BeerListAdapter
