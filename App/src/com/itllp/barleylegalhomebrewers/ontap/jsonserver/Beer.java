@@ -15,4 +15,5 @@ public class Beer {
 	public static final String PACKAGING = "KegOrBottle";
 	public static final String DESCRIPTION = "Description";
 	public static final String ORIGINAL_GRAVITY = "OG";
+	public static final String FINAL_GRAVITY = "FG";
 }

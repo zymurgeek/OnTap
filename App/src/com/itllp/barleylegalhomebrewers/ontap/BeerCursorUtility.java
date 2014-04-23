@@ -71,16 +71,4 @@ public class BeerCursorUtility {
 	}
 
 	
-	public String getOriginalGravity(Cursor beer) {
-		int ogColIndex = beer.getColumnIndex(BeerTableMetadata.ORIGINAL_GRAVITY_COLUMN);
-		String ogString = "";
-		try {
-			double og = beer.getDouble(ogColIndex);
-			ogString = String.valueOf(og);
-		} catch (Exception e) {}
-		return ogString;
-	}
-	
-	
-
 }
