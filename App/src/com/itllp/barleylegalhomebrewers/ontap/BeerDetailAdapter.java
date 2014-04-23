@@ -19,7 +19,77 @@ public class BeerDetailAdapter extends SimpleCursorAdapter {
         View view;
 
         view = super.getView(position, convertView, parent);
+        Cursor cursor = (Cursor)getItem(position);
+        Context context = convertView.getContext();
+        
+		// TODO add tests for these fields
+		TextView statusView = (TextView)convertView.findViewById(R.id.status);
+		if (beerQuery.isKicked(cursor)) {
+			statusView.setText(R.string.kicked_text);
+		} else {
+			if (beerQuery.isPouring(cursor)) {
+				if (0 < beerQuery.getTapNumber(cursor)) {
+					String status = context.getString(R.string.on_tap_number) + " " 
+							+ beerQuery.getTapNumber(cursor);
+					statusView.setText(status);
+				} else {
+					statusView.setText(R.string.pouring);
+				}
+			} else {
+				statusView.setText(R.string.on_deck);
+			}
+		}
+		
+		TextView beerStyleView = (TextView)convertView.findViewById(R.id.beer_style);
+		String styleCode = beerQuery.getStyleCode(cursor);
+		String styleName = beerQuery.getStyleName(cursor);
+		String style = styleCode;
+		if (null != styleCode && null != styleName) {
+			style += " - " + styleName;
+		}
+		beerStyleView.setText(style);
+		
+		TextView beerStyleOverrideView = (TextView)convertView.findViewById(R.id.beer_style_override);
+		String styleOverride = beerQuery.getStyleOverride(cursor);
+		if (null != styleOverride && 0 != styleOverride.length()) {
+			beerStyleOverrideView.setText(styleOverride);
+		} else {
+			beerStyleOverrideView.setVisibility(View.GONE);
+		}
+		
+//		TextView descriptionView = (TextView)convertView.findViewById(R.id.description);
+//		descriptionView.setText(beerQuery.getDescription());
+		
+//		TextView packagingView = (TextView)findViewById(R.id.packaging);
+//		packagingView.setText(beerQuery.getPackaging(cursor));
+///*
+//		TextView ogView = (TextView)findViewById(R.id.og);
+//		ogView.setText(beer.getOriginalGravity());
+//
+//		TextView fgView = (TextView)findViewById(R.id.fg);
+//		fgView.setText(beer.getFinalGravity());
+//		
+//		TextView abvView = (TextView)findViewById(R.id.abv);
+//		abvView.setText(beer.getAlcoholByVolume());
+//		
+//		TextView ibuView = (TextView)findViewById(R.id.ibu);
+//		ibuView.setText(beer.getInternationalBitternessUnits());
+//
+//		TextView srmView = (TextView)findViewById(R.id.srm);
+//		srmView.setText(beer.getStandardReferenceMethod());
+//		
+//		if (beer.getShowBrewerEmailAddress()) {
+//			TextView brewerEmailView = (TextView)findViewById(R.id.brewer_email);
+//			brewerEmailView.setText(beer.getBrewerEmailAddress());
+//		} else {
+//			TextView brewerEmailLabelView = (TextView)findViewById(R.id.brewer_email_label);
+//			brewerEmailLabelView.setEnabled(false);
+//		}
+//	*/
 
+        
+        
+/*
         Cursor cursor = (Cursor)getItem(position);
         int thisSectionTextId = getSectionTextId(cursor);
 
@@ -56,20 +126,20 @@ public class BeerDetailAdapter extends SimpleCursorAdapter {
         } else {
         	sectionHeaderView.setVisibility(View.GONE);
         }
-        
+  */      
         return view;
     }
 
 	private int getSectionTextId(Cursor beer) {
 		int sectionText = R.string.on_deck;
-		if (cursorUtil.isKicked(beer)) {
+		if (beerQuery.isKicked(beer)) {
 			sectionText = R.string.kicked_text;
-		} else if (cursorUtil.getTapNumber(beer) != 0) {
+		} else if (beerQuery.getTapNumber(beer) != 0) {
 			sectionText = R.string.pouring;
 		}
 		return sectionText;
 	}
 
-	private BeerCursorUtility cursorUtil = new BeerCursorUtility();
+	private BeerCursorUtility beerQuery = new BeerCursorUtility();
 }
 

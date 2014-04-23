@@ -29,7 +29,7 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			ViewGroup container, Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.activity_beer_detail, container, false);
+		return inflater.inflate(R.layout.beer_detail_view, container, false);
 	}
 	
 	
@@ -60,25 +60,25 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     	String[] from = new String[] { 
     			BeerTableMetadata.ID_COLUMN, 
     			BeerTableMetadata.NAME_COLUMN,
-    			BeerTableMetadata.BREWER_NAME_COLUMN,
-    			BeerTableMetadata.STYLE_CODE_COLUMN,
-    			BeerTableMetadata.STYLE_NAME_COLUMN,
-    			BeerTableMetadata.STYLE_OVERRIDE_COLUMN
+    			BeerTableMetadata.BREWER_NAME_COLUMN
+//    			BeerTableMetadata.STYLE_CODE_COLUMN,
+//    			BeerTableMetadata.STYLE_NAME_COLUMN,
+//    			BeerTableMetadata.STYLE_OVERRIDE_COLUMN
     			};
     	// Fields on the UI to which we map
     	int[] to = new int[] { 
     			R.id.id,
     			R.id.beer_name,
-    			R.id.brewer_name,
-    			R.id.beer_style_code,
-    			R.id.beer_style_name,
-    			R.id.beer_style_override
+    			R.id.brewer
+//    			R.id.beer_style_code,
+//    			R.id.beer_style_name,
+//    			R.id.beer_style_override
     			};
 
 //    	adapter = new BeerListAdapter
 //    			(getActivity(), R.layout.beer_list_item, null, from, to, 0);
-    	adapter = new SimpleCursorAdapter(getActivity(), R.layout.activity_beer_detail, null, from, to, 0);
-//    	adapter = new BeerDetailAdapter(getActivity(), R.layout.activity_beer_detail, null, from, to, 0);
+//    	adapter = new SimpleCursorAdapter(getActivity(), R.layout.beer_detail_view, null, from, to, 0);
+    	adapter = new BeerDetailAdapter(getActivity(), R.layout.beer_detail_view, null, from, to, 0);
     }
 
 

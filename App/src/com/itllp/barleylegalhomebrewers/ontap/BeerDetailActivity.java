@@ -15,7 +15,7 @@ public class BeerDetailActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         
-		setContentView(R.layout.beer_detail);
+		setContentView(R.layout.beer_detail_fragment);
         String beerIdString = intent.getStringExtra(BEER_ID);
         try {
         	beerId = Integer.parseInt(beerIdString);
