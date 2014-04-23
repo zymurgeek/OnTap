@@ -3,8 +3,6 @@ package com.itllp.barleylegalhomebrewers.ontap.contentprovider;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
-
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.OnTapContentProviderMetadata;
@@ -180,7 +178,8 @@ public class OnTapContentProvider extends ContentProvider {
 				BeerTableMetadata.STYLE_OVERRIDE_COLUMN,
 				BeerTableMetadata.IS_KICKED_COLUMN,
 				BeerTableMetadata.TAP_NUMBER_COLUMN,
-				BeerTableMetadata.PACKAGING_COLUMN};
+				BeerTableMetadata.PACKAGING_COLUMN,
+				BeerTableMetadata.DESCRIPTION_COLUMN};
 		checkForUnknownColumns(projection, available);
 	}
 

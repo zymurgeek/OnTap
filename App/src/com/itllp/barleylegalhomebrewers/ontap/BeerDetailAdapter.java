@@ -130,16 +130,6 @@ public class BeerDetailAdapter extends SimpleCursorAdapter {
         return view;
     }
 
-	private int getSectionTextId(Cursor beer) {
-		int sectionText = R.string.on_deck;
-		if (beerQuery.isKicked(beer)) {
-			sectionText = R.string.kicked_text;
-		} else if (beerQuery.getTapNumber(beer) != 0) {
-			sectionText = R.string.pouring;
-		}
-		return sectionText;
-	}
-
 	private BeerCursorUtility beerQuery = new BeerCursorUtility();
 }
 

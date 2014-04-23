@@ -25,6 +25,7 @@ class SQLiteBeerTable implements BeerTable {
 	public static final String IS_KICKED_COLUMN_TYPE = "INTEGER";
 	public static final String TAP_NUMBER_COLUMN_TYPE = "INTEGER";
 	public static final String PACKAGING_COLUMN_TYPE = "TEXT";
+	public static final String DESCRIPTION_COLUMN_TYPE = "TEXT";
 	
 	public static final String DATABASE_CREATE = "create table " 
 			+ TABLE_NAME
@@ -48,7 +49,9 @@ class SQLiteBeerTable implements BeerTable {
 			+ BeerTableMetadata.TAP_NUMBER_COLUMN
 			+ " " + SQLiteBeerTable.TAP_NUMBER_COLUMN_TYPE + ", "
 			+ BeerTableMetadata.PACKAGING_COLUMN
-			+ " " + SQLiteBeerTable.PACKAGING_COLUMN_TYPE + " "
+			+ " " + SQLiteBeerTable.PACKAGING_COLUMN_TYPE + ", "
+			+ BeerTableMetadata.DESCRIPTION_COLUMN
+			+ " " + SQLiteBeerTable.DESCRIPTION_COLUMN_TYPE + " "
 			+ ");";
 	public static final String DROP_TABLE = "DROP TABLE IF EXISTS ";
 	private CursorConverter cursorConverter;

@@ -63,4 +63,10 @@ public class BeerTableMetadata {
 	 */
 	public static final String PACKAGING_COLUMN = "packaging";
 
+	/**
+	 * Column name for the description of the beer
+	 * <P>Type: TEXT</P>
+	 */
+	public static final String DESCRIPTION_COLUMN = "description";
+	
 }

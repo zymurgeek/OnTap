@@ -38,6 +38,7 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 		convertIsKicked(jsonObject, result);
 		convertTapNumber(jsonObject, result);
 		convertPackaging(jsonObject, result);
+		convertDescription(jsonObject, result);
 
 		return result;
 	}
@@ -129,6 +130,14 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 			String packaging = jsonObject.getString(com.itllp
 					.barleylegalhomebrewers.ontap.jsonserver.Beer.PACKAGING);
 			result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.PACKAGING_COLUMN, packaging);
+		} catch (JSONException e) {}
+	}
+	
+	private void convertDescription(JSONObject jsonObject, ContentValues result) {
+		try {
+			String description = jsonObject.getString(com.itllp
+					.barleylegalhomebrewers.ontap.jsonserver.Beer.DESCRIPTION);
+			result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.DESCRIPTION_COLUMN, description);
 		} catch (JSONException e) {}
 	}
 	
