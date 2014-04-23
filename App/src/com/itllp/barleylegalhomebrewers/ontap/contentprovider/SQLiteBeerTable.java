@@ -31,6 +31,8 @@ class SQLiteBeerTable implements BeerTable {
 	public static final String ALCOHOL_BY_VOLUME_COLUMN_TYPE = "REAL";
 	public static final String INTERNATIONAL_BITTERNESS_UNITS_COLUMN_TYPE = "REAL";
 	public static final String STANDARD_REFERENCE_METHOD_COLUMN_TYPE = "REAL";
+	public static final String IS_EMAIL_SHOWN_COLUMN_TYPE = "INTEGER";
+	public static final String EMAIL_ADDRESS_COLUMN_TYPE = "TEXT";
 	
 	public static final String DATABASE_CREATE = "create table " 
 			+ TABLE_NAME
@@ -66,7 +68,11 @@ class SQLiteBeerTable implements BeerTable {
 			+ BeerTableMetadata.INTERNATIONAL_BITTERNESS_UNITS_COLUMN
 			+ " " + SQLiteBeerTable.INTERNATIONAL_BITTERNESS_UNITS_COLUMN_TYPE + ", "
 			+ BeerTableMetadata.STANDARD_REFERENCE_METHOD_COLUMN
-			+ " " + SQLiteBeerTable.STANDARD_REFERENCE_METHOD_COLUMN_TYPE + " "
+			+ " " + SQLiteBeerTable.STANDARD_REFERENCE_METHOD_COLUMN_TYPE + ", "
+			+ BeerTableMetadata.IS_EMAIL_SHOWN
+			+ " " + SQLiteBeerTable.IS_EMAIL_SHOWN_COLUMN_TYPE + ", "
+			+ BeerTableMetadata.EMAIL_ADDRESS
+			+ " " + SQLiteBeerTable.EMAIL_ADDRESS_COLUMN_TYPE + " "
 			+ ");";
 	public static final String DROP_TABLE = "DROP TABLE IF EXISTS ";
 	private CursorConverter cursorConverter;

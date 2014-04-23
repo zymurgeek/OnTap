@@ -104,13 +104,15 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     			BeerTableMetadata.FINAL_GRAVITY_COLUMN,
     			BeerTableMetadata.ALCOHOL_BY_VOLUME_COLUMN,
     			BeerTableMetadata.INTERNATIONAL_BITTERNESS_UNITS_COLUMN,
-    			BeerTableMetadata.STANDARD_REFERENCE_METHOD_COLUMN
-    			};
+    			BeerTableMetadata.STANDARD_REFERENCE_METHOD_COLUMN,
+    			BeerTableMetadata.IS_EMAIL_SHOWN,
+    			BeerTableMetadata.EMAIL_ADDRESS
+    	};
     	String sortOrder = null;
     	Uri queryUri = Uri.parse(OnTapContentProviderMetadata.BEER_CONTENT_URI
     			+ "/" + String.valueOf(beerId));
-    	String selection = null; //BeerTableMetadata.ID_COLUMN + " = ?";
-    	String[] selectionArgs = null; //{ /*beerIdString*/ };
+    	String selection = null;
+    	String[] selectionArgs = null;
     	
     	CursorLoader cursorLoader = new CursorLoader(getActivity(),
     			queryUri, projection, selection, selectionArgs, sortOrder);

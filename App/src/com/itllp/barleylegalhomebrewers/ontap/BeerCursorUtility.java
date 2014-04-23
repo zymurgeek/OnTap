@@ -71,4 +71,18 @@ public class BeerCursorUtility {
 	}
 
 	
+	public boolean isEmailShown(Cursor beer) {
+		int showEmailColIndex = beer.getColumnIndex(BeerTableMetadata.IS_EMAIL_SHOWN);
+		int isEmailShown = beer.getInt(showEmailColIndex);
+		return (isEmailShown != 0);
+	}
+
+	
+	public String getBrewerEmail(Cursor beer) {
+		int emailColIndex = beer.getColumnIndex(BeerTableMetadata.EMAIL_ADDRESS);
+		String email = beer.getString(emailColIndex);
+		return email;
+	}
+	
+	
 }

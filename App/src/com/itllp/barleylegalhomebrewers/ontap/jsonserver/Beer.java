@@ -19,4 +19,6 @@ public class Beer {
 	public static final String ALCOHOL_BY_VOLUME = "ABV";
 	public static final String INTERNATIONAL_BITTERNESS_UNITS = "IBU";
 	public static final String STANDARD_REFERENCE_METHOD = "SRM";
+	public static final String IS_EMAIL_SHOWN = "CanEmail";
+	public static final String EMAIL_ADDRESS = "EmailAddress";
 }

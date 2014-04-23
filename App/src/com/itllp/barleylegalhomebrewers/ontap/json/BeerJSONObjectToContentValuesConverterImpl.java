@@ -44,6 +44,8 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 		convertAlcoholByVolume(jsonObject, result);
 		convertInternationalBitternessUnits(jsonObject, result);
 		convertStandardReferenceMethod(jsonObject, result);
+		convertIsEmailShown(jsonObject, result);
+		convertEmailAddress(jsonObject, result);
 
 		return result;
 	}
@@ -186,4 +188,21 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 		} catch (JSONException e) {}
 	}
 
+	private void convertIsEmailShown(JSONObject jsonObject, ContentValues result) {
+		try {
+			boolean isEmailShown = jsonObject.getBoolean(com.itllp
+					.barleylegalhomebrewers.ontap.jsonserver.Beer.IS_EMAIL_SHOWN);
+			int isEmailShownValue = isEmailShown ? 1 : 0;
+			result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.IS_EMAIL_SHOWN, isEmailShownValue);
+		} catch (JSONException e) {}
+	}
+	
+	private void convertEmailAddress(JSONObject jsonObject, ContentValues result) {
+		try {
+			String emailAddress = jsonObject.getString(com.itllp
+					.barleylegalhomebrewers.ontap.jsonserver.Beer.EMAIL_ADDRESS);
+			result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.EMAIL_ADDRESS, emailAddress);
+		} catch (JSONException e) {}
+	}
+	
 }

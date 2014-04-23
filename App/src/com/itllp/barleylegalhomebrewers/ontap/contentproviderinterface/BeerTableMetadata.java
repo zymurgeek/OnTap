@@ -99,4 +99,16 @@ public class BeerTableMetadata {
 	 */
 	public static final String STANDARD_REFERENCE_METHOD_COLUMN = "standard_reference_method";
 
+	/**
+	 * Column name for whether the brewer's email address is shown.  0 = no, !0 = yes
+	 * <P>Type: INTEGER</P>
+	 */
+	public static final String IS_EMAIL_SHOWN = "is_email_shown";
+
+	/**
+	 * Column name for brewer's email address.
+	 * <P>Type: TEXT</P>
+	 */
+	public static final String EMAIL_ADDRESS = "email_address";
+
 }

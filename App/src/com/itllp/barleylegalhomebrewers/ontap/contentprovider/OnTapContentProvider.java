@@ -184,7 +184,9 @@ public class OnTapContentProvider extends ContentProvider {
 				BeerTableMetadata.FINAL_GRAVITY_COLUMN,
 				BeerTableMetadata.ALCOHOL_BY_VOLUME_COLUMN,
 				BeerTableMetadata.INTERNATIONAL_BITTERNESS_UNITS_COLUMN,
-				BeerTableMetadata.STANDARD_REFERENCE_METHOD_COLUMN};
+				BeerTableMetadata.STANDARD_REFERENCE_METHOD_COLUMN,
+				BeerTableMetadata.IS_EMAIL_SHOWN,
+				BeerTableMetadata.EMAIL_ADDRESS};
 		checkForUnknownColumns(projection, available);
 	}
 

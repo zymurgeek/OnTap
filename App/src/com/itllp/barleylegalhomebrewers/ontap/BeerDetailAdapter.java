@@ -57,13 +57,15 @@ public class BeerDetailAdapter extends SimpleCursorAdapter {
 			beerStyleOverrideView.setVisibility(View.GONE);
 		}
 		
-//		if (beer.getShowBrewerEmailAddress()) {
-//			TextView brewerEmailView = (TextView)findViewById(R.id.brewer_email);
-//			brewerEmailView.setText(beer.getBrewerEmailAddress());
-//		} else {
-//			TextView brewerEmailLabelView = (TextView)findViewById(R.id.brewer_email_label);
-//			brewerEmailLabelView.setEnabled(false);
-//		}
+		TextView brewerEmailView = (TextView)convertView.findViewById(R.id.brewer_email);
+		TextView brewerEmailLabelView = (TextView)convertView.findViewById(R.id.brewer_email_label);
+		if (beerQuery.isEmailShown(cursor)) {
+			brewerEmailView.setText(beerQuery.getBrewerEmail(cursor));
+			brewerEmailLabelView.setEnabled(true);
+		} else {
+			brewerEmailView.setText("");
+			brewerEmailLabelView.setEnabled(false);
+		}
 		
         return view;
     }
