@@ -69,4 +69,10 @@ public class BeerTableMetadata {
 	 */
 	public static final String DESCRIPTION_COLUMN = "description";
 	
+	/**
+	 * Column name for beer's original gravity
+	 * <P>Type: REAL</P>
+	 */
+	public static final String ORIGINAL_GRAVITY_COLUMN = "original_gravity";
+
 }

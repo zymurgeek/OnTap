@@ -14,4 +14,5 @@ public class Beer {
 	public static final String TAP_NUMBER = "OnTap";
 	public static final String PACKAGING = "KegOrBottle";
 	public static final String DESCRIPTION = "Description";
+	public static final String ORIGINAL_GRAVITY = "OG";
 }

@@ -62,7 +62,8 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     			BeerTableMetadata.NAME_COLUMN,
     			BeerTableMetadata.BREWER_NAME_COLUMN,
     			BeerTableMetadata.DESCRIPTION_COLUMN,
-    			BeerTableMetadata.PACKAGING_COLUMN
+    			BeerTableMetadata.PACKAGING_COLUMN,
+    			BeerTableMetadata.ORIGINAL_GRAVITY_COLUMN
     			};
     	// Fields on the UI to which we map
     	int[] to = new int[] { 
@@ -70,12 +71,10 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     			R.id.beer_name,
     			R.id.brewer,
     			R.id.description,
-    			R.id.packaging
+    			R.id.packaging,
+    			R.id.og
     			};
 
-//    	adapter = new BeerListAdapter
-//    			(getActivity(), R.layout.beer_list_item, null, from, to, 0);
-//    	adapter = new SimpleCursorAdapter(getActivity(), R.layout.beer_detail_view, null, from, to, 0);
     	adapter = new BeerDetailAdapter(getActivity(), R.layout.beer_detail_view, null, from, to, 0);
     }
 
@@ -92,7 +91,8 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     			BeerTableMetadata.IS_KICKED_COLUMN,
     			BeerTableMetadata.TAP_NUMBER_COLUMN,
     			BeerTableMetadata.PACKAGING_COLUMN,
-    			BeerTableMetadata.DESCRIPTION_COLUMN
+    			BeerTableMetadata.DESCRIPTION_COLUMN,
+    			BeerTableMetadata.ORIGINAL_GRAVITY_COLUMN
     			};
     	String sortOrder = null;
     	Uri queryUri = Uri.parse(OnTapContentProviderMetadata.BEER_CONTENT_URI

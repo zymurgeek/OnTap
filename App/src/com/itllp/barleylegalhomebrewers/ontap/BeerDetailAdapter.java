@@ -57,12 +57,6 @@ public class BeerDetailAdapter extends SimpleCursorAdapter {
 			beerStyleOverrideView.setVisibility(View.GONE);
 		}
 		
-//		TextView packagingView = (TextView)findViewById(R.id.packaging);
-//		packagingView.setText(beerQuery.getPackaging(cursor));
-///*
-//		TextView ogView = (TextView)findViewById(R.id.og);
-//		ogView.setText(beer.getOriginalGravity());
-//
 //		TextView fgView = (TextView)findViewById(R.id.fg);
 //		fgView.setText(beer.getFinalGravity());
 //		

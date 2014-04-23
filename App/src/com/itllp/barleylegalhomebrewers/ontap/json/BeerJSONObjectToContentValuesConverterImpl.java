@@ -39,6 +39,7 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 		convertTapNumber(jsonObject, result);
 		convertPackaging(jsonObject, result);
 		convertDescription(jsonObject, result);
+		convertOriginalGravity(jsonObject, result);
 
 		return result;
 	}
@@ -141,5 +142,12 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 		} catch (JSONException e) {}
 	}
 	
+	private void convertOriginalGravity(JSONObject jsonObject, ContentValues result) {
+		try {
+			double originalGravity = jsonObject.getDouble(com.itllp
+					.barleylegalhomebrewers.ontap.jsonserver.Beer.ORIGINAL_GRAVITY);
+			result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.ORIGINAL_GRAVITY_COLUMN, originalGravity);
+		} catch (JSONException e) {}
+	}
 
 }
