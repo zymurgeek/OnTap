@@ -7,6 +7,7 @@ import com.itllp.barleylegalhomebrewers.ontap.contentprovider.EventTableUpdaterF
 
 import android.annotation.TargetApi;
 import android.app.Application;
+import android.content.pm.ApplicationInfo;
 import android.os.Build;
 
 public class OnTapApplication extends Application {
@@ -14,10 +15,17 @@ public class OnTapApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		EventTableUpdaterFactory
-		.createSQLiteEventTableFromBetaServerUpdater();
-		BeerTableUpdaterFactory
-		.createSQLiteBeerTableFromBetaServerUpdater();
+		if (isDebug()) {
+			EventTableUpdaterFactory
+			.createSQLiteEventTableFromBetaServerUpdater();
+			BeerTableUpdaterFactory
+			.createSQLiteBeerTableFromBetaServerUpdater();
+		} else {
+			EventTableUpdaterFactory
+			.createSQLiteEventTableFromProductionServerUpdater();
+			BeerTableUpdaterFactory
+			.createSQLiteBeerTableFromProductionServerUpdater();
+		}
 		enableStrictModeForDebug();
 	}
 	
@@ -36,6 +44,8 @@ public class OnTapApplication extends Application {
 	}
 
 	private boolean isDebug() {
-		return true;
+		boolean isDebug = (0  != (getApplicationInfo().flags & 
+				ApplicationInfo.FLAG_DEBUGGABLE));
+		return isDebug;
 	}
 }
