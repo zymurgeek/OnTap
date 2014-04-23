@@ -14,6 +14,7 @@ import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 public class BeerDetailFragment extends Fragment 
 implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
@@ -37,11 +38,6 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
         
-//        setEmptyText(getString(R.string.no_beers_text));
-
-        // Start out with a progress indicator.
-//        setListShown(false);
-
 		createCursorAdapter();
 		
         // Prepare the loader.  Either re-connect with an existing one,
@@ -49,10 +45,18 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     	callbacks = this;
         final LoaderManager loaderManager = getLoaderManager();
         loaderManager.initLoader(LOADER_ID, null, callbacks);
- 
-		//setContentView(R.layout.activity_beer_detail);
-		//updateFields();
-	}
+
+        View view = getView().getRootView();
+        Button refreshButton = (Button)view.findViewById
+			(R.id.refresh_button);
+        //FIXME enable refresh when load by beer id is working
+        refreshButton.setEnabled(false);
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+        		loaderManager.restartLoader(LOADER_ID, null, callbacks);
+            }
+        });
+}
 
     private void createCursorAdapter() {
     	// Fields from the database (projection)
@@ -136,89 +140,6 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
         adapter.swapCursor(null);
 	}
 
-
-
-
-//	private void updateFields() {
-//		// TODO add tests for these fields
-//		TextView beerNameView = (TextView)findViewById(R.id.beer_name);
-//		beerNameView.setText(beerQuery.getBeerName(cursor));
-//		
-//		TextView statusView = (TextView)findViewById(R.id.status);
-//		if (beerQuery.isKicked(cursor)) {
-//			statusView.setText(R.string.kicked_text);
-//		} else {
-//			if (beerQuery.isPouring(cursor)) {
-//				if (0 != beerQuery.getTapNumber(cursor)) {
-//					String status = getString(R.string.on_tap_number) + " " 
-//							+ beerQuery.getTapNumber(cursor);
-//					statusView.setText(status);
-//				} else {
-//					statusView.setText(R.string.pouring);
-//				}
-//			} else {
-//				statusView.setText(R.string.on_deck);
-//			}
-//		}
-//		
-//		TextView beerStyleView = (TextView)findViewById(R.id.beer_style);
-//		String styleCode = beerQuery.getStyleCode(cursor);
-//		String styleName = beerQuery.getStyleName(cursor);
-//		String style = styleCode;
-//		if (null != styleCode && null != styleName) {
-//			style += " - " + styleName;
-//		}
-//		beerStyleView.setText(style);
-//		
-//		TextView beerStyleOverrideView = (TextView)findViewById(R.id.beer_style_override);
-//		String styleOverride = beerQuery.getStyleOverride(cursor);
-//		if (null != styleOverride && 0 != styleOverride.length()) {
-//			beerStyleOverrideView.setText(styleOverride);
-//		} else {
-//			beerStyleOverrideView.setVisibility(View.GONE);
-//		}
-//		
-//		TextView brewerView = (TextView)findViewById(R.id.brewer);
-//		String brewer = beerQuery.getBrewerName(cursor);
-//		brewerView.setText(brewer);
-//		/*
-//		TextView descriptionView = (TextView)findViewById(R.id.description);
-//		descriptionView.setText(beer.getDescription());
-//		*/
-//		TextView packagingView = (TextView)findViewById(R.id.packaging);
-//		packagingView.setText(beerQuery.getPackaging(cursor));
-///*
-//		TextView ogView = (TextView)findViewById(R.id.og);
-//		ogView.setText(beer.getOriginalGravity());
-//
-//		TextView fgView = (TextView)findViewById(R.id.fg);
-//		fgView.setText(beer.getFinalGravity());
-//		
-//		TextView abvView = (TextView)findViewById(R.id.abv);
-//		abvView.setText(beer.getAlcoholByVolume());
-//		
-//		TextView ibuView = (TextView)findViewById(R.id.ibu);
-//		ibuView.setText(beer.getInternationalBitternessUnits());
-//
-//		TextView srmView = (TextView)findViewById(R.id.srm);
-//		srmView.setText(beer.getStandardReferenceMethod());
-//		
-//		if (beer.getShowBrewerEmailAddress()) {
-//			TextView brewerEmailView = (TextView)findViewById(R.id.brewer_email);
-//			brewerEmailView.setText(beer.getBrewerEmailAddress());
-//		} else {
-//			TextView brewerEmailLabelView = (TextView)findViewById(R.id.brewer_email_label);
-//			brewerEmailLabelView.setEnabled(false);
-//		}
-//	*/
-//	}
-
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.beer_detail, menu);
-//		return true;
-//	}
 
 	public void setBeerId(int id) {
 		this.beerId = id;

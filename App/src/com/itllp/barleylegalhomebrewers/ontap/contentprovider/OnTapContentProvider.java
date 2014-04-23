@@ -127,8 +127,9 @@ public class OnTapContentProvider extends ContentProvider {
 		case BEER_ID:
 			checkForUnknownBeerColumns(projection);
 			queryBuilder.setTables(SQLiteBeerTable.TABLE_NAME);
+			String beerId = uri.getLastPathSegment();
 			String whereClause = BeerTableMetadata.ID_COLUMN + "="
-					+ uri.getLastPathSegment();
+					+ beerId;
 			queryBuilder.appendWhere(whereClause);
 			break;
 		default:
@@ -148,8 +149,15 @@ public class OnTapContentProvider extends ContentProvider {
 			sqlLoadTask = new TableUpdaterTask(eventUpdater);
 			break;
 		case BEERS:
+			BeerTableUpdater beersInEventUpdater = BeerTableUpdaterFactory.getInstance();
+			sqlLoadTask = new BeerTableUpdaterTask(beersInEventUpdater, eventId);
+			break;
+		case BEER_ID:
+			//FIXME Enable loading by beer ID
+			/*
 			BeerTableUpdater beerUpdater = BeerTableUpdaterFactory.getInstance();
 			sqlLoadTask = new BeerTableUpdaterTask(beerUpdater, eventId);
+			*/
 			break;
 		}
 		if (sqlLoadTask != null) {
