@@ -57,9 +57,6 @@ public class BeerDetailAdapter extends SimpleCursorAdapter {
 			beerStyleOverrideView.setVisibility(View.GONE);
 		}
 		
-//		TextView srmView = (TextView)findViewById(R.id.srm);
-//		srmView.setText(beer.getStandardReferenceMethod());
-//		
 //		if (beer.getShowBrewerEmailAddress()) {
 //			TextView brewerEmailView = (TextView)findViewById(R.id.brewer_email);
 //			brewerEmailView.setText(beer.getBrewerEmailAddress());

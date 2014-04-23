@@ -93,4 +93,10 @@ public class BeerTableMetadata {
 	 */
 	public static final String INTERNATIONAL_BITTERNESS_UNITS_COLUMN = "international_bitterness_units";
 
+	/**
+	 * Column name for beer's standard reference method (color)
+	 * <P>Type: REAL</P>
+	 */
+	public static final String STANDARD_REFERENCE_METHOD_COLUMN = "standard_reference_method";
+
 }
