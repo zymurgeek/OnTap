@@ -26,11 +26,11 @@ class SQLiteBeerTable implements BeerTable {
 	public static final String TAP_NUMBER_COLUMN_TYPE = "INTEGER";
 	public static final String PACKAGING_COLUMN_TYPE = "TEXT";
 	public static final String DESCRIPTION_COLUMN_TYPE = "TEXT";
-	public static final String ORIGINAL_GRAVITY_COLUMN_TYPE = "REAL";
-	public static final String FINAL_GRAVITY_COLUMN_TYPE = "REAL";
-	public static final String ALCOHOL_BY_VOLUME_COLUMN_TYPE = "REAL";
-	public static final String INTERNATIONAL_BITTERNESS_UNITS_COLUMN_TYPE = "REAL";
-	public static final String STANDARD_REFERENCE_METHOD_COLUMN_TYPE = "REAL";
+	public static final String ORIGINAL_GRAVITY_COLUMN_TYPE = "TEXT";
+	public static final String FINAL_GRAVITY_COLUMN_TYPE = "TEXT";
+	public static final String ALCOHOL_BY_VOLUME_COLUMN_TYPE = "TEXT";
+	public static final String INTERNATIONAL_BITTERNESS_UNITS_COLUMN_TYPE = "TEXT";
+	public static final String STANDARD_REFERENCE_METHOD_COLUMN_TYPE = "TEXT";
 	public static final String IS_EMAIL_SHOWN_COLUMN_TYPE = "INTEGER";
 	public static final String EMAIL_ADDRESS_COLUMN_TYPE = "TEXT";
 	

@@ -150,7 +150,7 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 	
 	private void convertOriginalGravity(JSONObject jsonObject, ContentValues result) {
 		try {
-			double originalGravity = jsonObject.getDouble(com.itllp
+			String originalGravity = jsonObject.getString(com.itllp
 					.barleylegalhomebrewers.ontap.jsonserver.Beer.ORIGINAL_GRAVITY);
 			result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.ORIGINAL_GRAVITY_COLUMN, originalGravity);
 		} catch (JSONException e) {}
@@ -158,7 +158,7 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 
 	private void convertFinalGravity(JSONObject jsonObject, ContentValues result) {
 		try {
-			double finalGravity = jsonObject.getDouble(com.itllp
+			String finalGravity = jsonObject.getString(com.itllp
 					.barleylegalhomebrewers.ontap.jsonserver.Beer.FINAL_GRAVITY);
 			result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.FINAL_GRAVITY_COLUMN, finalGravity);
 		} catch (JSONException e) {}
@@ -166,7 +166,7 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 
 	private void convertAlcoholByVolume(JSONObject jsonObject, ContentValues result) {
 		try {
-			double abv = jsonObject.getDouble(com.itllp
+			String abv = jsonObject.getString(com.itllp
 					.barleylegalhomebrewers.ontap.jsonserver.Beer.ALCOHOL_BY_VOLUME);
 			result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.ALCOHOL_BY_VOLUME_COLUMN, abv);
 		} catch (JSONException e) {}
@@ -174,7 +174,7 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 
 	private void convertInternationalBitternessUnits(JSONObject jsonObject, ContentValues result) {
 		try {
-			double ibu = jsonObject.getDouble(com.itllp
+			String ibu = jsonObject.getString(com.itllp
 					.barleylegalhomebrewers.ontap.jsonserver.Beer.INTERNATIONAL_BITTERNESS_UNITS);
 			result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.INTERNATIONAL_BITTERNESS_UNITS_COLUMN, ibu);
 		} catch (JSONException e) {}
@@ -182,7 +182,7 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 
 	private void convertStandardReferenceMethod(JSONObject jsonObject, ContentValues result) {
 		try {
-			double srm = jsonObject.getDouble(com.itllp
+			String srm = jsonObject.getString(com.itllp
 					.barleylegalhomebrewers.ontap.jsonserver.Beer.STANDARD_REFERENCE_METHOD);
 			result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.STANDARD_REFERENCE_METHOD_COLUMN, srm);
 		} catch (JSONException e) {}

@@ -71,31 +71,31 @@ public class BeerTableMetadata {
 	
 	/**
 	 * Column name for beer's original gravity
-	 * <P>Type: REAL</P>
+	 * <P>Type: TEXT</P>
 	 */
 	public static final String ORIGINAL_GRAVITY_COLUMN = "original_gravity";
 
 	/**
 	 * Column name for beer's final gravity
-	 * <P>Type: REAL</P>
+	 * <P>Type: TEXT</P>
 	 */
 	public static final String FINAL_GRAVITY_COLUMN = "final_gravity";
 
 	/**
 	 * Column name for beer's percentage alcohol by volume
-	 * <P>Type: REAL</P>
+	 * <P>Type: TEXT</P>
 	 */
 	public static final String ALCOHOL_BY_VOLUME_COLUMN = "alcohol_by_volume";
 
 	/**
 	 * Column name for beer's international bitterness units
-	 * <P>Type: REAL</P>
+	 * <P>Type: TEXT</P>
 	 */
 	public static final String INTERNATIONAL_BITTERNESS_UNITS_COLUMN = "international_bitterness_units";
 
 	/**
 	 * Column name for beer's standard reference method (color)
-	 * <P>Type: REAL</P>
+	 * <P>Type: TEXT</P>
 	 */
 	public static final String STANDARD_REFERENCE_METHOD_COLUMN = "standard_reference_method";
 
