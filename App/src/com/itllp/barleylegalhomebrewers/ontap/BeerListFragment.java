@@ -33,6 +33,8 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
 
         setEmptyText(getString(R.string.no_beers_text));
 
+        createListAdapter();
+        
         // Start out with a progress indicator.
         setListShown(false);
 
@@ -41,8 +43,6 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
         final LoaderManager loaderManager = getLoaderManager();
         loaderManager.initLoader(0, null, this);
 
-        createListAdapter();
-        
         View view = getView().getRootView();
         Button refreshButton = (Button)view.findViewById
 			(R.id.refresh_button);
