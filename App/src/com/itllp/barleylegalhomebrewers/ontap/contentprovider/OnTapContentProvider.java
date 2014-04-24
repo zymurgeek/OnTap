@@ -3,9 +3,11 @@ package com.itllp.barleylegalhomebrewers.ontap.contentprovider;
 
 import java.util.Arrays;
 import java.util.HashSet;
+
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.OnTapContentProviderMetadata;
+
 import android.content.ContentProvider;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -97,9 +99,7 @@ public class OnTapContentProvider extends ContentProvider {
 			String[] selectionArgs, String sortOrder) {
 
 		SQLiteDatabase db = mOpenHelper.getReadableDatabase();
-
 		SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
-
 
 		int uriType = sURIMatcher.match(uri);
 		String eventId = "";
@@ -146,7 +146,7 @@ public class OnTapContentProvider extends ContentProvider {
 		case EVENTS:
 		case EVENT_ID:
 			TableUpdater eventUpdater = EventTableUpdaterFactory.getInstance();
-			sqlLoadTask = new TableUpdaterTask(eventUpdater);
+			sqlLoadTask = new TableUpdaterTask(getContext().getContentResolver(), eventUpdater);
 			break;
 		case BEERS:
 			BeerTableUpdater beersInEventUpdater = BeerTableUpdaterFactory.getInstance();

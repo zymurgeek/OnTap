@@ -12,6 +12,11 @@ public class OnTapContentProviderMetadata {
 	//FIXME Delete this, as it's not a valid URI
 	public static final Uri BEER_CONTENT_URI = Uri.parse("content://" + 
 			AUTHORITY + "/" + OnTapContentProviderMetadata.BEER_BASE_PATH);
+    public static final Uri EVENT_BUSY_URI = Uri.parse("content://" + 
+			AUTHORITY + "/busy");
+    public static final Uri EVENT_NOT_BUSY_URI = Uri.parse("content://" + 
+			AUTHORITY + "/notbusy");
+
 	public static final String EVENT_BASE_PATH = "events";
 	public static final String BEER_BASE_PATH = "beers";
 	public static final String EVENT_ID_PARAM = "event";
