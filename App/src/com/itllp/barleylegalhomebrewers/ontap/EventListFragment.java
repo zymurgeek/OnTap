@@ -17,9 +17,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class EventListFragment extends ListFragment 
-implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
+implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor>,
+NetworkActivityObserver {
 	
 	private SimpleCursorAdapter adapter = null;
+	private Button refreshButton = null;
 	
 	
     @Override public void onActivityCreated(Bundle savedInstanceState) {
@@ -39,13 +41,14 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
         loaderManager.initLoader(0, null, this);
 
         View view = getView().getRootView();
-        Button refreshButton = (Button)view.findViewById
+        refreshButton = (Button)view.findViewById
         		(R.id.refresh_button);
         final android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> 
         callbacks = this;
+        EventListActivity elAct = (EventListActivity) getActivity();
+        elAct.registerForNetworkActivity(this);
         refreshButton.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
-        		//TODO Change implementation to kick content provider
         		loaderManager.restartLoader(0, null, callbacks);
         	}
         });
@@ -114,6 +117,26 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
 	public void onLoaderReset(Loader<Cursor> loader) {
 		// data is not available anymore, delete reference
 		adapter.swapCursor(null);
+	}
+
+
+	@Override
+	public void networkActive() {
+		getView().post(new Runnable() {
+		    public void run() {
+				refreshButton.setEnabled(false);
+		    }
+		});
+	}
+
+
+	@Override
+	public void networkInactive() {
+		getView().post(new Runnable() {
+		    public void run() {
+				refreshButton.setEnabled(true);
+		    }
+		});
 	}
 
 }
