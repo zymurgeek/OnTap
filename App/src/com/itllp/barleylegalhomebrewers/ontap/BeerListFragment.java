@@ -22,9 +22,11 @@ import android.widget.TextView;
 //TODO Sort beer list by OnTap, Style
 //TODO Have refresh update list, not replace it, so user's place is not lost
 public class BeerListFragment extends ListFragment 
-implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
+implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor>,
+NetworkActivityObserver {
 	
 	private SimpleCursorAdapter adapter = null;
+	private Button refreshButton = null;
 	private int eventId = -1;
 
 	
@@ -44,9 +46,11 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
         loaderManager.initLoader(0, null, this);
 
         View view = getView().getRootView();
-        Button refreshButton = (Button)view.findViewById
+        refreshButton = (Button)view.findViewById
 			(R.id.refresh_button);
         final LoaderManager.LoaderCallbacks<Cursor> callbacks = this;
+        BeerListActivity blAct = (BeerListActivity) getActivity();
+        blAct.registerForNetworkActivity(this);
         refreshButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
         		loaderManager.restartLoader(0, null, callbacks);
@@ -145,6 +149,25 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
 
 	public int getEventId() {
 		return eventId;
+	}
+
+	@Override
+	public void networkActive() {
+		getView().post(new Runnable() {
+		    public void run() {
+				refreshButton.setEnabled(false);
+		    }
+		});
+	}
+
+
+	@Override
+	public void networkInactive() {
+		getView().post(new Runnable() {
+		    public void run() {
+				refreshButton.setEnabled(true);
+		    }
+		});
 	}
 
 }

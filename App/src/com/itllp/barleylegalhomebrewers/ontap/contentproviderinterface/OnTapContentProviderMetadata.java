@@ -13,9 +13,13 @@ public class OnTapContentProviderMetadata {
 	public static final Uri BEER_CONTENT_URI = Uri.parse("content://" + 
 			AUTHORITY + "/" + OnTapContentProviderMetadata.BEER_BASE_PATH);
     public static final Uri EVENT_BUSY_URI = Uri.parse("content://" + 
-			AUTHORITY + "/busy");
+			AUTHORITY + "/busy_event");
     public static final Uri EVENT_NOT_BUSY_URI = Uri.parse("content://" + 
-			AUTHORITY + "/notbusy");
+			AUTHORITY + "/notbusy_event");
+    public static final Uri BEER_BUSY_URI = Uri.parse("content://" + 
+			AUTHORITY + "/busy_beer");
+    public static final Uri BEER_NOT_BUSY_URI = Uri.parse("content://" + 
+			AUTHORITY + "/notbusy_beer");
 
 	public static final String EVENT_BASE_PATH = "events";
 	public static final String BEER_BASE_PATH = "beers";

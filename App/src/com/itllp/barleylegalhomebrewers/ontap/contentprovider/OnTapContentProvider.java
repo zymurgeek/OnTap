@@ -150,7 +150,7 @@ public class OnTapContentProvider extends ContentProvider {
 			break;
 		case BEERS:
 			BeerTableUpdater beersInEventUpdater = BeerTableUpdaterFactory.getInstance();
-			sqlLoadTask = new BeerTableUpdaterTask(beersInEventUpdater, eventId);
+			sqlLoadTask = new BeerTableUpdaterTask(getContext().getContentResolver(), beersInEventUpdater, eventId);
 			break;
 		case BEER_ID:
 			//FIXME Enable loading by beer ID
