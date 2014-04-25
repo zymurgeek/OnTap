@@ -2,6 +2,7 @@ package com.itllp.barleylegalhomebrewers.ontap;
 
 import android.net.Uri;
 import android.os.Handler;
+import android.util.Log;
 
 public class OnTapContentProviderActiveObserver extends OnTapContentProviderObserver {
 
@@ -24,6 +25,8 @@ public class OnTapContentProviderActiveObserver extends OnTapContentProviderObse
 		NetworkActivityObserver observer = getObserver();
 		if (observer != null) {
 			observer.networkActive();
+		} else {
+			Log.e("OT", "OnTapContentProviderActiveObserver notifyObservers() null observer");
 		}
 	}
 }

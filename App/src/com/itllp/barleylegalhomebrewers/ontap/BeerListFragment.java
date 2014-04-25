@@ -13,6 +13,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -48,11 +49,13 @@ NetworkActivityObserver {
         View view = getView().getRootView();
         refreshButton = (Button)view.findViewById
 			(R.id.refresh_button);
+        refreshButton.setEnabled(false);
         final LoaderManager.LoaderCallbacks<Cursor> callbacks = this;
         BeerListActivity blAct = (BeerListActivity) getActivity();
-        blAct.registerForNetworkActivity(this);
+//        blAct.registerForNetworkActivity(this);
         refreshButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                refreshButton.setEnabled(false);
         		loaderManager.restartLoader(0, null, callbacks);
             }
         });
@@ -153,6 +156,7 @@ NetworkActivityObserver {
 
 	@Override
 	public void networkActive() {
+		Log.e("OT", "networkActive()");
 		getView().post(new Runnable() {
 		    public void run() {
 				refreshButton.setEnabled(false);
@@ -163,6 +167,7 @@ NetworkActivityObserver {
 
 	@Override
 	public void networkInactive() {
+		Log.e("OT", "networkInactive()");
 		getView().post(new Runnable() {
 		    public void run() {
 				refreshButton.setEnabled(true);

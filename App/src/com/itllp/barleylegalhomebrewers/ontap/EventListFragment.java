@@ -43,12 +43,14 @@ NetworkActivityObserver {
         View view = getView().getRootView();
         refreshButton = (Button)view.findViewById
         		(R.id.refresh_button);
+        refreshButton.setEnabled(false);
         final android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> 
         callbacks = this;
         EventListActivity elAct = (EventListActivity) getActivity();
         elAct.registerForNetworkActivity(this);
         refreshButton.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
+                refreshButton.setEnabled(false);
         		loaderManager.restartLoader(0, null, callbacks);
         	}
         });
