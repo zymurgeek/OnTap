@@ -1,16 +1,24 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
+import java.lang.reflect.Method;
+
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.OnTapContentProviderMetadata;
 
+import android.annotation.TargetApi;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.support.v4.app.ListFragment;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -46,8 +54,6 @@ NetworkActivityObserver {
         refreshButton.setEnabled(false);
         final android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> 
         callbacks = this;
-        EventListActivity elAct = (EventListActivity) getActivity();
-        elAct.registerForNetworkActivity(this);
         refreshButton.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
                 refreshButton.setEnabled(false);
@@ -57,7 +63,70 @@ NetworkActivityObserver {
     }
 
     
-    private void createListAdapter() {
+	@Override
+	public void onResume() {
+		super.onResume();
+    	final ContentResolver r = getActivity().getContentResolver();
+        if (activeWorkerThread == null) {
+        	activeWorkerThread = new HandlerThread("EventListFragment active worker");
+        	activeWorkerThread.start();
+        	activeWorkerQueue = new Handler(activeWorkerThread.getLooper());
+        	networkActiveObserver = new OnTapContentProviderActiveObserver(activeWorkerQueue);
+        	r.registerContentObserver(OnTapContentProviderMetadata.EVENT_BUSY_URI, true, networkActiveObserver);
+            networkActiveObserver.registerObserver(this);
+        }
+        if (inactiveWorkerThread == null) {
+        	inactiveWorkerThread = new HandlerThread("EventListFragment inactive worker");
+        	inactiveWorkerThread.start();
+        	inactiveWorkerQueue = new Handler(inactiveWorkerThread.getLooper());
+        	networkInactiveObserver = new OnTapContentProviderInactiveObserver(inactiveWorkerQueue);
+        	r.registerContentObserver(OnTapContentProviderMetadata.EVENT_NOT_BUSY_URI, true, networkInactiveObserver);
+            networkInactiveObserver.registerObserver(this);
+        }
+	}
+
+	
+	@TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
+	@Override
+	public void onPause() {
+		super.onPause();
+		getActivity().getContentResolver().unregisterContentObserver(networkActiveObserver);
+		getActivity().getContentResolver().unregisterContentObserver(networkInactiveObserver);
+		networkActiveObserver.deregisterObserver();
+		networkInactiveObserver.deregisterObserver();
+		networkActiveObserver = null;
+		networkInactiveObserver = null;
+		activeWorkerQueue = null;
+		inactiveWorkerQueue = null;
+		if (Build.VERSION.SDK_INT >= 18) {
+			try {
+				Class<?> handlerThreadClass = Class.forName("android.os.HandlerThread", true, Thread.currentThread()
+						.getContextClassLoader());
+				Method quitSafelyMethod = handlerThreadClass.getMethod("quitSafely", handlerThreadClass);
+				quitSafelyMethod.invoke(activeWorkerThread);
+				quitSafelyMethod.invoke(inactiveWorkerThread);
+			} catch (Exception e) {
+				// Do nothing if method does not exist
+			}
+		} else {
+			if (Build.VERSION.SDK_INT >= 5) {
+				try {
+					Class<?> handlerThreadClass = Class.forName("android.os.HandlerThread", true, Thread.currentThread()
+							.getContextClassLoader());
+					Method quitMethod = handlerThreadClass.getMethod("quit", handlerThreadClass);
+					quitMethod.invoke(activeWorkerThread);
+					quitMethod.invoke(inactiveWorkerThread);
+				} catch (Exception e) {
+					// Do nothing if method does not exist
+				}
+			}
+		}
+		activeWorkerThread = null;
+		inactiveWorkerThread = null;
+	}
+
+	
+	private void createListAdapter() {
         // Fields from the database (projection)
         // Must include the _id column for the adapter to work
         String[] from = new String[] { 
@@ -77,6 +146,7 @@ NetworkActivityObserver {
         setListAdapter(adapter);
       }
 
+    
     // Creates a new loader after the initLoader () call
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
@@ -101,11 +171,8 @@ NetworkActivityObserver {
     
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        // Set the new data in the adapter.
-		//adapter.setData(data);
 	    adapter.swapCursor(data);
 
-        // The list should now be shown.
         if (isResumed()) {
             setListShown(true);
         } else {
@@ -117,7 +184,6 @@ NetworkActivityObserver {
 	
 	@Override
 	public void onLoaderReset(Loader<Cursor> loader) {
-		// data is not available anymore, delete reference
 		adapter.swapCursor(null);
 	}
 
@@ -141,4 +207,11 @@ NetworkActivityObserver {
 		});
 	}
 
+	
+	private HandlerThread activeWorkerThread = null;
+	private Handler activeWorkerQueue = null;
+	private HandlerThread inactiveWorkerThread = null;
+	private Handler inactiveWorkerQueue = null;
+	private OnTapContentProviderActiveObserver networkActiveObserver = null;
+	private OnTapContentProviderInactiveObserver networkInactiveObserver = null;
 }

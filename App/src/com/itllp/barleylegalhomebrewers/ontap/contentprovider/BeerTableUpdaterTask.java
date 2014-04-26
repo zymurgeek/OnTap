@@ -3,6 +3,7 @@ package com.itllp.barleylegalhomebrewers.ontap.contentprovider;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.OnTapContentProviderMetadata;
 
 import android.content.ContentResolver;
+import android.util.Log;
 
 
 class BeerTableUpdaterTask implements Runnable {
@@ -16,16 +17,25 @@ class BeerTableUpdaterTask implements Runnable {
 
 
 	@Override
-	public void run() {
+	public synchronized void run() {
+		Log.d(tag, "Starting server query");
 		if (updateThreadCount < 1) { 
+			Log.d(tag, "Sending busy notification");
 			contentResolver.notifyChange(OnTapContentProviderMetadata.BEER_BUSY_URI, null);
 		}
 		++updateThreadCount;
-		updater.update(eventId);
+		try {
+			updater.update(eventId);
+		} catch (Exception e) {
+			Log.e(tag, "Failed to update");
+			Log.e(tag, e.toString());
+		}
 		--updateThreadCount;
 		if (updateThreadCount < 1) {
+			Log.d(tag, "Sending not busy notification");
 			contentResolver.notifyChange(OnTapContentProviderMetadata.BEER_NOT_BUSY_URI, null);
 		}
+		Log.d(tag, "Server query finished");
 	}
 	
 	
@@ -33,4 +43,5 @@ class BeerTableUpdaterTask implements Runnable {
 	private ContentResolver contentResolver;
 	private BeerTableUpdater updater;
 	private String eventId;
+	private final String tag = getClass().getSimpleName();
 }

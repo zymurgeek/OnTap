@@ -24,8 +24,6 @@ public class OnTapContentProviderInactiveObserver extends OnTapContentProviderOb
 		NetworkActivityObserver observer = getObserver();
 		if (observer != null) {
 			observer.networkInactive();
-		} else {
-			Log.e("OT", "OnTapContentProviderInactiveObserver notifyObservers() null observer");
 		}
 	}
 }
