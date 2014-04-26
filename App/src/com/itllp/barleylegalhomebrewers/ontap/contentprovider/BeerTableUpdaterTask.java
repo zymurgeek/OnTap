@@ -17,29 +17,32 @@ class BeerTableUpdaterTask implements Runnable {
 
 
 	@Override
-	public synchronized void run() {
-		Log.d(tag, "Starting server query");
-		if (updateThreadCount < 1) { 
-			Log.d(tag, "Sending busy notification");
-			contentResolver.notifyChange(OnTapContentProviderMetadata.BEER_BUSY_URI, null);
+	public void run() {
+		synchronized(synch) {
+			Log.d(tag, "Starting server query");
+			if (updateThreadCount < 1) { 
+				Log.d(tag, "Sending busy notification");
+				contentResolver.notifyChange(OnTapContentProviderMetadata.BEER_BUSY_URI, null);
+			}
+			++updateThreadCount;
+			try {
+				updater.update(eventId);
+			} catch (Exception e) {
+				Log.e(tag, "Failed to update");
+				Log.e(tag, e.toString());
+			}
+			--updateThreadCount;
+			if (updateThreadCount < 1) {
+				Log.d(tag, "Sending not busy notification");
+				contentResolver.notifyChange(OnTapContentProviderMetadata.BEER_NOT_BUSY_URI, null);
+			}
+			Log.d(tag, "Server query finished");
 		}
-		++updateThreadCount;
-		try {
-			updater.update(eventId);
-		} catch (Exception e) {
-			Log.e(tag, "Failed to update");
-			Log.e(tag, e.toString());
-		}
-		--updateThreadCount;
-		if (updateThreadCount < 1) {
-			Log.d(tag, "Sending not busy notification");
-			contentResolver.notifyChange(OnTapContentProviderMetadata.BEER_NOT_BUSY_URI, null);
-		}
-		Log.d(tag, "Server query finished");
 	}
 	
 	
 	private static int updateThreadCount = 0;
+	private static Object synch = new Object();
 	private ContentResolver contentResolver;
 	private BeerTableUpdater updater;
 	private String eventId;
