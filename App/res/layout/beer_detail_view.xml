@@ -262,6 +262,14 @@
         android:textSize="14sp"
         tools:ignore="SelectableText"
     />
+
+	<Button
+    android:id="@+id/email_brewer"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:text="@string/email_brewer" />
+    
 		
 </LinearLayout>
 </ScrollView>

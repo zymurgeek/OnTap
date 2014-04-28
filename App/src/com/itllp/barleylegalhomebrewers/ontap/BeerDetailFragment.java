@@ -5,6 +5,7 @@ import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.OnTapCont
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.widget.SimpleCursorAdapter;
@@ -15,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class BeerDetailFragment extends Fragment 
 implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
@@ -56,6 +58,25 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
         		loaderManager.restartLoader(LOADER_ID, null, callbacks);
             }
         });
+        
+        Button emailButton = (Button)view.findViewById
+			(R.id.email_brewer);
+        emailButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	TextView emailAddressView = (TextView)getView().findViewById(R.id.brewer_email);
+            	String emailAddress = emailAddressView.getText().toString();
+            	TextView beerNameView = (TextView)getView().findViewById(R.id.beer_name);
+            	String beerName = beerNameView.getText().toString();
+            	Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
+            	String uriText = "mailto:" + Uri.encode(emailAddress) + 
+            	          "?subject=" + Uri.encode("Barley Legal Homebrewers OnTap: " + beerName) + 
+            	          "&body=" + Uri.encode("I had your beer " + beerName);
+            	Uri uri = Uri.parse(uriText);
+            	sendEmail.setData(uri);
+            	startActivity(Intent.createChooser(sendEmail, "Send mail..."));        
+            }
+        });
+        
 }
 
     private void createCursorAdapter() {
