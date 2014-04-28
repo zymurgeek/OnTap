@@ -10,7 +10,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingRight="@dimen/activity_vertical_margin" >
+    >
 
     <TextView
         android:id="@+id/beer_name"
@@ -244,24 +244,15 @@
 	</LinearLayout>
     </RelativeLayout>
     
-	<TextView
-        android:id="@+id/brewer_email_label" 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="6dip"
-        android:textSize="16sp"
-        android:textStyle="bold"
-		android:text="@string/brewer_email_label_text"
-	/>
     <TextView
-    	android:id="@+id/brewer_email"
+        android:id="@+id/brewer_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="left"
         android:textColor="#acacac"
         android:textSize="14sp"
-        tools:ignore="SelectableText"
-    />
+        android:visibility="gone"
+        tools:ignore="SelectableText" />
 
 	<Button
     android:id="@+id/email_brewer"

@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 //TODO Is this class needed or can the adapter be replaced by updateFields() in the fragment?
 public class BeerDetailAdapter extends SimpleCursorAdapter {
@@ -58,13 +59,13 @@ public class BeerDetailAdapter extends SimpleCursorAdapter {
 		}
 		
 		TextView brewerEmailView = (TextView)convertView.findViewById(R.id.brewer_email);
-		TextView brewerEmailLabelView = (TextView)convertView.findViewById(R.id.brewer_email_label);
+		Button emailBrewerButton = (Button)convertView.findViewById(R.id.email_brewer);
 		if (beerQuery.isEmailShown(cursor)) {
 			brewerEmailView.setText(beerQuery.getBrewerEmail(cursor));
-			brewerEmailLabelView.setEnabled(true);
+			emailBrewerButton.setEnabled(true);
 		} else {
 			brewerEmailView.setText("");
-			brewerEmailLabelView.setEnabled(false);
+			emailBrewerButton.setEnabled(false);
 		}
 		
         return view;

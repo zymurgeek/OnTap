@@ -5,12 +5,12 @@
     android:orientation="vertical">  
 
     <!-- Event ID -->
+
     <TextView
         android:id="@+id/id"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:paddingBottom="2dip"
-        android:textColor="#acacac" />
+        android:visibility="gone" />
 
 	<!-- Event Name -->
 	<TextView
