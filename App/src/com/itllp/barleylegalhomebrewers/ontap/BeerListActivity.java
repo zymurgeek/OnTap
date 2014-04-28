@@ -1,8 +1,6 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
@@ -37,16 +35,4 @@ public class BeerListActivity  extends FragmentActivity {
         	beerListFrag.setEventId(eventId);
         }
     }
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-	}
-
-	@TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-	@Override
-	protected void onPause() {
-		super.onPause();
-	}
-
 }

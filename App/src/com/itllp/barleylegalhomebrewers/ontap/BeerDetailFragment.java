@@ -68,9 +68,12 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
             	TextView beerNameView = (TextView)getView().findViewById(R.id.beer_name);
             	String beerName = beerNameView.getText().toString();
             	Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
+            	//FIXME Use URI corresponding to server in use
+            	String emailBody = "I had your beer " + beerName + 
+            			" (http://barleylegalevents.com/barleylegal/showBeer.aspx?id=" + beerId + ").";
             	String uriText = "mailto:" + Uri.encode(emailAddress) + 
-            	          "?subject=" + Uri.encode("Barley Legal Homebrewers OnTap: " + beerName) + 
-            	          "&body=" + Uri.encode("I had your beer " + beerName);
+            	          "?subject=" + Uri.encode("Barley Legal Homebrewers On Tap: " + beerName) + 
+            	          "&body=" + Uri.encode(emailBody);
             	Uri uri = Uri.parse(uriText);
             	sendEmail.setData(uri);
             	startActivity(Intent.createChooser(sendEmail, "Send mail..."));        

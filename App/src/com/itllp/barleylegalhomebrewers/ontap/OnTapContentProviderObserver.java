@@ -2,7 +2,6 @@ package com.itllp.barleylegalhomebrewers.ontap;
 
 import android.database.ContentObserver;
 import android.os.Handler;
-import android.util.Log;
 
 public abstract class OnTapContentProviderObserver extends ContentObserver {
 

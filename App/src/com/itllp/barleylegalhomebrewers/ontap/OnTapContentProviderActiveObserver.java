@@ -2,7 +2,6 @@ package com.itllp.barleylegalhomebrewers.ontap;
 
 import android.net.Uri;
 import android.os.Handler;
-import android.util.Log;
 
 public class OnTapContentProviderActiveObserver extends OnTapContentProviderObserver {
 
