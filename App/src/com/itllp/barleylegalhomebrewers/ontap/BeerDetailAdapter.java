@@ -67,6 +67,15 @@ public class BeerDetailAdapter extends SimpleCursorAdapter {
 			brewerEmailView.setText("");
 			emailBrewerButton.setEnabled(false);
 		}
+
+		TextView untappdBeerIdView = (TextView)convertView.findViewById(R.id.untappd_beer_id);
+		String untappdBeerId = untappdBeerIdView.getText().toString();
+		Button checkInOnUntappdButton = (Button)convertView.findViewById(R.id.check_in_on_untappd);
+		if (untappdBeerId.length() > 0) {
+			checkInOnUntappdButton.setEnabled(true);
+		} else {
+			checkInOnUntappdButton.setEnabled(false);
+		}
 		
         return view;
     }

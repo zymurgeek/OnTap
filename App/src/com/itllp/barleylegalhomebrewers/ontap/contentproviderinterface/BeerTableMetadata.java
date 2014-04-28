@@ -111,4 +111,10 @@ public class BeerTableMetadata {
 	 */
 	public static final String EMAIL_ADDRESS = "email_address";
 
+	/**
+	 * Column name for beer ID on Untappd.
+	 * <P>Type: TEXT</P>
+	 */
+	public static final String UNTAPPD_BEER_ID = "untappd_beer_id";
+
 }

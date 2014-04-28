@@ -261,6 +261,20 @@
     android:layout_gravity="bottom"
     android:text="@string/email_brewer" />
     
-		
+    <TextView
+        android:id="@+id/untappd_beer_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:ignore="SelectableText" />
+
+	<Button
+    android:id="@+id/check_in_on_untappd"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:text="@string/check_in_on_uptappd" />
+    
+			
 </LinearLayout>
 </ScrollView>

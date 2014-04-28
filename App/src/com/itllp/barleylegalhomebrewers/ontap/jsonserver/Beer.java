@@ -21,4 +21,5 @@ public class Beer {
 	public static final String STANDARD_REFERENCE_METHOD = "SRM";
 	public static final String IS_EMAIL_SHOWN = "CanEmail";
 	public static final String EMAIL_ADDRESS = "EmailAddress";
+	public static final String UNTAPPD_BEER_ID = "UntappdBeerId";
 }

@@ -25,5 +25,6 @@
     <string name="section_text">--NEW SECTION--</string>
     <string name="refresh">Refresh</string>
     <string name="email_brewer">Email the Brewer</string>
+    <string name="check_in_on_uptappd">Check in on Untappd</string>
     
 </resources>

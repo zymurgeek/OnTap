@@ -1,5 +1,6 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
+import com.itllp.barleylegalhomebrewers.ontap.contentprovider.BeerTableUpdaterFactory;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.OnTapContentProviderMetadata;
 
@@ -23,8 +24,6 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
 
 	public static final String BEER_ID = "BEER_ID";
 	public static final int LOADER_ID = 1;
-//	private Cursor cursor;
-//	private BeerCursorUtility beerQuery = new BeerCursorUtility();
 	private android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> callbacks;
 	private SimpleCursorAdapter adapter;
 	private int beerId = -1;
@@ -68,15 +67,37 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
             	TextView beerNameView = (TextView)getView().findViewById(R.id.beer_name);
             	String beerName = beerNameView.getText().toString();
             	Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
-            	//FIXME Use URI corresponding to server in use
-            	String emailBody = "I had your beer " + beerName + 
-            			" (http://barleylegalevents.com/barleylegal/showBeer.aspx?id=" + beerId + ").";
+            	//TODO Update this URL retrieval to use the single beer query when that's finished.
+            	String serverBeersForEventTemplateUrl = BeerTableUpdaterFactory.getInstance().getDataSource();
+            	String beerPageText = "";
+            	if (serverBeersForEventTemplateUrl != null) {
+            		String serverBeerTemplateUrl = serverBeersForEventTemplateUrl.replace("getbeersforevent", "showBeer");
+            		String serverBeerUrl = serverBeerTemplateUrl.replace("#", Integer.toString(beerId));
+            		beerPageText = " (" + serverBeerUrl + ")" ;
+            	}
+            	String emailBody = "I had your beer " + beerName + beerPageText + ".";
             	String uriText = "mailto:" + Uri.encode(emailAddress) + 
             	          "?subject=" + Uri.encode("Barley Legal Homebrewers On Tap: " + beerName) + 
             	          "&body=" + Uri.encode(emailBody);
             	Uri uri = Uri.parse(uriText);
             	sendEmail.setData(uri);
             	startActivity(Intent.createChooser(sendEmail, "Send mail..."));        
+            }
+        });
+        
+        Button checkInOnUntappdButton = (Button)view.findViewById
+			(R.id.check_in_on_untappd);
+        checkInOnUntappdButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	TextView untappdBeerIdView = (TextView)getView().findViewById(R.id.untappd_beer_id);
+            	String untappdBeerId = untappdBeerIdView.getText().toString();
+            	Intent sendUntappd = new Intent(Intent.ACTION_VIEW);
+            	if (untappdBeerId != null && untappdBeerId.length() > 0) {
+                	String uriText = "untappd:///?beer=" + Uri.encode(untappdBeerId);
+                	Uri uri = Uri.parse(uriText);
+                	sendUntappd.setData(uri);
+                	startActivity(Intent.createChooser(sendUntappd, "Check in on Untappd"));        
+            	}
             }
         });
         
@@ -95,7 +116,8 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     			BeerTableMetadata.FINAL_GRAVITY_COLUMN,
     			BeerTableMetadata.ALCOHOL_BY_VOLUME_COLUMN,
     			BeerTableMetadata.INTERNATIONAL_BITTERNESS_UNITS_COLUMN,
-    			BeerTableMetadata.STANDARD_REFERENCE_METHOD_COLUMN
+    			BeerTableMetadata.STANDARD_REFERENCE_METHOD_COLUMN,
+    			BeerTableMetadata.UNTAPPD_BEER_ID
     			};
     	// Fields on the UI to which we map
     	int[] to = new int[] { 
@@ -108,7 +130,8 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     			R.id.fg,
     			R.id.abv,
     			R.id.ibu,
-    			R.id.srm
+    			R.id.srm,
+    			R.id.untappd_beer_id
     			};
 
     	adapter = new BeerDetailAdapter(getActivity(), R.layout.beer_detail_view, null, from, to, 0);
@@ -134,7 +157,8 @@ implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
     			BeerTableMetadata.INTERNATIONAL_BITTERNESS_UNITS_COLUMN,
     			BeerTableMetadata.STANDARD_REFERENCE_METHOD_COLUMN,
     			BeerTableMetadata.IS_EMAIL_SHOWN,
-    			BeerTableMetadata.EMAIL_ADDRESS
+    			BeerTableMetadata.EMAIL_ADDRESS,
+    			BeerTableMetadata.UNTAPPD_BEER_ID
     	};
     	String sortOrder = null;
     	Uri queryUri = Uri.parse(OnTapContentProviderMetadata.BEER_CONTENT_URI

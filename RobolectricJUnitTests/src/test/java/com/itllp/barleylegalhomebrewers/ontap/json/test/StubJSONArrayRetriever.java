@@ -3,6 +3,7 @@ package com.itllp.barleylegalhomebrewers.ontap.json.test;
 import org.json.JSONArray;
 
 import android.util.SparseArray;
+
 import com.itllp.barleylegalhomebrewers.ontap.json.JSONArrayRetriever;
 
 public class StubJSONArrayRetriever implements JSONArrayRetriever {
@@ -27,6 +28,11 @@ public class StubJSONArrayRetriever implements JSONArrayRetriever {
 
 	public void stub_setReturnArray(int id, JSONArray expectedJSONArray) {
 		returnJSONArrayForID.put(id, expectedJSONArray);
+	}
+
+	@Override
+	public String getDataSource() {
+		return null;
 	}
 
 }

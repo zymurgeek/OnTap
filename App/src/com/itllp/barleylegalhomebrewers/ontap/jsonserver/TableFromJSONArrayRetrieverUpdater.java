@@ -19,6 +19,12 @@ public class TableFromJSONArrayRetrieverUpdater implements
 
 	
 	@Override
+	public String getDataSource() {
+		return this.retriever.getDataSource();
+	}
+	
+	
+	@Override
 	public void update() {
 		JSONArray jsonArray = retriever.getJSONArray();
 		updater.updateTable(jsonArray);

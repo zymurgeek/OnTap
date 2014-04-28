@@ -20,6 +20,12 @@ public class BeerTableFromJSONArrayRetrieverUpdater implements
 
 	
 	@Override
+	public String getDataSource() {
+		return this.retriever.getDataSource();
+	}
+	
+	
+	@Override
 	public void update(String eventId) {
 		JSONArray jsonArray = retriever.getJSONArray(eventId);
 		updater.updateTable(jsonArray);

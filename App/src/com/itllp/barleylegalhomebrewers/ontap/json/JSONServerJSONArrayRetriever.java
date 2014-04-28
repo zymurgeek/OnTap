@@ -17,9 +17,12 @@ public class JSONServerJSONArrayRetriever implements JSONArrayRetriever {
 	}
 
 	
-	private String serverUrlTemplate = null;
-
-
+	@Override
+	public String getDataSource() {
+		return this.serverUrlTemplate;
+	}
+	
+	
 	@Override
 	public JSONArray getJSONArray(String id) {
 		if (id == null) {
@@ -30,4 +33,7 @@ public class JSONServerJSONArrayRetriever implements JSONArrayRetriever {
     	JSONArray jsonArray = jParser.getJSONArrayFromUrl(serverURL);
 		return jsonArray;
 	}
+
+
+	private String serverUrlTemplate = null;
 }

@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import com.itllp.barleylegalhomebrewers.ontap.dateconverter.JavaDateToStringConverter;
 import com.itllp.barleylegalhomebrewers.ontap.dateconverter.StringToJavaDateConverter;
+import com.itllp.barleylegalhomebrewers.ontap.util.UntappdBeerIdParser;
 
 import android.content.ContentValues;
 
@@ -46,6 +47,7 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 		convertStandardReferenceMethod(jsonObject, result);
 		convertIsEmailShown(jsonObject, result);
 		convertEmailAddress(jsonObject, result);
+		convertUntappdBeerId(jsonObject, result);
 
 		return result;
 	}
@@ -205,4 +207,22 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 		} catch (JSONException e) {}
 	}
 	
+	private void convertUntappdBeerId(JSONObject jsonObject, ContentValues result) {
+		try {
+			String untappdBeerId = jsonObject.getString(com.itllp
+					.barleylegalhomebrewers.ontap.jsonserver.Beer.UNTAPPD_BEER_ID);
+			result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.UNTAPPD_BEER_ID, untappdBeerId);
+		} catch (JSONException e) {
+			// Try to get value from description text
+			try {
+				String description = jsonObject.getString(com.itllp
+						.barleylegalhomebrewers.ontap.jsonserver.Beer.DESCRIPTION);
+				String untappdBeerId = idParser.getUntappdBeerId(description); 
+				result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.UNTAPPD_BEER_ID, untappdBeerId);
+			} catch (JSONException ex) {}
+		}
+	}
+
+	
+	private static final UntappdBeerIdParser idParser = new UntappdBeerIdParser();
 }

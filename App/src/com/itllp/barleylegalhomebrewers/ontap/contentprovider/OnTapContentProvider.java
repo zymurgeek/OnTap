@@ -160,6 +160,8 @@ public class OnTapContentProvider extends ContentProvider {
 			*/
 			break;
 		}
+		//TODO Optimize load task to announce once per table
+		//TODO Don't issue a load if one is already in progress
 		if (sqlLoadTask != null) {
 			Thread t = new Thread(sqlLoadTask);
 			t.start();
@@ -194,7 +196,8 @@ public class OnTapContentProvider extends ContentProvider {
 				BeerTableMetadata.INTERNATIONAL_BITTERNESS_UNITS_COLUMN,
 				BeerTableMetadata.STANDARD_REFERENCE_METHOD_COLUMN,
 				BeerTableMetadata.IS_EMAIL_SHOWN,
-				BeerTableMetadata.EMAIL_ADDRESS};
+				BeerTableMetadata.EMAIL_ADDRESS,
+				BeerTableMetadata.UNTAPPD_BEER_ID};
 		checkForUnknownColumns(projection, available);
 	}
 
