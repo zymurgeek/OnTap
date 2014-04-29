@@ -27,7 +27,6 @@ import android.widget.TextView;
 
 //TODO Put event name at top of beer list
 //TODO Sort beer list by OnTap, Style
-//TODO Have refresh update list, not replace it, so user's place is not lost
 public class BeerListFragment extends ListFragment 
 implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor>,
 NetworkActivityObserver {
