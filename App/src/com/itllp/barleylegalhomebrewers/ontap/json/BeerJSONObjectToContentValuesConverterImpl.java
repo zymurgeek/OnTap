@@ -208,19 +208,21 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 	}
 	
 	private void convertUntappdBeerId(JSONObject jsonObject, ContentValues result) {
+		String untappdBeerId = "";
 		try {
-			String untappdBeerId = jsonObject.getString(com.itllp
+			untappdBeerId = jsonObject.getString(com.itllp
 					.barleylegalhomebrewers.ontap.jsonserver.Beer.UNTAPPD_BEER_ID);
-			result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.UNTAPPD_BEER_ID, untappdBeerId);
-		} catch (JSONException e) {
-			// Try to get value from description text
+		} catch (JSONException e) {}
+		
+		if (untappdBeerId.length() == 0) {  
+			// Get ID from description text
 			try {
 				String description = jsonObject.getString(com.itllp
 						.barleylegalhomebrewers.ontap.jsonserver.Beer.DESCRIPTION);
-				String untappdBeerId = idParser.getUntappdBeerId(description); 
-				result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.UNTAPPD_BEER_ID, untappdBeerId);
+				untappdBeerId = idParser.getUntappdBeerId(description); 
 			} catch (JSONException ex) {}
 		}
+		result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.UNTAPPD_BEER_ID, untappdBeerId);
 	}
 
 	
