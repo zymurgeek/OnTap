@@ -97,4 +97,67 @@
         tools:ignore="SelectableText" 
     />
     
+    <RelativeLayout 
+		android:id="@+id/abv_ibu_srm_layout" 
+	    android:orientation="horizontal"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content" >
+    <LinearLayout 
+		android:id="@+id/abv_layout" 
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:layout_alignParentLeft="true" >
+    <TextView
+        android:id="@+id/abv_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="@dimen/label_horizontal_padding"
+        android:text="@string/abv_label_text"
+        android:textStyle="bold" />
+	<TextView
+	    android:id="@+id/abv"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    tools:ignore="SelectableText" />
+	</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ibu_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+   	<TextView
+   	    android:id="@+id/ibu_label"
+   	    android:layout_width="wrap_content"
+   	    android:layout_height="wrap_content"
+   	    android:paddingRight="@dimen/label_horizontal_padding"
+   	    android:text="@string/ibu_label_text"
+   	    android:textStyle="bold" />
+	<TextView
+	    android:id="@+id/ibu"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    tools:ignore="SelectableText" />
+	</LinearLayout>
+	
+    <LinearLayout
+        android:id="@+id/srm_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true" >
+   	<TextView
+   	    android:id="@+id/srm_label"
+   	    android:layout_width="wrap_content"
+   	    android:layout_height="wrap_content"
+   	    android:paddingRight="@dimen/label_horizontal_padding"
+   	    android:text="@string/srm_label_text"
+   	    android:textStyle="bold" />
+	<TextView
+	    android:id="@+id/srm"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    tools:ignore="SelectableText" />
+	</LinearLayout>
+   	</RelativeLayout>
+    
 </LinearLayout>

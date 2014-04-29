@@ -26,7 +26,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 //TODO Put event name at top of beer list
-//TODO Sort beer list by OnTap, Style
 public class BeerListFragment extends ListFragment 
 implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor>,
 NetworkActivityObserver {
@@ -136,7 +135,10 @@ NetworkActivityObserver {
     			BeerTableMetadata.BREWER_NAME_COLUMN,
     			BeerTableMetadata.STYLE_CODE_COLUMN,
     			BeerTableMetadata.STYLE_NAME_COLUMN,
-    			BeerTableMetadata.STYLE_OVERRIDE_COLUMN};
+    			BeerTableMetadata.STYLE_OVERRIDE_COLUMN,
+    			BeerTableMetadata.ALCOHOL_BY_VOLUME_COLUMN,
+    			BeerTableMetadata.INTERNATIONAL_BITTERNESS_UNITS_COLUMN,
+    			BeerTableMetadata.STANDARD_REFERENCE_METHOD_COLUMN};
     	// Fields on the UI to which we map
     	int[] to = new int[] { 
     			R.id.id,
@@ -144,7 +146,10 @@ NetworkActivityObserver {
     			R.id.brewer_name,
     			R.id.beer_style_code,
     			R.id.beer_style_name,
-    			R.id.beer_style_override};
+    			R.id.beer_style_override,
+    			R.id.abv,
+    			R.id.ibu,
+    			R.id.srm};
 
     	adapter = new BeerListAdapter
     			(getActivity(), R.layout.beer_list_item, null, from, to, 0);
@@ -163,7 +168,10 @@ NetworkActivityObserver {
     			BeerTableMetadata.STYLE_OVERRIDE_COLUMN,
     			BeerTableMetadata.IS_KICKED_COLUMN,
     			BeerTableMetadata.TAP_NUMBER_COLUMN,
-    			BeerTableMetadata.PACKAGING_COLUMN};
+    			BeerTableMetadata.PACKAGING_COLUMN,
+    			BeerTableMetadata.ALCOHOL_BY_VOLUME_COLUMN,
+    			BeerTableMetadata.INTERNATIONAL_BITTERNESS_UNITS_COLUMN,
+    			BeerTableMetadata.STANDARD_REFERENCE_METHOD_COLUMN};
     	String sortOrder = BeerTableMetadata.IS_KICKED_COLUMN +	",  ( " +
     			BeerTableMetadata.TAP_NUMBER_COLUMN + " <> 0 ) DESC, " +
     			BeerTableMetadata.NAME_COLUMN;

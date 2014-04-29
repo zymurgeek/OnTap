@@ -43,11 +43,14 @@ public class BeerListFragmentTests extends
 		BeerTableMetadata.STYLE_OVERRIDE_COLUMN,
 		BeerTableMetadata.IS_KICKED_COLUMN,
 		BeerTableMetadata.TAP_NUMBER_COLUMN,
-		BeerTableMetadata.PACKAGING_COLUMN};
+		BeerTableMetadata.PACKAGING_COLUMN,
+		BeerTableMetadata.ALCOHOL_BY_VOLUME_COLUMN,
+		BeerTableMetadata.INTERNATIONAL_BITTERNESS_UNITS_COLUMN,
+		BeerTableMetadata.STANDARD_REFERENCE_METHOD_COLUMN};
 	private static final Object[] ROW1_COLUMN_VALUES = {Integer.valueOf(10), 
-		"Beer #10", "Joe", "1A", "Lite American Lager", "Extra light", 0, 42, "Keg"};
+		"Beer #10", "Joe", "1A", "Lite American Lager", "Extra light", 0, 42, "Keg", "4%", "15", "5"};
 	private static final Object[] ROW2_COLUMN_VALUES = {Integer.valueOf(20), 
-		"Beer #20", "Steve", "2B", "Bohemian Pilsner", "New Zealand swing", 1, 0, "Bottle"};
+		"Beer #20", "Steve", "2B", "Bohemian Pilsner", "New Zealand swing", 1, 0, "Bottle", "5%", "22", "7"};
 	private Intent intent;
     ListView beerListView;
 	private Instrumentation instrumentation;

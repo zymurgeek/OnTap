@@ -2,7 +2,7 @@ OnTap is an Android app that provides information about what's
 available at a Barley Legal Homebrewers beer festival.
 
 To build this software requires:
-     The Android SDK with platform 1.6 (API 4)
+     The Android SDK with platform 2.1 (API 7)
 This is required to run the JUnit tests:
      Mockito 1.9.5
 These are required to run the Robolectric unit tests:
@@ -72,3 +72,6 @@ To test in Maven, from the top level (OnTap) directory, run "mvn
 install".  Maven should report "BUILD SUCCESS" unless you don't have
 an AVD with Android version at least 1.6 running, in which case the
 Android JUnit Tests will fail.
+
+Bugs and Change Requests are kept in Bugzilla at:
+http://bugs.itllp.com/bugzilla-4.4.4
