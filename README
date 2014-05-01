@@ -24,7 +24,7 @@ http://maven.apache.org/
 Available at https://github.com/mosabua/maven-android-sdk-deployer
 
 Before using the Maven Android SDK Deployer, install Android SDK
-version 4.4 (API 19), version 1.6 (API 4) and Android Support Library
+version 4.4 (API 19), version 2.1 (API 7) and Android Support Library
 (found under Extras).
 
 In the deployer's root directory pom.xml, add this profile:
@@ -35,7 +35,7 @@ In the deployer's root directory pom.xml, add this profile:
             </modules>
         </profile>
 
-Run "mvn install -P 4.4", "mvn install -P 1.6", 
+Run "mvn install -P 4.4", "mvn install -P 2.1", 
 then "mvn install -P extras".
 
 * Maven Eclipse Plug-In 
@@ -68,10 +68,52 @@ Select Classpath Variables.  On the right, select New.  Set the Name
 to MOCKITO_HOME and select Folder next to Path.  Select the directory
 containing the Mockito JAR.
 
+* Importing the project
+
+If you haven't already, create the Android Support library project
+using the v7 appcompat library.  See:
+http://developer.android.com/tools/support-library/setup.html
+
+Once the support library is ready, import the code from the Elipse
+menu File -> Import.  Expand General and select Existing Projects into
+Workspace.  Select Browse next to "Select root directory" and select
+the OnTap top level directory.  Five On Tap projects, Android JUnit
+Tests, App, JUnit Tests, Library, and Library JUnit tests will be
+selected.  Select Finish.
+
+If you already had the android-support-v7-appcompat project and you
+have your SDK in a different location than in your home directory, or
+you have a different version of the SDK, you'll need to update that
+location in App/project.properties.  You can do this in Eclipse using
+the instructions in "Adding libraries with resources" (expand "Using
+Eclipse"):
+http://developer.android.com/tools/support-library/setup.html#libs-with-res
+
+To run the JUnit tests, you'll need Mockito.  See above to install and
+configure it.  The tests can be run by right-clicking on the On Tap
+JUnit Tests or Library JUnit Tests projects and selecting Run As >
+JUnit Test.  These tests are very fast--the entire suite runs in under
+a second even on older hardware.  If you set up Maven (above), you can
+also run the Robolectric JUnit tests the same way.  They are almost as
+fast as the other JUnit tests, but much faster than the Android JUnit
+tests.
+
+To run the Android JUnit tests, start an emulator supporting API 7 or
+greater.  for help, see
+http://developer.android.com/tools/help/emulator.html.  Once the
+emulator is running, right click on the On Tap Android JUnit Tests
+project and select Run As > Android JUnit Test.  Since these tests are
+running on the emulator, they're a lot slower than the JUnit tests and
+take a few minutes to finish.
+
+* Testing with Maven
+
 To test in Maven, from the top level (OnTap) directory, run "mvn
 install".  Maven should report "BUILD SUCCESS" unless you don't have
-an AVD with Android version at least 1.6 running, in which case the
+an AVD with Android version at least 2.1 running, in which case the
 Android JUnit Tests will fail.
+
+* Reporting Problems or Suggestions
 
 Bugs and Change Requests are kept in Bugzilla at:
 http://bugs.itllp.com/bugzilla-4.4.4

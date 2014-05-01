@@ -35,18 +35,17 @@ public class OnTapContentProvider extends ContentProvider {
 	private static final int BEERS = 30;
 	private static final int BEER_ID = 40;
 	private static final UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-	  static {
-	    sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.EVENT_BASE_PATH, EVENTS);
-	    sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.EVENT_BASE_PATH + "/#", EVENT_ID);
-	    sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.BEER_BASE_PATH, BEERS);
-	    sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.BEER_BASE_PATH + "/#", BEER_ID);
-	  }
+	static {
+		sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.EVENT_BASE_PATH, EVENTS);
+		sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.EVENT_BASE_PATH + "/#", EVENT_ID);
+		sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.BEER_BASE_PATH, BEERS);
+		sURIMatcher.addURI(OnTapContentProviderMetadata.AUTHORITY, OnTapContentProviderMetadata.BEER_BASE_PATH + "/#", BEER_ID);
+	}
 	  
-	  public OnTapContentProvider() {
-		  super();
-		  instance = this;
-	  }
-
+	public OnTapContentProvider() {
+		super();
+		instance = this;
+	}
 	  
 	@Override
 	public int delete(Uri arg0, String arg1, String[] arg2) {

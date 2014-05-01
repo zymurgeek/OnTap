@@ -180,8 +180,8 @@ NetworkActivityObserver {
     			Uri.encode(String.valueOf(eventId));
     	Uri queryUri = Uri.parse(OnTapContentProviderMetadata.BEER_CONTENT_URI 
     			+ "?" +	queryString);
-    	CursorLoader cursorLoader = new CursorLoader(getActivity(),
-    			queryUri, projection, null, null, sortOrder);
+    	CursorLoader cursorLoader = CursorLoaderFactory.createCursorLoader(
+    			getActivity(), queryUri, projection, null, null, sortOrder);
     	return cursorLoader;
 	}
 

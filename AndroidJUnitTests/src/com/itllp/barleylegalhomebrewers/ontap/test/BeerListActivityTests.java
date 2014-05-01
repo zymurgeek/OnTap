@@ -4,6 +4,7 @@ import com.itllp.barleylegalhomebrewers.ontap.BeerListActivity;
 import com.itllp.barleylegalhomebrewers.ontap.BeerListFragment;
 
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
 import android.test.ActivityUnitTestCase;
 
 public class BeerListActivityTests extends ActivityUnitTestCase<BeerListActivity> {
@@ -21,11 +22,13 @@ public class BeerListActivityTests extends ActivityUnitTestCase<BeerListActivity
 		intent.putExtra(BeerListActivity.EVENT_ID, expectedIdString);
 		
 		// Call method under test
-		startActivity(intent, null, null);
+		BeerListActivity activity = 
+		launchActivityWithIntent("com.itllp.barleylegalhomebrewers.ontap", 
+				BeerListActivity.class, intent);
 
 		// Verify postconditions
-        BeerListFragment beerListFrag = (BeerListFragment)
-        	    getActivity().getSupportFragmentManager().
+		FragmentManager fragMgr = activity.getSupportFragmentManager();
+        BeerListFragment beerListFrag = (BeerListFragment)fragMgr.
         	    findFragmentById(com.itllp.barleylegalhomebrewers.ontap
         	    		.R.id.beer_list_fragment);
         int actualId = 0;
@@ -33,6 +36,7 @@ public class BeerListActivityTests extends ActivityUnitTestCase<BeerListActivity
         	actualId = beerListFrag.getEventId();
         }
         assertEquals(expectedId, actualId);
+        activity.finish();
 	}
 
 }

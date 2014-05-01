@@ -15,6 +15,8 @@ public class OnTapApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		CursorLoaderFactory.setImplementation(
+				new CursorLoaderFactoryImplementation());
 		if (isDebug()) {
 			EventTableUpdaterFactory
 			.createSQLiteEventTableFromBetaServerUpdater();

@@ -2,9 +2,9 @@ package com.itllp.barleylegalhomebrewers.ontap;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
 
-public class BeerListActivity  extends FragmentActivity {
+public class BeerListActivity  extends ActionBarActivity {
 	public static final String SKIP_INSTANTIATION_FOR_TESTING 
 	= "com.itllp.barleylegalhomebrewers.ontap.skipInstantiation_FOR_TESTING";
 	public int eventId = -1;
