@@ -20,10 +20,14 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 //TODO Put event name at top of beer list
 public class BeerListFragment extends ListFragment 
@@ -38,6 +42,7 @@ NetworkActivityObserver {
     @Override public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        setHasOptionsMenu(true);
         setEmptyText(getString(R.string.no_beers_text));
 
         createListAdapter();
@@ -64,6 +69,36 @@ NetworkActivityObserver {
     }
 
     
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    	super.onCreateOptionsMenu(menu, inflater);
+	    inflater.inflate(R.menu.beer_list_activity_actions, menu);
+	}
+	
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle presses on the action bar items
+	    switch (item.getItemId()) {
+	    case R.id.action_sort_by_name:
+	    	sortByName();
+	    	return true;
+	    default:
+	    	return super.onOptionsItemSelected(item);
+	    }
+	}
+
+
+	private void sortByName() {
+		Context context = getActivity();
+		CharSequence text = "Sorting doesn't work yet";
+		int duration = Toast.LENGTH_SHORT;
+
+		Toast toast = Toast.makeText(context, text, duration);
+		toast.show();
+	}
+
+
 	@Override
 	public void onResume() {
 		super.onResume();

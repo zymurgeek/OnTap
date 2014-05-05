@@ -6,4 +6,6 @@
         ontap:showAsAction="ifRoom" 
         android:icon="@drawable/ic_2_action_help"
     	android:visible="false"/>
+    <item android:id="@+id/action_sort_by_name" 
+        android:title="@string/sort_by_name"/>
 </menu>

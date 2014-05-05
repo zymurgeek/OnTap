@@ -27,5 +27,6 @@
     <string name="email_brewer">Email the Brewer</string>
     <string name="check_in_on_uptappd">Check in on Untappd</string>
     <string name="help">Help</string>
+    <string name="sort_by_name">Sort by Name</string>
     
 </resources>
