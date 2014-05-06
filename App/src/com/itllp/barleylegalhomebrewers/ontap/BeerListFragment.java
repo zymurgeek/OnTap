@@ -1,6 +1,7 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.OnTapContentProviderMetadata;
@@ -27,21 +28,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 //TODO Put event name at top of beer list
 public class BeerListFragment extends ListFragment 
 implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor>,
 NetworkActivityObserver {
 	
-	private SimpleCursorAdapter adapter = null;
-	private Button refreshButton = null;
-	private int eventId = -1;
-
 	
     @Override public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+		checkable_ids = new int[] { 
+				R.id.action_sort_by_beer_name,
+				R.id.action_sort_by_style,
+				R.id.action_sort_by_abv, 
+				R.id.action_sort_by_ibu, 
+				R.id.action_sort_by_srm, 
+		};
         setHasOptionsMenu(true);
         setEmptyText(getString(R.string.no_beers_text));
 
@@ -73,29 +76,58 @@ NetworkActivityObserver {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
     	super.onCreateOptionsMenu(menu, inflater);
 	    inflater.inflate(R.menu.beer_list_activity_actions, menu);
+    	this.menu = menu;
+	}
+
+
+	@Override
+	public void onPrepareOptionsMenu(Menu menu) {
+		super.onPrepareOptionsMenu(menu);
+	    setOptionsMenuChecks();
+	}
+
+
+	private void setOptionsMenuChecks() {
+		if (menu != null) { 
+			for (int id : checkable_ids) {
+				setMenuIdChecked(id, false);
+			}
+			setMenuIdChecked(sortOrderActionId, true);
+		}
+	}
+
+
+	private void setMenuIdChecked(int id, boolean isChecked) {
+		MenuItem item = menu.findItem(id);
+		if (item != null) {
+			item.setChecked(isChecked);
+		}
 	}
 	
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle presses on the action bar items
-	    switch (item.getItemId()) {
-	    case R.id.action_sort_by_name:
-	    	sortByName();
+		if (Arrays.asList(checkable_ids).contains(item.getItemId())) {
+			setSelectedOptionsMenuId(item.getItemId());
+			reloadList();
 	    	return true;
-	    default:
-	    	return super.onOptionsItemSelected(item);
-	    }
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	
+	private void setSelectedOptionsMenuId(int id) {
+		sortOrderActionId = id;
+		setOptionsMenuChecks();
 	}
 
 
-	private void sortByName() {
-		Context context = getActivity();
-		CharSequence text = "Sorting doesn't work yet";
-		int duration = Toast.LENGTH_SHORT;
-
-		Toast toast = Toast.makeText(context, text, duration);
-		toast.show();
+	private void reloadList() {
+		final LoaderManager.LoaderCallbacks<Cursor> callbacks = this;
+        refreshButton.setEnabled(false);
+        final LoaderManager loaderManager = getLoaderManager();
+        loaderManager.restartLoader(0, null, callbacks);
 	}
 
 
@@ -207,16 +239,26 @@ NetworkActivityObserver {
     			BeerTableMetadata.ALCOHOL_BY_VOLUME_COLUMN,
     			BeerTableMetadata.INTERNATIONAL_BITTERNESS_UNITS_COLUMN,
     			BeerTableMetadata.STANDARD_REFERENCE_METHOD_COLUMN};
-    	String sortOrder = BeerTableMetadata.IS_KICKED_COLUMN +	",  ( " +
-    			BeerTableMetadata.TAP_NUMBER_COLUMN + " <> 0 ) DESC, " +
-    			BeerTableMetadata.NAME_COLUMN;
+    	String sortOrderText = BeerTableMetadata.IS_KICKED_COLUMN +	",  ( " +
+    			BeerTableMetadata.TAP_NUMBER_COLUMN + " <> 0 ) DESC, ";
+    	switch (sortOrderActionId) {
+    	case R.id.action_sort_by_beer_name:
+    		sortOrderText += BeerTableMetadata.NAME_COLUMN;
+    		break;
+    	case R.id.action_sort_by_abv:
+    		sortOrderText += BeerTableMetadata.ALCOHOL_BY_VOLUME_COLUMN;
+    		break;
+    	case R.id.action_sort_by_style:
+    		sortOrderText += BeerTableMetadata.STYLE_CODE_COLUMN;
+    		break;
+    	}
     	String queryString =
     			OnTapContentProviderMetadata.EVENT_ID_PARAM + "=" +
     			Uri.encode(String.valueOf(eventId));
     	Uri queryUri = Uri.parse(OnTapContentProviderMetadata.BEER_CONTENT_URI 
     			+ "?" +	queryString);
     	CursorLoader cursorLoader = CursorLoaderFactory.createCursorLoader(
-    			getActivity(), queryUri, projection, null, null, sortOrder);
+    			getActivity(), queryUri, projection, null, null, sortOrderText);
     	return cursorLoader;
 	}
 
@@ -278,10 +320,16 @@ NetworkActivityObserver {
 		});
 	}
 
+	private SimpleCursorAdapter adapter = null;
+	private Button refreshButton = null;
+	private int eventId = -1;
+	private int sortOrderActionId = R.id.action_sort_by_beer_name;
+	private Menu menu = null;
 	private HandlerThread activeWorkerThread = null;
 	private Handler activeWorkerQueue = null;
 	private HandlerThread inactiveWorkerThread = null;
 	private Handler inactiveWorkerQueue = null;
 	private OnTapContentProviderActiveObserver networkActiveObserver = null;
 	private OnTapContentProviderInactiveObserver networkInactiveObserver = null;
+	private int checkable_ids[];
 }

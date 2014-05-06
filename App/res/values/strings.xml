@@ -27,6 +27,10 @@
     <string name="email_brewer">Email the Brewer</string>
     <string name="check_in_on_uptappd">Check in on Untappd</string>
     <string name="help">Help</string>
-    <string name="sort_by_name">Sort by Name</string>
+    <string name="sort_by_beer_name">Sort by Beer Name</string>
+    <string name="sort_by_style">Sort by Style</string>
+    <string name="sort_by_abv">Sort by ABV</string>
+    <string name="sort_by_ibu">Sort by IBU</string>
+    <string name="sort_by_srm">Sort by SRM</string>
     
 </resources>

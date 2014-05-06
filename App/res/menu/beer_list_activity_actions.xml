@@ -6,6 +6,19 @@
         ontap:showAsAction="ifRoom" 
         android:icon="@drawable/ic_2_action_help"
     	android:visible="false"/>
-    <item android:id="@+id/action_sort_by_name" 
-        android:title="@string/sort_by_name"/>
+    <item android:id="@+id/action_sort_by_beer_name" 
+        android:title="@string/sort_by_beer_name"
+        android:checkable="true"/>
+    <item android:id="@+id/action_sort_by_style" 
+        android:title="@string/sort_by_style"
+        android:checkable="true"/>
+    <item android:id="@+id/action_sort_by_abv" 
+        android:title="@string/sort_by_abv"
+        android:checkable="true"/>
+    <item android:id="@+id/action_sort_by_ibu" 
+        android:title="@string/sort_by_ibu"
+        android:checkable="true"/>
+    <item android:id="@+id/action_sort_by_srm" 
+        android:title="@string/sort_by_srm"
+        android:checkable="true"/>
 </menu>

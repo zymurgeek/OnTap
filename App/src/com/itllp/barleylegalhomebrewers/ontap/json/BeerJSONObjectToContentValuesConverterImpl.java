@@ -29,6 +29,7 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 			return result;
 		}
 		
+		//TODO make  og, fg, abv, ibu, srm numerc
 		convertID(jsonObject, result);
 		convertBeerName(jsonObject, result);
 		convertEventID(jsonObject, result);
@@ -97,6 +98,9 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 		try {
 			String styleCode = jsonObject.getString(com.itllp
 					.barleylegalhomebrewers.ontap.jsonserver.Beer.STYLE_CODE);
+			if (styleCode.length() < 3) {
+				styleCode = " " + styleCode;
+			}
 			result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.STYLE_CODE_COLUMN, styleCode);
 		} catch (JSONException e) {}
 	}
