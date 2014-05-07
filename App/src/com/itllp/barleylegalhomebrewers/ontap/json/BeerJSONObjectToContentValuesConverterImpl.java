@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import com.itllp.barleylegalhomebrewers.ontap.dateconverter.JavaDateToStringConverter;
 import com.itllp.barleylegalhomebrewers.ontap.dateconverter.StringToJavaDateConverter;
+import com.itllp.barleylegalhomebrewers.ontap.util.NumberExtractor;
 import com.itllp.barleylegalhomebrewers.ontap.util.UntappdBeerIdParser;
 
 import android.content.ContentValues;
@@ -29,7 +30,7 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 			return result;
 		}
 		
-		//TODO make  og, fg, abv, ibu, srm numerc
+		//TODO make  fg, abv, ibu, srm numerc
 		convertID(jsonObject, result);
 		convertBeerName(jsonObject, result);
 		convertEventID(jsonObject, result);
@@ -156,8 +157,9 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 	
 	private void convertOriginalGravity(JSONObject jsonObject, ContentValues result) {
 		try {
-			String originalGravity = jsonObject.getString(com.itllp
+			String originalGravityString = jsonObject.getString(com.itllp
 					.barleylegalhomebrewers.ontap.jsonserver.Beer.ORIGINAL_GRAVITY);
+			Float originalGravity = numberExtractor.extractNumber(originalGravityString);
 			result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.ORIGINAL_GRAVITY_COLUMN, originalGravity);
 		} catch (JSONException e) {}
 	}
@@ -231,4 +233,5 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 
 	
 	private static final UntappdBeerIdParser idParser = new UntappdBeerIdParser();
+	private static final NumberExtractor numberExtractor = new NumberExtractor();
 }

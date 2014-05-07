@@ -71,7 +71,7 @@ public class BeerTableMetadata {
 	
 	/**
 	 * Column name for beer's original gravity
-	 * <P>Type: TEXT</P>
+	 * <P>Type: REAL</P>
 	 */
 	public static final String ORIGINAL_GRAVITY_COLUMN = "original_gravity";
 
