@@ -30,7 +30,7 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 			return result;
 		}
 		
-		//TODO make  fg, abv, ibu, srm numerc
+		//TODO make abv, ibu, srm numerc
 		convertID(jsonObject, result);
 		convertBeerName(jsonObject, result);
 		convertEventID(jsonObject, result);
@@ -166,8 +166,9 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 
 	private void convertFinalGravity(JSONObject jsonObject, ContentValues result) {
 		try {
-			String finalGravity = jsonObject.getString(com.itllp
+			String finalGravityString = jsonObject.getString(com.itllp
 					.barleylegalhomebrewers.ontap.jsonserver.Beer.FINAL_GRAVITY);
+			Float finalGravity = numberExtractor.extractNumber(finalGravityString);
 			result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.FINAL_GRAVITY_COLUMN, finalGravity);
 		} catch (JSONException e) {}
 	}
