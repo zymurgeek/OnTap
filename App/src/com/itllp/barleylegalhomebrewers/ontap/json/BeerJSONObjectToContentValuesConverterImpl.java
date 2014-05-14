@@ -30,7 +30,7 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 			return result;
 		}
 		
-		//TODO make abv, ibu, srm numerc
+		//TODO make ibu, srm numeric
 		convertID(jsonObject, result);
 		convertBeerName(jsonObject, result);
 		convertEventID(jsonObject, result);
@@ -175,8 +175,9 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 
 	private void convertAlcoholByVolume(JSONObject jsonObject, ContentValues result) {
 		try {
-			String abv = jsonObject.getString(com.itllp
+			String abvString = jsonObject.getString(com.itllp
 					.barleylegalhomebrewers.ontap.jsonserver.Beer.ALCOHOL_BY_VOLUME);
+			Float abv = numberExtractor.extractNumber(abvString);
 			result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.ALCOHOL_BY_VOLUME_COLUMN, abv);
 		} catch (JSONException e) {}
 	}

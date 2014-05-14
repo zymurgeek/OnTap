@@ -1,8 +1,6 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
 import java.lang.reflect.Method;
-import java.util.Arrays;
-
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.OnTapContentProviderMetadata;
 
@@ -108,7 +106,8 @@ NetworkActivityObserver {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle presses on the action bar items
-		if (Arrays.asList(checkable_ids).contains(item.getItemId())) {
+		int itemId = item.getItemId();
+		if (isCheckableId(itemId)) {
 			setSelectedOptionsMenuId(item.getItemId());
 			reloadList();
 	    	return true;
@@ -117,6 +116,14 @@ NetworkActivityObserver {
 	}
 
 	
+	private boolean isCheckableId(final int id) {
+        for (final int i : checkable_ids) {
+            if (i == id) {
+                return true;
+            }
+        }
+        return false;
+    }
 	private void setSelectedOptionsMenuId(int id) {
 		sortOrderActionId = id;
 		setOptionsMenuChecks();
