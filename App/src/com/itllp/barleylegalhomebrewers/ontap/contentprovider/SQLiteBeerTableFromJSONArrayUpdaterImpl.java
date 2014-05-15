@@ -52,7 +52,7 @@ class SQLiteBeerTableFromJSONArrayUpdaterImpl implements
 			Integer id = contentValues.getAsInteger(BeerTableMetadata.ID_COLUMN);
 			ContentValues contentValuesInTable = 
 					beerTable.getBeer(id);
-			if (!cvComp.areEqual(contentValues, contentValuesInTable)) {
+			if (!cvComp.areBeersEqual(contentValues, contentValuesInTable)) {
 				beerTable.update(contentValues);
 			}
 

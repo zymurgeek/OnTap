@@ -89,7 +89,7 @@ public class BeerTableMetadata {
 
 	/**
 	 * Column name for beer's international bitterness units
-	 * <P>Type: TEXT</P>
+	 * <P>Type: REAL</P>
 	 */
 	public static final String INTERNATIONAL_BITTERNESS_UNITS_COLUMN = "international_bitterness_units";
 

@@ -30,7 +30,7 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 			return result;
 		}
 		
-		//TODO make ibu, srm numeric
+		//TODO make srm numeric
 		convertID(jsonObject, result);
 		convertBeerName(jsonObject, result);
 		convertEventID(jsonObject, result);
@@ -184,8 +184,9 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 
 	private void convertInternationalBitternessUnits(JSONObject jsonObject, ContentValues result) {
 		try {
-			String ibu = jsonObject.getString(com.itllp
+			String ibuString = jsonObject.getString(com.itllp
 					.barleylegalhomebrewers.ontap.jsonserver.Beer.INTERNATIONAL_BITTERNESS_UNITS);
+			Float ibu = numberExtractor.extractNumber(ibuString);
 			result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.INTERNATIONAL_BITTERNESS_UNITS_COLUMN, ibu);
 		} catch (JSONException e) {}
 	}

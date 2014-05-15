@@ -258,6 +258,12 @@ NetworkActivityObserver {
     	case R.id.action_sort_by_style:
     		sortOrderText += BeerTableMetadata.STYLE_CODE_COLUMN;
     		break;
+    	case R.id.action_sort_by_ibu:
+    		sortOrderText += BeerTableMetadata.INTERNATIONAL_BITTERNESS_UNITS_COLUMN;
+    		break;
+    	case R.id.action_sort_by_srm:
+    		sortOrderText += BeerTableMetadata.STANDARD_REFERENCE_METHOD_COLUMN;
+    		break;
     	}
     	String queryString =
     			OnTapContentProviderMetadata.EVENT_ID_PARAM + "=" +
