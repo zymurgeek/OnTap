@@ -382,8 +382,8 @@ public class ContentValuesComparatorTests {
 	@Test
 	public void testDifferentStandardReferenceMethodBeersEqual() {
 		// Set up preconditions
-		beerA.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.STANDARD_REFERENCE_METHOD_COLUMN, "1");
-		beerB.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.STANDARD_REFERENCE_METHOD_COLUMN, "2");
+		beerA.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.STANDARD_REFERENCE_METHOD_COLUMN, (float)1);
+		beerB.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.STANDARD_REFERENCE_METHOD_COLUMN, (float)2);
 		
 		// Call method under test
 		boolean actual = cut.areBeersEqual(beerA, beerB);

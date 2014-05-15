@@ -74,8 +74,7 @@ public class ContentValuesComparator {
 		if (!areFloatsEqual(a, b, com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.INTERNATIONAL_BITTERNESS_UNITS_COLUMN)) {
 			return false;
 		}
-		//TODO Change SRM to REAL
-		if (!areStringsEqual(a, b, com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.STANDARD_REFERENCE_METHOD_COLUMN)) {
+		if (!areFloatsEqual(a, b, com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.STANDARD_REFERENCE_METHOD_COLUMN)) {
 			return false;
 		}
 		if (!areIntegersEqual(a, b, com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.IS_EMAIL_SHOWN)) {

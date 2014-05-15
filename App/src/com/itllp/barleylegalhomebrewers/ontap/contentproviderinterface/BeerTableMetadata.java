@@ -95,7 +95,7 @@ public class BeerTableMetadata {
 
 	/**
 	 * Column name for beer's standard reference method (color)
-	 * <P>Type: TEXT</P>
+	 * <P>Type: REAL</P>
 	 */
 	public static final String STANDARD_REFERENCE_METHOD_COLUMN = "standard_reference_method";
 

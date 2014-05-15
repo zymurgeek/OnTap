@@ -30,7 +30,6 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 			return result;
 		}
 		
-		//TODO make srm numeric
 		convertID(jsonObject, result);
 		convertBeerName(jsonObject, result);
 		convertEventID(jsonObject, result);
@@ -193,8 +192,9 @@ public class BeerJSONObjectToContentValuesConverterImpl implements
 
 	private void convertStandardReferenceMethod(JSONObject jsonObject, ContentValues result) {
 		try {
-			String srm = jsonObject.getString(com.itllp
+			String srmString = jsonObject.getString(com.itllp
 					.barleylegalhomebrewers.ontap.jsonserver.Beer.STANDARD_REFERENCE_METHOD);
+			Float srm = numberExtractor.extractNumber(srmString);
 			result.put(com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata.STANDARD_REFERENCE_METHOD_COLUMN, srm);
 		} catch (JSONException e) {}
 	}
