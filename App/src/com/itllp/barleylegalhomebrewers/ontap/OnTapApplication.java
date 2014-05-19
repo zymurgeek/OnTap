@@ -4,6 +4,12 @@ import java.lang.reflect.Method;
 
 import com.itllp.barleylegalhomebrewers.ontap.contentprovider.BeerTableUpdaterFactory;
 import com.itllp.barleylegalhomebrewers.ontap.contentprovider.EventTableUpdaterFactory;
+import com.itllp.barleylegalhomebrewers.ontap.persistence.Persister;
+import com.itllp.barleylegalhomebrewers.ontap.persistence.impl.PreferencesFilePersister;
+import com.itllp.barleylegalhomebrewers.ontap.persistence.impl.PreferencesPersisterImpl;
+import com.itllp.barleylegalhomebrewers.ontap.preferences.OnTapPreferencesFactory;
+import com.itllp.barleylegalhomebrewers.ontap.preferences.impl.OnTapPreferencesImpl;
+import com.itllp.barleylegalhomebrewers.ontap.preferences.persistence.PreferencesPersisterFactory;
 
 import android.annotation.TargetApi;
 import android.app.Application;
@@ -12,9 +18,19 @@ import android.os.Build;
 
 public class OnTapApplication extends Application {
 	
+	public static final String PREFERENCES_FILE = "OnTapPreferences";
+
+	
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		
+		OnTapPreferencesFactory.setPreferences(new OnTapPreferencesImpl());
+		Persister preferencesPersister = new PreferencesFilePersister
+				(PREFERENCES_FILE);
+		PreferencesPersisterFactory.setPreferencesPersister(
+				new PreferencesPersisterImpl(preferencesPersister));
+		
 		CursorLoaderFactory.setImplementation(
 				new CursorLoaderFactoryImplementation());
 		if (isDebug()) {

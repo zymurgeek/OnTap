@@ -3,6 +3,11 @@ package com.itllp.barleylegalhomebrewers.ontap;
 import java.lang.reflect.Method;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.OnTapContentProviderMetadata;
+import com.itllp.barleylegalhomebrewers.ontap.persistence.PreferencesPersister;
+import com.itllp.barleylegalhomebrewers.ontap.preferences.OnTapPreferences;
+import com.itllp.barleylegalhomebrewers.ontap.preferences.OnTapPreferencesFactory;
+import com.itllp.barleylegalhomebrewers.ontap.preferences.persistence.PreferencesPersisterFactory;
+import com.itllp.barleylegalhomebrewers.ontap.util.SortTypeToActionId;
 
 import android.annotation.TargetApi;
 import android.content.ContentResolver;
@@ -43,6 +48,15 @@ NetworkActivityObserver {
 				R.id.action_sort_by_ibu, 
 				R.id.action_sort_by_srm, 
 		};
+		sortTypeToActionId.add(SortType.NAME, R.id.action_sort_by_beer_name);		
+		sortTypeToActionId.add(SortType.STYLE, R.id.action_sort_by_style);		
+		sortTypeToActionId.add(SortType.ABV, R.id.action_sort_by_abv);		
+		sortTypeToActionId.add(SortType.IBU, R.id.action_sort_by_ibu);		
+		sortTypeToActionId.add(SortType.SRM, R.id.action_sort_by_srm);		
+		
+		preferences = OnTapPreferencesFactory.getPreferences();
+		preferencesPersister = PreferencesPersisterFactory.getPreferencesPersister();
+
         setHasOptionsMenu(true);
         setEmptyText(getString(R.string.no_beers_text));
 
@@ -85,6 +99,30 @@ NetworkActivityObserver {
 	}
 
 
+    /**
+     * Reads the previous state of the app from the preferences file
+     * @param context - The Activity's Context
+     */
+    public void restoreInstanceState(Context context) {
+    	preferencesPersister.restoreState(preferences, context);
+    	SortType sortType = preferences.getSortType();
+    	sortOrderActionId = sortTypeToActionId.getActionId(sortType);
+    	setOptionsMenuChecks();
+    }
+
+    
+    /**
+     * Writes the app's current state to a properties repository.
+     * @param context - The Activity's Context
+     *
+     */
+    public void saveInstanceState(Context context) {
+    	SortType sortType = sortTypeToActionId.getSortType(sortOrderActionId);
+    	preferences.setSortType(sortType);
+    	preferencesPersister.saveState(preferences, context);
+    }
+
+    
 	private void setOptionsMenuChecks() {
 		if (menu != null) { 
 			for (int id : checkable_ids) {
@@ -141,6 +179,10 @@ NetworkActivityObserver {
 	@Override
 	public void onResume() {
 		super.onResume();
+		
+		restoreInstanceState(getActivity());
+		reloadList();
+		
     	final ContentResolver r = getActivity().getContentResolver();
         if (activeWorkerThread == null) {
         	activeWorkerThread = new HandlerThread("BeerListFragment active worker");
@@ -164,6 +206,9 @@ NetworkActivityObserver {
 	@Override
 	public void onPause() {
 		super.onPause();
+		
+        saveInstanceState(getActivity());
+
 		getActivity().getContentResolver().unregisterContentObserver(networkActiveObserver);
 		getActivity().getContentResolver().unregisterContentObserver(networkInactiveObserver);
 		networkActiveObserver.deregisterObserver();
@@ -345,4 +390,7 @@ NetworkActivityObserver {
 	private OnTapContentProviderActiveObserver networkActiveObserver = null;
 	private OnTapContentProviderInactiveObserver networkInactiveObserver = null;
 	private int checkable_ids[];
+	private SortTypeToActionId sortTypeToActionId = new SortTypeToActionId();
+	private OnTapPreferences preferences;
+	private PreferencesPersister preferencesPersister;
 }
