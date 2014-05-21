@@ -27,10 +27,16 @@
         <activity
             android:name="com.itllp.barleylegalhomebrewers.ontap.BeerListActivity"
             android:label="Beer List">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.itllp.barleylegalhomebrewers.ontap.EventListActivity" />
         </activity>
         <activity
             android:name="com.itllp.barleylegalhomebrewers.ontap.BeerDetailActivity"
             android:label="@string/title_activity_beer_detail" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.itllp.barleylegalhomebrewers.ontap.BeerListActivity" />
         </activity>
         
         <provider 
