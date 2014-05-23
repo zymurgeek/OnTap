@@ -51,8 +51,7 @@ NetworkActivityObserver {
 
         // Prepare the loader.  Either re-connect with an existing one,
         // or start a new one.
-        final android.support.v4.app.LoaderManager loaderManager 
-        = getLoaderManager();
+        loaderManager = getLoaderManager();
         loaderManager.initLoader(0, null, this);
 
         View view = getView().getRootView();
@@ -74,6 +73,7 @@ NetworkActivityObserver {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
     	super.onCreateOptionsMenu(menu, inflater);
 	    inflater.inflate(R.menu.event_list_activity_actions, menu);
+    	this.menu = menu;
 	}
 
 	
@@ -102,6 +102,10 @@ NetworkActivityObserver {
 	        case R.id.action_help:
 	            openHelp();
 	            return true;
+	        case R.id.action_refresh:
+	        	enableRefresh(false);
+        		loaderManager.restartLoader(0, null, callbacks);
+        		return true;
 	        case R.id.action_use_production_server:
 	        	setProductionServer(true);
 	        	activity.restartApplication();
@@ -259,24 +263,29 @@ NetworkActivityObserver {
 
 	@Override
 	public void networkActive() {
-		getView().post(new Runnable() {
-		    public void run() {
-				refreshButton.setEnabled(false);
-		    }
-		});
+		enableRefresh(false);
 	}
 
 
 	@Override
 	public void networkInactive() {
+		enableRefresh(true);
+	}
+
+	
+	private void enableRefresh(final boolean isEnabled) {
 		getView().post(new Runnable() {
 		    public void run() {
-				refreshButton.setEnabled(true);
+				refreshButton.setEnabled(isEnabled);
+				MenuItem refreshMenuItem = menu.findItem(R.id.action_refresh);
+				if (refreshMenuItem != null) {
+					refreshMenuItem.setEnabled(isEnabled);
+				}
 		    }
 		});
 	}
 
-	
+
 	private SimpleCursorAdapter adapter = null;
 	private Button refreshButton = null;
 	private HandlerThread activeWorkerThread = null;
@@ -287,4 +296,7 @@ NetworkActivityObserver {
 	private OnTapContentProviderInactiveObserver networkInactiveObserver = null;
 	private OnTapPreferences preferences;
 	private PreferencesPersister preferencesPersister;
+	private android.support.v4.app.LoaderManager loaderManager;
+	private android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> callbacks;
+	private Menu menu = null;
 }

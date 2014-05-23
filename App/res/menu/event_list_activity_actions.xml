@@ -6,6 +6,11 @@
         ontap:showAsAction="ifRoom" 
         android:icon="@drawable/ic_2_action_help"
     	android:visible="false"/>
+    <item android:id="@+id/action_refresh" 
+        android:title="@string/refresh"
+        ontap:showAsAction="ifRoom" 
+        android:icon="@drawable/ic_1_navigation_refresh"
+    	android:visible="true"/>
     <item android:id="@+id/action_use_production_server" 
         android:title="@string/use_production_server"
         ontap:showAsAction="never" 
