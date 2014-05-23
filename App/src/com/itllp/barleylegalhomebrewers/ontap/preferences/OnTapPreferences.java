@@ -19,5 +19,19 @@ public interface OnTapPreferences {
 	 */
 	public void setSortType(SortType sortType);
 
+	/** Tells if the beta server (as opposed to the production
+	 * server) is in use.
+	 * 
+	 * @return True if the beta server is in use; false otherwise.
+	 */
+	public Boolean useBetaServer();
+
+	/** Sets if the beta server (as opposed to the production
+	 * server) is in use.
+	 * 
+	 * @param True if the beta server is in use; false otherwise.
+	 */
+	public void useBetaServer(Boolean useBeta);
+
 	public String toString();
 }

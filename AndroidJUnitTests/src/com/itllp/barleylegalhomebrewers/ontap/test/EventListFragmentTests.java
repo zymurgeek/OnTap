@@ -21,6 +21,7 @@ package com.itllp.barleylegalhomebrewers.ontap.test;
 import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.support.v4.app.FragmentManager;
 import android.test.ActivityUnitTestCase;
@@ -28,6 +29,7 @@ import android.widget.ListView;
 
 import com.itllp.barleylegalhomebrewers.ontap.EventListActivity;
 import com.itllp.barleylegalhomebrewers.ontap.EventListFragment;
+import com.itllp.barleylegalhomebrewers.ontap.contentprovider.OnTapContentProvider;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
 
 public class EventListFragmentTests extends
@@ -56,59 +58,82 @@ public class EventListFragmentTests extends
     protected void setUp() throws Exception {
         super.setUp();
         
+        /* These tests rely on a linkseam testing version of 
+         * OnTapContentProvider */
         instrumentation = getInstrumentation();
-    	
     	context = getInstrumentation().getContext();
-    	
         intent = new Intent(context, EventListActivity.class);
-        activity = startActivity(intent, null, null);
+    	instrumentation.waitForIdleSync();
+        mockCursor = new MatrixCursor(COLUMN_NAMES);
+    }
+    
+  
+	@Override
+	protected void tearDown() throws Exception {
+		super.tearDown();
+		activity.finish();
+	}
+
+	
+	private void startActivity() {
+		activity = launchActivityWithIntent(
+    			"com.itllp.barleylegalhomebrewers.ontap", 
+				EventListActivity.class, intent);
     	instrumentation.waitForIdleSync();
     	fragmentManager = activity.getSupportFragmentManager();
     	eventListFragment = (EventListFragment)
     			fragmentManager.findFragmentById
     			(com.itllp.barleylegalhomebrewers.ontap.R.id.event_list_fragment);
         eventListView = (ListView)eventListFragment.getListView();
-        eventListFragment.onActivityCreated(null);
-        mockCursor = new MatrixCursor(COLUMN_NAMES);
-    }
-    
-    
+    	instrumentation.waitForIdleSync();
+	}
+
+
     public void testEmptyList() {
+    	// Set up preconditions
+    	OnTapContentProvider.mockSetCursor(mockCursor);
+    	
+    	// Call method under test
+    	startActivity();
+    	
     	// Verify postconditions
         assertEquals("List should be empty", 0, 
         		eventListView.getCount());    	
     }
 
 
-
     public void testListWithOneItem() {
     	// Set up preconditions
     	mockCursor.addRow(ROW1_COLUMN_VALUES);
-
-    	// Call method under test
-    	eventListFragment.onLoadFinished(null, mockCursor);
+    	OnTapContentProvider.mockSetCursor(mockCursor);
     	
+    	// Call method under test
+    	startActivity();
+
     	// Verify postconditions
         assertEquals("List should have 1 item", 1, 
         		eventListView.getCount());    	
+        Cursor row1 = (Cursor)eventListView.getItemAtPosition(0);
+        int idColumnIndex = row1.getColumnIndex(EventTableMetadata.ID_COLUMN);
+        assertEquals("First event ID should be 10", 10, row1.getInt(idColumnIndex));
     }
 
 
-    public void testListWithTwoItems() {
+	public void testListWithTwoItems() {
     	// Set up preconditions
 		mockCursor.addRow(ROW1_COLUMN_VALUES);
     	mockCursor.addRow(ROW2_COLUMN_VALUES);
+    	OnTapContentProvider.mockSetCursor(mockCursor);
 
     	// Call method under test
-    	eventListFragment.onLoadFinished(null, mockCursor);
+    	startActivity();
     	
     	// Verify postconditions
-        assertEquals("List should have 2 items", 2, 
-        		eventListView.getCount());
-        MatrixCursor row1 = (MatrixCursor)eventListView.getItemAtPosition(0);
+        assertEquals("List should have 2 items", 2, eventListView.getCount());
+        Cursor row1 = (Cursor)eventListView.getItemAtPosition(0);
         int idColumnIndex = row1.getColumnIndex(EventTableMetadata.ID_COLUMN);
         assertEquals("First event ID should be 10", 10, row1.getInt(idColumnIndex));
-        MatrixCursor row2 = (MatrixCursor)eventListView.getItemAtPosition(1);
+        Cursor row2 = (Cursor)eventListView.getItemAtPosition(1);
         assertEquals("Second event ID should be 20", 20, row2.getInt(idColumnIndex));
     }
 

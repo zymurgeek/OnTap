@@ -26,6 +26,7 @@ public class PreferencesPersisterImpl implements PreferencesPersister {
 		persister.beginSave(context);
 		try {
 			persister.save(PreferencesPersister.SORT_TYPE_KEY, preferences.getSortType().getId());
+			persister.save(PreferencesPersister.USE_BETA_SERVER_KEY, preferences.useBetaServer());
 			persister.endSave();
 		} catch (Exception e) {
 			Toast.makeText(context,
@@ -45,5 +46,11 @@ public class PreferencesPersisterImpl implements PreferencesPersister {
 			SortType sortType = SortType.getSortType(sortTypeId.intValue());
 			preferences.setSortType(sortType);
 		}
+		
+		Boolean useBeta = persister.retrieveBoolean(context, USE_BETA_SERVER_KEY);
+		if (null == useBeta) {
+			useBeta = Boolean.FALSE;
+		}
+		preferences.useBetaServer(useBeta);
 	}
 }

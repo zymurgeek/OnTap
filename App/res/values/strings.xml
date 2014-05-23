@@ -32,5 +32,7 @@
     <string name="sort_by_abv">Sort by ABV</string>
     <string name="sort_by_ibu">Sort by IBU</string>
     <string name="sort_by_srm">Sort by SRM</string>
+    <string name="use_production_server">Use production server</string>
+    <string name="use_beta_server">Use beta server (for testing only)</string>
     
 </resources>

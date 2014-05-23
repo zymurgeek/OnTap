@@ -5,8 +5,10 @@ import java.lang.reflect.Method;
 import com.itllp.barleylegalhomebrewers.ontap.contentprovider.BeerTableUpdaterFactory;
 import com.itllp.barleylegalhomebrewers.ontap.contentprovider.EventTableUpdaterFactory;
 import com.itllp.barleylegalhomebrewers.ontap.persistence.Persister;
+import com.itllp.barleylegalhomebrewers.ontap.persistence.PreferencesPersister;
 import com.itllp.barleylegalhomebrewers.ontap.persistence.impl.PreferencesFilePersister;
 import com.itllp.barleylegalhomebrewers.ontap.persistence.impl.PreferencesPersisterImpl;
+import com.itllp.barleylegalhomebrewers.ontap.preferences.OnTapPreferences;
 import com.itllp.barleylegalhomebrewers.ontap.preferences.OnTapPreferencesFactory;
 import com.itllp.barleylegalhomebrewers.ontap.preferences.impl.OnTapPreferencesImpl;
 import com.itllp.barleylegalhomebrewers.ontap.preferences.persistence.PreferencesPersisterFactory;
@@ -24,16 +26,20 @@ public class OnTapApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		
-		OnTapPreferencesFactory.setPreferences(new OnTapPreferencesImpl());
-		Persister preferencesPersister = new PreferencesFilePersister
+
+		OnTapPreferences preferences = new OnTapPreferencesImpl();
+		OnTapPreferencesFactory.setPreferences(preferences);
+		Persister persister = new PreferencesFilePersister
 				(PREFERENCES_FILE);
+		PreferencesPersister preferencesPersister = 
+				new PreferencesPersisterImpl(persister); 
 		PreferencesPersisterFactory.setPreferencesPersister(
-				new PreferencesPersisterImpl(preferencesPersister));
-		
+				preferencesPersister);
+
 		CursorLoaderFactory.setImplementation(
 				new CursorLoaderFactoryImplementation());
-		if (isDebug()) {
+		preferencesPersister.restoreState(preferences, this);
+		if (preferences.useBetaServer()) {
 			EventTableUpdaterFactory
 			.createSQLiteEventTableFromBetaServerUpdater();
 			BeerTableUpdaterFactory

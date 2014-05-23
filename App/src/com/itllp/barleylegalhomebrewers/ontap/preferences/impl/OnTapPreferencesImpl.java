@@ -30,10 +30,30 @@ public class OnTapPreferencesImpl implements OnTapPreferences {
 	}
 
 	
+	/** Tells if the beta server (as opposed to the production
+	 * server) is in use.
+	 * 
+	 * @return True if the beta server is in use; false otherwise.
+	 */
+	public Boolean useBetaServer() {
+		return useBetaServer;
+	}
+
+	/** Sets if the beta server (as opposed to the production
+	 * server) is in use.
+	 * 
+	 * @param True if the beta server is in use; false otherwise.
+	 */
+	public void useBetaServer(Boolean useBeta) {
+		useBetaServer = useBeta;
+	}
+
 	public String toString() {
-		return sortType.toString();
+		return "SortType=" + sortType.toString() +
+				", BetaServer=" + useBetaServer.toString();
 	};
 	
 
 	private SortType sortType;
+	private Boolean useBetaServer;
 }

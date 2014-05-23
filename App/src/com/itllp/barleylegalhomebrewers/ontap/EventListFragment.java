@@ -4,6 +4,10 @@ import java.lang.reflect.Method;
 
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.OnTapContentProviderMetadata;
+import com.itllp.barleylegalhomebrewers.ontap.persistence.PreferencesPersister;
+import com.itllp.barleylegalhomebrewers.ontap.preferences.OnTapPreferences;
+import com.itllp.barleylegalhomebrewers.ontap.preferences.OnTapPreferencesFactory;
+import com.itllp.barleylegalhomebrewers.ontap.preferences.persistence.PreferencesPersisterFactory;
 
 import android.annotation.TargetApi;
 import android.content.ContentResolver;
@@ -18,22 +22,26 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class EventListFragment extends ListFragment 
 implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor>,
 NetworkActivityObserver {
 	
-	private SimpleCursorAdapter adapter = null;
-	private Button refreshButton = null;
-	
-	
     @Override public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+		preferences = OnTapPreferencesFactory.getPreferences();
+		preferencesPersister = PreferencesPersisterFactory.getPreferencesPersister();
+		
+        setHasOptionsMenu(true);
         setEmptyText(getString(R.string.no_events_text));
 
         createListAdapter();
@@ -62,6 +70,68 @@ NetworkActivityObserver {
     }
 
     
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    	super.onCreateOptionsMenu(menu, inflater);
+	    inflater.inflate(R.menu.event_list_activity_actions, menu);
+	}
+
+	
+	@Override
+	public void onPrepareOptionsMenu(Menu menu) {
+		super.onPrepareOptionsMenu(menu);
+		if (menu != null) { 
+			preferencesPersister.restoreState(preferences, getActivity());
+			MenuItem productionMenuItem = menu.findItem(R.id.action_use_production_server);
+			if (productionMenuItem != null) {
+				productionMenuItem.setVisible(preferences.useBetaServer());
+			}
+			MenuItem betaMenuItem = menu.findItem(R.id.action_use_beta_server);
+			if (betaMenuItem != null) {
+				betaMenuItem.setVisible(!preferences.useBetaServer());
+			}
+		}
+	}
+
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle presses on the action bar items
+    	EventListActivity activity = (EventListActivity)getActivity();
+	    switch (item.getItemId()) {
+	        case R.id.action_help:
+	            openHelp();
+	            return true;
+	        case R.id.action_use_production_server:
+	        	setProductionServer(true);
+	        	activity.restartApplication();
+	        	return true;
+	        case R.id.action_use_beta_server:
+	        	setProductionServer(false);
+	        	activity.restartApplication();
+	        	return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
+
+	
+	private void setProductionServer(boolean useProduction) {
+		preferencesPersister.restoreState(preferences, getActivity());
+		preferences.useBetaServer(!useProduction);
+    	preferencesPersister.saveState(preferences, getActivity());
+	}
+
+	
+	private void openHelp() {
+		CharSequence text = "There is no help yet";
+		int duration = Toast.LENGTH_SHORT;
+
+		Toast toast = Toast.makeText(getActivity(), text, duration);
+		toast.show();	
+	}
+
+	
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -207,10 +277,14 @@ NetworkActivityObserver {
 	}
 
 	
+	private SimpleCursorAdapter adapter = null;
+	private Button refreshButton = null;
 	private HandlerThread activeWorkerThread = null;
 	private Handler activeWorkerQueue = null;
 	private HandlerThread inactiveWorkerThread = null;
 	private Handler inactiveWorkerQueue = null;
 	private OnTapContentProviderActiveObserver networkActiveObserver = null;
 	private OnTapContentProviderInactiveObserver networkInactiveObserver = null;
+	private OnTapPreferences preferences;
+	private PreferencesPersister preferencesPersister;
 }

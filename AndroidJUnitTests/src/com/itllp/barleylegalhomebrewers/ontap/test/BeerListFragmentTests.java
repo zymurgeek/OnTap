@@ -21,6 +21,7 @@ package com.itllp.barleylegalhomebrewers.ontap.test;
 import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.support.v4.app.FragmentManager;
 import android.test.ActivityUnitTestCase;
@@ -28,10 +29,8 @@ import android.widget.ListView;
 
 import com.itllp.barleylegalhomebrewers.ontap.BeerListActivity;
 import com.itllp.barleylegalhomebrewers.ontap.BeerListFragment;
-import com.itllp.barleylegalhomebrewers.ontap.CursorLoaderFactory;
-import com.itllp.barleylegalhomebrewers.ontap.CursorLoaderFactoryImplementationInterface;
+import com.itllp.barleylegalhomebrewers.ontap.contentprovider.OnTapContentProvider;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata;
-import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.EventTableMetadata;
 
 public class BeerListFragmentTests extends
 	ActivityUnitTestCase<BeerListActivity> {
@@ -67,13 +66,13 @@ public class BeerListFragmentTests extends
 		super(BeerListActivity.class);
 	}
 
+	
     @Override
     protected void setUp() throws Exception {
         super.setUp();
         
-    	CursorLoaderFactoryImplementationInterface mockCursorLoaderFactory =
-    			new StubCursorLoaderFactory();
-    	CursorLoaderFactory.setImplementation(mockCursorLoaderFactory);
+        /* These tests rely on a linkseam testing version of 
+         * OnTapContentProvider */
         instrumentation = getInstrumentation();
     	context = instrumentation.getTargetContext();
         intent = new Intent(context, BeerListActivity.class);
@@ -87,6 +86,7 @@ public class BeerListFragmentTests extends
 		activity.finish();
 	}
 
+	
 	private void startActivity() {
 		activity = launchActivityWithIntent(
     			"com.itllp.barleylegalhomebrewers.ontap", 
@@ -97,43 +97,35 @@ public class BeerListFragmentTests extends
     			fragmentManager.findFragmentById
     			(com.itllp.barleylegalhomebrewers.ontap.R.id.beer_list_fragment);
         beerListView = (ListView)beerListFragment.getListView();
+    	instrumentation.waitForIdleSync();
 	}
 
 
     public void testEmptyList() {
     	// Set up preconditions
-    	
+    	OnTapContentProvider.mockSetCursor(mockCursor);
+
     	// Call method under test
     	startActivity();
-    	activity.runOnUiThread(new Runnable() {
-            public void run() {
-            	beerListFragment.onLoadFinished(null, mockCursor);
-            }
-        });
-    	instrumentation.waitForIdleSync();
 
     	// Verify Postconditions
-        assertEquals("List should be empty", 0, 
-        		beerListView.getCount());    	
+        assertEquals("List should be empty", 0, beerListView.getCount());    	
     }
 
     
     public void testListWithOneItem() {
     	// Set up preconditions
     	mockCursor.addRow(ROW1_COLUMN_VALUES);
+    	OnTapContentProvider.mockSetCursor(mockCursor);
     	
     	// Call method under test
     	startActivity();
-    	activity.runOnUiThread(new Runnable() {
-            public void run() {
-            	beerListFragment.onLoadFinished(null, mockCursor);
-            }
-        });
-    	instrumentation.waitForIdleSync();
     	
     	// Verify postconditions
-        assertEquals("List should have 1 item", 1, 
-        		beerListView.getCount());    	
+        assertEquals("List should have 1 item", 1, beerListView.getCount());    	
+        Cursor row1 = (Cursor)beerListView.getItemAtPosition(0);
+        int idColumnIndex = row1.getColumnIndex(BeerTableMetadata.ID_COLUMN);
+        assertEquals("First beer ID should be 10", 10, row1.getInt(idColumnIndex));
     }
 
   
@@ -141,23 +133,17 @@ public class BeerListFragmentTests extends
     	// Set up preconditions
 		mockCursor.addRow(ROW1_COLUMN_VALUES);
     	mockCursor.addRow(ROW2_COLUMN_VALUES);
+    	OnTapContentProvider.mockSetCursor(mockCursor);
 
     	// Call method under test
     	startActivity();
-    	activity.runOnUiThread(new Runnable() {
-            public void run() {
-            	beerListFragment.onLoadFinished(null, mockCursor);
-            }
-        });
-    	instrumentation.waitForIdleSync();
     	
     	// Verify postconditions
-        assertEquals("List should have 2 items", 2, 
-        		beerListView.getCount());
-        MatrixCursor row1 = (MatrixCursor)beerListView.getItemAtPosition(0);
-        int idColumnIndex = row1.getColumnIndex(EventTableMetadata.ID_COLUMN);
+        assertEquals("List should have 2 items", 2, beerListView.getCount());
+        Cursor row1 = (Cursor)beerListView.getItemAtPosition(0);
+        int idColumnIndex = row1.getColumnIndex(BeerTableMetadata.ID_COLUMN);
         assertEquals("First beer ID should be 10", 10, row1.getInt(idColumnIndex));
-        MatrixCursor row2 = (MatrixCursor)beerListView.getItemAtPosition(1);
+        Cursor row2 = (Cursor)beerListView.getItemAtPosition(1);
         assertEquals("Second beer ID should be 20", 20, row2.getInt(idColumnIndex));
     }
 }
