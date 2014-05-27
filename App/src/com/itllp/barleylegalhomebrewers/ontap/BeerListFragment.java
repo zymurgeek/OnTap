@@ -1,6 +1,7 @@
 package com.itllp.barleylegalhomebrewers.ontap;
 
 import java.lang.reflect.Method;
+
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.BeerTableMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.contentproviderinterface.OnTapContentProviderMetadata;
 import com.itllp.barleylegalhomebrewers.ontap.persistence.PreferencesPersister;
@@ -20,7 +21,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.v4.app.ListFragment;
-import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
@@ -28,7 +28,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -60,6 +59,8 @@ NetworkActivityObserver {
         setHasOptionsMenu(true);
         setEmptyText(getString(R.string.no_beers_text));
 
+        callbacks = this;
+
         createListAdapter();
         
         // Start out with a progress indicator.
@@ -67,20 +68,8 @@ NetworkActivityObserver {
 
         // Prepare the loader.  Either re-connect with an existing one,
         // or start a new one.
-        final LoaderManager loaderManager = getLoaderManager();
+        loaderManager = getLoaderManager();
         loaderManager.initLoader(0, null, this);
-
-        View view = getView().getRootView();
-        refreshButton = (Button)view.findViewById
-			(R.id.refresh_button);
-        refreshButton.setEnabled(false);
-        final LoaderManager.LoaderCallbacks<Cursor> callbacks = this;
-        refreshButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                refreshButton.setEnabled(false);
-        		loaderManager.restartLoader(0, null, callbacks);
-            }
-        });
     }
 
     
@@ -144,12 +133,20 @@ NetworkActivityObserver {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle presses on the action bar items
+	    switch (item.getItemId()) {
+	    case R.id.action_refresh:
+        	enableRefresh(false);
+        	reloadList();
+    		return true;
+	    }
+	    
 		int itemId = item.getItemId();
 		if (isCheckableId(itemId)) {
 			setSelectedOptionsMenuId(item.getItemId());
 			reloadList();
 	    	return true;
 		}
+		
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -169,9 +166,6 @@ NetworkActivityObserver {
 
 
 	private void reloadList() {
-		final LoaderManager.LoaderCallbacks<Cursor> callbacks = this;
-        refreshButton.setEnabled(false);
-        final LoaderManager loaderManager = getLoaderManager();
         loaderManager.restartLoader(0, null, callbacks);
 	}
 
@@ -361,25 +355,29 @@ NetworkActivityObserver {
 	
 	@Override
 	public void networkActive() {
-		getView().post(new Runnable() {
-		    public void run() {
-				refreshButton.setEnabled(false);
-		    }
-		});
+		enableRefresh(false);
 	}
 
 
 	@Override
 	public void networkInactive() {
+		enableRefresh(true);
+	}
+
+	
+	private void enableRefresh(final boolean isEnabled) {
 		getView().post(new Runnable() {
 		    public void run() {
-				refreshButton.setEnabled(true);
+				MenuItem refreshMenuItem = menu.findItem(R.id.action_refresh);
+				if (refreshMenuItem != null) {
+					refreshMenuItem.setVisible(isEnabled);
+				}
 		    }
 		});
 	}
 
+
 	private SimpleCursorAdapter adapter = null;
-	private Button refreshButton = null;
 	private int eventId = -1;
 	private int sortOrderActionId = R.id.action_sort_by_beer_name;
 	private Menu menu = null;
@@ -393,4 +391,6 @@ NetworkActivityObserver {
 	private SortTypeToActionId sortTypeToActionId = new SortTypeToActionId();
 	private OnTapPreferences preferences;
 	private PreferencesPersister preferencesPersister;
+	private android.support.v4.app.LoaderManager loaderManager;
+	private android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> callbacks;
 }
