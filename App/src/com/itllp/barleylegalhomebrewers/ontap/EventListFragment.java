@@ -26,7 +26,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +43,8 @@ NetworkActivityObserver {
         setHasOptionsMenu(true);
         setEmptyText(getString(R.string.no_events_text));
 
+        callbacks = this;
+
         createListAdapter();
         
         // Start out with a progress indicator.
@@ -53,18 +54,6 @@ NetworkActivityObserver {
         // or start a new one.
         loaderManager = getLoaderManager();
         loaderManager.initLoader(0, null, this);
-
-        View view = getView().getRootView();
-        refreshButton = (Button)view.findViewById
-        		(R.id.refresh_button);
-        refreshButton.setEnabled(false);
-        callbacks = this;
-        refreshButton.setOnClickListener(new View.OnClickListener() {
-        	public void onClick(View v) {
-                refreshButton.setEnabled(false);
-        		loaderManager.restartLoader(0, null, callbacks);
-        	}
-        });
     }
 
     
@@ -275,7 +264,6 @@ NetworkActivityObserver {
 	private void enableRefresh(final boolean isEnabled) {
 		getView().post(new Runnable() {
 		    public void run() {
-				refreshButton.setEnabled(isEnabled);
 				MenuItem refreshMenuItem = menu.findItem(R.id.action_refresh);
 				if (refreshMenuItem != null) {
 					refreshMenuItem.setVisible(isEnabled);
@@ -286,7 +274,6 @@ NetworkActivityObserver {
 
 
 	private SimpleCursorAdapter adapter = null;
-	private Button refreshButton = null;
 	private HandlerThread activeWorkerThread = null;
 	private Handler activeWorkerQueue = null;
 	private HandlerThread inactiveWorkerThread = null;

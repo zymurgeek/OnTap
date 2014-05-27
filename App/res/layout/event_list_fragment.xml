@@ -15,11 +15,4 @@
 
 </fragment>
 
-<Button
-    android:id="@+id/refresh_button"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom"
-    android:text="@string/refresh" />
-
 </LinearLayout>
