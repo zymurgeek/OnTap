@@ -58,7 +58,6 @@ NetworkActivityObserver {
         refreshButton = (Button)view.findViewById
         		(R.id.refresh_button);
         refreshButton.setEnabled(false);
-        final android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> 
         callbacks = this;
         refreshButton.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
@@ -279,7 +278,7 @@ NetworkActivityObserver {
 				refreshButton.setEnabled(isEnabled);
 				MenuItem refreshMenuItem = menu.findItem(R.id.action_refresh);
 				if (refreshMenuItem != null) {
-					refreshMenuItem.setEnabled(isEnabled);
+					refreshMenuItem.setVisible(isEnabled);
 				}
 		    }
 		});
