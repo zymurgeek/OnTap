@@ -91,7 +91,6 @@ NetworkActivityObserver {
 	            openHelp();
 	            return true;
 	        case R.id.action_refresh:
-	        	enableRefresh(false);
         		loaderManager.restartLoader(0, null, callbacks);
         		return true;
 	        case R.id.action_use_production_server:

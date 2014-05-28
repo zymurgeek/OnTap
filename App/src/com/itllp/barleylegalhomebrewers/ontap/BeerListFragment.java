@@ -135,7 +135,6 @@ NetworkActivityObserver {
 	    // Handle presses on the action bar items
 	    switch (item.getItemId()) {
 	    case R.id.action_refresh:
-        	enableRefresh(false);
         	reloadList();
     		return true;
 	    }

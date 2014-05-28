@@ -16,10 +16,15 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.text.format.Time;
 
 public class OnTapContentProvider extends ContentProvider {
 
 	private static OnTapContentProvider instance = null;
+	private Time timeNow = new Time();
+	private long lastEventUpdateTimeMillis = 0;
+	private long lastBeerUpdateTimeMillis = 0;
+	private String lastBeerUpdateEventId = "";
 	private OnTapDatabaseHelper mOpenHelper;	
     public static final String EVENT_CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE
 			+ "/" + OnTapContentProviderMetadata.AUTHORITY + "." + OnTapContentProviderMetadata.EVENT_BASE_PATH;
@@ -141,15 +146,27 @@ public class OnTapContentProvider extends ContentProvider {
 		cursor.setNotificationUri(getContext().getContentResolver(), uri);
 
 		Runnable sqlLoadTask = null;
+		timeNow.setToNow();
+		long timeNowMillis = timeNow.toMillis(true);
+		long timeDiffMillis;
 		switch (uriType) {
 		case EVENTS:
 		case EVENT_ID:
-			TableUpdater eventUpdater = EventTableUpdaterFactory.getInstance();
-			sqlLoadTask = new TableUpdaterTask(getContext().getContentResolver(), eventUpdater);
+			timeDiffMillis = timeNowMillis - lastEventUpdateTimeMillis;
+			if (timeDiffMillis >= 5000) {
+				TableUpdater eventUpdater = EventTableUpdaterFactory.getInstance();
+				sqlLoadTask = new TableUpdaterTask(getContext().getContentResolver(), eventUpdater);
+			}
+			lastEventUpdateTimeMillis = timeNowMillis;
 			break;
 		case BEERS:
-			BeerTableUpdater beersInEventUpdater = BeerTableUpdaterFactory.getInstance();
-			sqlLoadTask = new BeerTableUpdaterTask(getContext().getContentResolver(), beersInEventUpdater, eventId);
+			timeDiffMillis = timeNowMillis - lastBeerUpdateTimeMillis;
+			if (timeDiffMillis >= 5000 || !lastBeerUpdateEventId.equals(eventId)) {
+				BeerTableUpdater beersInEventUpdater = BeerTableUpdaterFactory.getInstance();
+				sqlLoadTask = new BeerTableUpdaterTask(getContext().getContentResolver(), beersInEventUpdater, eventId);
+			}
+			lastBeerUpdateTimeMillis = timeNowMillis;
+			lastBeerUpdateEventId = eventId;
 			break;
 		case BEER_ID:
 			//FIXME Enable loading by beer ID
